@@ -1,8 +1,8 @@
--- creamos base de datos
-CREATE DATABASE IF NOT EXISTS almacen ;
+-- Creamos la base de datos
+CREATE DATABASE IF NOT EXISTS almacen;
 USE almacen;
 
--- creamos las tablas
+-- Creamos las tablas
 
 -- TABLA UNIDADES
 CREATE TABLE IF NOT EXISTS unidades (
@@ -18,14 +18,28 @@ CREATE TABLE IF NOT EXISTS categorias (
     observaciones CHAR(100) NULL
 ) ENGINE = INNODB;
 
+-- TABLA ESTADORESIDUOS
+CREATE TABLE IF NOT EXISTS estadoresiduos (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    descripcion CHAR(50) NOT NULL,
+    observaciones CHAR(100) NOT NULL
+) ENGINE = INNODB;
+
+-- TABLA RESIDUOS
+CREATE TABLE IF NOT EXISTS residuos (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    descripcion CHAR(50) NOT NULL,
+    observaciones CHAR(100) NOT NULL
+) ENGINE = INNODB;
+
 -- TABLA PRODUCTOS
 CREATE TABLE IF NOT EXISTS productos (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     descripcion CHAR(50) NOT NULL,
-    fk_unidades CHAR(10) NOT NULL,
+    fk_unidades INT NOT NULL,
     observaciones CHAR(100) NULL,
     foto CHAR(20) NOT NULL,
-    FOREIGN KEY (fk_unidades) REFERENCES unidades (descripcion)
+    FOREIGN KEY (fk_unidades) REFERENCES unidades (id)
     ON UPDATE CASCADE
 ) ENGINE = INNODB;
 
@@ -38,13 +52,6 @@ CREATE TABLE IF NOT EXISTS productos_categoria (
     ON UPDATE CASCADE,
     FOREIGN KEY (fk_categoria) REFERENCES categorias (id)
     ON UPDATE CASCADE
-) ENGINE = INNODB;
-
--- TABLA RESIDUOS
-CREATE TABLE IF NOT EXISTS residuos (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    descripcion CHAR(50) NOT NULL,
-    observaciones CHAR(100) NOT NULL
 ) ENGINE = INNODB;
 
 -- TABLA PRODUCTOS_RESIDUOS
@@ -72,27 +79,6 @@ CREATE TABLE IF NOT EXISTS residuos_generados (
     ON UPDATE CASCADE
 ) ENGINE = INNODB;
 
--- TABLA ESTADORESIDUOS
-CREATE TABLE IF NOT EXISTS estadoresiduos (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    descripcion CHAR(50) NOT NULL,
-    observaciones CHAR(100) NOT NULL
-) ENGINE = INNODB;
-
--- TABLA SOLICITUDES
-CREATE TABLE IF NOT EXISTS solicitudes (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    fecha DATE NOT NULL,
-    descripcion CHAR(50) NOT NULL,
-    unidades CHAR(20) NOT NULL,
-    cantidad FLOAT NOT NULL,
-    observaciones CHAR(100) NULL,
-    fk_usuario INT NOT NULL,
-    tramitado BINARY(1) NOT NULL,
-    FOREIGN KEY (fk_usuario) REFERENCES usuarios (id)
-    ON UPDATE CASCADE
-) ENGINE = INNODB;
-
 -- TABLA USUARIOS
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -112,7 +98,7 @@ CREATE TABLE IF NOT EXISTS estados (
     observaciones CHAR(100) NULL
 ) ENGINE = INNODB;
 
--- TABLA PROOVEEDORES
+-- TABLA PROVEEDORES
 CREATE TABLE IF NOT EXISTS proveedores (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     descripcion CHAR(50) NOT NULL,
@@ -138,7 +124,6 @@ CREATE TABLE IF NOT EXISTS pedidos (
     ON UPDATE CASCADE
 ) ENGINE = INNODB;
 
--- ULTIMA TABLA
 -- TABLA LINEA_PEDIDO
 CREATE TABLE IF NOT EXISTS linea_pedido (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -151,6 +136,16 @@ CREATE TABLE IF NOT EXISTS linea_pedido (
     ON UPDATE CASCADE
 ) ENGINE = INNODB;
 
-
--- INSERCCION DE DATOS
-
+-- TABLA SOLICITUDES
+CREATE TABLE IF NOT EXISTS solicitudes (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    fecha DATE NOT NULL,
+    descripcion CHAR(50) NOT NULL,
+    unidades CHAR(20) NOT NULL,
+    cantidad FLOAT NOT NULL,
+    observaciones CHAR(100) NULL,
+    fk_usuario INT NOT NULL,
+    tramitado BINARY(1) NOT NULL,
+    FOREIGN KEY (fk_usuario) REFERENCES usuarios (id)
+    ON UPDATE CASCADE
+) ENGINE = INNODB;
