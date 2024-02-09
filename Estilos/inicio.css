@@ -45,7 +45,7 @@ body {
     align-items: center;
 }
 
-.login-box input[type="submit"] {
+.login-box input[type="button"] {
     width: 80%;
     height: 45px;
     background-color: #4caf50;
@@ -57,6 +57,6 @@ body {
     margin-bottom: 15px;
 }
 
-.login-box input[type="submit"]:hover {
+.login-box input[type="button"]:hover {
     background-color: #45a049;
 }
