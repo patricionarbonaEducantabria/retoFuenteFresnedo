@@ -1,6 +1,6 @@
 -- creamos base de datos
 
-CREATE DATABASE almacen DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+CREATE DATABASE IF NOT EXISTS almacen ;
 USE almacen;
 -- creamos las tablas
 -- TABLA CATEGORIAS
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     descripcion CHAR(20) NOT NULL,
     observaciones CHAR(100) NULL
-)ENGINE = InnoDB;
+ ENGINE = InnoDB;
 
 -- TABLA PROOVEEDORES
 CREATE TABLE IF NOT EXISTS `proveedores` (
