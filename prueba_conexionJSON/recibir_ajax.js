@@ -39,3 +39,16 @@ function manejarRespuesta(elEvento) {
 
     }
 }
+
+// readyState valores:
+// 0: petición no iniciada
+// 1: Conexión establecida con el servidor
+// 2: Petición recibida
+// 3: Procesando la petición
+// 4: Petición terminada y respuesta lista
+
+// status valores:
+// 200: OK
+// 403: Forbidden
+// 404: Pagina no encontrada
+// Y mas mensajes de estado HTTP
