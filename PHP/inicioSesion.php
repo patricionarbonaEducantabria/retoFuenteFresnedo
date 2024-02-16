@@ -1,20 +1,35 @@
 <?php
-// Para devolver un dato en formato JSON hacemos lo siguiente
+if(isset($_POST['existeEmail'])) {
+    existeEmail($_POST['existeEmail']);
+}
 
-$json = array(
-    array(
-        "id" => "1",
-        "nombre" => "manolo"
-    ),
-    array(
-        "id" => "2",
-        "nombre" => "pepe"
-    )
-);
+if(isset($_POST['existeContrasenia'])) {
+    existeContrasenia($_POST['existeContrasenia'], $_POST['email']);
+}
 
+function existeEmail($email) {
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+    $resultado = $conexion -> query("SELECT * FROM usuarios WHERE email = '$email';");
+    $existe = $resultado -> fetch();
+    // Si existe ese correo envio 1 sino 0
+    if($existe) {
+        echo "1";
+    } else {
+        echo "0";
+    }
+    return $existe;
+}
 
-
-// Convierto el objeto a formato json y lo envio
-$jsonString = json_encode($json);
-echo $jsonString;
+function existeContrasenia($contrasenia,$email) {
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+    $resultado = $conexion -> query("SELECT * FROM usuarios WHERE email = '$email' AND password='$contrasenia';");
+    $existe = $resultado -> fetch();
+    // Si existe ese usuario envio 1 sino 0
+    if($existe) {
+        echo "1";
+    } else {
+        echo "0";
+    }
+    return $existe;
+}
 ?>
