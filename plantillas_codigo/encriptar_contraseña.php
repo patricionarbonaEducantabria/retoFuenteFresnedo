@@ -18,5 +18,5 @@ $resultado -> execute(array(hash('sha256', 'contraseña123')));
 // Insertar usuario Patricio
 $resultado = $conexion -> prepare("INSERT INTO usuarios (admin, nombre, email, password, activo, observaciones, telefono)
 VALUES (1, 'Patricio', 'patricio@example.com', ?, 1, 'Observaciones sobre el admin', '987654321');");
-$resultado -> execute(array(hash('sha256', 'contraseña123')));
+$resultado -> execute(array(hash('sha256', 'contraseña')));
 ?>
