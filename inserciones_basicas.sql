@@ -246,10 +246,3 @@ INSERT INTO productos (descripcion, fk_unidades )
     /* Pan*/
 
     /* Utiles y Materiales*/
-
-/*Tabla Usuarios*/
-/* 2 Usuarios de ejemplo*/
-INSERT INTO usuarios (admin, nombre, email, password, activo, observaciones, telefono)
-VALUES (0, 'NombreUsuario', 'usuario@example.com', 'contraseña123', 1, 'Observaciones sobre el usuario', '123456789');
-INSERT INTO usuarios (admin, nombre, email, password, activo, observaciones, telefono)
-VALUES (1, 'NombreAdmin', 'admin@example.com', 'contraseña123', 1, 'Observaciones sobre el admin', '987654321');
