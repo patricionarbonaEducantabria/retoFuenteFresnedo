@@ -61,10 +61,10 @@ function iniciarSesion() {
         $respuesta = $resultado -> fetch();
         if($respuesta['admin'] == "1") {
             session_destroy();
-            echo "../Paginas/admin_inicio.html";
+            echo "../Paginas/admin/admin_inicio.html";
         } else {
             session_destroy();
-            echo "../Paginas/usuario_inicio.html";
+            echo "../Paginas/usuario/usuario_inicio.html";
         }
     }
 }
