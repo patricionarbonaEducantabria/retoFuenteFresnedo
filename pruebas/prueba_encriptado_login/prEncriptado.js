@@ -2,8 +2,28 @@ window.onload = principal;
 
 function principal()
 {
+    console.log("aca");
     let botonInicioSesion = document.getElementById("btnInicio_Sesion");
     botonInicioSesion.addEventListener("click", manejadorClickInicioSesion);
+
+    // Recupero el valor de token
+    // Creo el objeto para tratar la peticion Ajax
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "./prEncriptado.php", true);
+
+  // Configurar la función de retorno de llamada
+  miPeticion.onreadystatechange = function() {
+    if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+        console.log(miPeticion.responseText);
+        document.getElementById("token").innerHTML = miPeticion.responseText;
+    }
+  };
+
+  miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  // Convertir los datos a formato JSON y enviar la solicitud
+  miPeticion.send();
 }
 
 function manejadorClickInicioSesion(e) {

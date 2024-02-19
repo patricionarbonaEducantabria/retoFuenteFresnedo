@@ -58,5 +58,14 @@
 
 
 
+if (!isset($_SESSION['token'])):
+    $token = md5(uniqid(rand(), TRUE));
+    $_SESSION['token'] = $token;
+    echo "puta";
+else:
+    echo "puta";
+    $token = $_SESSION['token'];
+endif;
+
 
 ?>
