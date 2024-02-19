@@ -108,3 +108,14 @@ function iniciarSesion(email, contrasenia) {
   let datos = "iniciarSesion=2";
   miPeticion.send(datos);
 }
+
+function mostrarContrasenia() {
+    let contrasenia = document.getElementById("inContrasenia");
+    let visualizarContraseña = document.getElementById("visualizarContraseña");
+    
+    if (visualizarContraseña.checked) {
+        contrasenia.type = "text";
+    } else {
+        contrasenia.type = "password";
+    }
+}

@@ -36,9 +36,11 @@ body {
     border: 1px solid #ccc;
     border-radius: 20px;
 }
+
 .login-box div {
     width: 100%;
 }
+
 .login-form {
     display: flex;
     flex-direction: column;
@@ -59,4 +61,10 @@ body {
 
 .login-box input[type="button"]:hover {
     background-color: #45a049;
+}
+
+/* Ajustes para el label "Mostrar contraseña" */
+.password-input label {
+    margin-bottom: 5%;
+    padding-right: 25%;
 }
