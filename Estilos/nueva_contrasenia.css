@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../Imagenes/inicioSesion.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    width: 400px; /* Aumentamos el ancho de la caja */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px; /* Aumentamos el espacio interno */
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.login-box label {
+    text-align: left;
+    display: block;
+    margin-left: 5%;
+    font-size: 20px; /* Aumentamos el tamaño del texto */
+    margin-bottom: 10px; /* Espacio entre etiquetas */
+}
+
+.login-box input[type="password"] {
+    width: calc(100% - 20px); /* Hacemos que el ancho del input sea el 100% menos el espacio de los bordes */
+    height: 45px;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.login-box input[type="button"] {
+    width: calc(100% - 20px); /* Hacemos que el ancho del botón sea el 100% menos el espacio de los bordes */
+    height: 45px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 15px; /* Ajustamos el margen superior */
+    margin-bottom: 15px;
+}
+
+.login-box input[type="button"]:hover {
+    background-color: #45a049;
+}
+
+.password-specs ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.password-specs li {
+    margin-bottom: 5px;
+    text-indent: -1em; /* Ajustamos el margen izquierdo para que todos los puntos comiencen en la misma posición */
+}
+
+.password-specs li::before {
+    content: "•";
+    margin-right: 5px;
+    vertical-align: middle; /* Alineamos los puntos verticalmente */
+    display: inline-block; /* Ajustamos el estilo en línea para que se pueda alinear correctamente */
+    width: 1em; /* Establecemos un ancho fijo para los puntos */
+}
+
+
+
