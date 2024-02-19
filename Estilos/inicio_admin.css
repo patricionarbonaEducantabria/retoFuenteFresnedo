@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../Imagenes/inicioSesion.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    width: 400px; /* Aumentamos el ancho de la caja */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px; /* Aumentamos el espacio interno */
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.login-box input[type="button"] {
+    width: 80%; /* Ancho del botón al 80% para que aparezcan uno encima del otro */
+    height: 55px; /* Aumentamos la altura del botón */
+    background-color: #4caf50; /* Cambiamos el color del botón de Usuario */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 15px; /* Ajustamos el margen superior */
+    margin-bottom: 15px;
+}
+
+.login-box input[type="button"]:hover {
+    background-color: #45a049; /* Cambiamos el color de hover del botón de Usuario */
+}
+
+#btnAdmin {
+    background-color: #f39c12; /* Cambiamos el color del botón de Administrador a un tono relacionado con la comida */
+}
+
+#btnAdmin:hover {
+    background-color: #d68910; /* Cambiamos el color de hover del botón de Administrador */
+}

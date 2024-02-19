@@ -20,7 +20,7 @@ function comprobarInicioSesion(e) {
 
     // Si estan rellenados empiezo a comprobar si existe los datos del usuario
     if(rellenados) {
-        let email = document.getElementById("inEmail").value;
+        let email = document.getElementById("inEmail").value.toLowerCase();
         console.log(email);
     
         // Compruebo el email
@@ -28,13 +28,13 @@ function comprobarInicioSesion(e) {
             if(respuesta === "1") {
                 let contrasenia = document.getElementById("inContrasenia").value;
                 console.log("contraseña: ", contrasenia, " email: ",email);
-                contraseniaExiste(contrasenia, email, function(respuesta) {
+                contraseniaExiste(contrasenia, function(respuesta) {
                     if(respuesta === "1") {
                         // Y si el login es correcto iniciamos sesion
                         // la dirección de a que página tenemos que ir nos lo entrega el servidor
                         // (El servidor hace la comprobación de si la contraseña es nueva, tenemos que ir
                         // a la pagina de usuario o de admin)
-                        iniciarSesion(contrasenia,email);
+                        iniciarSesion();
                         console.log("Login correcto");
                     } else {
                         // 👀 cambiar a aviso
@@ -59,36 +59,36 @@ function emailExiste(email, callback) {
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
         // Devuelvo la respuesta del servidor a la funcion de arriba
+        console.log("respuesta email",miPeticion.responseText);
         callback(miPeticion.responseText);
     }
   };
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
   // Convertir los datos a formato JSON y enviar la solicitud
   miPeticion.send("existeEmail=" + email);
 }
 
-function contraseniaExiste(contrasenia, email, callback) {
+function contraseniaExiste(contrasenia, callback) {
     let miPeticion = new XMLHttpRequest();
 
     miPeticion.open("POST", "../PHP/inicioSesion.php", true);
 
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+        console.log("respuesta contraseña",miPeticion.responseText);
         callback(miPeticion.responseText);
     }
   };
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  let datos = "existeContrasenia=" + contrasenia +"&email=" + email;
+  let datos = "existeContrasenia=" + contrasenia;
   console.log(datos);
   miPeticion.send(datos);
 }
 
-function iniciarSesion(contrasenia, email) {
-    console.log("dentro");
+function iniciarSesion() {
     let miPeticion = new XMLHttpRequest();
 
     miPeticion.open("POST", "../PHP/inicioSesion.php", true);
@@ -96,14 +96,13 @@ function iniciarSesion(contrasenia, email) {
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
         // Recupero la ruta de la pagina a la que ir
-        console.log(miPeticion.responseText);
+        console.log("respuesta login",miPeticion.responseText);
         window.location.href = miPeticion.responseText;
     }
   };
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  let datos = "iniciarSesion=2&email=" + email + "&contrasenia=" + contrasenia;
-  console.log(datos);
+  let datos = "iniciarSesion=2";
   miPeticion.send(datos);
 }

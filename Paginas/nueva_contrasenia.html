@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva Contraseña</title>
+    <title>Iniciar sesión - Instituto de Cocina Fuentes Fresnedo</title>
+    <link rel="stylesheet" href="../Estilos/estilo_general.css">
+    <link rel="stylesheet" href="../Estilos/nueva_contrasenia.css">
+    <script src="../JS/nuevaContrasenia.js"></script>
 </head>
 <body>
-    
+    <div class="login-box">
+        <form id="loginForm" action="procesar_login.php" method="post">
+            <div>
+                <label for="contrasenia">Nueva contraseña:</label>
+                <input type="password" id="inContrasenia" name="contrasenia" required>
+                <br><br>
+                <label for="confirmarContrasenia">Confirmar contraseña:</label>
+                <input type="password" id="inconfirmarContrasenia" name="confirmarContrasenia" required><br><br>
+                <input type="button" id="btnConfirmar" value="Confirmar">
+                <div class="password-specs">
+                    <p>Requisitos de la contraseña:</p>
+                    <ul>
+                        <li>Mínimo 8 caracteres</li>
+                        <li>Máximo 15 caracteres</li>
+                        <li>Al menos una letra mayúscula</li>
+                        <li>Al menos una letra minúscula</li>
+                        <li>Al menos un dígito</li>
+                        <li>Sin espacios en blanco</li>
+                        <li>Al menos 1 carácter especial</li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
