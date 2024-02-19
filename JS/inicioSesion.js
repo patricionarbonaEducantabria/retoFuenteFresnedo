@@ -20,7 +20,7 @@ function comprobarInicioSesion(e) {
 
     // Si estan rellenados empiezo a comprobar si existe los datos del usuario
     if(rellenados) {
-        let email = toLowerCase(document.getElementById("inEmail").value);
+        let email = document.getElementById("inEmail").value.toLowerCase();
         console.log(email);
     
         // Compruebo el email
