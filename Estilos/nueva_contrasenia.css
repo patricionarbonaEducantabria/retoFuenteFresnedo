@@ -62,16 +62,13 @@ body {
 
 .password-specs li {
     margin-bottom: 5px;
-    text-indent: -1em; /* Ajustamos el margen izquierdo para que todos los puntos comiencen en la misma posición */
+    text-indent: -1em; /* Retrocedemos el primer punto */
 }
 
 .password-specs li::before {
-    content: "•";
-    margin-right: 5px;
-    vertical-align: middle; /* Alineamos los puntos verticalmente */
-    display: inline-block; /* Ajustamos el estilo en línea para que se pueda alinear correctamente */
-    width: 1em; /* Establecemos un ancho fijo para los puntos */
+    content: ""; /* Eliminamos el contenido antes del texto */
 }
 
-
-
+.password-specs li {
+    margin-left: 1em; /* Añadimos un margen izquierdo uniforme */
+}
