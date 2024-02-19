@@ -34,7 +34,7 @@ function comprobarInicioSesion(e) {
                         // la dirección de a que página tenemos que ir nos lo entrega el servidor
                         // (El servidor hace la comprobación de si la contraseña es nueva, tenemos que ir
                         // a la pagina de usuario o de admin)
-                        iniciarSesion();
+                        iniciarSesion(email, contrasenia);
                         console.log("Login correcto");
                     } else {
                         // 👀 cambiar a aviso
@@ -88,7 +88,7 @@ function contraseniaExiste(contrasenia, callback) {
   miPeticion.send(datos);
 }
 
-function iniciarSesion() {
+function iniciarSesion(email, contrasenia) {
     let miPeticion = new XMLHttpRequest();
 
     miPeticion.open("POST", "../PHP/inicioSesion.php", true);
@@ -97,6 +97,8 @@ function iniciarSesion() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
         // Recupero la ruta de la pagina a la que ir
         console.log("respuesta login",miPeticion.responseText);
+        localStorage.setItem('email', email);
+        localStorage.setItem('contrasenia', contrasenia);
         window.location.href = miPeticion.responseText;
     }
   };
