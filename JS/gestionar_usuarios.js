@@ -3,13 +3,21 @@ window.onload = principal;
 function principal()
 {
     let miDiv = document.getElementById("contenedor-usuarios");
-    miDiv.appendChild(dibujarUsuario());
-    document.body.appendChild(miDiv);
+    // miDiv.appendChild(dibujarUsuario());
+    // document.body.appendChild(miDiv);
 
     let miBoton = document.getElementById("btnBuscar");
     miBoton.addEventListener("click", manejadorClickBuscar);
 
-    obtenerUsuarios();
+    obtenerUsuarios(function(respuesta) {
+        respuesta = JSON.parse(respuesta);
+        // recorro el json
+        let miDiv = document.getElementById("contenedor-usuarios");
+        for(let i = 0; i< respuesta.length; i++) {
+            miDiv.appendChild(dibujarUsuario(respuesta[i]));
+        }
+        document.body.appendChild(miDiv);
+    });
 }
 
 function crearElemento(etiqueta, texto, atributos) {
@@ -28,13 +36,15 @@ function crearElemento(etiqueta, texto, atributos) {
 
 function dibujarUsuario(datosUsuario) {
     let miFila = crearElemento("ul",undefined,{"id":"filaN"});
-    let miNombre = crearElemento("li","usuario1", {"id":"nombreUsuario"});
+    let miNombre = crearElemento("li",datosUsuario.nombre, {"id":"nombreUsuario"});
     miFila.appendChild(miNombre);
-    let miCorreo = crearElemento("li","correo1", {"id":"correoUsuario"});  
+    let miCorreo = crearElemento("li",datosUsuario.email, {"id":"correoUsuario"});  
     miFila.appendChild(miCorreo);
-    let miTelefono = crearElemento("li","telefono1", {"id":"telefonoUsuario"});    
+    let miTelefono = crearElemento("li",datosUsuario.telefono, {"id":"telefonoUsuario"});    
     miFila.appendChild(miTelefono);
-    let miEstado = crearElemento("li","estado1", {"id":"telefonoUsuario"});
+    let miCargo = crearElemento("li",datosUsuario.cargo, {"id":"telefonoUsuario"});    
+    miFila.appendChild(miCargo);
+    let miEstado = crearElemento("li",datosUsuario.estado, {"id":"estadoUsuario"});
     miFila.appendChild(miEstado);
     return miFila;
 }
@@ -58,7 +68,8 @@ function obtenerUsuarios(callback) {
 
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-        console.log(miPeticion.responseText);
+        // console.log(miPeticion.responseText);
+        callback(miPeticion.responseText);
     }
   };
 
