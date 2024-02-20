@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS productos (
     descripcion CHAR(50) NOT NULL,
     fk_unidades INT NOT NULL,
     observaciones CHAR(100) NULL,
-    foto CHAR(80) DEFAULT './img/defecto.png',
+    foto CHAR(80) DEFAULT '../../Imagenes/carne.png',
     FOREIGN KEY (fk_unidades) REFERENCES unidades (id)
     ON UPDATE CASCADE
 ) ENGINE = INNODB;
