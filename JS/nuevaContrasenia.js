@@ -1,29 +1,46 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Tu código JavaScript aquí
-    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@!%*?&#¡.])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
+window.onload = principal;
 
-    document.getElementById("btnConfirmar").addEventListener("click", function() {
-        let contrasenia = document.getElementById("inContrasenia").value;
-        let confirmarContrasenia = document.getElementById("inConfirmarContrasenia").value;
+function principal() {
+    let botonConfirmar = document.getElementById("btnConfirmar");
+    botonConfirmar.addEventListener("click", enviarDatos);
+}
 
-            // Si estan rellenados empiezo a comprobar si existe los datos del usuario
-            if(contrasenia && confirmarContrasenia) {
-            // Validar la nueva contraseña con la expresión regular
-            if (!regex.test(contrasenia)) {
-                alert("La nueva contraseña no cumple con los requisitos de seguridad.");
-                return;
-            }
+function enviarDatos() {
+    let contrasenia = document.getElementById("inContrasenia").value;
+    let confirmarContrasenia = document.getElementById("inConfirmarContrasenia").value;
 
-            // Verificar si las contraseñas ingresadas coinciden
-            if (contrasenia !== confirmarContrasenia) {
-                alert("Las contraseñas ingresadas no coinciden.");
-                return;
-            }
-        }else {
-            alert("Rellena todos los campos");
+    if (contrasenia && confirmarContrasenia) {
+        if (contrasenia !== confirmarContrasenia) {
+            alert("Las contraseñas ingresadas no coinciden.");
             return;
         }
-        // Si todas las validaciones pasan, enviar el formulario
-        document.getElementById("loginForm").submit();
-    });
-});
+
+        let correoUsuario = localStorage.getItem("email"); // Obtener el correo del localStorage
+        if (!correoUsuario) {
+            alert("No se encontró el correo del usuario en el almacenamiento local.");
+            return;
+        }
+
+        // Crear objeto con los datos a enviar
+        let datos = {
+            "correo": correoUsuario,
+            "contrasenia": contrasenia
+        };
+
+        // Imprimir los datos a enviar en la consola
+        console.log("Datos a enviar al servidor:", datos);
+
+        // Enviar datos al servidor mediante AJAX
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../PHP/nuevaContrasenia.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert(xhr.responseText);
+            }
+        };
+        xhr.send(JSON.stringify(datos));
+    } else {
+        alert("Rellena todos los campos");
+    }
+}
