@@ -99,6 +99,8 @@ function dibujarProductos(datosProducto) {
     miFila.appendChild(descripcion);
     let unidades = crearElemento("li",datosProducto.unidades);  
     miFila.appendChild(unidades);
+    let cantidad = crearElemento("li",datosProducto.cantidad);  
+    miFila.appendChild(cantidad);
     if(datosProducto.observaciones == null) {
         let observaciones = crearElemento("li","sin observaciones");    
         miFila.appendChild(observaciones);
