@@ -278,6 +278,11 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
+    (SELECT id FROM productos WHERE descripcion = 'Tocino fresco'),
+    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    );
+    INSERT INTO productos_categoria (fk_producto, fk_categoria) 
+    VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Gallina'),
     (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
     );
