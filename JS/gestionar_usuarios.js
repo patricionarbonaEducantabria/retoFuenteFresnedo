@@ -47,6 +47,7 @@ function dibujarUsuario(datosUsuario) {
     });
     // Añado el modal al boton modificar
     let miModal = dibujarModal(idMagico,datosUsuario);
+    let miModalSeguro = dibujarModalSeguro(idMagico);
     filita.appendChild(boton);
     miFila.appendChild(filita);
     // Boton Habilitar
@@ -68,6 +69,7 @@ function dibujarUsuario(datosUsuario) {
     filita.appendChild(boton);
     miFila.appendChild(filita);
     miFila.appendChild(miModal);
+    miFila.appendChild(miModalSeguro);
     return miFila;
 }
 
@@ -77,7 +79,7 @@ function dibujarModal(idModal, datosUsuario) {
     let modalContent = crearElemento("div",undefined, {"class": "modal-content"});
     // Contenido Header
     let modalHeader = crearElemento("div",undefined, {"class": "modal-header"});
-    let modalTitulo = crearElemento("h1","Añadir Usuario", {"class" : "modal-title"});
+    let modalTitulo = crearElemento("h1","Modificar Usuario", {"class" : "modal-title"});
     let modalCierre = crearElemento("button",undefined,{
         "type" : "button",
         "class" : "btn-close",
@@ -124,9 +126,9 @@ function dibujarModal(idModal, datosUsuario) {
     let modalModificar = crearElemento("button", "Modificar Datos", {
         "type" : "button",
         "class" : "btn btn-primary",
-        "id" : idModal
-        // "data-bs-toggle": "modal",
-        // "data-bs-target": "#modal-" + idModal + "-seguro"
+        "id" : idModal,
+        "data-bs-toggle": "modal",
+        "data-bs-target": "#modal-" + idModal + "-seguro"
     });
     modalModificar.addEventListener("click",manejadorClickModificar);
     modalFooter.appendChild(modalModificar);
@@ -144,69 +146,53 @@ function dibujarModal(idModal, datosUsuario) {
 }
 
 function dibujarModalSeguro(idModalSeguro) {
-    // idModalSeguro = "modal-" + idModalSeguro + "-seguro";
-    // obtengo valores de los input del modal modificar
-    console.log("idSeguro: " , idModalSeguro);
-    let nombre = document.getElementById("inNombre" + idModalSeguro).value;
-    if(!nombre) {
-        nombre = document.getElementById("inNombre" + idModalSeguro).placeholder;
-    }
-    let email = document.getElementById("inEmail" + idModalSeguro).value;
-    if(!email) {
-        email = document.getElementById("inEmail" + idModalSeguro).placeholder;
-    }
-    let telefono = document.getElementById("inTelefono" + idModalSeguro).value;
-    if(!telefono) {
-        telefono = document.getElementById("inTelefono" + idModalSeguro).placeholder;
-    }
-    // console.log("nombre: ", nombre, " telefono: ", telefono, " email: ", email);
-
-    // MODAL SEGURO
-    // Comienzo a crear el modal de seguro
     let miDiv = crearElemento("div",undefined,{"id":"modal-" +idModalSeguro + "-seguro", "class": "modal"});
     let modalDialog = crearElemento("div",undefined,{"class": "modal-dialog"});
     let modalContent = crearElemento("div",undefined, {"class": "modal-content"});
-
     // Contenido Header
     let modalHeader = crearElemento("div",undefined, {"class": "modal-header"});
+    let modalCierre = crearElemento("button",undefined,{
+        "type" : "button",
+        "class" : "btn-close",
+        "data-bs-dismiss" : "modal",
+        "aria-label" : "Close"
+    });
+    modalHeader.appendChild(modalCierre);
     // Contenido Body
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     let modalBody = crearElemento("div",undefined, {"class": "modal-body"});
-
-    let textoCuerpo = crearElemento("h4","¿Esta seguro de introducir los siguientes datos?");
-    let textoNombre = crearElemento("p","Nombre: " + nombre + ".");
-    let textoTelefono = crearElemento("p","Telefono: " + telefono + ".");
-    let textoEmail = crearElemento("p","Email: " + email + ".");
-    modalBody.appendChild(textoCuerpo);
-    modalBody.appendChild(textoNombre);
-    modalBody.appendChild(textoTelefono);
-    modalBody.appendChild(textoEmail);
+    let miPregunta = crearElemento("p",undefined,{"id" : "pregunta-" + idModalSeguro + "-seguro"});
+    modalBody.appendChild(miPregunta);
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     // Contenido footer
-    let modalFooter = crearElemento("div",undefined, {"class": "modal-footer"})
-
-    // añado los botones si y no
-    let botonSi = crearElemento("button","Si",{
+    let modalFooter = crearElemento("div",undefined, {"class": "modal-footer"});
+    // Pongo al boton modificar el id del modal ¿estas seguro?
+    let botonSi = crearElemento("button", "Si", {
         "type" : "button",
-        "class" : "btn-close",
+        "class" : "btn btn-primary",
         "data-bs-dismiss" : "modal",
         "aria-label" : "Close"
     });
-    let botonNo = crearElemento("button","No",{
+    let botonNo = crearElemento("button", "No", {
         "type" : "button",
-        "class" : "btn-close",
-        "data-bs-dismiss" : "modal",
-        "aria-label" : "Close"
+        "class" : "btn btn-secondary",
+        "data-bs-toggle": "modal",
+        "data-bs-target": "#modal-" + idModalSeguro
     });
-    modalFooter.appendChild(botonNo);
+    // modalModificar.addEventListener("click",manejadorClickModificar);
     modalFooter.appendChild(botonSi);
+    modalFooter.appendChild(botonNo);
 
-    // Añado header, body y footer al modal
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalBody);
     modalContent.appendChild(modalFooter);
     modalDialog.appendChild(modalContent);
     miDiv.appendChild(modalDialog);
+
+    //añado modal estas seguro 
+    // miDiv.appendChild(dibujarModalSeguro(idModal));
+
+    return miDiv;
 }
 
 function recuperarUsuarios(longitud) {
@@ -271,6 +257,30 @@ function manejadorClickBuscar(e) {
 
 function manejadorClickModificar(e) {
     console.log("modifico: ",this.id , "clase: ", this.className);
+    let idNuevo = "pregunta-" + this.id + "-seguro";
+    let txt = "¿Estas seguro que quieres introducir los siguientes datos?";
+    // ↓↓↓↓↓↓↓↓↓↓↓
+    let nombre = document.getElementById("inNombre" + this.id);
+    if(nombre.value) {
+        txt += "<br>Nombre: " + nombre.value;
+    } else {
+        txt += "<br>Nombre: " + nombre.placeholder;
+    }
+    let email = document.getElementById("inEmail" + this.id);
+    if(email.value) {
+        txt += "<br>Email: " + email.value;
+    } else {
+        txt += "<br>Email: " + email.placeholder;
+    }
+    let telefono = document.getElementById("inTelefono" + this.id);
+    if(telefono.value) {
+        txt += "<br>Telefono: " + telefono.value;
+    } else {
+        txt += "<br>Telefono: " + telefono.placeholder;
+    }
+    // ↑↑↑↑↑↑↑↑↑↑↑↑
+    console.log(idNuevo);
+    document.getElementById(idNuevo).innerHTML = txt;
     // listaUsuario.appendChild(dibujarModalSeguro(idUsuario));
 }
 function manejadorClickHabilitar(e) {
