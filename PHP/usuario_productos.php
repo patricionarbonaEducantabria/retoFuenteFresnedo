@@ -6,7 +6,6 @@
         obtenerProductos();
     }
 
-
     // Listar los productos
     function obtenerProductos() {
         $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
