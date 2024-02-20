@@ -97,10 +97,8 @@ function dibujarProductos(datosProducto) {
     miFila.appendChild(foto);
     let descripcion = crearElemento("li",datosProducto.nombre);
     miFila.appendChild(descripcion);
-    let unidades = crearElemento("li",datosProducto.unidades);  
+    let unidades = crearElemento("li",datosProducto.unidad);  
     miFila.appendChild(unidades);
-    let cantidad = crearElemento("li",datosProducto.cantidad);  
-    miFila.appendChild(cantidad);
     if(datosProducto.observaciones == null) {
         let observaciones = crearElemento("li","sin observaciones");    
         miFila.appendChild(observaciones);
@@ -109,13 +107,19 @@ function dibujarProductos(datosProducto) {
         let observaciones = crearElemento("li",datosProducto.observaciones);    
         miFila.appendChild(observaciones);
     }
-    // // Boton Modificar Datos
-    // let filita = crearElemento("li",undefined);
-    // let boton = crearElemento("input",undefined,{"type":"button","value":"Modificar Datos"});
-    // boton.addEventListener("click",manejadorClickModificar);
-    // filita.appendChild(boton);
-    // miFila.appendChild(filita);
+    // Boton Modificar Datos
+    let filita = crearElemento("li",undefined);
+    let boton = crearElemento("input",undefined,{"type":"button","value":"Añadir a la cesta"});
+    boton.addEventListener("click",manejadorClickAñadirProducto);
+    filita.appendChild(boton);
+    miFila.appendChild(filita);
     return miFila;
+}
+
+// MANEJADOR CLICK PARA AÑADIR PRODUCTOS A LA CESTA
+function manejadorClickAñadirProducto(e)
+{
+
 }
 
 function obtenerProductos(callback)
