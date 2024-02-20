@@ -3,6 +3,23 @@ window.onload = principal;
 function principal() {
     let botonConfirmar = document.getElementById("btnConfirmar");
     botonConfirmar.addEventListener("click", enviarDatos);
+
+    let checkboxMostrar = document.getElementById("visualizarContraseña");
+    checkboxMostrar.addEventListener("change", mostrarContrasenas);
+}
+
+function mostrarContrasenas() {
+    let inputContrasenia = document.getElementById("inContrasenia");
+    let inputConfirmarContrasenia = document.getElementById("inConfirmarContrasenia");
+    let checkboxMostrar = document.getElementById("visualizarContraseña");
+
+    if (checkboxMostrar.checked) {
+        inputContrasenia.type = "text";
+        inputConfirmarContrasenia.type = "text";
+    } else {
+        inputContrasenia.type = "password";
+        inputConfirmarContrasenia.type = "password";
+    }
 }
 
 function enviarDatos() {
