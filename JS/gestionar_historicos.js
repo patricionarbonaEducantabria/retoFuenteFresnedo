@@ -8,7 +8,7 @@ function principal()
     let miBoton = document.getElementById("btnBuscar");
     miBoton.addEventListener("click", manejadorClickBuscar);
 
-    recuperarUsuarios();
+    recuperarHistorico();
 }
 
 function crearElemento(etiqueta, texto, atributos) {
@@ -26,14 +26,23 @@ function crearElemento(etiqueta, texto, atributos) {
 }
 
 function dibujarHistorico(datosUsuario) {
-    let miFila = crearElemento("ul",undefined,{"id":datosUsuario.tramitado});
-    let miEstado = crearElemento("li",datosUsuario.tramitado);
-    miFila.appendChild(miEstado);
-    let miDescripcion = crearElemento("li",datosUsuario.descripcion);  
+    let miFila = crearElemento("div",undefined,{"id":datosUsuario.id,"class":"parent"});
+    if(datosUsuario.tramitado == 1){
+        miEstado = crearElemento("p",undefined,{"id":"circle","class":"div1"})
+        miFila.appendChild(miEstado);
+        miEstado = crearElemento("p","Tramitado",{"class":"div2"})
+        miFila.appendChild(miEstado);
+    }else if(datosUsuario.tramitado == 0){
+        let miEstado = crearElemento("p",undefined,{"id":"circle2","class":"div1"})
+        miFila.appendChild(miEstado);
+        miEstado = crearElemento("p","En tramite",{"class":"div2"})
+        miFila.appendChild(miEstado);
+    }
+    let miDescripcion = crearElemento("p",datosUsuario.descripcion,{"class":"div3"});  
     miFila.appendChild(miDescripcion);
-    let miCantidad = crearElemento("li",datosUsuario.cantidad);    
+    let miCantidad = crearElemento("p",datosUsuario.cantidad,{"class":"div4"});    
     miFila.appendChild(miCantidad);
-    let miUnidad = crearElemento("li",datosUsuario.unidades);    
+    let miUnidad = crearElemento("p",datosUsuario.unidades,{"class":"div5"});    
     miFila.appendChild(miUnidad);
 
     return miFila;
@@ -47,11 +56,11 @@ function manejadorClickBuscar(e) {
 
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑ MANEJADORES ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-function recuperarUsuarios(longitud) {
+function recuperarHistorico(longitud) {
     let miDiv = document.getElementById("contenedor-historico");
     miDiv.innerHTML = "";
 
-    obtenerUsuarios(function(respuesta) {
+ obtenerSolicitudes(function(respuesta) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
         let miDiv = document.getElementById("contenedor-historico");
@@ -62,7 +71,7 @@ function recuperarUsuarios(longitud) {
     });
 }
 
-function obtenerUsuarios(callback) {
+function obtenerSolicitudes(callback) {
     let miPeticion = new XMLHttpRequest();
 
     miPeticion.open("POST", "../../PHP/gestionar_historicos.php", true);
@@ -78,4 +87,18 @@ function obtenerUsuarios(callback) {
 
   let datos = "obtenerHistorico=";
   miPeticion.send(datos);
+}
+
+function buscadorFecha(){
+ obtenerSolicitudes(function(respuesta) {
+        respuesta = JSON.parse(respuesta);
+        console.log(respuesta);
+        // recorro el json
+    let fechaHace = document.getElementById("fecha_desde").value;
+    console.log(fechaHace);
+    let fechaHasta = document.getElementById("fecha_hasta").value;
+    console.log(fechaHasta);
+        let busca = respuesta.filter(n => n.fecha > fechaHace &&  n.fecha < fechaHasta);
+    console.warn(busca);
+    });
 }

@@ -6,7 +6,37 @@
 }
 #Buscador_Fechas{
     margin-top: 10%;
-    margin-bottom: 15%;
-    margin-left: 35%;
-    margin-right: 25%;
+    margin-bottom: 10%;
+    margin-left: 36%;
+    margin-right: 30%;
 }
+
+
+#circle {
+    background: green;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+#circle2 {
+    background: orange;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 8px;
+    align-items: baseline;
+    justify-items: start
+    }
+  
+        .div1 { grid-area: 1 / 5 / 2 / 6; }
+        .div2 { grid-area: 1 / 6 / 2 / 7; }
+        .div3 { grid-area: 1 / 7 / 2 / 8; }
+        .div4 { grid-area: 1 / 8 / 2 / 9; }
+        .div5 { grid-area: 1 / 9 / 2 / 10; }

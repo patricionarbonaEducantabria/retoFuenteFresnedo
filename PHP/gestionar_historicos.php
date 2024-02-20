@@ -11,6 +11,8 @@ function obtenerHistorico() {
     $datos = array();
     while($fila = $resultado -> fetch()) {
         $usuario = array(
+            'id' => $fila['id'],
+            'fecha' => $fila['fecha'],
             'descripcion' => $fila['descripcion'],
             'unidades' => $fila['unidades'],
             'cantidad' => $fila['cantidad'],
