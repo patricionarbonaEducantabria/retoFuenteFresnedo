@@ -26,15 +26,15 @@ function crearElemento(etiqueta, texto, atributos) {
 }
 
 function dibujarHistorico(datosUsuario) {
-    let miFila = crearElemento("ul",undefined,{"id":datosUsuario.estado});
-    let miEstado = crearElemento("li",datosUsuario.estado);
-    miFila.appendChild(miNombre);
+    let miFila = crearElemento("ul",undefined,{"id":datosUsuario.tramitado});
+    let miEstado = crearElemento("li",datosUsuario.tramitado);
+    miFila.appendChild(miEstado);
     let miDescripcion = crearElemento("li",datosUsuario.descripcion);  
-    miFila.appendChild(miCorreo);
+    miFila.appendChild(miDescripcion);
     let miCantidad = crearElemento("li",datosUsuario.cantidad);    
-    miFila.appendChild(miTelefono);
-    let miUnidad = crearElemento("li",datosUsuario.unidad);    
-    miFila.appendChild(miCargo);
+    miFila.appendChild(miCantidad);
+    let miUnidad = crearElemento("li",datosUsuario.unidades);    
+    miFila.appendChild(miUnidad);
 
     return miFila;
 }
@@ -76,6 +76,6 @@ function obtenerUsuarios(callback) {
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  let datos = "obtenerUsuarios";
+  let datos = "obtenerHistorico=";
   miPeticion.send(datos);
 }

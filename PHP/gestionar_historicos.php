@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['Buscar'])) {
+if(isset($_POST['obtenerHistorico'])) {
     obtenerHistorico();
 }
 
@@ -11,10 +11,10 @@ function obtenerHistorico() {
     $datos = array();
     while($fila = $resultado -> fetch()) {
         $usuario = array(
-            'tramitado' => $fila['tramitado'],
             'descripcion' => $fila['descripcion'],
-            'cantidad' => $fila['cantidad'],
             'unidades' => $fila['unidades'],
+            'cantidad' => $fila['cantidad'],
+            'tramitado' => $fila['tramitado']
         );
 
         $datos[] = $usuario;
