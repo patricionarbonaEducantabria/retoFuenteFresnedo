@@ -497,8 +497,14 @@ function manejadorClickAdd(e) {
     // ↑↑↑↑↑↑↑↑↑↑↑↑
 }
 
+function cerrarModales() {
+    $('#modal-Add-Usuario').modal('hide');
+    $('#modalAdd-seguro').modal('hide');
+}
+
 function manejadorClickSiAdd(e) {
     console.log("si mi pana");
+    cerrarModales();
     // Recupero los datos del nuevo usuario
     let nombreUsuario = document.getElementById("inNombreAdd-seguro").innerHTML;
     nombreUsuario = nombreUsuario.split(": ")[1].trim();
