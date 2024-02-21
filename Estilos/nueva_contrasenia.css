@@ -11,6 +11,14 @@ body {
     align-items: center;
 }
 
+p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: red;
+}
+
 .login-box {
     width: 400px; /* Aumentamos el ancho de la caja */
     background-color: rgba(255, 255, 255, 0.8);

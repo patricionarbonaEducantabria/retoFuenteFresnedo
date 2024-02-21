@@ -4,6 +4,14 @@ function principal()
 {
     let botonInicioSesion = document.getElementById("btnInicio_Sesion");
     botonInicioSesion.addEventListener("click", manejadorClickInicioSesion);
+    // Agregar event listener para el evento keypress en todo el documento
+    document.addEventListener("keypress", function(event) {
+        // Verificar si la tecla presionada es Enter (código de tecla 13)
+        if (event.key === 'Enter') {
+            // Disparar el evento click en el botón de Iniciar sesión
+            botonInicioSesion.click();
+        }
+    });
 }
 
 function manejadorClickInicioSesion(e) {

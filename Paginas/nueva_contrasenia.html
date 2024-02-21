@@ -13,13 +13,18 @@
             <div>
                 <label for="contrasenia">Nueva contraseña:</label>
                 <input type="password" id="inContrasenia" name="contrasenia" required>
+                <p id="errorNuevaContrasenia"></p>
                 <br><br>
                 <label for="confirmarContrasenia">Confirmar contraseña:</label>
                 <input type="password" id="inConfirmarContrasenia" name="confirmarContrasenia" required><br><br>
-                <label for="visualizarContraseña"><input type="checkbox" id="visualizarContraseña"> Mostrar contraseña</label>
+                <label for="visualizarContraseña">
+                    <p id="errorConfirmarContrasenia"></p>
+                    <p id="rellenadoCampos"></p>
+                    <input type="checkbox" id="visualizarContraseña"> Mostrar contraseña
+                </label>
                 <input type="button" id="btnConfirmar" value="Confirmar">
                 <div class="password-specs">
-                    <p>Requisitos de la contraseña:</p>
+                    <h3>Requisitos de la contraseña:</h3>
                     <ul>
                         <li>Mínimo 8 caracteres</li>
                         <li>Máximo 15 caracteres</li>
