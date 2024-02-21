@@ -41,6 +41,7 @@ function dibujarUsuario(datosUsuario) {
     let filita = crearElemento("li",undefined);
     let idMagico = datosUsuario.id;
     let boton = crearElemento("input",undefined,{"type":"button",
+        "class":"btnModificar",
         "value":"Modificar Datos",
         "data-bs-toggle": "modal",
         "data-bs-target": "#modal-" + idMagico
@@ -52,19 +53,19 @@ function dibujarUsuario(datosUsuario) {
     miFila.appendChild(filita);
     // Boton Habilitar
     filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","value":"Habilitar/Deshabilitar"});
+    boton = crearElemento("input",undefined,{"type":"button","class":"btnHabilitar","value":"Habilitar/Deshabilitar"});
     boton.addEventListener("click",manejadorClickHabilitar);
     filita.appendChild(boton);
     miFila.appendChild(filita);
     // Boton Reiniciar
     filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","value":"Reiniciar Contraseña"});
+    boton = crearElemento("input",undefined,{"type":"button","class":"btnReiniciar","value":"Reiniciar Contraseña"});
     boton.addEventListener("click",manejadorClickReiniciarContrasenia);
     filita.appendChild(boton);
     miFila.appendChild(filita);
     // Boton Cambiar Cargo
     filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","value":"Cambiar Cargo"});
+    boton = crearElemento("input",undefined,{"type":"button","class":"btnCargo","value":"Cambiar Cargo"});
     boton.addEventListener("click",manejadorClickCambiarCargo);
     filita.appendChild(boton);
     miFila.appendChild(filita);
