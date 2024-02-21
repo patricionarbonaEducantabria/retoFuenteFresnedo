@@ -7,14 +7,32 @@ function principal()
 
     let miBoton = document.getElementById("btnBuscar");
     miBoton.addEventListener("click", manejadorClickBuscar);
-    let botonAdd = document.getElementById("btnAddUsuario");
+    // let botonAdd = document.getElementById("btnAddUsuario");
     
-    let botonNoAdd = document.getElementById("btnNoAdd");
+    // let botonNoAdd = document.getElementById("btnNoAdd");
 
 
-    botonNoAdd.addEventListener("click",manejadorClickNoAdd);
-    botonAdd.addEventListener("click",manejadorClickAdd);
+    // botonNoAdd.addEventListener("click",manejadorClickNoAdd);
+    // botonAdd.addEventListener("click",manejadorClickAdd);
+
+    let botonMostrarAdd = document.getElementById("btnMostrarAddUsuarios");
+    let modalAddUsuario = new bootstrap.Modal("#modal-Add-Usuario");
+    botonMostrarAdd.addEventListener("click", function(modalAddSeguro) {
+        modalAddUsuario.show();
+    });
+
+    
+    
+    
+    let botonAddUsuario = document.getElementById("btnAddUsuario");
+    botonAddUsuario.addEventListener("click",manejadorClickAdd);
+    let botonAddSiUsuario = document.getElementById("btnSiAdd");
+    botonAddSiUsuario.addEventListener("click",manejadorClickSiAdd);
+
+
     recuperarUsuarios();
+
+    
 }
 
 function crearElemento(etiqueta, texto, atributos) {
@@ -279,6 +297,27 @@ function modificarUsuario(idDatos) {
     miPeticion.send(datos);
 }
 
+function addUsuario(nombreUsuario,cargoUsuario,emailUsuario,telefonoUsuario) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_usuarios.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            // callback(miPeticion.responseText);
+            recuperarUsuarios();
+            // let modalAddUsuarioSeguro = new bootstrap.Modal("#modalAdd-seguro");
+            // modalAddUsuarioSeguro.dispose();
+        }
+    };
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    let datos = "addUsuario=" + "&nombre=" + nombreUsuario + "&cargo=" + cargoUsuario + "&email=" +emailUsuario + "&telefono=" + telefonoUsuario;
+    miPeticion.send(datos);
+}
+
+
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
 
@@ -289,22 +328,24 @@ function manejadorClickAdd(e) {
     // ↓↓↓↓↓↓↓↓↓↓↓
     let nombre = document.getElementById("inNombreAdd");
     
+    let cargo = document.getElementById("inCargoAdd");
 
     let email = document.getElementById("inEmailAdd");
 
     let telefono = document.getElementById("inTelefonoAdd");
     
 
-    if(nombre.value && email.value && telefono.value) {
-        let modalAddSeguro = new bootstrap.Modal(document.getElementById('modalAdd-seguro'));
+    if(nombre.value && email.value && telefono.value && cargo.value) {
+    let modalAddUsuarioSeguro = new bootstrap.Modal("#modalAdd-seguro");
+
         document.getElementById("inNombreAdd-seguro").innerHTML = "Nombre: " + nombre.value;
+        document.getElementById("inCargoAdd-seguro").innerHTML = "Cargo: " + cargo.value;
 
         document.getElementById("inEmailAdd-seguro").innerHTML = "Email: " + email.value;
 
         document.getElementById("inTelefonoAdd-seguro").innerHTML = "Telefono: " + telefono.value;
-        modalAddSeguro.show();
+        modalAddUsuarioSeguro.show();
     } else {
-        e.preventDefault();
 
         document.getElementById("errorAdd").innerHTML = "No se han rellenado todos los campos";
     }
@@ -312,9 +353,18 @@ function manejadorClickAdd(e) {
     // ↑↑↑↑↑↑↑↑↑↑↑↑
 }
 
-function manejadorClickNoAdd(e) {
-    let modalAddSeguro = new bootstrap.Modal(document.getElementById('modalAdd-seguro'));
-    modalAddSeguro.hide();
+function manejadorClickSiAdd(e) {
+    console.log("si mi pana");
+    // Recupero los datos del nuevo usuario
+    let nombreUsuario = document.getElementById("inNombreAdd-seguro").innerHTML;
+    nombreUsuario = nombreUsuario.split(": ")[1].trim();
+    let cargoUsuario = document.getElementById("inCargoAdd-seguro").innerHTML;
+    cargoUsuario = cargoUsuario.split(": ")[1].trim();
+    let emailUsuario = document.getElementById("inEmailAdd-seguro").innerHTML;
+    emailUsuario = emailUsuario.split(": ")[1].trim();
+    let telefonoUsuario = document.getElementById("inTelefonoAdd-seguro").innerHTML;
+    telefonoUsuario = telefonoUsuario.split(": ")[1].trim();
+    addUsuario(nombreUsuario,cargoUsuario,emailUsuario,telefonoUsuario);
 
 }
 

@@ -17,7 +17,7 @@
             <input type="button" value="Buscar" id="btnBuscar">
             <input type="text" id="inBuscador" placeholder="usuario@ejemplo.com">
         </div>
-        <input type="button" value="Añadir Usuario" data-bs-toggle="modal" data-bs-target="#modal-Add-Usuario">
+        <input type="button" id="btnMostrarAddUsuarios" value="Añadir Usuario" >
         <!-- Modal de añadir usuario -->
         <div id="modal-Add-Usuario" class="modal">
             <div class="modal-dialog">
@@ -56,12 +56,13 @@
                     <div class="modal-body">
                         <h5>¿Estás seguro que quieres los siguientes datos para el usuario?</h5>
                         <p id="inNombreAdd-seguro"></p>
+                        <p id="inCargoAdd-seguro"></p>
                         <p id="inEmailAdd-seguro"></p>
                         <p id="inTelefonoAdd-seguro"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="btnSiAdd" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Sí</button>
-                        <button type="button" id="btnNoAdd"class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-Add-Usuario">No</button>
+                        <button type="button" id="btnNoAdd"class="btn btn-secondary" data-bs-dismiss="modal" >No</button>
                     </div>
                 </div>
             </div>
