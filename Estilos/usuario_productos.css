@@ -1,12 +1,6 @@
 body {
-    /* margin: 0;
-    padding: 0; */
     font-family: Arial, sans-serif;
-    /* background-image: url('../Imagenes/inicioSesion.jpg'); */
-    background-size: cover;
-    background-position: center;
     height: 100vh;
-    /* display: flex; */
     justify-content: center;
     align-items: center;
 }
@@ -30,8 +24,6 @@ body {
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    /* padding: 10px; */
-    /* margin-bottom: 15px; */
 }
 
 ul {
