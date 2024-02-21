@@ -34,4 +34,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("btnPan").onclick = function() {
         window.location.href = "../usuario/usuario_pan.html";
     };
+
+    document.getElementById("btnHistorialPedidos").onclick = function() {
+        window.location.href = "../usuario/usuario_HistorialPedidos.html";
+    };
 });
