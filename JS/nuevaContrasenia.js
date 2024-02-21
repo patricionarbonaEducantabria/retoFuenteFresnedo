@@ -60,16 +60,20 @@ function enviarDatos() {
             "contrasenia": contrasenia
         };
 
-        // Imprimir los datos a enviar en la consola
-        console.log("Datos a enviar al servidor:", datos);
-
         // Enviar datos al servidor mediante AJAX
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../PHP/nuevaContrasenia.php", true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                alert(xhr.responseText);
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    // Redirigir a la página de inicio
+                    window.location.href = "../Paginas/inicio.html"; // Cambia la ruta según la ubicación de tu página de inicio
+                } else {
+                    // Manejo de errores en la respuesta del servidor
+                    console.error("Error al actualizar la contraseña:", xhr.statusText);
+                    // Aquí puedes mostrar un mensaje de error o realizar otras acciones necesarias
+                }
             }
         };
         xhr.send(JSON.stringify(datos));
@@ -77,3 +81,4 @@ function enviarDatos() {
         document.getElementById("rellenadoCampos").innerHTML= "No se han rellenado todos los campos";
     }
 }
+
