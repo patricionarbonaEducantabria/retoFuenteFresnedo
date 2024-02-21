@@ -5,10 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario Inicio</title>
     <script src="../../JS/usuario_inicio.js"></script>
-    <link rel="stylesheet" href="../../Estilos/estilo_general.css">
     <link rel="stylesheet" href="../../Estilos/inicio_usuario.css">
 </head>
 <body>
+    <header id="encabezado">
+        <ul>
+            <li>
+                <a href="./usuario_pagina_compra.html">
+                    <img src="../../Imagenes/carro-de-la-compra.png" alt="carrito_compra">
+                </a>
+            </li>
+            <li>
+                <img src="../../Imagenes/icono_persona.png" alt="icono_persona">
+                <div id="submenu">
+                    <ul>
+                        <li>
+                            <input type="button" id="modo_oscuro" value="Modo Oscuro/Claro">
+                        </li>
+                        <li>
+                            <input type="button" id="historial_pedidos" value="Historial pedidos">
+                        </li>
+                        <li>
+                            <input type="button" id="cerra_sesion" value="Cerrar sesión">
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </header>
     <div class="login-box">
         <form id="loginForm" action="#" method="post">
             <div class="parent">

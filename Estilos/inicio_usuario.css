@@ -6,9 +6,44 @@ body {
     background-size: cover;
     background-position: center;
     height: 100vh;
-    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#encabezado ul {
+    text-align: right;
+}
+
+#encabezado ul li {
+    position: relative;
+    display: inline-block;
+}
+
+#submenu {
+    position: absolute;
+    /* top: 20px; Ajusta la posición del menú según tus necesidades */
+    /* left: 20px; Ajusta la posición del menú según tus necesidades */
+    display: none;
+    background-color: white;
+}
+
+#encabezado:hover #submenu {
+    display: block;
+}
+
+#submenu ul {
+    list-style-type: none;
+    /* padding: 45px; */
+}
+
+#submenu ul li {
+    /* Espacio entre elementos del menú */
+    margin-bottom: 10px; 
+}
+
+#encabezado img {
+    width: 80px;
+    height: 80px;
 }
 
 .login-box {
@@ -18,6 +53,10 @@ body {
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
+    /* display: flex; */
+    text-align: center;
+    align-content: center;
+    margin: auto;
 }
 
 .login-box input[type="button"] {

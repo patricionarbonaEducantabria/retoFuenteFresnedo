@@ -11,6 +11,14 @@ body {
     align-items: center;
 }
 
+p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: red;
+}
+
 .login-box {
     width: 300px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -24,6 +32,7 @@ body {
     text-align: left;
     display: block;
     margin-left: 10%;
+    margin-bottom: 0;
 }
 
 .login-box input[type="text"],

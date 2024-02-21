@@ -28,6 +28,7 @@ function obtenerUsuarios() {
             'telefono' => $fila['telefono'],
             'cargo' => $fila['admin'],
             'estado' => $fila['activo'],
+            'id' => $fila['id'],
         );
 
         $datos[] = $usuario;
@@ -81,12 +82,20 @@ function reiniciaContrasenia(){
 
 // Modificar Datos
 function modificarDatos(){
-    $email = $_POST['modificarDatos'];
+    $emailID = $_POST['modificarDatos'];
+    $nombre = $_POST['nombre'];
+    $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
-
-    $resultado = $conexion -> prepare("UPDATE usuarios SET nombre = ?, email = ?, telefono = ? WHERE email = ?;");
-    $contrasenia = hash('sha256', 'contraseña123');
-    $resultado -> execute(array($contrasenia, $email));
+    $resultado = $conexion -> prepare(
+        "UPDATE usuarios 
+        SET
+        nombre = ?,
+        email = ?,
+        telefono = ?
+        WHERE
+        email = ?;");
+    $resultado -> execute(array($nombre, $email, $telefono, $emailID));
 }
 
 ?>

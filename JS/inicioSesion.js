@@ -4,6 +4,14 @@ function principal()
 {
     let botonInicioSesion = document.getElementById("btnInicio_Sesion");
     botonInicioSesion.addEventListener("click", manejadorClickInicioSesion);
+    // Agregar event listener para el evento keypress en todo el documento
+    document.addEventListener("keypress", function(event) {
+        // Verificar si la tecla presionada es Enter (código de tecla 13)
+        if (event.key === 'Enter') {
+            // Disparar el evento click en el botón de Iniciar sesión
+            botonInicioSesion.click();
+        }
+    });
 }
 
 function manejadorClickInicioSesion(e) {
@@ -19,7 +27,10 @@ function comprobarInicioSesion(e) {
     }
 
     // Si estan rellenados empiezo a comprobar si existe los datos del usuario
+    document.getElementById("errorEmail").innerHTML= "";
+    document.getElementById("errorContrasenia").innerHTML= "";
     if(rellenados) {
+        document.getElementById("rellenadoCampos").innerHTML= "";
         let email = document.getElementById("inEmail").value.toLowerCase();
         console.log(email);
     
@@ -35,17 +46,16 @@ function comprobarInicioSesion(e) {
                         // (El servidor hace la comprobación de si la contraseña es nueva, tenemos que ir
                         // a la pagina de usuario o de admin)
                         iniciarSesion(email, contrasenia);
-                        console.log("Login correcto");
                     } else {
-                        // 👀 cambiar a aviso
-                        console.log("Login incorrecto");
+                        document.getElementById("errorContrasenia").innerHTML= "❗Contraseña incorrecta❗";
                     }
                 });
             } else {
-                // 👀 cambiar a aviso
-                console.log("Correo Incorrecto");
+                document.getElementById("errorEmail").innerHTML= "❗Email incorrecto❗";
             }
         });
+    }else {
+        document.getElementById("rellenadoCampos").innerHTML= "No se han rellenado todos los campos";
     }
 }
 
