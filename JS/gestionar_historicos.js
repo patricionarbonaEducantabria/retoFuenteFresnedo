@@ -50,7 +50,7 @@ function dibujarHistorico(datosUsuario) {
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
-
+    buscadorFecha();
 }
 
 
@@ -90,15 +90,39 @@ function obtenerSolicitudes(callback) {
 }
 
 function buscadorFecha(){
+
+    let miDiv = document.getElementById("contenedor-historico");
+    miDiv.innerHTML = "";
+
  obtenerSolicitudes(function(respuesta) {
         respuesta = JSON.parse(respuesta);
-        console.log(respuesta);
-        // recorro el json
-    let fechaHace = document.getElementById("fecha_desde").value;
-    console.log(fechaHace);
-    let fechaHasta = document.getElementById("fecha_hasta").value;
-    console.log(fechaHasta);
-        let busca = respuesta.filter(n => n.fecha > fechaHace &&  n.fecha < fechaHasta);
-    console.warn(busca);
+
+let miDiv = document.getElementById("contenedor-historico");
+
+//recupero los valores de los input date (yyyy-mm-dd)
+
+let fechaHace = document.getElementById("fecha_desde").value;
+let fechaHasta = document.getElementById("fecha_hasta").value
+
+            if(fechaHace !== "" && fechaHasta !== ""){
+                //filtro el array por fecha 
+                muestra = respuesta.filter( n=> n.fecha > fechaHace && n.fecha <= fechaHasta)
+                //recorro el array para crear los elementos
+
+                for(let i = 0; i< muestra.length; i++){
+                    miDiv.appendChild(dibujarHistorico(muestra[i]));
+                    console.error("salta la primera");     
+                }
+               
+            }else if(fechaHasta === ""){
+                muestra = respuesta.filter(n => n.fecha > fechaHace);
+                console.warn(muestra);
+                for(let i = 0; i< muestra.length; i++){
+                    miDiv.appendChild(dibujarHistorico(muestra[i]));
+                    console.error("salta la segunda");
+                }
+            }
+        
+    document.body.appendChild(miDiv);
     });
 }

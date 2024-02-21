@@ -109,7 +109,7 @@ function dibujarProductos(datosProducto) {
     }
     // INPUT para introducir cantidad
     let filita_1 = crearElemento("li",undefined);
-    let boton_1 = crearElemento("input",undefined,{"type":"number","id":"cantidad_producto","step":0.001});
+    let boton_1 = crearElemento("input",undefined,{"type":"number","id":"cantidad_producto","step":"0.001"});
     filita_1.appendChild(boton_1);
     miFila.appendChild(filita_1);
     // Boton Modificar Datos
