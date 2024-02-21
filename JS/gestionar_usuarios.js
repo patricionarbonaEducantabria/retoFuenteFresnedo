@@ -7,7 +7,13 @@ function principal()
 
     let miBoton = document.getElementById("btnBuscar");
     miBoton.addEventListener("click", manejadorClickBuscar);
+    let botonAdd = document.getElementById("btnAddUsuario");
+    
+    let botonNoAdd = document.getElementById("btnNoAdd");
 
+
+    botonNoAdd.addEventListener("click",manejadorClickNoAdd);
+    botonAdd.addEventListener("click",manejadorClickAdd);
     recuperarUsuarios();
 }
 
@@ -41,6 +47,7 @@ function dibujarUsuario(datosUsuario) {
     let filita = crearElemento("li",undefined);
     let idMagico = datosUsuario.id;
     let boton = crearElemento("input",undefined,{"type":"button",
+        "class":"btnModificar",
         "value":"Modificar Datos",
         "data-bs-toggle": "modal",
         "data-bs-target": "#modal-" + idMagico
@@ -52,19 +59,19 @@ function dibujarUsuario(datosUsuario) {
     miFila.appendChild(filita);
     // Boton Habilitar
     filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","value":"Habilitar/Deshabilitar"});
+    boton = crearElemento("input",undefined,{"type":"button","class":"btnHabilitar","value":"Habilitar/Deshabilitar"});
     boton.addEventListener("click",manejadorClickHabilitar);
     filita.appendChild(boton);
     miFila.appendChild(filita);
     // Boton Reiniciar
     filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","value":"Reiniciar Contraseña"});
+    boton = crearElemento("input",undefined,{"type":"button","class":"btnReiniciar","value":"Reiniciar Contraseña"});
     boton.addEventListener("click",manejadorClickReiniciarContrasenia);
     filita.appendChild(boton);
     miFila.appendChild(filita);
     // Boton Cambiar Cargo
     filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","value":"Cambiar Cargo"});
+    boton = crearElemento("input",undefined,{"type":"button","class":"btnCargo","value":"Cambiar Cargo"});
     boton.addEventListener("click",manejadorClickCambiarCargo);
     filita.appendChild(boton);
     miFila.appendChild(filita);
@@ -274,6 +281,45 @@ function modificarUsuario(idDatos) {
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
+
+}
+function manejadorClickAdd(e) {
+    console.log("añado usuario");
+    
+    // ↓↓↓↓↓↓↓↓↓↓↓
+    let nombre = document.getElementById("inNombreAdd");
+    
+
+    let email = document.getElementById("inEmailAdd");
+
+    let telefono = document.getElementById("inTelefonoAdd");
+    
+
+    if(nombre.value && email.value && telefono.value) {
+        let modalAddSeguro = new bootstrap.Modal(document.getElementById('modalAdd-seguro'));
+        document.getElementById("inNombreAdd-seguro").innerHTML = "Nombre: " + nombre.value;
+
+        document.getElementById("inEmailAdd-seguro").innerHTML = "Email: " + email.value;
+
+        document.getElementById("inTelefonoAdd-seguro").innerHTML = "Telefono: " + telefono.value;
+        modalAddSeguro.show();
+    } else {
+        e.preventDefault();
+
+        document.getElementById("errorAdd").innerHTML = "No se han rellenado todos los campos";
+    }
+    
+    // ↑↑↑↑↑↑↑↑↑↑↑↑
+}
+
+function manejadorClickNoAdd(e) {
+    let modalAddSeguro = new bootstrap.Modal(document.getElementById('modalAdd-seguro'));
+    modalAddSeguro.hide();
+
+}
+
+function manejadorClickAddUsuario(e) {
+    console.log("añado usuario");
 
 }
 function manejadorClickActualizarBD(e) {
