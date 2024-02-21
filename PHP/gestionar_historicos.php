@@ -6,8 +6,8 @@ if(isset($_POST['obtenerHistorico'])) {
 // Listar los usuarios
 function obtenerHistorico() {
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
-    $resultado = $conexion -> prepare("SELECT * FROM solicitudes");
-    $resultado -> execute();
+    $resultado = $conexion -> prepare("SELECT * FROM solicitudes where fk_usuario = (SELECT id FROM usuarios WHERE email = ?);");
+    $resultado -> execute(array($_POST['obtenerHistorico']));
     $datos = array();
     while($fila = $resultado -> fetch()) {
         $usuario = array(

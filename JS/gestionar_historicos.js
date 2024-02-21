@@ -85,7 +85,7 @@ function obtenerSolicitudes(callback) {
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  let datos = "obtenerHistorico=";
+  let datos = "obtenerHistorico="+localStorage.getItem("email");
   miPeticion.send(datos);
 }
 
