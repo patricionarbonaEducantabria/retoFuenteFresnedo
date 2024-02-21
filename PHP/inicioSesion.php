@@ -49,23 +49,30 @@ function iniciarSesion() {
     $email = $_SESSION['email'];
     $contrasenia = $_SESSION['contrasenia'];
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
-    $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email = ? AND password='8e7ab8d9fe3b324acdd1f76735eea350ea61ac24cbd17e5446946e5a4c71d999';");
+    $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email = ? AND activo=1;");
     $resultado -> execute(array($email));
     $existe = $resultado -> fetch();
     if($existe) {
-        session_destroy();
-        echo "../Paginas/nueva_contrasenia.html";
-    } else {
-        $resultado = $conexion -> prepare("SELECT admin FROM usuarios WHERE email = ? AND password=?;");
-        $resultado -> execute(array($email, $contrasenia));
-        $respuesta = $resultado -> fetch();
-        if($respuesta['admin'] == "1") {
+        $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email = ? AND password='8e7ab8d9fe3b324acdd1f76735eea350ea61ac24cbd17e5446946e5a4c71d999';");
+        $resultado -> execute(array($email));
+        $existe = $resultado -> fetch();
+        if($existe) {
             session_destroy();
-            echo "../Paginas/admin/admin_inicio.html";
+            echo "../Paginas/nueva_contrasenia.html";
         } else {
-            session_destroy();
-            echo "../Paginas/usuario/usuario_inicio.html";
+            $resultado = $conexion -> prepare("SELECT admin FROM usuarios WHERE email = ? AND password=?;");
+            $resultado -> execute(array($email, $contrasenia));
+            $respuesta = $resultado -> fetch();
+            if($respuesta['admin'] == "1") {
+                session_destroy();
+                echo "../Paginas/admin/admin_inicio.html";
+            } else {
+                session_destroy();
+                echo "../Paginas/usuario/usuario_inicio.html";
+            }
         }
+    }else {
+        echo "0";
     }
 }
 ?>

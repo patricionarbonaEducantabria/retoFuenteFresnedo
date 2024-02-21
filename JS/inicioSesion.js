@@ -107,9 +107,14 @@ function iniciarSesion(email, contrasenia) {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
         // Recupero la ruta de la pagina a la que ir
         console.log("respuesta login",miPeticion.responseText);
-        localStorage.setItem('email', email);
-        localStorage.setItem('contrasenia', contrasenia);
-        window.location.href = miPeticion.responseText;
+        if(miPeticion.responseText==="0")
+        {
+            document.getElementById("rellenadoCampos").innerHTML= "Usuario deshabilitado";
+        } else{
+            localStorage.setItem('email', email);
+            localStorage.setItem('contrasenia', contrasenia);
+            window.location.href = miPeticion.responseText;
+        }
     }
   };
 
