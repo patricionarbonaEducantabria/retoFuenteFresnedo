@@ -15,7 +15,8 @@ body {
 }
 
 #encabezado ul {
-    text-align: right; /* Alineación a la derecha */
+    /* Alineación a la derecha */
+    text-align: right; 
 }
 
 #encabezado ul li {
@@ -29,13 +30,12 @@ body {
     top: 80px; /* Ajustar posición según necesidades */
     display: none;
     /* Fondo blanco */
-    background-color: rgba(255, 255, 255, 0.3); 
+    background-color: rgba(255, 255, 255, 0.5); 
     /* Borde redondeado */
     border-radius: 5px; 
-    /* Espaciado interno */
-    padding: 5px; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra */
     z-index: 1; /* Asegurar que esté por encima de otros elementos */
+    width: auto;
 }
 
 #icono_persona:hover #submenu {
@@ -44,32 +44,38 @@ body {
 
 #submenu ul {
     list-style: none;
-    /* padding: 0; */
-}
-
-#submenu ul li {
-    margin-bottom: 8px; /* Espaciado entre elementos del submenú */
+    padding: 0;
+    text-align: left;
+    margin: 0;
 }
 
 #submenu ul li input[type="button"] {
-    width: 100%; /* Ancho completo */
-    height: 40px; /* Altura */
-    background-color: #f2f2f2; /* Color de fondo */
+    /* Ancho completo */
+    width: 100%; 
+    /* Altura */
+    height: 40px; 
+    /* Color de fondo */
+    background-color: transparent; 
     border: none;
-    border-radius: 5px; /* Borde redondeado */
+    /* Borde redondeado */
+    border-radius: 5px; 
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Transición suave */
+    /* Transición suave */
+    transition: background-color 0.3s ease; 
 }
 
 #submenu ul li input[type="button"]:hover {
-    background-color: #e0e0e0; /* Cambio de color al pasar el ratón */
+    /* Cambio de color al pasar el ratón */
+    background-color: #4caf50; 
 }
 
 #encabezado img {
     width: 80px;
     height: 80px;
-    float: right; /* Mover imágenes a la esquina derecha */
-    margin-right: 20px; /* Espacio entre imágenes */
+    /* Mover imágenes a la esquina derecha */
+    float: right; 
+    /* Espacio entre imágenes */
+    margin-right: 20px; 
 }
 
 .login-box {
