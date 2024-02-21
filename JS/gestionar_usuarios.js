@@ -14,7 +14,9 @@ function principal()
 
     // botonNoAdd.addEventListener("click",manejadorClickNoAdd);
     // botonAdd.addEventListener("click",manejadorClickAdd);
+    dibujarModalesAdd();
 
+    recuperarUsuarios();
     let botonMostrarAdd = document.getElementById("btnMostrarAddUsuarios");
     let modalAddUsuario = new bootstrap.Modal("#modal-Add-Usuario");
     botonMostrarAdd.addEventListener("click", function(modalAddSeguro) {
@@ -30,8 +32,7 @@ function principal()
     botonAddSiUsuario.addEventListener("click",manejadorClickSiAdd);
 
 
-    recuperarUsuarios();
-
+    
     
 }
 
@@ -306,15 +307,158 @@ function addUsuario(nombreUsuario,cargoUsuario,emailUsuario,telefonoUsuario) {
         if (miPeticion.readyState == 4 && miPeticion.status == 200) {
             // console.log(miPeticion.responseText);
             // callback(miPeticion.responseText);
+            // dibujarModalesAdd();
             recuperarUsuarios();
-            // let modalAddUsuarioSeguro = new bootstrap.Modal("#modalAdd-seguro");
-            // modalAddUsuarioSeguro.dispose();
         }
     };
 
     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let datos = "addUsuario=" + "&nombre=" + nombreUsuario + "&cargo=" + cargoUsuario + "&email=" +emailUsuario + "&telefono=" + telefonoUsuario;
     miPeticion.send(datos);
+}
+
+function dibujarModalesAdd() {
+    let misModales = document.getElementById("contenedorModalesAdd");
+    misModales.appendChild(dibujarModalAddUsuario());
+    misModales.appendChild(dibujarModalAddUsuarioSeguro());
+    document.body.appendChild(misModales);
+}
+
+function dibujarModalAddUsuario() {
+    let miDiv = crearElemento("div", undefined, { "id": "modal-Add-Usuario", "class": "modal" });
+    let modalDialog = crearElemento("div", undefined, { "class": "modal-dialog" });
+    let modalContent = crearElemento("div", undefined, { "class": "modal-content" });
+    // Contenido Header
+    let modalHeader = crearElemento("div", undefined, { "class": "modal-header" });
+    let modalCierre = crearElemento("button", undefined, {
+        "type": "button",
+        "class": "btn-close",
+        "data-bs-dismiss": "modal",
+        "aria-label": "Close"
+    });
+    modalHeader.appendChild(modalCierre);
+    // Contenido Body
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    let modalBody = crearElemento("div", undefined, { "class": "modal-body" });
+
+    // Entrada Cargo
+    let labelCargo = crearElemento("label", "Cargo", { "for": "inCargoAdd" });
+    let selectCargo = crearElemento("select", undefined, { "id": "inCargoAdd" });
+    let optionAdmin = crearElemento("option", "Admin");
+    let optionUsuario = crearElemento("option", "Usuario");
+    selectCargo.appendChild(optionAdmin);
+    selectCargo.appendChild(optionUsuario);
+    modalBody.appendChild(labelCargo);
+    modalBody.appendChild(selectCargo);
+
+    // Entrada Nombre
+    let labelNombreAdd = crearElemento("label", "Nombre", { "for": "inNombreAdd" });
+    let inputNombreAdd = crearElemento("input", undefined, {
+        "type": "text",
+        "id": "inNombreAdd",
+        "placeholder": "ej: Mi Nombre y apellidos"
+    });
+    modalBody.appendChild(labelNombreAdd);
+    modalBody.appendChild(inputNombreAdd);
+
+    // Entrada Email
+    let labelEmailAdd = crearElemento("label", "Email", { "for": "inEmailAdd" });
+    let inputEmailAdd = crearElemento("input", undefined, {
+        "type": "text",
+        "id": "inEmailAdd",
+        "placeholder": "ej: micorreo@example.com"
+    });
+    modalBody.appendChild(labelEmailAdd);
+    modalBody.appendChild(inputEmailAdd);
+
+    // Entrada Teléfono
+    let labelTelefonoAdd = crearElemento("label", "Telefono", { "for": "inTelefonoAdd" });
+    let inputTelefonoAdd = crearElemento("input", undefined, {
+        "type": "text",
+        "id": "inTelefonoAdd",
+        "placeholder": "ej: 644763523"
+    });
+    modalBody.appendChild(labelTelefonoAdd);
+    modalBody.appendChild(inputTelefonoAdd);
+
+    // Error
+    let errorAdd = crearElemento("p", "", { "id": "errorAdd" });
+    modalBody.appendChild(errorAdd);
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    // Contenido Footer
+    let modalFooter = crearElemento("div", undefined, { "class": "modal-footer" });
+    // Botón Añadir Usuario
+    let btnAddUsuario = crearElemento("button", "Añadir Usuario", {
+        "type": "button",
+        "class": "btn btn-primary",
+        "id": "btnAddUsuario"
+    });
+    modalFooter.appendChild(btnAddUsuario);
+    modalContent.appendChild(modalHeader);
+    modalContent.appendChild(modalBody);
+    modalContent.appendChild(modalFooter);
+    modalDialog.appendChild(modalContent);
+    miDiv.appendChild(modalDialog);
+    
+    return miDiv;
+}    
+
+function dibujarModalAddUsuarioSeguro() {
+    let miDiv = crearElemento("div", undefined, { "id": "modalAdd-seguro", "class": "modal" });
+    let modalDialog = crearElemento("div", undefined, { "class": "modal-dialog" });
+    let modalContent = crearElemento("div", undefined, { "class": "modal-content" });
+    // Contenido Header
+    let modalHeader = crearElemento("div", undefined, { "class": "modal-header" });
+    let modalCierre = crearElemento("button", undefined, {
+        "type": "button",
+        "class": "btn-close",
+        "data-bs-dismiss": "modal",
+        "aria-label": "Close"
+    });
+    modalHeader.appendChild(modalCierre);
+    // Contenido Body
+    let modalBody = crearElemento("div", undefined, { "class": "modal-body" });
+
+    // Pregunta de Confirmación
+    let confirmacion = crearElemento("h5", "¿Estás seguro que quieres los siguientes datos para el usuario?");
+    modalBody.appendChild(confirmacion);
+
+    // Detalles del Usuario
+    let inNombreAddSeguro = crearElemento("p", "", { "id": "inNombreAdd-seguro" });
+    let inCargoAddSeguro = crearElemento("p", "", { "id": "inCargoAdd-seguro" });
+    let inEmailAddSeguro = crearElemento("p", "", { "id": "inEmailAdd-seguro" });
+    let inTelefonoAddSeguro = crearElemento("p", "", { "id": "inTelefonoAdd-seguro" });
+    modalBody.appendChild(inNombreAddSeguro);
+    modalBody.appendChild(inCargoAddSeguro);
+    modalBody.appendChild(inEmailAddSeguro);
+    modalBody.appendChild(inTelefonoAddSeguro);
+
+    // Contenido Footer
+    let modalFooter = crearElemento("div", undefined, { "class": "modal-footer" });
+    // Botones de Confirmación
+    let btnSiAdd = crearElemento("button", "Sí", {
+        "type": "button",
+        "class": "btn btn-primary",
+        "id": "btnSiAdd",
+        "data-bs-dismiss": "modal",
+        "aria-label": "Close"
+    });
+    let btnNoAdd = crearElemento("button", "No", {
+        "type": "button",
+        "class": "btn btn-secondary",
+        "id": "btnNoAdd",
+        "data-bs-dismiss": "modal"
+    });
+    modalFooter.appendChild(btnSiAdd);
+    modalFooter.appendChild(btnNoAdd);
+
+    modalContent.appendChild(modalHeader);
+    modalContent.appendChild(modalBody);
+    modalContent.appendChild(modalFooter);
+    modalDialog.appendChild(modalContent);
+    miDiv.appendChild(modalDialog);
+
+    return miDiv;
 }
 
 
