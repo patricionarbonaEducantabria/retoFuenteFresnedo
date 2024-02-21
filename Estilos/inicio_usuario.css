@@ -26,8 +26,10 @@ body {
 
 #submenu {
     position: absolute;
-    left: -100px; /* Ajustar posición a la izquierda */
-    top: 80px; /* Ajustar posición según necesidades */
+    /* Ajustar posición a la izquierda */
+    left: -24px; 
+    /* Ajustar posición según necesidades */
+    top: 80px; 
     display: none;
     /* Fondo blanco */
     background-color: rgba(255, 255, 255, 0.5); 
@@ -43,10 +45,14 @@ body {
 }
 
 #submenu ul {
-    list-style: none;
+    display: flex;
+    /* list-style: none; */
     padding: 0;
     text-align: left;
     margin: 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 
 #submenu ul li input[type="button"] {

@@ -1,0 +1,50 @@
+/* Estilo para el contenedor de usuarios */
+#contenedor-usuarios {
+    margin-top: 50px; /* Aumentamos el margen superior */
+}
+
+/* Estilo para cada usuario */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para cada elemento dentro de un usuario */
+ul li {
+    width: 100%; /* Ancho fijo para cada elemento */
+    margin-right: 0px;
+    padding: 10px; /* Añadimos un poco de espacio interno */
+    text-align: center; /* Centramos el texto */
+    border-right: 1px solid #ccc; /* Añadimos una línea divisoria entre elementos */
+}
+
+/* Estilo para el último elemento dentro de un usuario */
+ul li:last-child {
+    border-right: none; /* Quitamos la línea divisoria en el último elemento */
+}
+
+/* Estilo para los botones */
+input[type="button"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Estilo específico para los botones de modificar */
+input[type="button"].btnModificar {
+    background-color: #007bff; /* Azul corporativo */
+}
+
+/* Estilo específico para los botones de acción (excepto modificar) */
+input[type="button"].btnHabilitar,
+input[type="button"].btnReiniciar,
+input[type="button"].btnCargo {
+    background-color: #4caf50; /* Verde corporativo relacionado con comida */
+}
