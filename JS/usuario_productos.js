@@ -107,12 +107,17 @@ function dibujarProductos(datosProducto) {
         let observaciones = crearElemento("li",datosProducto.observaciones);    
         miFila.appendChild(observaciones);
     }
+    // INPUT para introducir cantidad
+    let filita_1 = crearElemento("li",undefined);
+    let boton_1 = crearElemento("input",undefined,{"type":"number","id":"cantidad_producto","step":0.001});
+    filita_1.appendChild(boton_1);
+    miFila.appendChild(filita_1);
     // Boton Modificar Datos
-    let filita = crearElemento("li",undefined);
-    let boton = crearElemento("input",undefined,{"type":"button","value":"Añadir a la cesta"});
-    boton.addEventListener("click",manejadorClickAñadirProducto);
-    filita.appendChild(boton);
-    miFila.appendChild(filita);
+    let filita_2 = crearElemento("li",undefined);
+    let boton_2 = crearElemento("input",undefined,{"type":"button","value":"Añadir a la cesta"});
+    boton_2.addEventListener("click",manejadorClickAñadirProducto);
+    filita_2.appendChild(boton_2);
+    miFila.appendChild(filita_2);
     return miFila;
 }
 
