@@ -39,7 +39,7 @@ function dibujarUsuario(datosUsuario) {
     miFila.appendChild(miEstado);
     // Boton Modificar Datos
     let filita = crearElemento("li",undefined);
-    let idMagico = datosUsuario.nombre + (Math.floor(Math.random() * 1050) + 1);
+    let idMagico = datosUsuario.id;
     let boton = crearElemento("input",undefined,{"type":"button",
         "value":"Modificar Datos",
         "data-bs-toggle": "modal",
@@ -161,14 +161,21 @@ function dibujarModalSeguro(idModalSeguro) {
     // Contenido Body
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     let modalBody = crearElemento("div",undefined, {"class": "modal-body"});
-    let miPregunta = crearElemento("p",undefined,{"id" : "pregunta-" + idModalSeguro + "-seguro"});
+    let miPregunta = crearElemento("h5","¿Estas seguro que quieres los siguientes datos para el usuario?");
+    let miNombre = crearElemento("p",undefined,{"id" : "inNombre" + idModalSeguro + "-seguro"});
+    let miEmail = crearElemento("p",undefined,{"id" : "inEmail" + idModalSeguro + "-seguro"});
+    let miTelefono = crearElemento("p",undefined,{"id" : "inTelefono" + idModalSeguro + "-seguro"});
     modalBody.appendChild(miPregunta);
+    modalBody.appendChild(miNombre);
+    modalBody.appendChild(miEmail);
+    modalBody.appendChild(miTelefono);
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     // Contenido footer
     let modalFooter = crearElemento("div",undefined, {"class": "modal-footer"});
     // Pongo al boton modificar el id del modal ¿estas seguro?
     let botonSi = crearElemento("button", "Si", {
         "type" : "button",
+        "id" : "btnSi" + idModalSeguro,
         "class" : "btn btn-primary",
         "data-bs-dismiss" : "modal",
         "aria-label" : "Close"
@@ -179,7 +186,7 @@ function dibujarModalSeguro(idModalSeguro) {
         "data-bs-toggle": "modal",
         "data-bs-target": "#modal-" + idModalSeguro
     });
-    // modalModificar.addEventListener("click",manejadorClickModificar);
+    botonSi.addEventListener("click", manejadorClickActualizarBD);
     modalFooter.appendChild(botonSi);
     modalFooter.appendChild(botonNo);
 
@@ -230,58 +237,80 @@ function obtenerUsuarios(callback) {
 }
 
 function modificarUsuario(idDatos) {
-    let nombreUsuario = document.getElementById("inNombre" + idDatos);
-    if(nombreUsuario.value) {
-        console.log(nombreUsuario.value);
-    } else {
-        console.log(nombreUsuario.placeholder);
-    }
-    let emailUsuario = document.getElementById("inEmail" + idDatos);
-    if(emailUsuario.value) {
-        console.log(emailUsuario.value);
-    } else {
-        console.log(emailUsuario.placeholder);
-    }
-    let telefonoUsuario = document.getElementById("inTelefono" + idDatos);
-    if(telefonoUsuario.value) {
-        console.log(telefonoUsuario.value);
-    } else {
-        console.log(telefonoUsuario.placeholder);
-    }
+    idDatos = idDatos.split("btnSi")[1];
+    let nombreUsuario = document.getElementById("inNombre" + idDatos + "-seguro").innerHTML;
+    // divido el contenido desde ": "
+    nombreUsuario = nombreUsuario.split(": ")[1].trim();
+
+    let emailUsuario = document.getElementById("inEmail" + idDatos + "-seguro").innerHTML;
+    emailUsuario = emailUsuario.split(": ")[1].trim();
+
+    let telefonoUsuario = document.getElementById("inTelefono" + idDatos + "-seguro").innerHTML;
+    telefonoUsuario = telefonoUsuario.split(": ")[1].trim();
+
+    console.log("si Nombre:"+ nombreUsuario + " si Email:" + emailUsuario + " si Telefono:" + telefonoUsuario);
+
+    let emailOriginal = document.getElementById("inEmail" + idDatos + "-seguro").value;
+    console.log(emailOriginal);
+
+
+    // COMIENZO A MODIFICAR LA BD
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_usuarios.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            // callback(miPeticion.responseText);
+            recuperarUsuarios();
+        }
+    };
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    let datos = "modificarDatos=" + emailOriginal + "&nombre=" + nombreUsuario + "&email=" +emailUsuario + "&telefono=" + telefonoUsuario;
+    miPeticion.send(datos);
 }
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
 
 }
+function manejadorClickActualizarBD(e) {
+    console.log("actualiza puto id:", this.id);
+    modificarUsuario(this.id);
+
+}
 
 function manejadorClickModificar(e) {
     console.log("modifico: ",this.id , "clase: ", this.className);
-    let idNuevo = "pregunta-" + this.id + "-seguro";
-    let txt = "¿Estas seguro que quieres introducir los siguientes datos?";
+    let txt = "";
     // ↓↓↓↓↓↓↓↓↓↓↓
     let nombre = document.getElementById("inNombre" + this.id);
     if(nombre.value) {
-        txt += "<br>Nombre: " + nombre.value;
+        txt = "Nombre: " + nombre.value;
     } else {
-        txt += "<br>Nombre: " + nombre.placeholder;
+        txt = "Nombre: " + nombre.placeholder;
     }
+    document.getElementById("inNombre" + this.id + "-seguro").innerHTML = txt;
+
     let email = document.getElementById("inEmail" + this.id);
     if(email.value) {
-        txt += "<br>Email: " + email.value;
+        txt = "Email: " + email.value;
     } else {
-        txt += "<br>Email: " + email.placeholder;
+        txt = "Email: " + email.placeholder;
     }
+    document.getElementById("inEmail" + this.id + "-seguro").innerHTML = txt;
+    document.getElementById("inEmail" + this.id + "-seguro").value = email.placeholder;
+
     let telefono = document.getElementById("inTelefono" + this.id);
     if(telefono.value) {
-        txt += "<br>Telefono: " + telefono.value;
+        txt = "Telefono: " + telefono.value;
     } else {
-        txt += "<br>Telefono: " + telefono.placeholder;
+        txt = "Telefono: " + telefono.placeholder;
     }
+    document.getElementById("inTelefono" + this.id + "-seguro").innerHTML = txt;
     // ↑↑↑↑↑↑↑↑↑↑↑↑
-    console.log(idNuevo);
-    document.getElementById(idNuevo).innerHTML = txt;
-    // listaUsuario.appendChild(dibujarModalSeguro(idUsuario));
 }
 function manejadorClickHabilitar(e) {
     let padre = this.parentElement.parentElement;
