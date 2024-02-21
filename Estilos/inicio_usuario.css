@@ -10,8 +10,12 @@ body {
     align-items: center;
 }
 
+#encabezado {
+    margin-right: 15px;
+}
+
 #encabezado ul {
-    text-align: center;
+    text-align: right; /* Alineación a la derecha */
 }
 
 #encabezado ul li {
@@ -21,29 +25,51 @@ body {
 
 #submenu {
     position: absolute;
-    /* top: 20px; Ajusta la posición del menú según tus necesidades */
-    /* left: 20px; Ajusta la posición del menú según tus necesidades */
+    left: -100px; /* Ajustar posición a la izquierda */
+    top: 80px; /* Ajustar posición según necesidades */
     display: none;
-    background-color: white;
+    /* Fondo blanco */
+    background-color: rgba(255, 255, 255, 0.3); 
+    /* Borde redondeado */
+    border-radius: 5px; 
+    /* Espaciado interno */
+    padding: 5px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra */
+    z-index: 1; /* Asegurar que esté por encima de otros elementos */
 }
 
-#encabezado:hover #submenu {
+#icono_persona:hover #submenu {
     display: block;
 }
 
 #submenu ul {
-    list-style-type: none;
-    /* padding: 45px; */
+    list-style: none;
+    /* padding: 0; */
 }
 
 #submenu ul li {
-    /* Espacio entre elementos del menú */
-    margin-bottom: 10px; 
+    margin-bottom: 8px; /* Espaciado entre elementos del submenú */
+}
+
+#submenu ul li input[type="button"] {
+    width: 100%; /* Ancho completo */
+    height: 40px; /* Altura */
+    background-color: #f2f2f2; /* Color de fondo */
+    border: none;
+    border-radius: 5px; /* Borde redondeado */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+#submenu ul li input[type="button"]:hover {
+    background-color: #e0e0e0; /* Cambio de color al pasar el ratón */
 }
 
 #encabezado img {
     width: 80px;
     height: 80px;
+    float: right; /* Mover imágenes a la esquina derecha */
+    margin-right: 20px; /* Espacio entre imágenes */
 }
 
 .login-box {
