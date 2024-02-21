@@ -49,7 +49,7 @@ function iniciarSesion() {
     $email = $_SESSION['email'];
     $contrasenia = $_SESSION['contrasenia'];
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
-    $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email = ? AND password='8e7ab8d9fe3b324acdd1f76735eea350ea61ac24cbd17e5446946e5a4c71d999';");
+    $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email = ? AND password='8e7ab8d9fe3b324acdd1f76735eea350ea61ac24cbd17e5446946e5a4c71d999' AND activo='1';");
     $resultado -> execute(array($email));
     $existe = $resultado -> fetch();
     if($existe) {

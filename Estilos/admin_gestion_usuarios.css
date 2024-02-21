@@ -27,6 +27,7 @@ ul li {
 ul li:last-child {
     border-right: none; /* Quitamos la línea divisoria en el último elemento */
 }
+
 /* Estilo para los botones */
 input[type="button"] {
     background-color: #007bff;
