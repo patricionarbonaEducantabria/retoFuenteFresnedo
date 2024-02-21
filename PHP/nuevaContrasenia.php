@@ -16,9 +16,6 @@ if ($conexion->connect_error) {
 // Obtener los datos enviados por AJAX
 $data = json_decode(file_get_contents("php://input"), true);
 
-// Registrar los datos recibidos en la consola
-file_put_contents('datos_recibidos.txt', print_r($data, true));
-
 // Verificar si se recibieron los datos esperados
 if (isset($data['correo'], $data['contrasenia'])) {
     // Obtener el correo electrónico y la nueva contraseña
