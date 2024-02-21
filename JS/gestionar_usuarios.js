@@ -7,7 +7,13 @@ function principal()
 
     let miBoton = document.getElementById("btnBuscar");
     miBoton.addEventListener("click", manejadorClickBuscar);
+    let botonAdd = document.getElementById("btnAddUsuario");
+    
+    let botonNoAdd = document.getElementById("btnNoAdd");
 
+
+    botonNoAdd.addEventListener("click",manejadorClickNoAdd);
+    botonAdd.addEventListener("click",manejadorClickAdd);
     recuperarUsuarios();
 }
 
@@ -274,6 +280,45 @@ function modificarUsuario(idDatos) {
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
+
+}
+function manejadorClickAdd(e) {
+    console.log("añado usuario");
+    
+    // ↓↓↓↓↓↓↓↓↓↓↓
+    let nombre = document.getElementById("inNombreAdd");
+    
+
+    let email = document.getElementById("inEmailAdd");
+
+    let telefono = document.getElementById("inTelefonoAdd");
+    
+
+    if(nombre.value && email.value && telefono.value) {
+        let modalAddSeguro = new bootstrap.Modal(document.getElementById('modalAdd-seguro'));
+        document.getElementById("inNombreAdd-seguro").innerHTML = "Nombre: " + nombre.value;
+
+        document.getElementById("inEmailAdd-seguro").innerHTML = "Email: " + email.value;
+
+        document.getElementById("inTelefonoAdd-seguro").innerHTML = "Telefono: " + telefono.value;
+        modalAddSeguro.show();
+    } else {
+        e.preventDefault();
+
+        document.getElementById("errorAdd").innerHTML = "No se han rellenado todos los campos";
+    }
+    
+    // ↑↑↑↑↑↑↑↑↑↑↑↑
+}
+
+function manejadorClickNoAdd(e) {
+    let modalAddSeguro = new bootstrap.Modal(document.getElementById('modalAdd-seguro'));
+    modalAddSeguro.hide();
+
+}
+
+function manejadorClickAddUsuario(e) {
+    console.log("añado usuario");
 
 }
 function manejadorClickActualizarBD(e) {
