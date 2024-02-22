@@ -592,6 +592,14 @@ function manejadorClickModificar(e) {
         txt = "Residuos: " + residuos.placeholder;
     }
     document.getElementById("inResiduos" + this.id + "-seguro").innerHTML = txt;
+
+    let categorias = document.getElementById("inCategorias" + this.id);
+    if(residuos.value) {
+        txt = "Categorias: " + residuos.value;
+    } else {
+        txt = "Categorias: " + residuos.placeholder;
+    }
+    document.getElementById("inCategorias" + this.id + "-seguro").innerHTML = txt;
     // ↑↑↑↑↑↑↑↑↑↑↑↑
 }
 function manejadorClickHabilitar(e) {
