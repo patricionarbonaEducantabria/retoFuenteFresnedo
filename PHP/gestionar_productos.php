@@ -13,17 +13,21 @@ if(isset($_POST['addProducto'])) {
 function obtenerProductos() {
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
     $resultado = $conexion -> prepare("
-        SELECT productos.id AS producto_id,
-        productos.descripcion AS producto_descripcion, 
-        unidades.descripcion AS unidad_descripcion, 
-        productos.observaciones AS producto_observaciones, 
-        productos.foto AS producto_foto, 
-        categorias.descripcion AS categoria_descripcion
-        FROM productos
-        INNER JOIN unidades ON productos.fk_unidades = unidades.id
-        LEFT JOIN productos_categoria ON productos.id = productos_categoria.fk_producto
-        LEFT JOIN categorias ON productos_categoria.fk_categoria = categorias.id
-        ORDER BY categorias.descripcion;
+    SELECT productos.id AS producto_id, 
+    productos.descripcion AS producto_descripcion, 
+    unidades.descripcion AS unidad_descripcion, 
+    productos.observaciones AS producto_observaciones, 
+    productos.foto AS producto_foto, 
+    categorias.descripcion AS categoria_descripcion,
+    residuos.descripcion AS residuo_descripcion
+FROM productos
+INNER JOIN unidades ON productos.fk_unidades = unidades.id
+LEFT JOIN productos_categoria ON productos.id = productos_categoria.fk_producto
+LEFT JOIN categorias ON productos_categoria.fk_categoria = categorias.id
+LEFT JOIN productos_residuos ON productos.id = productos_residuos.fk_producto
+LEFT JOIN residuos ON productos_residuos.fk_residuos = residuos.id
+ORDER BY categorias.descripcion;
+
     ");
     $resultado -> execute();
 
@@ -31,8 +35,9 @@ function obtenerProductos() {
     while($fila = $resultado -> fetch()) {
         $producto = array(
             'id' => $fila['producto_id'],
-            'descripcion' => $fila['producto_descripcion'],
+            'nombre' => $fila['producto_descripcion'],
             'unidades' => $fila['unidad_descripcion'],
+            'residuos' => $fila['residuo_descripcion'],
             'observaciones' => $fila['producto_observaciones'],
             'foto' => $fila['producto_foto'],
             'categorias' => $fila['categoria_descripcion']

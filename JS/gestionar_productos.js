@@ -2,7 +2,7 @@ window.onload = principal;
 
 function principal()
 {
-    // miDiv.appendChild(dibujarUsuario());
+    // miDiv.appendChild(dibujarProducto());
     // document.body.appendChild(miDiv);
 
     let miBoton = document.getElementById("btnBuscar");
@@ -58,56 +58,38 @@ function crearElemento(etiqueta, texto, atributos) {
     return elementoNuevo;
 }
 
-function dibujarUsuario(datosUsuario) {
-    let miFila = crearElemento("ul",undefined,{"id":datosUsuario.email});
-    let miNombre = crearElemento("li",datosUsuario.nombre);
+function dibujarProducto(datosProducto) {
+    let miFila = crearElemento("ul",undefined,{"id":datosProducto.id});
+    let miFoto = crearElemento("li",datosProducto.foto);
+    miFila.appendChild(miFoto);
+    let miNombre = crearElemento("li",datosProducto.nombre);
     miFila.appendChild(miNombre);
-    let miCorreo = crearElemento("li",datosUsuario.email);  
-    miFila.appendChild(miCorreo);
-    let miTelefono = crearElemento("li",datosUsuario.telefono);    
-    miFila.appendChild(miTelefono);
-    let miCargo = crearElemento("li",datosUsuario.cargo);    
-    miFila.appendChild(miCargo);
-    let miEstado = crearElemento("li",datosUsuario.estado);
-    miFila.appendChild(miEstado);
+    let misUnidades = crearElemento("li",datosProducto.unidades);  
+    miFila.appendChild(misUnidades);
+    let misResiduos = crearElemento("li",datosProducto.residuos);    
+    miFila.appendChild(misResiduos);
+    let misCategorias = crearElemento("li",datosProducto.categorias);    
+    miFila.appendChild(misCategorias);
     // Boton Modificar Datos
     let filita = crearElemento("li",undefined);
-    let idMagico = datosUsuario.id;
+    let idMagico = datosProducto.id;
     let boton = crearElemento("input",undefined,{"type":"button",
         "class":"btnModificar",
         "value":"Modificar Datos",
-        "data-bs-toggle": "modal",
-        "data-bs-target": "#modal-" + idMagico
+        // "data-bs-toggle": "modal",
+        // "data-bs-target": "#modal-" + idMagico
     });
     // Añado el modal al boton modificar
-    let miModal = dibujarModal(idMagico,datosUsuario);
-    let miModalSeguro = dibujarModalSeguro(idMagico);
+    // let miModal = dibujarModal(idMagico,datosProducto);
+    // let miModalSeguro = dibujarModalSeguro(idMagico);
     filita.appendChild(boton);
-    miFila.appendChild(filita);
-    // Boton Habilitar
-    filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","class":"btnHabilitar","value":"Habilitar/Deshabilitar"});
-    boton.addEventListener("click",manejadorClickHabilitar);
-    filita.appendChild(boton);
-    miFila.appendChild(filita);
-    // Boton Reiniciar
-    filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","class":"btnReiniciar","value":"Reiniciar Contraseña"});
-    boton.addEventListener("click",manejadorClickReiniciarContrasenia);
-    filita.appendChild(boton);
-    miFila.appendChild(filita);
-    // Boton Cambiar Cargo
-    filita = crearElemento("li",undefined);
-    boton = crearElemento("input",undefined,{"type":"button","class":"btnCargo","value":"Cambiar Cargo"});
-    boton.addEventListener("click",manejadorClickCambiarCargo);
-    filita.appendChild(boton);
-    miFila.appendChild(filita);
-    miFila.appendChild(miModal);
-    miFila.appendChild(miModalSeguro);
+    miFila.appendChild(filita);  
+    // miFila.appendChild(miModal);
+    // miFila.appendChild(miModalSeguro);
     return miFila;
 }
 
-function dibujarModal(idModal, datosUsuario) {
+function dibujarModal(idModal, datosProducto) {
     let miDiv = crearElemento("div",undefined,{"id":"modal-" +idModal, "class": "modal"});
     let modalDialog = crearElemento("div",undefined,{"class": "modal-dialog"});
     let modalContent = crearElemento("div",undefined, {"class": "modal-content"});
@@ -131,7 +113,7 @@ function dibujarModal(idModal, datosUsuario) {
     let inputNombre = crearElemento("input",undefined,{
         "type" : "text",
         "id": "inNombre" + idModal,
-        "placeholder" : datosUsuario.nombre
+        "placeholder" : datosProducto.nombre
     });
     modalBody.appendChild(labelNombre);
     modalBody.appendChild(inputNombre);
@@ -140,7 +122,7 @@ function dibujarModal(idModal, datosUsuario) {
     let inputEmail = crearElemento("input",undefined,{
         "type" : "text",
         "id": "inEmail" + idModal,
-        "placeholder" : datosUsuario.email
+        "placeholder" : datosProducto.email
     });
     modalBody.appendChild(labelEmail);
     modalBody.appendChild(inputEmail);
@@ -149,7 +131,7 @@ function dibujarModal(idModal, datosUsuario) {
     let inputTelefono = crearElemento("input",undefined,{
         "type" : "text",
         "id": "inTelefono" + idModal,
-        "placeholder" : datosUsuario.telefono
+        "placeholder" : datosProducto.telefono
     });
     modalBody.appendChild(labelTelefono);
     modalBody.appendChild(inputTelefono);
@@ -245,8 +227,8 @@ function recuperarProductos(longitud) {
         // recorro el json
         let miDiv = document.getElementById("contenedor-productos");
         for(let i = 0; i< respuesta.length; i++) {
-            // miDiv.appendChild(dibujarUsuario(respuesta[i]));
-            console.log(respuesta[i]);
+            miDiv.appendChild(dibujarProducto(respuesta[i]));
+            // console.log(respuesta[i]);
         }
         document.body.appendChild(miDiv);
     });
