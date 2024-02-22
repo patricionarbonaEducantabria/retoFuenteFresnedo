@@ -287,22 +287,24 @@ function obtenerProductos(callback) {
   miPeticion.send(datos);
 }
 
-function modificarUsuario(idDatos) {
+function modificarProducto(idDatos) {
     idDatos = idDatos.split("btnSi")[1];
-    let nombreUsuario = document.getElementById("inNombre" + idDatos + "-seguro").innerHTML;
+    let fotoProducto = document.getElementById("inFoto" + idDatos + "-seguro").innerHTML;
     // divido el contenido desde ": "
-    nombreUsuario = nombreUsuario.split(": ")[1].trim();
+    fotoProducto = fotoProducto.split(": ")[1].trim();
 
-    let emailUsuario = document.getElementById("inEmail" + idDatos + "-seguro").innerHTML;
-    emailUsuario = emailUsuario.split(": ")[1].trim();
+    let nombreProducto = document.getElementById("inNombre" + idDatos + "-seguro").innerHTML;
+    // divido el contenido desde ": "
+    nombreProducto = nombreProducto.split(": ")[1].trim();
 
-    let telefonoUsuario = document.getElementById("inTelefono" + idDatos + "-seguro").innerHTML;
-    telefonoUsuario = telefonoUsuario.split(": ")[1].trim();
+    let unidadesProducto = document.getElementById("inUnidades" + idDatos + "-seguro").innerHTML;
+    unidadesProducto = unidadesProducto.split(": ")[1].trim();
 
-    console.log("si Nombre:"+ nombreUsuario + " si Email:" + emailUsuario + " si Telefono:" + telefonoUsuario);
+    let residuosProducto = document.getElementById("inResiduos" + idDatos + "-seguro").innerHTML;
+    residuosProducto = residuosProducto.split(": ")[1].trim();
 
-    let emailOriginal = document.getElementById("inEmail" + idDatos + "-seguro").value;
-    console.log(emailOriginal);
+    let categoriasProducto = document.getElementById("inCategorias" + idDatos + "-seguro").innerHTML;
+    categoriasProducto = categoriasProducto.split(": ")[1].trim();
 
 
     // COMIENZO A MODIFICAR LA BD
@@ -319,7 +321,7 @@ function modificarUsuario(idDatos) {
     };
 
     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    let datos = "modificarDatos=" + emailOriginal + "&nombre=" + nombreUsuario + "&email=" +emailUsuario + "&telefono=" + telefonoUsuario;
+    let datos = "modificarDatos=" + idDatos + "&nombre=" + nombreProducto + "&foto=" +fotoProducto + "&unidades=" + unidadesProducto + "&residuos=" + residuosProducto + "&categorias=" + categoriasProducto;
     miPeticion.send(datos);
 }
 
@@ -549,7 +551,7 @@ function manejadorClickAddUsuario(e) {
 }
 function manejadorClickActualizarBD(e) {
     console.log("actualiza puto id:", this.id);
-    // modificarUsuario(this.id);
+    modificarProducto(this.id);
 
 }
 
