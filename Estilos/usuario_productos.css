@@ -3,10 +3,11 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
 #barraNav {
-    width: 100%;
+    width: auto;
 }
 
 #barraNav {
@@ -15,7 +16,7 @@ body {
 }
 
 #barraNav li {
-    margin: 5px;
+    padding-left: 5px;
     width: 150px;
 }
 
@@ -33,10 +34,11 @@ body {
     /* position: relative; */
     display: flex;
     justify-content: right;
-    margin-top: -60px;
     padding-right: 5px;
-    margin-right: 20px;
-    margin-left: 20px;
+    /* margin-right: 20px; */
+    /* margin-left: 20px; */
+    margin: 0;
+    margin-top: -60px;
 }
 
 #iconos li {
@@ -45,14 +47,17 @@ body {
 
 #submenu {
     position: absolute;
-    top: 65px; /* Ajustar según sea necesario */
+    /* Ajustar según sea necesario */
+    top: 58px; 
     right: 25px;
     display: none;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 9999; /* Asegurar que esté por encima del contenedor de productos */
-    width: auto; /* Ancho automático */
+    /* Asegurar que esté por encima del contenedor de productos */
+    z-index: 9999; 
+    width: auto;
+    padding: -30px; 
 }
 
 #icono_persona {
@@ -66,24 +71,22 @@ body {
 
 #submenu ul {
     display: flex;
-    /* list-style: none; */
-    padding: 0;
     text-align: left;
-    margin: 0;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
+    /* margin-left: 0px; */
+}
+
+#submenu ul li {
+    margin-left: 0;
 }
 
 #submenu ul li input[type="button"] {
-    /* Ancho completo */
     width: 100%; 
-    /* Altura */
     height: 40px; 
-    /* Color de fondo */
     background-color: transparent; 
     border: none;
-    /* Borde redondeado */
     border-radius: 5px; 
     cursor: pointer;
     /* Transición suave */
@@ -100,8 +103,8 @@ ul {
 }
 
 img {
-    height: 60px;
-    width: 60px;
+    height: 55px;
+    width: 55px;
 }
 
 #contenedor-productos {
