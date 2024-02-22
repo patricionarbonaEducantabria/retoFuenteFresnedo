@@ -2,7 +2,6 @@ window.onload = principal;
 
 function principal()
 {
-    dibujarBarraNav();
     recuperarProductos();
 }
 
@@ -90,11 +89,6 @@ function crearElemento(etiqueta, texto, atributos) {
     return elementoNuevo;
 }
 
-function dibujarBarraNav()
-{
-
-}
-
 function dibujarProductos(datosProducto) {
     let miFila = crearElemento("ul",undefined,{"id":datosProducto.id});
     let foto = crearElemento("li",undefined);    
@@ -129,7 +123,7 @@ function dibujarProductos(datosProducto) {
 // MANEJADOR CLICK PARA AÑADIR PRODUCTOS A LA CESTA
 function manejadorClickAñadirProducto(e)
 {
-
+    
 }
 
 function obtenerProductos(callback)
