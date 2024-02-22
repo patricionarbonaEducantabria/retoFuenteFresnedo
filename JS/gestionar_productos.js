@@ -21,7 +21,7 @@ function principal()
     // dibujarModalesAdd();
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-    // recuperarProductos();
+    recuperarProductos();
 
     // Editar despues de recuperar Productos
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -237,25 +237,25 @@ function dibujarModalSeguro(idModalSeguro) {
 }
 
 function recuperarProductos(longitud) {
-    let miDiv = document.getElementById("contenedor-usuarios");
+    let miDiv = document.getElementById("contenedor-productos");
     miDiv.innerHTML = "";
 
-    obtenerUsuarios(function(respuesta) {
+    obtenerProductos(function(respuesta) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
-        let miDiv = document.getElementById("contenedor-usuarios");
+        let miDiv = document.getElementById("contenedor-productos");
         for(let i = 0; i< respuesta.length; i++) {
-            miDiv.appendChild(dibujarUsuario(respuesta[i]));
+            // miDiv.appendChild(dibujarUsuario(respuesta[i]));
+            console.log(respuesta[i]);
         }
         document.body.appendChild(miDiv);
     });
 }
 
-function obtenerUsuarios(callback) {
-    let miEmail = localStorage.getItem("email");
+function obtenerProductos(callback) {
     let miPeticion = new XMLHttpRequest();
 
-    miPeticion.open("POST", "../../PHP/gestionar_usuarios.php", true);
+    miPeticion.open("POST", "../../PHP/gestionar_productos.php", true);
 
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
@@ -266,7 +266,7 @@ function obtenerUsuarios(callback) {
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  let datos = "obtenerUsuarios=&email=" + miEmail;
+  let datos = "obtenerProductos=";
   miPeticion.send(datos);
 }
 
