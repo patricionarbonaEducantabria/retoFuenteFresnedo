@@ -92,18 +92,18 @@ function crearElemento(etiqueta, texto, atributos) {
 function dibujarProductos(datosProducto) {
     let miFila = crearElemento("ul",undefined,{"id":datosProducto.id});
     let foto = crearElemento("li",undefined);    
-    foto.appendChild(crearElemento("img",undefined,{"src" : datosProducto.foto}));    
+    foto.appendChild(crearElemento("img",undefined,{"src" : datosProducto.foto, "id":"foto_producto"}));    
     miFila.appendChild(foto);
-    let descripcion = crearElemento("li",datosProducto.nombre);
+    let descripcion = crearElemento("li",datosProducto.nombre, {"id":"nombre_producto"});
     miFila.appendChild(descripcion);
-    let unidades = crearElemento("li",datosProducto.unidad);  
+    let unidades = crearElemento("li",datosProducto.unidad, {"id":"unidad_producto"});  
     miFila.appendChild(unidades);
     if(datosProducto.observaciones == null) {
-        let observaciones = crearElemento("li","sin observaciones");    
+        let observaciones = crearElemento("li","sin observaciones", {"id":"observaciones_producto"});    
         miFila.appendChild(observaciones);
     }
     else {
-        let observaciones = crearElemento("li",datosProducto.observaciones);    
+        let observaciones = crearElemento("li",datosProducto.observaciones, {"id":"observaciones_producto"});    
         miFila.appendChild(observaciones);
     }
     // INPUT para introducir cantidad
@@ -120,10 +120,30 @@ function dibujarProductos(datosProducto) {
     return miFila;
 }
 
-// MANEJADOR CLICK PARA AÑADIR PRODUCTOS A LA CESTA
+// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickAñadirProducto(e)
 {
     
+}
+// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑ MANEJADORES ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+function añadirProductos(callback)
+{
+    let miPeticion = new XMLHttpRequest;
+    miPeticion.open("POST", "../../PHP/usuario_productos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if(miPeticion.readyState == 4 && miPeticion.status == 200)
+        {
+            console.log(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    let datos = "obtenerHistorico="+localStorage.getItem("email");
+    
+    miPeticion.send(datos);
 }
 
 function obtenerProductos(callback)
