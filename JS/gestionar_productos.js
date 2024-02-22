@@ -14,23 +14,31 @@ function principal()
 
     // botonNoAdd.addEventListener("click",manejadorClickNoAdd);
     // botonAdd.addEventListener("click",manejadorClickAdd);
-    dibujarModalesAdd();
 
-    recuperarUsuarios();
-    let botonMostrarAdd = document.getElementById("btnMostrarAddUsuarios");
-    let modalAddUsuario = new bootstrap.Modal("#modal-Add-Usuario");
-    botonMostrarAdd.addEventListener("click", function(modalAddSeguro) {
-        modalAddUsuario.show();
-    });
+
+        // Editar despues de recuperar Productos
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // dibujarModalesAdd();
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+    // recuperarProductos();
+
+    // Editar despues de recuperar Productos
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // let botonMostrarAdd = document.getElementById("btnMostrarAddUsuarios");
+    // let modalAddUsuario = new bootstrap.Modal("#modal-Add-Usuario");
+    // botonMostrarAdd.addEventListener("click", function(modalAddSeguro) {
+    //     modalAddUsuario.show();
+    // });
 
     
     
     
-    let botonAddUsuario = document.getElementById("btnAddUsuario");
-    botonAddUsuario.addEventListener("click",manejadorClickAdd);
-    let botonAddSiUsuario = document.getElementById("btnSiAdd");
-    botonAddSiUsuario.addEventListener("click",manejadorClickSiAdd);
-
+    // let botonAddUsuario = document.getElementById("btnAddUsuario");
+    // botonAddUsuario.addEventListener("click",manejadorClickAdd);
+    // let botonAddSiUsuario = document.getElementById("btnSiAdd");
+    // botonAddSiUsuario.addEventListener("click",manejadorClickSiAdd);
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     
     
@@ -228,7 +236,7 @@ function dibujarModalSeguro(idModalSeguro) {
     return miDiv;
 }
 
-function recuperarUsuarios(longitud) {
+function recuperarProductos(longitud) {
     let miDiv = document.getElementById("contenedor-usuarios");
     miDiv.innerHTML = "";
 
@@ -289,7 +297,7 @@ function modificarUsuario(idDatos) {
         if (miPeticion.readyState == 4 && miPeticion.status == 200) {
             // console.log(miPeticion.responseText);
             // callback(miPeticion.responseText);
-            recuperarUsuarios();
+            recuperarProductos();
         }
     };
 
@@ -308,7 +316,7 @@ function addUsuario(nombreUsuario,cargoUsuario,emailUsuario,telefonoUsuario) {
             // console.log(miPeticion.responseText);
             // callback(miPeticion.responseText);
             // dibujarModalesAdd();
-            recuperarUsuarios();
+            recuperarProductos();
         }
     };
 
@@ -566,7 +574,7 @@ function manejadorClickHabilitar(e) {
 
     miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-        recuperarUsuarios();
+        recuperarProductos();
     }
   };
 
@@ -584,7 +592,7 @@ function manejadorClickReiniciarContrasenia(e) {
 
     miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-        recuperarUsuarios();
+        recuperarProductos();
     }
   };
 
@@ -601,7 +609,7 @@ function manejadorClickCambiarCargo(e) {
 
     miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-        recuperarUsuarios();
+        recuperarProductos();
     }
   };
 
