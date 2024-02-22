@@ -3,7 +3,7 @@ if(isset($_POST['obtenerProductos'])) {
     obtenerProductos();
 }
 if(isset($_POST['modificarProducto'])) {
-    modificarProducto();
+    // modificarProducto();
 }
 if(isset($_POST['addProducto'])) {
     addProducto();
@@ -55,20 +55,58 @@ ORDER BY categorias.descripcion;
 
 // Modificar Producto
 function modificarProducto(){
-    $emailID = $_POST['modificarDatos'];
-    $nombre = $_POST['nombre'];
-    $telefono = $_POST['telefono'];
-    $email = $_POST['email'];
+    $productoID = $_POST['modificarDatos'];
+    $producto = $_POST['nombre'];
+    $foto = $_POST['foto'];
+    $unidadesID = $_POST['unidades'];
+    $observaciones = $_POST['observaciones'];
+    $residuosID = $_POST['residuos'];
+    $categoriaID = $_POST['categorias'];
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
-    $resultado = $conexion -> prepare(
-        "UPDATE usuarios 
-        SET
-        nombre = ?,
-        email = ?,
-        telefono = ?
-        WHERE
-        email = ?;");
-    $resultado -> execute(array($nombre, $email, $telefono, $emailID));
+    
+    
+    // ACTUALIZAR PRODUCTO_RESIDUOS
+    // va dentro de un while cuando se añada mas de un residuo(recibiremos un json)
+    // lo que recibimos de los residuos es su id
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // actualizo la tabla producto_residuos
+    $resultado = $conexion -> prepare("
+    UPDATE productos_residuos
+    SET fk_residuos = ?
+    WHERE id = ?;
+    ");
+    $resultado -> execute(array($residuosID, $productoID));
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+    // ACTUALIZAR PRODUCTOS_CATEGORIA
+    // va dentro de un while cuando se añada mas de una categoria(recibiremos un json)
+    // lo que recibimos de las categorias es su id
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // actualizo la tabla producto_categoria
+    $resultado = $conexion -> prepare("
+        UPDATE productos_categoria
+        SET fk_categoria = ?
+        WHERE id = ?;
+    ");
+    $resultado -> execute(array($categoriaID, $productoID));
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+
+    // ACTUALIZAR PRODUCTO
+    // lo que recibimos de las unidades es su id, solo puede tener una unidad
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // actualizo la tabla producto_categoria
+    $resultado = $conexion -> prepare("
+        UPDATE productos
+        SET descripcion = ?, 
+        fk_unidades = ?,
+        observaciones = ?,
+        foto = ?
+        WHERE id = ?;
+    
+    ");
+    $resultado -> execute(array($producto, $unidadesID, $observaciones, $foto, $productoID));
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 }
 
 function addProducto() {

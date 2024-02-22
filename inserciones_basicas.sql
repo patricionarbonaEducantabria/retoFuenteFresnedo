@@ -840,3 +840,21 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
     (SELECT id FROM productos WHERE descripcion = 'Papel Aluminio'),
     (SELECT id FROM categorias WHERE descripcion = 'Utiles y Materiales')
     );
+
+    -- INSERCION DE RESIDUOS
+    INSERT INTO `residuos` (`descripcion`, `observaciones`) VALUES
+        ('Residuo 1', 'Observaciones 1'),
+        ('Residuo 2', 'Observaciones 2'),
+        ('Residuo 3', 'Observaciones 3'),
+        ('Residuo 4', 'Observaciones 4'),
+        ('Residuo 5', 'Observaciones 5'),
+        ('Residuo 6', 'Observaciones 6'),
+        ('Residuo 7', 'Observaciones 7'),
+        ('Residuo 8', 'Observaciones 8'),
+        ('Residuo 9', 'Observaciones 9'),
+        ('Residuo 10', 'Observaciones 10'),
+        ('Residuo 11', 'Observaciones 11'),
+        ('Residuo 12', 'Observaciones 12'),
+        ('Residuo 13', 'Observaciones 13'),
+        ('Residuo 14', 'Observaciones 14'),
+        ('Residuo 15', 'Observaciones 15');
