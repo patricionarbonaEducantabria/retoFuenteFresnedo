@@ -80,15 +80,15 @@ function dibujarProducto(datosProducto) {
     let boton = crearElemento("input",undefined,{"type":"button",
         "class":"btnModificar",
         "value":"Modificar Datos",
-        // "data-bs-toggle": "modal",
-        // "data-bs-target": "#modal-" + idMagico
+        "data-bs-toggle": "modal",
+        "data-bs-target": "#modal-" + idMagico
     });
     // Añado el modal al boton modificar
-    // let miModal = dibujarModal(idMagico,datosProducto);
+    let miModal = dibujarModal(idMagico,datosProducto);
     // let miModalSeguro = dibujarModalSeguro(idMagico);
     filita.appendChild(boton);
     miFila.appendChild(filita);  
-    // miFila.appendChild(miModal);
+    miFila.appendChild(miModal);
     // miFila.appendChild(miModalSeguro);
     return miFila;
 }
@@ -99,7 +99,7 @@ function dibujarModal(idModal, datosProducto) {
     let modalContent = crearElemento("div",undefined, {"class": "modal-content"});
     // Contenido Header
     let modalHeader = crearElemento("div",undefined, {"class": "modal-header"});
-    let modalTitulo = crearElemento("h1","Modificar Usuario", {"class" : "modal-title"});
+    let modalTitulo = crearElemento("h1","Modificar Producto", {"class" : "modal-title"});
     let modalCierre = crearElemento("button",undefined,{
         "type" : "button",
         "class" : "btn-close",
@@ -112,6 +112,16 @@ function dibujarModal(idModal, datosProducto) {
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     let modalBody = crearElemento("div",undefined, {"class": "modal-body"});
 
+    // Entrada foto
+    let labelFoto = crearElemento("label","Foto",{"for":"inFoto"});
+    let inputFoto = crearElemento("input",undefined,{
+        "type" : "file",
+        "id": "inFoto" + idModal,
+        "placeholder" : datosProducto.foto,
+        "value": "Subir Foto"
+    });
+    modalBody.appendChild(labelFoto);
+    modalBody.appendChild(inputFoto);
     // Entrada nombre
     let labelNombre = crearElemento("label","Nombre",{"for":"inNombre"});
     let inputNombre = crearElemento("input",undefined,{
@@ -121,24 +131,33 @@ function dibujarModal(idModal, datosProducto) {
     });
     modalBody.appendChild(labelNombre);
     modalBody.appendChild(inputNombre);
-    // Entrada email
-    let labelEmail = crearElemento("label","Email",{"for":"inEmail"});
-    let inputEmail = crearElemento("input",undefined,{
+    // Entrada Unidades
+    let labelUnidades = crearElemento("label","Unidades",{"for":"inUnidades"});
+    let inputUnidades = crearElemento("input",undefined,{
         "type" : "text",
-        "id": "inEmail" + idModal,
-        "placeholder" : datosProducto.email
+        "id": "inUnidades" + idModal,
+        "placeholder" : datosProducto.unidades
     });
-    modalBody.appendChild(labelEmail);
-    modalBody.appendChild(inputEmail);
-    // Entrada telefono
-    let labelTelefono = crearElemento("label","Telefono",{"for":"inTelefono"});
-    let inputTelefono = crearElemento("input",undefined,{
+    modalBody.appendChild(labelUnidades);
+    modalBody.appendChild(inputUnidades);
+    // Entrada Residuos
+    let labelResiduos = crearElemento("label","Residuos",{"for":"inResiduos"});
+    let inputResiduos = crearElemento("input",undefined,{
         "type" : "text",
-        "id": "inTelefono" + idModal,
-        "placeholder" : datosProducto.telefono
+        "id": "inResiduos" + idModal,
+        "placeholder" : datosProducto.residuos
     });
-    modalBody.appendChild(labelTelefono);
-    modalBody.appendChild(inputTelefono);
+    modalBody.appendChild(labelResiduos);
+    modalBody.appendChild(inputResiduos);
+    // Entrada Categorias
+    let labelCategorias = crearElemento("label","Categorias",{"for":"inCategorias"});
+    let inputCategorias = crearElemento("input",undefined,{
+        "type" : "text",
+        "id": "inCategorias" + idModal,
+        "placeholder" : datosProducto.categorias
+    });
+    modalBody.appendChild(labelCategorias);
+    modalBody.appendChild(inputCategorias);
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     // Contenido footer
     let modalFooter = crearElemento("div",undefined, {"class": "modal-footer"});
@@ -147,8 +166,8 @@ function dibujarModal(idModal, datosProducto) {
         "type" : "button",
         "class" : "btn btn-primary",
         "id" : idModal,
-        "data-bs-toggle": "modal",
-        "data-bs-target": "#modal-" + idModal + "-seguro"
+        // "data-bs-toggle": "modal",
+        // "data-bs-target": "#modal-" + idModal + "-seguro"
     });
     modalModificar.addEventListener("click",manejadorClickModificar);
     modalFooter.appendChild(modalModificar);
