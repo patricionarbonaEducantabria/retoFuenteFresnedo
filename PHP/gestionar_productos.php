@@ -26,7 +26,7 @@ LEFT JOIN productos_categoria ON productos.id = productos_categoria.fk_producto
 LEFT JOIN categorias ON productos_categoria.fk_categoria = categorias.id
 LEFT JOIN productos_residuos ON productos.id = productos_residuos.fk_producto
 LEFT JOIN residuos ON productos_residuos.fk_residuos = residuos.id
-ORDER BY categorias.descripcion;
+ORDER BY productos.id;
 
     ");
     $resultado -> execute();
