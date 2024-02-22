@@ -69,6 +69,11 @@ document.addEventListener("DOMContentLoaded", function() {
             window.location.href = "../usuario/usuario_pan.html";
         };
     }
+
+    // boton historial pedidos
+    document.getElementById("btnHistorialPedidos").onclick = function() {
+        window.location.href = "../usuario/usuario_HistorialPedidos.html";
+    };
 });
 
 function crearElemento(etiqueta, texto, atributos) {

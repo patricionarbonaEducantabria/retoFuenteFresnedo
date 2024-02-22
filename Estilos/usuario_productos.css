@@ -6,7 +6,10 @@ body {
 }
 
 #barraNav {
-    justify-content: center;
+    width: 100%;
+}
+
+#barraNav {
     text-align: center;
     display: flex;
 }
@@ -26,20 +29,86 @@ body {
     cursor: pointer;
 }
 
+#iconos {
+    /* position: relative; */
+    display: flex;
+    justify-content: right;
+    margin-top: -60px;
+    padding-right: 5px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#iconos li {
+    margin-left: 10px;
+}
+
+#submenu {
+    position: absolute;
+    top: 65px; /* Ajustar según sea necesario */
+    right: 25px;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 9999; /* Asegurar que esté por encima del contenedor de productos */
+    width: auto; /* Ancho automático */
+}
+
+#icono_persona {
+    /* Asegurar que el contenedor del icono de persona sea relativo */
+    position: relative; 
+}
+
+#icono_persona:hover #submenu {
+    display: block;
+}
+
+#submenu ul {
+    display: flex;
+    /* list-style: none; */
+    padding: 0;
+    text-align: left;
+    margin: 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#submenu ul li input[type="button"] {
+    /* Ancho completo */
+    width: 100%; 
+    /* Altura */
+    height: 40px; 
+    /* Color de fondo */
+    background-color: transparent; 
+    border: none;
+    /* Borde redondeado */
+    border-radius: 5px; 
+    cursor: pointer;
+    /* Transición suave */
+    transition: background-color 0.3s ease; 
+}
+
+#submenu ul li input[type="button"]:hover {
+    /* Cambio de color al pasar el ratón */
+    background-color: #4caf50; 
+}
+
 ul {
    list-style: none; 
 }
 
 img {
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
 }
 
 #contenedor-productos {
-    margin-top: 50px;
     text-align: center;
     justify-content: center;
     width: 100%;
+    position: relative;
 }
 
 #contenedor-productos ul {
@@ -50,4 +119,6 @@ img {
 #contenedor-productos ul li {
     margin: 50px;
 }
+
+
 
