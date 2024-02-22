@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-image: url('../Imagenes/inicioSesion.jpg');
+    background-color: lightgrey;
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -11,12 +11,15 @@ body {
 }
 
 #encabezado {
-    margin-right: 15px;
+    margin-right: 0;
+    padding-right: 15px;
 }
 
 #encabezado ul {
     /* Alineación a la derecha */
     text-align: right; 
+    margin-top: 0;
+    padding-top: 16px;
 }
 
 #encabezado ul li {
@@ -27,16 +30,16 @@ body {
 #submenu {
     position: absolute;
     /* Ajustar posición a la izquierda */
-    left: -24px; 
-    /* Ajustar posición según necesidades */
-    top: 80px; 
+    left: -45px; 
+    /* Ajustar posición */
+    top: 68px; 
     display: none;
-    /* Fondo blanco */
     background-color: rgba(255, 255, 255, 0.5); 
-    /* Borde redondeado */
     border-radius: 5px; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra */
-    z-index: 1; /* Asegurar que esté por encima de otros elementos */
+    /* Sombra */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+    /* Asegurar que esté por encima de otros elementos */
+    z-index: 1; 
     width: auto;
 }
 
@@ -46,7 +49,6 @@ body {
 
 #submenu ul {
     display: flex;
-    /* list-style: none; */
     padding: 0;
     text-align: left;
     margin: 0;
@@ -76,18 +78,19 @@ body {
 }
 
 #encabezado img {
-    width: 80px;
-    height: 80px;
+    width: 55px;
+    height: 55px;
     /* Mover imágenes a la esquina derecha */
     float: right; 
     /* Espacio entre imágenes */
-    margin-right: 20px; 
+    margin-right: 0;
+    padding-right: 20px; 
 }
 
 .login-box {
-    width: 800px; /* Aumentamos el ancho de la caja */
+    width: 800px;
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 40px; /* Aumentamos el espacio interno */
+    padding: 40px;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-align: center;
@@ -95,18 +98,19 @@ body {
     text-align: center;
     align-content: center;
     margin: auto;
+    margin-top: 40px;
 }
 
 .login-box input[type="button"] {
-    width: 80%; /* Ancho del botón al 80% para que aparezcan uno encima del otro */
-    height: 55px; /* Aumentamos la altura del botón */
-    background-color: #4caf50; /* Cambiamos el color del botón de Usuario */
+    width: 80%; 
+    height: 55px;
+    background-color: #4caf50;
     color: white;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     padding: 10px;
-    margin-top: 15px; /* Ajustamos el margen superior */
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 

@@ -66,7 +66,7 @@ function dibujarUsuario(datosUsuario) {
     let filita = crearElemento("li",undefined);
     let idMagico = datosUsuario.id;
     let boton = crearElemento("input",undefined,{"type":"button",
-        "class":"btnModificar",
+        "id":"btnModificar",
         "value":"Modificar Datos",
         "data-bs-toggle": "modal",
         "data-bs-target": "#modal-" + idMagico
@@ -137,7 +137,7 @@ function dibujarModal(idModal, datosUsuario) {
     modalBody.appendChild(labelEmail);
     modalBody.appendChild(inputEmail);
     // Entrada telefono
-    let labelTelefono = crearElemento("label","Telefono",{"for":"inTelefono"});
+    let labelTelefono = crearElemento("label","Teléfono",{"for":"inTelefono"});
     let inputTelefono = crearElemento("input",undefined,{
         "type" : "text",
         "id": "inTelefono" + idModal,
@@ -330,12 +330,14 @@ function dibujarModalAddUsuario() {
     let modalContent = crearElemento("div", undefined, { "class": "modal-content" });
     // Contenido Header
     let modalHeader = crearElemento("div", undefined, { "class": "modal-header" });
+    let modalTitulo = crearElemento("h1","Añadir Usuario ", {"class" : "modal-title"});
     let modalCierre = crearElemento("button", undefined, {
         "type": "button",
         "class": "btn-close",
         "data-bs-dismiss": "modal",
         "aria-label": "Close"
     });
+    modalHeader.appendChild(modalTitulo);
     modalHeader.appendChild(modalCierre);
     // Contenido Body
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -372,7 +374,7 @@ function dibujarModalAddUsuario() {
     modalBody.appendChild(inputEmailAdd);
 
     // Entrada Teléfono
-    let labelTelefonoAdd = crearElemento("label", "Telefono", { "for": "inTelefonoAdd" });
+    let labelTelefonoAdd = crearElemento("label", "Teléfono", { "for": "inTelefonoAdd" });
     let inputTelefonoAdd = crearElemento("input", undefined, {
         "type": "text",
         "id": "inTelefonoAdd",
