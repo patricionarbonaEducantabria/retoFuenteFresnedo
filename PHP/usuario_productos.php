@@ -6,6 +6,11 @@
         obtenerProductos();
     }
 
+    // if(isset($_POST['añadirProducto']))
+    // {
+    //     añadirProductos();
+    // }
+
     // Listar los productos
     function obtenerProductos() {
         $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
@@ -42,4 +47,10 @@
         $jsonString = json_encode($datos);
         echo $jsonString;
     }
+
+    // function añadirProductos()
+    // {
+    //     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+    //     $resultado = $conexion -> prepare("")
+    // }
 ?>
