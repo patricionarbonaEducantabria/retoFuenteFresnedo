@@ -60,8 +60,12 @@ function crearElemento(etiqueta, texto, atributos) {
 
 function dibujarProducto(datosProducto) {
     let miFila = crearElemento("ul",undefined,{"id":datosProducto.id});
-    let miFoto = crearElemento("li",datosProducto.foto);
-    miFila.appendChild(miFoto);
+    // foto del producto
+    let miFotoLista = crearElemento("li",undefined);
+    let miFoto = crearElemento("img",undefined,{"src":datosProducto.foto});
+    miFotoLista.appendChild(miFoto);
+    miFila.appendChild(miFotoLista);
+    
     let miNombre = crearElemento("li",datosProducto.nombre);
     miFila.appendChild(miNombre);
     let misUnidades = crearElemento("li",datosProducto.unidades);  
