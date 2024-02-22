@@ -85,11 +85,11 @@ function dibujarProducto(datosProducto) {
     });
     // Añado el modal al boton modificar
     let miModal = dibujarModal(idMagico,datosProducto);
-    // let miModalSeguro = dibujarModalSeguro(idMagico);
+    let miModalSeguro = dibujarModalSeguro(idMagico);
     filita.appendChild(boton);
     miFila.appendChild(filita);  
     miFila.appendChild(miModal);
-    // miFila.appendChild(miModalSeguro);
+    miFila.appendChild(miModalSeguro);
     return miFila;
 }
 
@@ -111,6 +111,14 @@ function dibujarModal(idModal, datosProducto) {
     // Contenido Body
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     let modalBody = crearElemento("div",undefined, {"class": "modal-body"});
+
+    let inputID = crearElemento("input",undefined,{
+        "type" : "hidden",
+        "id": "inID" + idModal,
+        "placeholder" : datosProducto.id,
+        "value": "Subir Foto"
+    });
+    modalBody.appendChild(inputID);
 
     // Entrada foto
     let labelFoto = crearElemento("label","Foto",{"for":"inFoto"});
@@ -166,8 +174,8 @@ function dibujarModal(idModal, datosProducto) {
         "type" : "button",
         "class" : "btn btn-primary",
         "id" : idModal,
-        // "data-bs-toggle": "modal",
-        // "data-bs-target": "#modal-" + idModal + "-seguro"
+        "data-bs-toggle": "modal",
+        "data-bs-target": "#modal-" + idModal + "-seguro"
     });
     modalModificar.addEventListener("click",manejadorClickModificar);
     modalFooter.appendChild(modalModificar);
@@ -201,13 +209,17 @@ function dibujarModalSeguro(idModalSeguro) {
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     let modalBody = crearElemento("div",undefined, {"class": "modal-body"});
     let miPregunta = crearElemento("h5","¿Estas seguro que quieres los siguientes datos para el usuario?");
+    let miFoto = crearElemento("p",undefined,{"id" : "inFoto" + idModalSeguro + "-seguro"});
     let miNombre = crearElemento("p",undefined,{"id" : "inNombre" + idModalSeguro + "-seguro"});
-    let miEmail = crearElemento("p",undefined,{"id" : "inEmail" + idModalSeguro + "-seguro"});
-    let miTelefono = crearElemento("p",undefined,{"id" : "inTelefono" + idModalSeguro + "-seguro"});
+    let misUnidades = crearElemento("p",undefined,{"id" : "inUnidades" + idModalSeguro + "-seguro"});
+    let misResiduos = crearElemento("p",undefined,{"id" : "inResiduos" + idModalSeguro + "-seguro"});
+    let misCategorias = crearElemento("p",undefined,{"id" : "inCategorias" + idModalSeguro + "-seguro"});
     modalBody.appendChild(miPregunta);
+    modalBody.appendChild(miFoto);
     modalBody.appendChild(miNombre);
-    modalBody.appendChild(miEmail);
-    modalBody.appendChild(miTelefono);
+    modalBody.appendChild(misUnidades);
+    modalBody.appendChild(misResiduos);
+    modalBody.appendChild(misCategorias);
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     // Contenido footer
     let modalFooter = crearElemento("div",undefined, {"class": "modal-footer"});
@@ -537,7 +549,7 @@ function manejadorClickAddUsuario(e) {
 }
 function manejadorClickActualizarBD(e) {
     console.log("actualiza puto id:", this.id);
-    modificarUsuario(this.id);
+    // modificarUsuario(this.id);
 
 }
 
@@ -545,6 +557,18 @@ function manejadorClickModificar(e) {
     console.log("modifico: ",this.id , "clase: ", this.className);
     let txt = "";
     // ↓↓↓↓↓↓↓↓↓↓↓
+    // Obtengo valor del archivo
+    let archivo = document.getElementById("inFoto" + this.id);
+    if(archivo.files[0]) {
+        txt = "Foto: " + archivo.files[0].name;
+    } else {
+        txt = "Foto: " + archivo.placeholder;
+    }
+    document.getElementById("inFoto" + this.id + "-seguro").innerHTML = txt;
+    document.getElementById("inFoto" + this.id + "-seguro").value = this.id;
+
+
+
     let nombre = document.getElementById("inNombre" + this.id);
     if(nombre.value) {
         txt = "Nombre: " + nombre.value;
@@ -553,22 +577,21 @@ function manejadorClickModificar(e) {
     }
     document.getElementById("inNombre" + this.id + "-seguro").innerHTML = txt;
 
-    let email = document.getElementById("inEmail" + this.id);
-    if(email.value) {
-        txt = "Email: " + email.value;
+    let unidades = document.getElementById("inUnidades" + this.id);
+    if(unidades.value) {
+        txt = "Unidades: " + unidades.value;
     } else {
-        txt = "Email: " + email.placeholder;
+        txt = "Unidades: " + unidades.placeholder;
     }
-    document.getElementById("inEmail" + this.id + "-seguro").innerHTML = txt;
-    document.getElementById("inEmail" + this.id + "-seguro").value = email.placeholder;
+    document.getElementById("inUnidades" + this.id + "-seguro").innerHTML = txt;
 
-    let telefono = document.getElementById("inTelefono" + this.id);
-    if(telefono.value) {
-        txt = "Telefono: " + telefono.value;
+    let residuos = document.getElementById("inResiduos" + this.id);
+    if(residuos.value) {
+        txt = "Residuos: " + residuos.value;
     } else {
-        txt = "Telefono: " + telefono.placeholder;
+        txt = "Residuos: " + residuos.placeholder;
     }
-    document.getElementById("inTelefono" + this.id + "-seguro").innerHTML = txt;
+    document.getElementById("inResiduos" + this.id + "-seguro").innerHTML = txt;
     // ↑↑↑↑↑↑↑↑↑↑↑↑
 }
 function manejadorClickHabilitar(e) {
