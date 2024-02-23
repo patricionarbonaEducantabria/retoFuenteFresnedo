@@ -140,36 +140,14 @@ function manejadorClickAñadirProducto(idProducto)
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑ MANEJADORES ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-// function añadirProductos(callback)
-// {
-//     let miIDProducto = document.getElementById("id_producto");
-//     let miCantidad = document.getElementById("cantidad_producto"); 
-//     let miPeticion = new XMLHttpRequest();
-    
-//     miPeticion.open("POST", "../../PHP/usuario_productos.php", true);
-
-//     miPeticion.onreadystatechange = function() {
-//         if(miPeticion.readyState == 4 && miPeticion.status == 200)
-//         {
-//             console.log(miPeticion.responseText);
-//         }
-//     }
-
-//     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-//     let datos = "obtenerEmail=&id_producto="+miIDProducto+"cantidad_producto="+miCantidad;
-    
-//     miPeticion.send(datos);
-// }
-
 function almacenarProductos(idProducto, miCantidad)
 {
     // console.log("ID: "+idProducto);
     // console.log("Cantidad: "+miCantidad);
     // verificimos si existe productos en el localStorage
+    let productos;
     if (localStorage.getItem('productos') !== null && localStorage.getItem('productos') !== undefined) 
     {
-        let productos;
         productos = JSON.parse(localStorage.getItem('productos'));
     }
     else 
@@ -181,7 +159,7 @@ function almacenarProductos(idProducto, miCantidad)
     if(productos.hasOwnProperty(idProducto))
     {
         // sumamos
-        productos[idProducto].cantidad = parseInt(productos[idProducto].cantidad + parseInt(miCantidad));
+        productos[idProducto].cantidad = parseInt(productos[idProducto].cantidad) + parseInt(miCantidad);
     }
     else 
     {
@@ -193,6 +171,8 @@ function almacenarProductos(idProducto, miCantidad)
 
     // Almacenamos el objeto
     localStorage.setItem('productos', JSON.stringify(productos));
+    // para que el cajon de texto vuelve a esta vacio
+    document.getElementById("cantidad_"+idProducto).value = undefined;
 }
 
 function obtenerProductos(callback)
@@ -200,7 +180,7 @@ function obtenerProductos(callback)
     let miCategoria = document.getElementById("categoria").textContent;
     let miPeticion = new XMLHttpRequest();
 
-    miPeticion.open("POST", "../../PHP/usuario_productos.php", true);
+    miPeticion.open("POST","../../PHP/usuario_productos.php", true);
 
     miPeticion.onreadystatechange = function() {
         if(miPeticion.readyState == 4 && miPeticion.status == 200)

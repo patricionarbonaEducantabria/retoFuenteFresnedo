@@ -6,10 +6,6 @@
         obtenerProductos();
     }
 
-    // if(isset($_POST['añadirProducto']))
-    // {
-    //     añadirProductos();
-    // }
 
     // Listar los productos
     function obtenerProductos() {
@@ -47,36 +43,4 @@
         $jsonString = json_encode($datos);
         echo $jsonString;
     }
-
-    // function añadirProductos()
-    // {
-    //     $id_producto = $_POST['id_producto'];
-    //     $cantidad = $_POST['cantidad_producto'];
-
-    //     $productos = array();
-    //     $encontrado = false;
-
-    //     foreach ($productos as &$producto) 
-    //     {
-    //         // Si el ID del producto coincide, sumar la cantidad
-    //         if ($producto['id'] == $id_producto) 
-    //         {
-    //             $producto['cantidad'] += $cantidad;
-    //             $encontrado = true;
-    //         }
-    //     }
-    
-    //     // Si el producto no se encontró en el array, agregarlo
-    //     if (!$encontrado) 
-    //     {
-    //         $nuevo_producto = array(
-    //             'id' => $id_producto,
-    //             'cantidad' => $cantidad
-    //         );
-    //         $productos[] = $nuevo_producto;
-    //     }
-
-    //     $jsonString = json_encode($productos);
-    //     echo $jsonString;
-    // }
 ?>
