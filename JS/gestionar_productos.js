@@ -71,8 +71,6 @@ function dibujarProducto(datosProducto) {
     let misUnidades = crearElemento("li",datosProducto.unidades);  
     miFila.appendChild(misUnidades);
 
-    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
     let misResiduos = crearElemento("li",undefined);
     let misResiduosSelect = crearElemento("select",undefined);
     let misResiduosOption;    
@@ -88,11 +86,7 @@ function dibujarProducto(datosProducto) {
     }
     misResiduos.appendChild(misResiduosSelect);
     miFila.appendChild(misResiduos);
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
-    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     
-    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
     let misCategorias = crearElemento("li",undefined);   
     let misCategoriasSelect = crearElemento("select",undefined);
     let misCategoriasOption;    
@@ -102,8 +96,6 @@ function dibujarProducto(datosProducto) {
     }
     misCategorias.appendChild(misCategoriasSelect);
     miFila.appendChild(misCategorias);
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
-    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     // Boton Modificar Datos
     let filita = crearElemento("li",undefined);
