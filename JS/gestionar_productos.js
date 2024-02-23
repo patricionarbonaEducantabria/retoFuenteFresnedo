@@ -70,10 +70,41 @@ function dibujarProducto(datosProducto) {
     miFila.appendChild(miNombre);
     let misUnidades = crearElemento("li",datosProducto.unidades);  
     miFila.appendChild(misUnidades);
-    let misResiduos = crearElemento("li",datosProducto.residuos);    
+
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    let misResiduos = crearElemento("li",undefined);
+    let misResiduosSelect = crearElemento("select",undefined);
+    let misResiduosOption;    
+    // recorro los residuos
+    if(datosProducto.residuos.length !== 0) {
+        for(let i=0; i<datosProducto.residuos.length;i++) {
+            misResiduosOption= crearElemento("option",datosProducto.residuos[i]);
+            misResiduosSelect.appendChild(misResiduosOption);
+        }
+    } else {
+        misResiduosOption = crearElemento("option","No produce residuos");
+        misResiduosSelect.appendChild(misResiduosOption);
+    }
+    misResiduos.appendChild(misResiduosSelect);
     miFila.appendChild(misResiduos);
-    let misCategorias = crearElemento("li",datosProducto.categorias);    
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    let misCategorias = crearElemento("li",undefined);   
+    let misCategoriasSelect = crearElemento("select",undefined);
+    let misCategoriasOption;    
+    for(let i=0; i<datosProducto.categorias.length;i++) {
+        misCategoriasOption= crearElemento("option",datosProducto.categorias[i]);
+        misCategoriasSelect.appendChild(misCategoriasOption);
+    }
+    misCategorias.appendChild(misCategoriasSelect);
     miFila.appendChild(misCategorias);
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
     // Boton Modificar Datos
     let filita = crearElemento("li",undefined);
     let idMagico = datosProducto.id;
