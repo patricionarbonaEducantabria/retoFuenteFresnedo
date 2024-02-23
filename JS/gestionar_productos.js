@@ -40,8 +40,22 @@ function principal()
     // botonAddSiUsuario.addEventListener("click",manejadorClickSiAdd);
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-    
-    
+    window.onscroll = function() {
+        scrollFunction();
+    }; 
+}
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("btnScrollToTop").style.display = "block";
+    } else {
+        document.getElementById("btnScrollToTop").style.display = "none";
+    }
+}
+
+function scrollToTop() {
+    document.body.scrollTop = 0; // Para Safari
+    document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
 }
 
 function crearElemento(etiqueta, texto, atributos) {
@@ -102,17 +116,18 @@ function dibujarProducto(datosProducto) {
     let idMagico = datosProducto.id;
     let boton = crearElemento("input",undefined,{"type":"button",
         "class":"btnModificar",
+        "id":"btnModificar",
         "value":"Modificar Datos",
         "data-bs-toggle": "modal",
         "data-bs-target": "#modal-" + idMagico
     });
     // Añado el modal al boton modificar
     let miModal = dibujarModal(idMagico,datosProducto);
-    let miModalSeguro = dibujarModalSeguro(idMagico);
+    // let miModalSeguro = dibujarModalSeguro(idMagico);
     filita.appendChild(boton);
     miFila.appendChild(filita);  
     miFila.appendChild(miModal);
-    miFila.appendChild(miModalSeguro);
+    // miFila.appendChild(miModalSeguro);
     return miFila;
 }
 
@@ -172,14 +187,57 @@ function dibujarModal(idModal, datosProducto) {
     modalBody.appendChild(labelUnidades);
     modalBody.appendChild(inputUnidades);
     // Entrada Residuos
-    let labelResiduos = crearElemento("label","Residuos",{"for":"inResiduos"});
-    let inputResiduos = crearElemento("input",undefined,{
-        "type" : "text",
-        "id": "inResiduos" + idModal,
-        "placeholder" : datosProducto.residuos
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    let divResiduosAdd = crearElemento("div",undefined, {"id" : "divResiduosAdd"});
+    let labelResiduos = crearElemento("label","Residuos",{"for" : "btnResiduosAdd"});
+    let botonResiduos = crearElemento("input",undefined, {
+        "type": "button",
+        "id" : "btnResiduosAdd",
+        "value" : "➕"
     });
-    modalBody.appendChild(labelResiduos);
-    modalBody.appendChild(inputResiduos);
+    // al pulsar el boton mas, añadimos un select al contenedor divResiduosModificar
+    botonResiduos.addEventListener("click", manejadorClickResiduosMas);
+    divResiduosAdd.appendChild(labelResiduos);
+    divResiduosAdd.appendChild(botonResiduos);
+
+    let divResiduos = crearElemento("div",undefined, {"id" : "divResiduosModificar"});
+    // Muestro los residuos que tiene el producto
+    if(datosProducto.residuos.length !== 0) {
+        for(let i=0; i<datosProducto.residuos.length;i++) {
+            let misResiduosP = crearElemento("p",undefined);
+            let misResiduosSelect= crearElemento("select", undefined);
+            let misResiduosOption= crearElemento("option",datosProducto.residuos[i]);
+            let misResiduosMenos = crearElemento("input",undefined, {
+                "type": "button",
+                "class" : "btnResiduos",
+                "value" : "➖"
+            });
+
+            misResiduosMenos.addEventListener("click",manejadorClickResiduosMenos);
+            misResiduosSelect.appendChild(misResiduosOption);
+            misResiduosP.appendChild(misResiduosSelect);
+            misResiduosP.appendChild(misResiduosMenos);
+            divResiduos.appendChild(misResiduosP);
+        }
+    }
+    // let misResiduosSelect = crearElemento("select",undefined);
+    // let misResiduosOption;    
+    // // recorro los residuos
+    // if(datosProducto.residuos.length !== 0) {
+    //     for(let i=0; i<datosProducto.residuos.length;i++) {
+    //         misResiduosOption= crearElemento("option",datosProducto.residuos[i]);
+    //         misResiduosSelect.appendChild(misResiduosOption);
+    //     }
+    // } else {
+    //     misResiduosOption = crearElemento("option","No produce residuos");
+    //     misResiduosSelect.appendChild(misResiduosOption);
+    // }
+    // misResiduos.appendChild(misResiduosSelect);
+    modalBody.appendChild(divResiduosAdd);
+    modalBody.appendChild(divResiduos);
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+
     // Entrada Categorias
     let labelCategorias = crearElemento("label","Categorias",{"for":"inCategorias"});
     let inputCategorias = crearElemento("input",undefined,{
@@ -284,6 +342,23 @@ function recuperarProductos(longitud) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
         let miDiv = document.getElementById("contenedor-productos");
+        //Este es la cabecera de las listas generadas
+        let miCabecera = crearElemento("ul",undefined,{
+            "id":"cabecera"
+        });
+        let miFotoCabecera = crearElemento("li","Foto"); 
+        let miProductoCabecera = crearElemento("li","Producto"); 
+        let miUnidadCabecera = crearElemento("li","Unidad de medida"); 
+        let miResiduoCabecera = crearElemento("li","Residuos generados"); 
+        let miCategoriaCabecera = crearElemento("li","Categorias");
+        let miCosaCabecera = crearElemento("li","");
+        miCabecera.appendChild(miFotoCabecera); 
+        miCabecera.appendChild(miProductoCabecera); 
+        miCabecera.appendChild(miUnidadCabecera); 
+        miCabecera.appendChild(miResiduoCabecera); 
+        miCabecera.appendChild(miCategoriaCabecera); 
+        miCabecera.appendChild(miCosaCabecera); 
+        miDiv.appendChild(miCabecera);
         for(let i = 0; i< respuesta.length; i++) {
             miDiv.appendChild(dibujarProducto(respuesta[i]));
             // console.log(respuesta[i]);
@@ -307,6 +382,24 @@ function obtenerProductos(callback) {
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
   let datos = "obtenerProductos=";
+  miPeticion.send(datos);
+}
+function obtenerResiduos(miContenedorResiduos, callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_productos.php", true);
+
+  miPeticion.onreadystatechange = function() {
+    if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+        // console.log(miPeticion.responseText);
+        // console.log(miContenedorResiduos);
+        callback(miPeticion.responseText);
+    }
+  };
+
+  miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  let datos = "obtenerResiduos=";
   miPeticion.send(datos);
 }
 
@@ -515,6 +608,42 @@ function dibujarModalAddUsuarioSeguro() {
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
 
+}
+
+function manejadorClickResiduosMenos(e) {
+    console.log(this.parentElement);
+    console.log("menos");
+    this.parentElement.remove();
+}
+function manejadorClickResiduosMas(e) {
+    console.log(this.parentElement.nextSibling);
+    console.log("mas");
+    let miContenedorResiduos = this.parentElement.nextSibling;
+
+    obtenerResiduos(miContenedorResiduos,function(respuesta) {
+        respuesta = JSON.parse(respuesta);
+        // recorro el json
+        // console.log("puta",respuesta[i]);
+        let misResiduosP = crearElemento("p",undefined);
+        let misResiduosSelect= crearElemento("select", undefined);
+        let misResiduosMenos = crearElemento("input",undefined, {
+            "type": "button",
+            "class" : "btnResiduos",
+            "value" : "➖"
+        });
+        // añado los option de residuos
+        for(let i = 0; i< respuesta.length; i++) {
+            let misResiduosOption= crearElemento("option",respuesta[i].descripcion, {"value" : respuesta[i].id});
+
+            misResiduosSelect.appendChild(misResiduosOption);
+        }
+            misResiduosMenos.addEventListener("click",manejadorClickResiduosMenos);
+            misResiduosP.appendChild(misResiduosSelect);
+            misResiduosP.appendChild(misResiduosMenos);
+            miContenedorResiduos.appendChild(misResiduosP);
+    });
+
+    
 }
 function manejadorClickAdd(e) {
     console.log("añado usuario");

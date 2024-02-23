@@ -8,6 +8,9 @@ if(isset($_POST['modificarProducto'])) {
 if(isset($_POST['addProducto'])) {
     addProducto();
 }
+if(isset($_POST['obtenerResiduos'])) {
+    obtenerResiduos();
+}
 
 // Listar los usuarios
 function obtenerProductos() {
@@ -76,14 +79,31 @@ ORDER BY productos.id;
         );
 
         $datos[] = $producto;
-    }
+        }
 
     $jsonString = json_encode($datos);
     echo $jsonString;
 
 }
 
+function obtenerResiduos() {
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
 
+    // Recupero la informacion del producto
+    $resultado = $conexion -> prepare("
+    SELECT * FROM residuos");
+    $resultado -> execute();
+     // Listo las categorias de ese producto y las almaceno en un array
+     $residuos = array();
+     while ($residuo = $resultado->fetch()) {
+        $residuos[] = array(
+            'id' => $residuo["id"],
+            'descripcion' => $residuo["descripcion"]
+        );
+    }
+    $jsonString = json_encode($residuos);
+    echo $jsonString;
+}
 
 
 // Modificar Producto

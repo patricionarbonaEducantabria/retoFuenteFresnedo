@@ -9,26 +9,39 @@
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../../Estilos/admin_gestion_productos.css">
-    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <header>
-        <div id="contenedor-buscador">
-            <input type="button" value="Buscar" id="btnBuscar">
+        <div id="contenedor-buscar">
             <input type="text" id="inBuscador" placeholder="ej: pimiento">
+            <button id="btnBuscar">Buscar</button>
         </div>
-        <input type="button" id="btnAddProducto" value="Añadir Usuario" >
+        <input type="button" id="btnAddProducto" value="Añadir Producto">
+    </header>
         <div id="contenedorModalesAdd">
 
         </div>
         <!-- Modal de añadir usuario -->
         
-        
-
-        
-    </header>
-    <div id="contenedor-productos">
-
+        <div id="contenedor-productos">
+            <ul id="cabecera">
+                <li>Foto</li>
+                <li>Producto</li>
+                <li>Unidad de medida</li>
+                <li>Residuos generados</li>
+                <li>Categorías</li>
+                <li></li> <!-- Espacio adicional si es necesario -->
+            </ul>
+            <ul id="1">
+                <li>Foto</li>
+                <li>Producto</li>
+                <li>Unidad de medida</li>
+                <li>Residuos generados</li>
+                <li>Categorías</li>
+            </ul>
     </div>
+
+    <button onclick="scrollToTop()" id="btnScrollToTop" title="Ir arriba">Δ</button>
 </body>
 </html>
