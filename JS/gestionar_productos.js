@@ -343,17 +343,21 @@ function recuperarProductos(longitud) {
         // recorro el json
         let miDiv = document.getElementById("contenedor-productos");
         //Este es la cabecera de las listas generadas
-        let miCabecera = crearElemento("ul",undefined);
+        let miCabecera = crearElemento("ul",undefined,{
+            "id":"cabecera"
+        });
         let miFotoCabecera = crearElemento("li","Foto"); 
         let miProductoCabecera = crearElemento("li","Producto"); 
         let miUnidadCabecera = crearElemento("li","Unidad de medida"); 
         let miResiduoCabecera = crearElemento("li","Residuos generados"); 
         let miCategoriaCabecera = crearElemento("li","Categorias");
+        let miCosaCabecera = crearElemento("li","");
         miCabecera.appendChild(miFotoCabecera); 
         miCabecera.appendChild(miProductoCabecera); 
         miCabecera.appendChild(miUnidadCabecera); 
         miCabecera.appendChild(miResiduoCabecera); 
         miCabecera.appendChild(miCategoriaCabecera); 
+        miCabecera.appendChild(miCosaCabecera); 
         miDiv.appendChild(miCabecera);
         for(let i = 0; i< respuesta.length; i++) {
             miDiv.appendChild(dibujarProducto(respuesta[i]));
