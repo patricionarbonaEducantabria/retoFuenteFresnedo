@@ -92,11 +92,23 @@ function crearElemento(etiqueta, texto, atributos) {
 
 function dibujarProductos(datosProducto) {
     let miFila = crearElemento("ul",undefined);
+    let filita = crearElemento("li",undefined);
+    let papelera = crearElemento("input",undefined,{"type":"button","value":"AQUI VA LA PAPELERA","id":"btnPapelera"});
+    filita.appendChild(papelera);
+    miFila.appendChild(filita);
     let foto = crearElemento("li",undefined);    
     foto.appendChild(crearElemento("img",undefined,{"src" : datosProducto.foto, "id":"foto_producto"}));   
     miFila.appendChild(foto);
     let descripcion = crearElemento("li",datosProducto.nombre, {"id":"nombre_producto"});
     miFila.appendChild(descripcion);
+    let filita_1 = crearElemento("li",undefined);
+    let boton_2 = crearElemento("input",undefined,{"type":"button","value":"-", "id":"btnRestar"});
+    let cantidad =  crearElemento("p",datosProducto.cantidad,{"id":"cantidad_producto"});
+    let boton_3 = crearElemento("input",undefined,{"type":"button","value":"+", "id":"btnSumar"});
+    filita_1.appendChild(boton_2);
+    filita_1.appendChild(cantidad);
+    filita_1.appendChild(boton_3);
+    miFila.appendChild(filita_1);
     let unidades = crearElemento("li",datosProducto.unidad, {"id":"unidad_producto"});  
     miFila.appendChild(unidades);
     if(datosProducto.observaciones == null) {
@@ -107,21 +119,6 @@ function dibujarProductos(datosProducto) {
         let observaciones = crearElemento("li",datosProducto.observaciones, {"id":"observaciones_producto"});    
         miFila.appendChild(observaciones);
     }
-    // INPUT para introducir cantidad
-    let filita_1 = crearElemento("li",undefined);
-    let caja_texto = crearElemento("input",undefined,{"type":"number","id":"cantidad_"+datosProducto.id,"step":"0.001", "min":"0"});
-    filita_1.appendChild(caja_texto);
-    miFila.appendChild(filita_1);
-    // Boton Modificar Datos
-    let filita_2 = crearElemento("li",undefined);
-    let boton_2 = crearElemento("input",undefined,{"type":"button","value":"Añadir a la cesta"});
-    let parrafo = crearElemento("p","",{"id":"errores_"+datosProducto.id});
-    boton_2.addEventListener("click", function() {
-        manejadorClickAñadirProducto(datosProducto.id);
-    });
-    filita_2.appendChild(boton_2);
-    filita_2.appendChild(parrafo);
-    miFila.appendChild(filita_2);
     return miFila;
 }
 
@@ -132,15 +129,15 @@ function enviarProductos(callback)
 
     miPeticion.onreadystatechange = function () {
         if(miPeticion.readyState == 4 && miPeticion.status == 200) {
-            console.log(miPeticion.responseText);
-            // callback(miPeticion.responseText);
+            // console.log(miPeticion.responseText);
+            callback(miPeticion.responseText);
         }   
     }
 
     miPeticion.open("POST","../../PHP/usuario_cesta.php",true);
     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let productos = localStorage.getItem('productos');
-    miPeticion.send("productos=" + JSON.stringify(productos));
+    miPeticion.send("productos=" + productos);
 }
 
 function recuperarPedido(longitud)

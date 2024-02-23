@@ -129,13 +129,24 @@ function dibujarProductos(datosProducto) {
 function manejadorClickAñadirProducto(idProducto)
 {
     let miCantidad = document.getElementById("cantidad_"+idProducto).value;
-    if(miCantidad <= 0)
+    if (miCantidad === "" || miCantidad === null) 
     {
-        document.getElementById("errores_"+idProducto).innerHTML = "Introduce un numero positivo";
-    }
-    else
+        document.getElementById("errores_"+idProducto).innerHTML = "Introduce una cantidad";
+    } 
+    else if (parseFloat(miCantidad) <= 0) 
     {
+        document.getElementById("errores_"+idProducto).innerHTML = "Número incorrecto";
+    } 
+    else 
+    {
+        // ESTILO MENSAJE DE ERRORES
         almacenarProductos(idProducto, miCantidad);
+        document.getElementById("errores_"+idProducto).innerHTML = "Producto añadido correctamente";
+        
+        // Desaparecer el mensaje después de 2 segundos (2000 milisegundos)
+        setTimeout(function() {
+            document.getElementById("errores_"+idProducto).innerHTML = "";
+        }, 2000);
     }
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑ MANEJADORES ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
