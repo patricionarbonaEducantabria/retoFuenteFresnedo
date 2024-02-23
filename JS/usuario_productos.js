@@ -2,6 +2,7 @@ window.onload = principal;
 
 function principal()
 {
+    // document.getElementById("errores").innerHTML = "";
     recuperarProductos();
 }
 
@@ -90,9 +91,9 @@ function crearElemento(etiqueta, texto, atributos) {
 }
 
 function dibujarProductos(datosProducto) {
-    let miFila = crearElemento("ul",undefined,{"id":datosProducto.id});
+    let miFila = crearElemento("ul",undefined);
     let foto = crearElemento("li",undefined);    
-    foto.appendChild(crearElemento("img",undefined,{"src" : datosProducto.foto, "id":"foto_producto"}));    
+    foto.appendChild(crearElemento("img",undefined,{"src" : datosProducto.foto, "id":"foto_producto"}));   
     miFila.appendChild(foto);
     let descripcion = crearElemento("li",datosProducto.nombre, {"id":"nombre_producto"});
     miFila.appendChild(descripcion);
@@ -108,42 +109,90 @@ function dibujarProductos(datosProducto) {
     }
     // INPUT para introducir cantidad
     let filita_1 = crearElemento("li",undefined);
-    let boton_1 = crearElemento("input",undefined,{"type":"number","id":"cantidad_producto","step":"0.001"});
-    filita_1.appendChild(boton_1);
+    let caja_texto = crearElemento("input",undefined,{"type":"number","id":"cantidad_"+datosProducto.id,"step":"0.001", "min":"0"});
+    filita_1.appendChild(caja_texto);
     miFila.appendChild(filita_1);
     // Boton Modificar Datos
     let filita_2 = crearElemento("li",undefined);
     let boton_2 = crearElemento("input",undefined,{"type":"button","value":"Añadir a la cesta"});
-    boton_2.addEventListener("click",manejadorClickAñadirProducto);
+    let parrafo = crearElemento("p","",{"id":"errores_"+datosProducto.id});
+    boton_2.addEventListener("click", function() {
+        manejadorClickAñadirProducto(datosProducto.id);
+    });
     filita_2.appendChild(boton_2);
+    filita_2.appendChild(parrafo);
     miFila.appendChild(filita_2);
     return miFila;
 }
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-function manejadorClickAñadirProducto(e)
+function manejadorClickAñadirProducto(idProducto)
 {
-    
+    let miCantidad = document.getElementById("cantidad_"+idProducto).value;
+    if(miCantidad <= 0)
+    {
+        document.getElementById("errores_"+idProducto).innerHTML = "Introduce un numero positivo";
+    }
+    else
+    {
+        almacenarProductos(idProducto, miCantidad);
+    }
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑ MANEJADORES ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-function añadirProductos(callback)
-{
-    let miPeticion = new XMLHttpRequest;
-    miPeticion.open("POST", "../../PHP/usuario_productos.php", true);
+// function añadirProductos(callback)
+// {
+//     let miIDProducto = document.getElementById("id_producto");
+//     let miCantidad = document.getElementById("cantidad_producto"); 
+//     let miPeticion = new XMLHttpRequest();
+    
+//     miPeticion.open("POST", "../../PHP/usuario_productos.php", true);
 
-    miPeticion.onreadystatechange = function() {
-        if(miPeticion.readyState == 4 && miPeticion.status == 200)
-        {
-            console.log(miPeticion.responseText);
-        }
+//     miPeticion.onreadystatechange = function() {
+//         if(miPeticion.readyState == 4 && miPeticion.status == 200)
+//         {
+//             console.log(miPeticion.responseText);
+//         }
+//     }
+
+//     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+//     let datos = "obtenerEmail=&id_producto="+miIDProducto+"cantidad_producto="+miCantidad;
+    
+//     miPeticion.send(datos);
+// }
+
+function almacenarProductos(idProducto, miCantidad)
+{
+    // console.log("ID: "+idProducto);
+    // console.log("Cantidad: "+miCantidad);
+    // verificimos si existe productos en el localStorage
+    if (localStorage.getItem('productos') !== null && localStorage.getItem('productos') !== undefined) 
+    {
+        let productos;
+        productos = JSON.parse(localStorage.getItem('productos'));
+    }
+    else 
+    {
+        productos = {};
     }
 
-    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    // verificamos si el producto ya existe en el objeto 'productos'
+    if(productos.hasOwnProperty(idProducto))
+    {
+        // sumamos
+        productos[idProducto].cantidad = parseInt(productos[idProducto].cantidad + parseInt(miCantidad));
+    }
+    else 
+    {
+        productos[idProducto] = {
+            id : idProducto,
+            cantidad : miCantidad
+        };
+    }
 
-    let datos = "obtenerHistorico="+localStorage.getItem("email");
-    
-    miPeticion.send(datos);
+    // Almacenamos el objeto
+    localStorage.setItem('productos', JSON.stringify(productos));
 }
 
 function obtenerProductos(callback)
@@ -156,7 +205,7 @@ function obtenerProductos(callback)
     miPeticion.onreadystatechange = function() {
         if(miPeticion.readyState == 4 && miPeticion.status == 200)
         {
-            // console.log(miPeticion.responseText);
+            console.log(miPeticion.responseText);
             callback(miPeticion.responseText);
         }
     };
