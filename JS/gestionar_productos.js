@@ -40,8 +40,22 @@ function principal()
     // botonAddSiUsuario.addEventListener("click",manejadorClickSiAdd);
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-    
-    
+    window.onscroll = function() {
+        scrollFunction();
+    }; 
+}
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("btnScrollToTop").style.display = "block";
+    } else {
+        document.getElementById("btnScrollToTop").style.display = "none";
+    }
+}
+
+function scrollToTop() {
+    document.body.scrollTop = 0; // Para Safari
+    document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
 }
 
 function crearElemento(etiqueta, texto, atributos) {
@@ -79,6 +93,7 @@ function dibujarProducto(datosProducto) {
     let idMagico = datosProducto.id;
     let boton = crearElemento("input",undefined,{"type":"button",
         "class":"btnModificar",
+        "id":"btnModificar",
         "value":"Modificar Datos",
         "data-bs-toggle": "modal",
         "data-bs-target": "#modal-" + idMagico
@@ -261,6 +276,19 @@ function recuperarProductos(longitud) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
         let miDiv = document.getElementById("contenedor-productos");
+        //Este es la cabecera de las listas generadas
+        let miCabecera = crearElemento("ul",undefined);
+        let miFotoCabecera = crearElemento("li","Foto"); 
+        let miProductoCabecera = crearElemento("li","Producto"); 
+        let miUnidadCabecera = crearElemento("li","Unidad de medida"); 
+        let miResiduoCabecera = crearElemento("li","Residuos generados"); 
+        let miCategoriaCabecera = crearElemento("li","Categorias");
+        miCabecera.appendChild(miFotoCabecera); 
+        miCabecera.appendChild(miProductoCabecera); 
+        miCabecera.appendChild(miUnidadCabecera); 
+        miCabecera.appendChild(miResiduoCabecera); 
+        miCabecera.appendChild(miCategoriaCabecera); 
+        miDiv.appendChild(miCabecera);
         for(let i = 0; i< respuesta.length; i++) {
             miDiv.appendChild(dibujarProducto(respuesta[i]));
             // console.log(respuesta[i]);

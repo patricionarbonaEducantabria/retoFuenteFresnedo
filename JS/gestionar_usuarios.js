@@ -23,17 +23,29 @@ function principal()
         modalAddUsuario.show();
     });
 
-    
-    
-    
+      
     let botonAddUsuario = document.getElementById("btnAddUsuario");
     botonAddUsuario.addEventListener("click",manejadorClickAdd);
     let botonAddSiUsuario = document.getElementById("btnSiAdd");
     botonAddSiUsuario.addEventListener("click",manejadorClickSiAdd);
 
+    window.onscroll = function() {
+        scrollFunction();
+    }; 
+    
+}
 
-    
-    
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("btnScrollToTop").style.display = "block";
+    } else {
+        document.getElementById("btnScrollToTop").style.display = "none";
+    }
+}
+
+function scrollToTop() {
+    document.body.scrollTop = 0; // Para Safari
+    document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
 }
 
 function crearElemento(etiqueta, texto, atributos) {
