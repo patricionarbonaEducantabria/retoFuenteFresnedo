@@ -183,13 +183,40 @@ function dibujarModal(idModal, datosProducto) {
     modalBody.appendChild(inputNombre);
     // Entrada Unidades
     let labelUnidades = crearElemento("label","Unidades",{"for":"inUnidades"});
-    let inputUnidades = crearElemento("input",undefined,{
-        "type" : "text",
-        "id": "inUnidades" + idModal,
-        "placeholder" : datosProducto.unidades
+    // let inputUnidades = crearElemento("input",undefined,{
+    //     "type" : "text",
+    //     "id": "inUnidades" + idModal,
+    //     "placeholder" : datosProducto.unidades
+    // });
+    // let inputUnidades = crearElemento("input",undefined,{
+    //     "type" : "text",
+    //     "id": "inUnidades" + idModal,
+    //     "placeholder" : datosProducto.unidades
+    // });
+
+    let misUnidadesSelect = crearElemento("select",undefined, {
+        "id" : "inUnidades" + idModal
+    })
+    let miUnidadDefault = crearElemento("option",datosProducto.unidades);
+    misUnidadesSelect.appendChild(miUnidadDefault);
+    obtenerUnidades(misUnidadesSelect,datosProducto.unidades,function(respuesta) {
+        respuesta = JSON.parse(respuesta);
+        // recorro el json
+        // console.log("puta",respuesta[i]);
+        // añado los option de residuos
+        for(let i = 0; i< respuesta.length; i++) {
+            if(respuesta[i].descripcion !== datosProducto.unidades) {
+
+                let misUnidadesOption= crearElemento("option",respuesta[i].descripcion, {"value" : respuesta[i].id});
+                
+                misUnidadesSelect.appendChild(misUnidadesOption);
+            }
+        }
     });
+
     modalBody.appendChild(labelUnidades);
-    modalBody.appendChild(inputUnidades);
+    // modalBody.appendChild(inputUnidades);
+    modalBody.appendChild(misUnidadesSelect);
     // Entrada Residuos
     let divResiduosAdd = crearElemento("div",undefined, {"id" : "divResiduosAdd"});
     let labelResiduos = crearElemento("label","Residuos",{"for" : "btnResiduosAdd"});
@@ -454,6 +481,24 @@ function obtenerCategorias(miContenedorCategorias, callback) {
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
   let datos = "obtenerCategorias=";
+  miPeticion.send(datos);
+}
+function obtenerUnidades(miContenedorCategorias, unidadDefecto, callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_productos.php", true);
+
+  miPeticion.onreadystatechange = function() {
+    if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+        // console.log(miPeticion.responseText);
+        // console.log(miContenedorResiduos);
+        callback(miPeticion.responseText);
+    }
+  };
+
+  miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  let datos = "obtenerUnidades=";
   miPeticion.send(datos);
 }
 function modificarProducto(idDatos) {
@@ -857,12 +902,10 @@ function manejadorClickModificar(e) {
     document.getElementById("inNombre" + this.id + "-seguro").innerHTML = txt;
 
     let unidades = document.getElementById("inUnidades" + this.id);
-    if(unidades.value) {
-        txt = "Unidades: " + unidades.value;
-    } else {
-        txt = "Unidades: " + unidades.placeholder;
-    }
-    document.getElementById("inUnidades" + this.id + "-seguro").innerHTML = txt;
+    
+    let unidadesNombre = unidades.options[unidades.selectedIndex].text;
+
+    document.getElementById("inUnidades" + this.id + "-seguro").innerHTML = "Unidades: "  + unidadesNombre;
 
 
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀

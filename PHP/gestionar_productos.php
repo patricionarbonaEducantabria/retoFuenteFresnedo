@@ -14,6 +14,9 @@ if(isset($_POST['obtenerResiduos'])) {
 if(isset($_POST['obtenerCategorias'])) {
     obtenerCategorias();
 }
+if(isset($_POST['obtenerUnidades'])) {
+    obtenerUnidades();
+}
 
 // Listar los usuarios
 function obtenerProductos() {
@@ -123,6 +126,24 @@ function obtenerResiduos() {
         );
     }
     $jsonString = json_encode($residuos);
+    echo $jsonString;
+}
+function obtenerUnidades() {
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+
+    // Recupero la informacion del producto
+    $resultado = $conexion -> prepare("
+    SELECT * FROM unidades");
+    $resultado -> execute();
+     // Listo las categorias de ese producto y las almaceno en un array
+     $unidades = array();
+     while ($unidad = $resultado->fetch()) {
+        $unidades[] = array(
+            'id' => $unidad["id"],
+            'descripcion' => $unidad["descripcion"]
+        );
+    }
+    $jsonString = json_encode($unidades);
     echo $jsonString;
 }
 
