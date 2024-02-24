@@ -231,24 +231,73 @@ function modificarProducto(){
 }
 
 function addProducto() {
-    $cargo = $_POST['cargo'];
-    if($cargo == "Admin") {
-        $cargo = 1;
-    } else {
-        $cargo = 0;
-    }
-    $nombre = $_POST['nombre'];
-    $email = $_POST['email'];
-    $contrasenia = hash('sha256', 'contraseña123');
-    $telefono = $_POST['telefono'];
-
+    $datosProducto = $_POST['addProducto'];
+    $datosProducto = json_decode($datosProducto,true);
+    $foto = $datosProducto['fotoProducto'];
+    $producto = $datosProducto['nombreProducto'];
+    $unidadesNombre = $datosProducto['unidadesProducto'];
+    $residuos = $datosProducto['residuosProducto'];
+    $categorias = $datosProducto['categoriasProducto'];
+    $observaciones = $datosProducto['observacionesProducto'];
+    
 
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
-    $resultado = $conexion -> prepare("INSERT INTO usuarios 
-    (admin, nombre, email, password, activo, observaciones, telefono)
-    VALUES (
-        ?, ?, ?, ?, 1, 'Observaciones sobre el admin', ?);");
-$resultado -> execute(array($cargo,$nombre,$email,$contrasenia,$telefono));
+    
+    // INSERTAR PRODUCTO
+    // lo que recibimos de las unidades es su id, solo puede tener una unidad
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // actualizo la tabla producto_categoria
+    $resultado = $conexion -> prepare("
+    INSERT INTO productos 
+    (
+        descripcion, fk_unidades, observaciones, foto
+    ) 
+    VALUES 
+    (
+        ?, (SELECT id FROM unidades WHERE descripcion = ?), ?, ?
+    );
+    ");
+    $resultado -> execute(array($producto, $unidadesNombre, $observaciones, $foto));
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+    // ACTUALIZAR PRODUCTO_RESIDUOS
+    // va dentro de un while cuando se añada mas de un residuo(recibiremos un json)
+    // lo que recibimos de los residuos es su id
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // elimino todos los residuos asociados al producto
+    // añado los residuos del producto
+    foreach($residuos as $residuo) {
+        $resultado = $conexion -> prepare("
+        INSERT INTO productos_residuos 
+        (
+            fk_producto, fk_residuos
+        ) 
+        VALUES (
+                (SELECT id FROM productos WHERE descripcion = ?),
+                (SELECT id FROM residuos WHERE descripcion = ?)
+            );
+
+        ");
+        $resultado -> execute(array($producto, $residuo));
+    }
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+    // ACTUALIZAR PRODUCTOS_CATEGORIA
+    // va dentro de un while cuando se añada mas de una categoria(recibiremos un json)
+    // lo que recibimos de las categorias es su id
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // Añadir nuevas categorías asociadas al producto
+    foreach ($categorias as $categoria) {
+        $resultado = $conexion->prepare("
+            INSERT INTO productos_categoria (fk_producto, fk_categoria) 
+            VALUES (
+                (SELECT id FROM productos WHERE descripcion = ?), 
+                (SELECT id FROM categorias WHERE descripcion = ?)
+            );
+        ");
+        $resultado->execute(array($producto, $categoria));
+    }
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 }
 
 ?>

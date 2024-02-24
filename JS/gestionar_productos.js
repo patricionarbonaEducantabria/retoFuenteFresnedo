@@ -7,7 +7,7 @@ function principal()
 
     let miBoton = document.getElementById("btnBuscar");
     miBoton.addEventListener("click", manejadorClickBuscar);
-    // let botonAdd = document.getElementById("btnAddUsuario");
+    // let botonAdd = document.getElementById("btnAddProducto");
     
     // let botonNoAdd = document.getElementById("btnNoAdd");
 
@@ -18,26 +18,26 @@ function principal()
 
         // Editar despues de recuperar Productos
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    // dibujarModalesAdd();
+    dibujarModalesAdd();
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     recuperarProductos();
 
     // Editar despues de recuperar Productos
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    // let botonMostrarAdd = document.getElementById("btnMostrarAddUsuarios");
-    // let modalAddUsuario = new bootstrap.Modal("#modal-Add-Usuario");
-    // botonMostrarAdd.addEventListener("click", function(modalAddSeguro) {
-    //     modalAddUsuario.show();
-    // });
+    let botonMostrarAdd = document.getElementById("btnMostrarAddProducto");
+    let modalAddProducto = new bootstrap.Modal("#modal-Add-Producto");
+    botonMostrarAdd.addEventListener("click", function(modalAddSeguro) {
+        modalAddProducto.show();
+    });
 
     
     
     
-    // let botonAddUsuario = document.getElementById("btnAddUsuario");
-    // botonAddUsuario.addEventListener("click",manejadorClickAdd);
-    // let botonAddSiUsuario = document.getElementById("btnSiAdd");
-    // botonAddSiUsuario.addEventListener("click",manejadorClickSiAdd);
+    let botonAddProducto = document.getElementById("btnAddProducto");
+    botonAddProducto.addEventListener("click",manejadorClickAdd);
+    let botonAddSiProducto = document.getElementById("btnSiAdd");
+    botonAddSiProducto.addEventListener("click",manejadorClickSiAdd);
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     window.onscroll = function() {
@@ -218,11 +218,11 @@ function dibujarModal(idModal, datosProducto) {
     // modalBody.appendChild(inputUnidades);
     modalBody.appendChild(misUnidadesSelect);
     // Entrada Residuos
-    let divResiduosAdd = crearElemento("div",undefined, {"id" : "divResiduosAdd"});
-    let labelResiduos = crearElemento("label","Residuos",{"for" : "btnResiduosAdd"});
+    let divResiduosAdd = crearElemento("div",undefined, {"id" : "divResiduosAddModificar"});
+    let labelResiduos = crearElemento("label","Residuos",{"for" : "btnResiduosAddModificar"});
     let botonResiduos = crearElemento("input",undefined, {
         "type": "button",
-        "id" : "btnResiduosAdd",
+        "id" : "btnResiduosAddModificar",
         "value" : "➕"
     });
     // al pulsar el boton mas, añadimos un select al contenedor divResiduosModificar
@@ -262,11 +262,11 @@ function dibujarModal(idModal, datosProducto) {
     //     "id": "inCategorias" + idModal,
     //     "placeholder" : datosProducto.categorias
     // });
-    let divCategoriasAdd = crearElemento("div",undefined, {"id" : "divCategoriasAdd"});
-    let labelCategorias = crearElemento("label","Categorias",{"for" : "btnCategoriasAdd"});
+    let divCategoriasAdd = crearElemento("div",undefined, {"id" : "divCategoriasAddModificar"});
+    let labelCategorias = crearElemento("label","Categorias",{"for" : "btnCategoriasAddModificar"});
     let botonCategorias = crearElemento("input",undefined, {
         "type": "button",
-        "id" : "btnCategoriasAdd",
+        "id" : "btnCategoriasAddModificar",
         "value" : "➕"
     });
     // al pulsar el boton mas, añadimos un select al contenedor divResiduosModificar
@@ -576,14 +576,15 @@ function modificarProducto(idDatos) {
     miPeticion.send(datos);
 }
 
-function addUsuario(nombreUsuario,cargoUsuario,emailUsuario,telefonoUsuario) {
+function addProducto(nombreProducto,unidades, residuos, categorias, foto, observaciones) {
+    // aqui estoy
     let miPeticion = new XMLHttpRequest();
 
-    miPeticion.open("POST", "../../PHP/gestionar_usuarios.php", true);
+    miPeticion.open("POST", "../../PHP/gestionar_productos.php", true);
 
     miPeticion.onreadystatechange = function() {
         if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-            // console.log(miPeticion.responseText);
+            console.log("hola",miPeticion.responseText);
             // callback(miPeticion.responseText);
             // dibujarModalesAdd();
             recuperarProductos();
@@ -591,19 +592,44 @@ function addUsuario(nombreUsuario,cargoUsuario,emailUsuario,telefonoUsuario) {
     };
 
     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    let datos = "addUsuario=" + "&nombre=" + nombreUsuario + "&cargo=" + cargoUsuario + "&email=" +emailUsuario + "&telefono=" + telefonoUsuario;
+
+    residuos = residuos.split(",");
+    residuosProducto = []
+    for(let i = 0; i < residuos.length;i++) {
+        residuosProducto.push(residuos[i]);
+    }
+
+    categorias = categorias.split(",");
+    categoriasProducto = []
+    for(let i = 0; i < categorias.length;i++) {
+        categoriasProducto.push(categorias[i]);
+    }
+
+    // creo mi json
+    let misDatos = {
+        "fotoProducto" : foto,
+        "nombreProducto" : nombreProducto,
+        "unidadesProducto"  : unidades,
+        "residuosProducto" : residuosProducto,
+        "categoriasProducto" : categoriasProducto,
+        "observacionesProducto" : observaciones
+    };
+    console.log(misDatos);
+    misDatos = JSON.stringify(misDatos);
+
+    let datos = "addProducto=" + misDatos; 
     miPeticion.send(datos);
 }
 
 function dibujarModalesAdd() {
     let misModales = document.getElementById("contenedorModalesAdd");
-    misModales.appendChild(dibujarModalAddUsuario());
-    misModales.appendChild(dibujarModalAddUsuarioSeguro());
+    misModales.appendChild(dibujarModalAddProducto());
+    misModales.appendChild(dibujarModalAddProductoSeguro());
     document.body.appendChild(misModales);
 }
 
-function dibujarModalAddUsuario() {
-    let miDiv = crearElemento("div", undefined, { "id": "modal-Add-Usuario", "class": "modal" });
+function dibujarModalAddProducto() {
+    let miDiv = crearElemento("div", undefined, { "id": "modal-Add-Producto", "class": "modal" });
     let modalDialog = crearElemento("div", undefined, { "class": "modal-dialog" });
     let modalContent = crearElemento("div", undefined, { "class": "modal-content" });
     // Contenido Header
@@ -618,46 +644,106 @@ function dibujarModalAddUsuario() {
     // Contenido Body
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     let modalBody = crearElemento("div", undefined, { "class": "modal-body" });
+    // esto es añadido a modificar
+    // ↓
 
-    // Entrada Cargo
-    let labelCargo = crearElemento("label", "Cargo", { "for": "inCargoAdd" });
-    let selectCargo = crearElemento("select", undefined, { "id": "inCargoAdd" });
-    let optionAdmin = crearElemento("option", "Admin");
-    let optionUsuario = crearElemento("option", "Usuario");
-    selectCargo.appendChild(optionAdmin);
-    selectCargo.appendChild(optionUsuario);
-    modalBody.appendChild(labelCargo);
-    modalBody.appendChild(selectCargo);
-
-    // Entrada Nombre
-    let labelNombreAdd = crearElemento("label", "Nombre", { "for": "inNombreAdd" });
-    let inputNombreAdd = crearElemento("input", undefined, {
-        "type": "text",
-        "id": "inNombreAdd",
-        "placeholder": "ej: Mi Nombre y apellidos"
+    // Entrada foto
+    let labelFoto = crearElemento("label","Foto",{"for":"inFotoAdd"});
+    let inputFoto = crearElemento("input",undefined,{
+        "type" : "file",
+        "id": "inFotoAdd",
+        "value": "Subir Foto"
     });
-    modalBody.appendChild(labelNombreAdd);
-    modalBody.appendChild(inputNombreAdd);
-
-    // Entrada Email
-    let labelEmailAdd = crearElemento("label", "Email", { "for": "inEmailAdd" });
-    let inputEmailAdd = crearElemento("input", undefined, {
-        "type": "text",
-        "id": "inEmailAdd",
-        "placeholder": "ej: micorreo@example.com"
+    modalBody.appendChild(labelFoto);
+    modalBody.appendChild(inputFoto);
+    // Entrada nombre
+    let labelNombre = crearElemento("label","Nombre",{"for":"inNombreAdd"});
+    let inputNombre = crearElemento("input",undefined,{
+        "type" : "text",
+        "id": "inNombreAdd"
     });
-    modalBody.appendChild(labelEmailAdd);
-    modalBody.appendChild(inputEmailAdd);
+    modalBody.appendChild(labelNombre);
+    modalBody.appendChild(inputNombre);
+    // Entrada Unidades
+    let labelUnidades = crearElemento("label","Unidades",{"for":"inUnidadesAdd"});
 
-    // Entrada Teléfono
-    let labelTelefonoAdd = crearElemento("label", "Telefono", { "for": "inTelefonoAdd" });
-    let inputTelefonoAdd = crearElemento("input", undefined, {
-        "type": "text",
-        "id": "inTelefonoAdd",
-        "placeholder": "ej: 644763523"
+    let misUnidadesSelect = crearElemento("select",undefined, {
+        "id" : "inUnidadesAdd"
+    })
+    obtenerUnidades(misUnidadesSelect,undefined,function(respuesta) {
+        respuesta = JSON.parse(respuesta);
+        // recorro el json
+        // console.log("puta",respuesta[i]);
+        // añado los option de residuos
+        for(let i = 0; i< respuesta.length; i++) {
+
+            let misUnidadesOption= crearElemento("option",respuesta[i].descripcion, {"value" : respuesta[i].id});
+            
+            misUnidadesSelect.appendChild(misUnidadesOption);
+        }
     });
-    modalBody.appendChild(labelTelefonoAdd);
-    modalBody.appendChild(inputTelefonoAdd);
+
+    modalBody.appendChild(labelUnidades);
+    // modalBody.appendChild(inputUnidades);
+    modalBody.appendChild(misUnidadesSelect);
+    // Entrada Residuos
+    let divResiduosAdd = crearElemento("div",undefined, {"id" : "divResiduosAdd"});
+    let labelResiduos = crearElemento("label","Residuos",{"for" : "btnResiduosAdd"});
+    let botonResiduos = crearElemento("input",undefined, {
+        "type": "button",
+        "id" : "btnResiduosAdd",
+        "value" : "➕"
+    });
+    // al pulsar el boton mas, añadimos un select al contenedor divResiduosModificar
+    botonResiduos.addEventListener("click", manejadorClickResiduosMas);
+    divResiduosAdd.appendChild(labelResiduos);
+    divResiduosAdd.appendChild(botonResiduos);
+
+    let divResiduos = crearElemento("div",undefined, {"id" : "divResiduosAddModificar"});
+    
+    modalBody.appendChild(divResiduosAdd);
+    modalBody.appendChild(divResiduos);
+
+
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    // Entrada Categorias
+    // let labelCategorias = crearElemento("label","Categorias",{"for":"inCategorias"});
+    // let inputCategorias = crearElemento("input",undefined,{
+    //     "type" : "text",
+    //     "id": "inCategorias" + idModal,
+    //     "placeholder" : datosProducto.categorias
+    // });
+    let divCategoriasAdd = crearElemento("div",undefined, {"id" : "divCategoriasAdd"});
+    let labelCategorias = crearElemento("label","Categorias",{"for" : "btnCategoriasAdd"});
+    let botonCategorias = crearElemento("input",undefined, {
+        "type": "button",
+        "id" : "btnCategoriasAdd",
+        "value" : "➕"
+    });
+    // al pulsar el boton mas, añadimos un select al contenedor divResiduosModificar
+    botonCategorias.addEventListener("click", manejadorClickCategoriasMas);
+    divCategoriasAdd.appendChild(labelCategorias);
+    divCategoriasAdd.appendChild(botonCategorias);
+
+    let divCategorias = crearElemento("div",undefined, {"id" : "divCategoriasAddModificar"});
+    // Muestro los residuos que tiene el producto
+    modalBody.appendChild(divCategoriasAdd);
+    modalBody.appendChild(divCategorias);
+    // modalBody.appendChild(labelCategorias);
+    // modalBody.appendChild(inputCategorias);
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+
+    // Entrada Observacion
+    let labelObservacion = crearElemento("label","Observaciones",{"for":"inObsevacionesAdd"});
+    let inputObservacion = crearElemento("input",undefined,{
+        "type" : "text",
+        "id": "inObservacionesAdd"
+    });
+    modalBody.appendChild(labelObservacion);
+    modalBody.appendChild(inputObservacion);
+
+    // ↑ 
 
     // Error
     let errorAdd = crearElemento("p", "", { "id": "errorAdd" });
@@ -666,10 +752,10 @@ function dibujarModalAddUsuario() {
     // Contenido Footer
     let modalFooter = crearElemento("div", undefined, { "class": "modal-footer" });
     // Botón Añadir Usuario
-    let btnAddUsuario = crearElemento("button", "Añadir Usuario", {
+    let btnAddUsuario = crearElemento("button", "Añadir Producto", {
         "type": "button",
         "class": "btn btn-primary",
-        "id": "btnAddUsuario"
+        "id": "btnAddProducto"
     });
     modalFooter.appendChild(btnAddUsuario);
     modalContent.appendChild(modalHeader);
@@ -681,7 +767,7 @@ function dibujarModalAddUsuario() {
     return miDiv;
 }    
 
-function dibujarModalAddUsuarioSeguro() {
+function dibujarModalAddProductoSeguro() {
     let miDiv = crearElemento("div", undefined, { "id": "modalAdd-seguro", "class": "modal" });
     let modalDialog = crearElemento("div", undefined, { "class": "modal-dialog" });
     let modalContent = crearElemento("div", undefined, { "class": "modal-content" });
@@ -703,13 +789,17 @@ function dibujarModalAddUsuarioSeguro() {
 
     // Detalles del Usuario
     let inNombreAddSeguro = crearElemento("p", "", { "id": "inNombreAdd-seguro" });
-    let inCargoAddSeguro = crearElemento("p", "", { "id": "inCargoAdd-seguro" });
-    let inEmailAddSeguro = crearElemento("p", "", { "id": "inEmailAdd-seguro" });
-    let inTelefonoAddSeguro = crearElemento("p", "", { "id": "inTelefonoAdd-seguro" });
+    let inFotoAddSeguro = crearElemento("p", "", { "id": "inFotoAdd-seguro" });
+    let inUnidadesAddSeguro = crearElemento("p", "", { "id": "inUnidadesAdd-seguro" });
+    let inResiduosAddSeguro = crearElemento("p", "", { "id": "inResiduosAdd-seguro" });
+    let inCategoriasAddSeguro = crearElemento("p", "", { "id": "inCategoriasAdd-seguro" });
+    let inObservacionesAddSeguro = crearElemento("p", "", { "id": "inObservacionesAdd-seguro" });
     modalBody.appendChild(inNombreAddSeguro);
-    modalBody.appendChild(inCargoAddSeguro);
-    modalBody.appendChild(inEmailAddSeguro);
-    modalBody.appendChild(inTelefonoAddSeguro);
+    modalBody.appendChild(inUnidadesAddSeguro);
+    modalBody.appendChild(inResiduosAddSeguro);
+    modalBody.appendChild(inCategoriasAddSeguro);
+    modalBody.appendChild(inFotoAddSeguro);
+    modalBody.appendChild(inObservacionesAddSeguro);
 
     // Contenido Footer
     let modalFooter = crearElemento("div", undefined, { "class": "modal-footer" });
@@ -819,24 +909,75 @@ function manejadorClickAdd(e) {
     console.log("añado usuario");
     
     // ↓↓↓↓↓↓↓↓↓↓↓
+ 
+
+    let foto = document.getElementById("inFotoAdd");    
     let nombre = document.getElementById("inNombreAdd");
-    
-    let cargo = document.getElementById("inCargoAdd");
+    let unidades = document.getElementById("inUnidadesAdd");    
+    let contenedorResiduos = document.getElementById("divResiduosAddModificar");    
+    let contenedorCategorias = document.getElementById("divCategoriasAddModificar");    
+    let observaciones = document.getElementById("inObservacionesAdd");    
+    let txt;
 
-    let email = document.getElementById("inEmailAdd");
 
-    let telefono = document.getElementById("inTelefonoAdd");
-    
+    // RESIDUOS
+    let residuosSeleccionados = contenedorResiduos.querySelectorAll('p select');
 
-    if(nombre.value && email.value && telefono.value && cargo.value) {
-    let modalAddUsuarioSeguro = new bootstrap.Modal("#modalAdd-seguro");
+    // CATEGORIA
+    let categoriasSeleccionados = contenedorCategorias.querySelectorAll('p select');
 
+
+
+    if(nombre.value && (residuosSeleccionados[0] !== undefined) && (categoriasSeleccionados[0] !== undefined)) {
+        let modalAddUsuarioSeguro = new bootstrap.Modal("#modalAdd-seguro");
+        // Nombre
         document.getElementById("inNombreAdd-seguro").innerHTML = "Nombre: " + nombre.value;
-        document.getElementById("inCargoAdd-seguro").innerHTML = "Cargo: " + cargo.value;
-
-        document.getElementById("inEmailAdd-seguro").innerHTML = "Email: " + email.value;
-
-        document.getElementById("inTelefonoAdd-seguro").innerHTML = "Telefono: " + telefono.value;
+        // Unidades
+        let unidadesNombre = unidades.options[unidades.selectedIndex].text;
+        document.getElementById("inUnidadesAdd-seguro").innerHTML = "Unidades: " + unidadesNombre;
+        // Residuos
+        for(let i = 0; i < residuosSeleccionados.length; i++) {
+            if(i === 0) {txt = ""}
+            // let residuoID = residuosSeleccionados[i].value;
+            let residuoNombre = residuosSeleccionados[i].options[residuosSeleccionados[i].selectedIndex].text;
+            // console.log("residuo id: ",residuoID);
+            console.log("residuo nombre: ",residuoNombre);
+            if(i === residuosSeleccionados.length - 1) {
+                txt += residuoNombre;
+            } else {
+                txt += residuoNombre + ",";
+            }
+        }
+    
+        document.getElementById("inResiduosAdd-seguro").innerHTML = "Residuos: " + txt;
+        // Categorias
+        for(let i = 0; i < categoriasSeleccionados.length; i++) {
+            if(i === 0) {txt = ""}
+            let categoriaNombre = categoriasSeleccionados[i].options[categoriasSeleccionados[i].selectedIndex].text;
+            if(i === categoriasSeleccionados.length - 1) {
+                txt += categoriaNombre;
+            } else {
+                txt += categoriaNombre + ",";
+            }
+        }
+    
+        document.getElementById("inCategoriasAdd-seguro").innerHTML = "Categorias: " + txt;
+        // Foto
+        // uso el txt que tiene el valor de categorias
+        if(foto.files[0]) {
+            txt = "Foto: " + foto.files[0].name;
+        } else {
+            txt = "Foto: " + txt.split(",")[0] + ".png";
+        }
+        document.getElementById("inFotoAdd-seguro").innerHTML = txt;
+        // Observaciones
+        if(observaciones.value) {
+            txt = "Observaciones: " + observaciones.value;
+        } else {
+            txt = "Observaciones: Sin observaciones";
+        }
+        document.getElementById("inObservacionesAdd-seguro").innerHTML = txt;
+        // Mostrar el modal
         modalAddUsuarioSeguro.show();
     } else {
 
@@ -847,7 +988,7 @@ function manejadorClickAdd(e) {
 }
 
 function cerrarModales() {
-    $('#modal-Add-Usuario').modal('hide');
+    $('#modal-Add-Producto').modal('hide');
     $('#modalAdd-seguro').modal('hide');
 }
 
@@ -855,16 +996,21 @@ function manejadorClickSiAdd(e) {
     console.log("si mi pana");
     cerrarModales();
     // Recupero los datos del nuevo usuario
-    let nombreUsuario = document.getElementById("inNombreAdd-seguro").innerHTML;
-    nombreUsuario = nombreUsuario.split(": ")[1].trim();
-    let cargoUsuario = document.getElementById("inCargoAdd-seguro").innerHTML;
-    cargoUsuario = cargoUsuario.split(": ")[1].trim();
-    let emailUsuario = document.getElementById("inEmailAdd-seguro").innerHTML;
-    emailUsuario = emailUsuario.split(": ")[1].trim();
-    let telefonoUsuario = document.getElementById("inTelefonoAdd-seguro").innerHTML;
-    telefonoUsuario = telefonoUsuario.split(": ")[1].trim();
-    addUsuario(nombreUsuario,cargoUsuario,emailUsuario,telefonoUsuario);
+    let nombreProducto = document.getElementById("inNombreAdd-seguro").innerHTML;
+    nombreProducto = nombreProducto.split(": ")[1].trim();
+    let unidades = document.getElementById("inUnidadesAdd-seguro").innerHTML;
+    unidades = unidades.split(": ")[1].trim();
+    let residuos = document.getElementById("inResiduosAdd-seguro").innerHTML;
+    residuos = residuos.split(": ")[1].trim();
+    let categorias = document.getElementById("inCategoriasAdd-seguro").innerHTML;
+    categorias = categorias.split(": ")[1].trim();
+    let foto = document.getElementById("inFotoAdd-seguro").innerHTML;
+    foto = foto.split(": ")[1].trim();
+    let observaciones = document.getElementById("inObservacionesAdd-seguro").innerHTML;
+    // Obtengo todo el texto que esta despues del primer ": " que es "Observaciones: "
+    observaciones = observaciones.split(": ").slice(1).join(': ').trim();
 
+    addProducto(nombreProducto,unidades, residuos, categorias, foto, observaciones);
 }
 
 function manejadorClickAddUsuario(e) {

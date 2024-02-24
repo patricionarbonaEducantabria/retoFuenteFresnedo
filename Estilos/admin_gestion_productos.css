@@ -64,7 +64,7 @@ ul li img {
     border: 1px solid #ccc;
 }
 
-#btnAddProducto,
+#btnMostrarAddProducto,
 #btnModificar {
     padding: 8px 20px;
     font-size: 16px;
@@ -75,7 +75,7 @@ ul li img {
     cursor: pointer;
 }
 
-#btnAddProducto:hover,
+#btnMostrarAddProducto:hover,
 #btnModificar:hover {
     background-color: #0056b3; /* Cambio de color al pasar el cursor */
 }
@@ -189,7 +189,7 @@ ul li img {
         margin-bottom: 10px;
     }
 
-    #btnAddProducto,
+    #btnMostrarAddProducto,
     #btnModificarDatos {
         width: 100%;
         margin-top: 10px;
