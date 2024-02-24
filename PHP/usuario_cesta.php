@@ -4,6 +4,10 @@
     {
         obtenerProductos();
     }
+    if(isset($_POST['crearPedido']))
+    {
+        crearPedido();
+    }
 
     // funcion para listar los productos 
     function obtenerProductos() {
@@ -58,5 +62,25 @@
         // Convertir el array $datos a formato JSON y enviarlo al cliente
         $jsonString = json_encode($datos);
         echo $jsonString;
+    }
+
+    function crearPedido() {
+        // Establecer conexión con la base de datos
+        $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+        
+        // Obtener el string JSON de productos enviado desde el cliente y convertirlo a un array PHP
+        $productosJSON = $_POST['crearPedido'];
+        $productos = json_decode($productosJSON, true);
+
+        // Mi Json en php
+        // {
+        //     "email":"patricio@example.com",
+        //     "productos":{
+        //         "6":{"id":6,"cantidad":"25"},
+        //         "9":{"id":9,"cantidad":"23"}
+        //     }
+        // }
+        echo json_encode($productos['email']);
+
     }
 ?>

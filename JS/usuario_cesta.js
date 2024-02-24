@@ -68,6 +68,11 @@ document.addEventListener("DOMContentLoaded", function() {
             window.location.href = "../usuario/usuario_pan.html";
         };
     }
+    // Boton Realizar Pedido de la cesta
+    if(document.getElementById("btnPedido") != undefined)
+    {
+        document.getElementById("btnPedido").onclick = manejadorClickRealizarPedido;
+    }
 
     // boton historial pedidos
     document.getElementById("btnHistorialPedidos").onclick = function() {
@@ -91,7 +96,7 @@ function crearElemento(etiqueta, texto, atributos) {
 }
 
 function dibujarProductos(datosProducto) {
-    let miFila = crearElemento("ul",undefined);
+    let miFila = crearElemento("ul",undefined, {"id" : datosProducto.id});
     let filita = crearElemento("li",undefined);
     let papelera = crearElemento("input",undefined,{"type":"button","value":"AQUI VA LA PAPELERA","id":"btnPapelera"});
     filita.appendChild(papelera);
@@ -177,14 +182,35 @@ function validarInputNumeros(elemento) {
         if(valor.length >= 2 && valor[0] === "0") {
             elemento.value = valor.slice(1);
         }
+        // Maximos decimales 3
+        if(valor.split(".")[1] && valor.split(".")[1].length > 3) {
+            elemento.value = valor.slice(0,-1);
+        }
     } else {
         elemento.value = 0;
     }
+}
 
-    // Maximos decimales 3
-    if(valor.split(".")[1].length > 3) {
-        elemento.value = valor.slice(0,-1);
+function crearPedido() {
+    // enviar a PHP
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.onreadystatechange = function () {
+        if(miPeticion.readyState == 4 && miPeticion.status == 200) {
+            console.log(miPeticion.responseText);
+        }   
     }
+
+    miPeticion.open("POST","../../PHP/usuario_cesta.php",true);
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    let productos = localStorage.getItem('productos');
+    
+    let misDatos = {
+        "email" : localStorage.getItem("email"),
+        "productos" : JSON.parse(productos),
+    };
+    misDatos = JSON.stringify(misDatos);
+    miPeticion.send("crearPedido=" + misDatos);
 }
 
 function manejadorInputCantidad() {
@@ -202,5 +228,38 @@ function manejadorClickRestar() {
         inputCantidad.value = cantidad - 1;
     }
 }
-function manejadorClickPapelera() {}
-function manejadorClickPagar() {}
+function manejadorClickPapelera() {
+    let ulProducto = this.parentElement.parentElement;
+    let idProducto = ulProducto.id;
+    let productosString = localStorage.getItem("productos");
+    let productosJSON = JSON.parse(productosString); 
+    
+
+    // Eliminar el producto
+    delete productosJSON[idProducto];
+
+    // Actualizar los productos
+    productosString = JSON.stringify(productosJSON);
+    localStorage.setItem("productos", productosString);
+    ulProducto.remove();
+}
+function manejadorClickRealizarPedido() {
+    let ulProductos = document.getElementById("contenedor-productos").querySelectorAll("ul");
+    let productosString = localStorage.getItem("productos");
+    let productosJSON = JSON.parse(productosString); 
+    for(let i = 0; i < ulProductos.length;i++) {
+        let producto = ulProductos[i];
+        let idProducto = producto.id;
+        let cantidadNueva = producto.querySelector("#cantidad_producto" + producto.id).value;
+        // en caso de que el usuario haya dejado el campo como 23.
+        if(cantidadNueva.substr(-1) === ".") {
+            cantidadNueva = cantidadNueva.slice(0,-1);
+        }
+
+        // actualizar el localStorage
+        productosJSON[idProducto].cantidad = cantidadNueva;
+        productosString = JSON.stringify(productosJSON);
+        localStorage.setItem("productos", productosString);
+    }
+    crearPedido();
+}
