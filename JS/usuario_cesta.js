@@ -103,22 +103,28 @@ function dibujarProductos(datosProducto) {
     miFila.appendChild(descripcion);
     let filita_1 = crearElemento("li",undefined);
     let boton_2 = crearElemento("input",undefined,{"type":"button","value":"-", "id":"btnRestar"});
-    let cantidad =  crearElemento("p",datosProducto.cantidad,{"id":"cantidad_producto"});
+    // cantidad tipo input para poder cambiar el valor a mano
+    let cantidad =  crearElemento("input",undefined,{
+        "type" : "text",
+        "id":"cantidad_producto" + datosProducto.id,
+        "placeholder" : datosProducto.cantidad,
+        "value" : datosProducto.cantidad
+    });
     let boton_3 = crearElemento("input",undefined,{"type":"button","value":"+", "id":"btnSumar"});
+    // eventos de botones e input
+    cantidad.addEventListener("input",manejadorInputCantidad);
+    papelera.addEventListener("click",manejadorClickPapelera);
+    boton_2.addEventListener("click",manejadorClickRestar);
+    boton_3.addEventListener("click",manejadorClickSumar);
     filita_1.appendChild(boton_2);
     filita_1.appendChild(cantidad);
     filita_1.appendChild(boton_3);
     miFila.appendChild(filita_1);
     let unidades = crearElemento("li",datosProducto.unidad, {"id":"unidad_producto"});  
-    miFila.appendChild(unidades);
-    if(datosProducto.observaciones == null) {
-        let observaciones = crearElemento("li","sin observaciones", {"id":"observaciones_producto"});    
-        miFila.appendChild(observaciones);
-    }
-    else {
-        let observaciones = crearElemento("li",datosProducto.observaciones, {"id":"observaciones_producto"});    
-        miFila.appendChild(observaciones);
-    }
+    miFila.appendChild(unidades);    
+    // todos los productos van a tener observaciones
+    let observaciones = crearElemento("li",datosProducto.observaciones, {"id":"observaciones_producto"});    
+    miFila.appendChild(observaciones);
     return miFila;
 }
 
@@ -157,3 +163,44 @@ function recuperarPedido(longitud)
         document.body.appendChild(miDiv);
     });
 }
+
+function validarInputNumeros(elemento) {
+    let regex = /^(\d+|\d*\.\d+)$/;
+    let valor = elemento.value;
+    console.log(valor);
+    if(regex.test(valor) || valor.substr(-1) === ".") {
+        // comprobar que no haya mas de 2 puntos
+        if((valor.match(/\./g) || []).length === 2) {
+            elemento.value = valor.slice(0,-1);
+        }
+        // comprobar que no tengamos valor similar a 02
+        if(valor.length >= 2 && valor[0] === "0") {
+            elemento.value = valor.slice(1);
+        }
+    } else {
+        elemento.value = 0;
+    }
+
+    // Maximos decimales 3
+    if(valor.split(".")[1].length > 3) {
+        elemento.value = valor.slice(0,-1);
+    }
+}
+
+function manejadorInputCantidad() {
+    validarInputNumeros(this);
+}
+function manejadorClickSumar() {
+    let inputCantidad = this.previousSibling;
+    let cantidad = inputCantidad.value;
+    inputCantidad.value = parseFloat(cantidad) + 1;
+}
+function manejadorClickRestar() {
+    let inputCantidad = this.nextSibling;
+    let cantidad = parseFloat(inputCantidad.value);
+    if(cantidad > 0) {
+        inputCantidad.value = cantidad - 1;
+    }
+}
+function manejadorClickPapelera() {}
+function manejadorClickPagar() {}

@@ -109,7 +109,8 @@ function dibujarProductos(datosProducto) {
     }
     // INPUT para introducir cantidad
     let filita_1 = crearElemento("li",undefined);
-    let caja_texto = crearElemento("input",undefined,{"type":"number","id":"cantidad_"+datosProducto.id,"step":"0.001", "min":"0"});
+    let caja_texto = crearElemento("input",undefined,{"type":"text","id":"cantidad_"+datosProducto.id,"step":"0.001", "min":"0"});
+    caja_texto.addEventListener("input",manejadorInputCantidad);
     filita_1.appendChild(caja_texto);
     miFila.appendChild(filita_1);
     // Boton Modificar Datos
@@ -123,6 +124,28 @@ function dibujarProductos(datosProducto) {
     filita_2.appendChild(parrafo);
     miFila.appendChild(filita_2);
     return miFila;
+}
+
+function validarInputNumeros(elemento) {
+    let regex = /^(\d+|\d*\.\d+)$/;
+    let valor = elemento.value;
+    console.log(valor);
+    if(regex.test(valor) || valor.substr(-1) === ".") {
+        // comprobar que no haya mas de 2 puntos
+        if((valor.match(/\./g) || []).length === 2) {
+            elemento.value = valor.slice(0,-1);
+        }
+        // comprobar que no tengamos valor similar a 02
+        if(valor.length >= 2 && valor[0] === "0") {
+            elemento.value = valor.slice(1);
+        }
+    } else {
+        elemento.value = 0;
+    }
+    // Maximos decimales 3
+    if(valor.split(".")[1].length > 3) {
+        elemento.value = valor.slice(0,-1);
+    }
 }
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -148,6 +171,9 @@ function manejadorClickAñadirProducto(idProducto)
             document.getElementById("errores_"+idProducto).innerHTML = "";
         }, 2000);
     }
+}
+function manejadorInputCantidad() {
+    validarInputNumeros(this);
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑ MANEJADORES ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
