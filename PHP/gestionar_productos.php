@@ -3,13 +3,16 @@ if(isset($_POST['obtenerProductos'])) {
     obtenerProductos();
 }
 if(isset($_POST['modificarProducto'])) {
-    // modificarProducto();
+    modificarProducto();
 }
 if(isset($_POST['addProducto'])) {
     addProducto();
 }
 if(isset($_POST['obtenerResiduos'])) {
     obtenerResiduos();
+}
+if(isset($_POST['obtenerCategorias'])) {
+    obtenerCategorias();
 }
 
 // Listar los usuarios
@@ -24,9 +27,9 @@ function obtenerProductos() {
     unidades.descripcion AS unidad_descripcion,
     productos.observaciones AS producto_observaciones,
     productos.foto AS producto_foto
-FROM productos
-INNER JOIN unidades ON productos.fk_unidades = unidades.id
-ORDER BY productos.id;
+    FROM productos
+    INNER JOIN unidades ON productos.fk_unidades = unidades.id
+    ORDER BY productos.id;
 
     ");
     $resultado -> execute();
@@ -86,6 +89,24 @@ ORDER BY productos.id;
 
 }
 
+function obtenerCategorias() {
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+
+    // Recupero la informacion del producto
+    $resultado = $conexion -> prepare("
+    SELECT * FROM categorias");
+    $resultado -> execute();
+     // Listo las categorias de ese producto y las almaceno en un array
+     $categorias = array();
+     while ($categoria = $resultado->fetch()) {
+        $categorias[] = array(
+            'id' => $categoria["id"],
+            'descripcion' => $categoria["descripcion"]
+        );
+    }
+    $jsonString = json_encode($categorias);
+    echo $jsonString;
+}
 function obtenerResiduos() {
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
 
@@ -108,13 +129,17 @@ function obtenerResiduos() {
 
 // Modificar Producto
 function modificarProducto(){
-    $productoID = $_POST['modificarDatos'];
-    $producto = $_POST['nombre'];
-    $foto = $_POST['foto'];
-    $unidadesID = $_POST['unidades'];
-    $observaciones = $_POST['observaciones'];
-    $residuosID = $_POST['residuos'];
-    $categoriaID = $_POST['categorias'];
+    $datosProducto = $_POST['modificarProducto'];
+    $datosProducto = json_decode($datosProducto,true);
+    $productoID = $datosProducto['idProducto'];
+    $foto = $datosProducto['fotoProducto'];
+    $producto = $datosProducto['nombreProducto'];
+    $unidadesNombre = $datosProducto['unidadesProducto'];
+    $residuos = $datosProducto['residuosProducto'];
+    $categorias = $datosProducto['categoriasProducto'];
+    $observaciones = $datosProducto['observacionesProducto'];
+    
+
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
     
     
@@ -122,26 +147,47 @@ function modificarProducto(){
     // va dentro de un while cuando se añada mas de un residuo(recibiremos un json)
     // lo que recibimos de los residuos es su id
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    // actualizo la tabla producto_residuos
+    // elimino todos los residuos asociados al producto
     $resultado = $conexion -> prepare("
-    UPDATE productos_residuos
-    SET fk_residuos = ?
-    WHERE id = ?;
+    DELETE FROM productos_residuos WHERE fk_producto = ?;
     ");
-    $resultado -> execute(array($residuosID, $productoID));
+    $resultado -> execute(array($productoID));
+    // añado los residuos del producto
+    foreach($residuos as $residuo) {
+        $resultado = $conexion -> prepare("
+        INSERT INTO productos_residuos (fk_producto, fk_residuos) 
+        VALUES (?, 
+                (SELECT id FROM residuos 
+                WHERE descripcion = ?)
+            );
+
+        ");
+        $resultado -> execute(array($productoID, $residuo));
+    }
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     // ACTUALIZAR PRODUCTOS_CATEGORIA
     // va dentro de un while cuando se añada mas de una categoria(recibiremos un json)
     // lo que recibimos de las categorias es su id
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    // actualizo la tabla producto_categoria
-    $resultado = $conexion -> prepare("
-        UPDATE productos_categoria
-        SET fk_categoria = ?
-        WHERE id = ?;
+    // Eliminar todas las categorías asociadas al producto
+    $resultado = $conexion->prepare("
+    DELETE FROM productos_categoria WHERE fk_producto = ?;
     ");
-    $resultado -> execute(array($categoriaID, $productoID));
+    $resultado->execute(array($productoID));
+
+    // Añadir nuevas categorías asociadas al producto
+    foreach ($categorias as $categoria) {
+        $resultado = $conexion->prepare("
+            INSERT INTO productos_categoria (fk_producto, fk_categoria) 
+            VALUES (?, 
+                    (SELECT id FROM categorias 
+                    WHERE descripcion = ?)
+            );
+        ");
+        $resultado->execute(array($productoID, $categoria));
+    }
+
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
@@ -150,15 +196,16 @@ function modificarProducto(){
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     // actualizo la tabla producto_categoria
     $resultado = $conexion -> prepare("
-        UPDATE productos
-        SET descripcion = ?, 
-        fk_unidades = ?,
-        observaciones = ?,
-        foto = ?
-        WHERE id = ?;
-    
+    UPDATE productos
+    SET descripcion = ?, 
+    fk_unidades = (
+            SELECT id FROM unidades WHERE descripcion = ?
+          ),
+    observaciones = ?,
+    foto = ?
+    WHERE id = ?;
     ");
-    $resultado -> execute(array($producto, $unidadesID, $observaciones, $foto, $productoID));
+    $resultado -> execute(array($producto, $unidadesNombre, $observaciones, $foto, $productoID));
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 }
 

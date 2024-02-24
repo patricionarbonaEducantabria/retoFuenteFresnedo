@@ -111,6 +111,10 @@ function dibujarProducto(datosProducto) {
     misCategorias.appendChild(misCategoriasSelect);
     miFila.appendChild(misCategorias);
 
+    let miObservacion = crearElemento("li",datosProducto.observaciones);
+    miFila.appendChild(miObservacion);
+    
+
     // Boton Modificar Datos
     let filita = crearElemento("li",undefined);
     let idMagico = datosProducto.id;
@@ -123,11 +127,11 @@ function dibujarProducto(datosProducto) {
     });
     // Añado el modal al boton modificar
     let miModal = dibujarModal(idMagico,datosProducto);
-    // let miModalSeguro = dibujarModalSeguro(idMagico);
+    let miModalSeguro = dibujarModalSeguro(idMagico);
     filita.appendChild(boton);
     miFila.appendChild(filita);  
     miFila.appendChild(miModal);
-    // miFila.appendChild(miModalSeguro);
+    miFila.appendChild(miModalSeguro);
     return miFila;
 }
 
@@ -187,7 +191,6 @@ function dibujarModal(idModal, datosProducto) {
     modalBody.appendChild(labelUnidades);
     modalBody.appendChild(inputUnidades);
     // Entrada Residuos
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
     let divResiduosAdd = crearElemento("div",undefined, {"id" : "divResiduosAdd"});
     let labelResiduos = crearElemento("label","Residuos",{"for" : "btnResiduosAdd"});
     let botonResiduos = crearElemento("input",undefined, {
@@ -220,33 +223,67 @@ function dibujarModal(idModal, datosProducto) {
             divResiduos.appendChild(misResiduosP);
         }
     }
-    // let misResiduosSelect = crearElemento("select",undefined);
-    // let misResiduosOption;    
-    // // recorro los residuos
-    // if(datosProducto.residuos.length !== 0) {
-    //     for(let i=0; i<datosProducto.residuos.length;i++) {
-    //         misResiduosOption= crearElemento("option",datosProducto.residuos[i]);
-    //         misResiduosSelect.appendChild(misResiduosOption);
-    //     }
-    // } else {
-    //     misResiduosOption = crearElemento("option","No produce residuos");
-    //     misResiduosSelect.appendChild(misResiduosOption);
-    // }
-    // misResiduos.appendChild(misResiduosSelect);
     modalBody.appendChild(divResiduosAdd);
     modalBody.appendChild(divResiduos);
+
+
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    // Entrada Categorias
+    // let labelCategorias = crearElemento("label","Categorias",{"for":"inCategorias"});
+    // let inputCategorias = crearElemento("input",undefined,{
+    //     "type" : "text",
+    //     "id": "inCategorias" + idModal,
+    //     "placeholder" : datosProducto.categorias
+    // });
+    let divCategoriasAdd = crearElemento("div",undefined, {"id" : "divCategoriasAdd"});
+    let labelCategorias = crearElemento("label","Categorias",{"for" : "btnCategoriasAdd"});
+    let botonCategorias = crearElemento("input",undefined, {
+        "type": "button",
+        "id" : "btnCategoriasAdd",
+        "value" : "➕"
+    });
+    // al pulsar el boton mas, añadimos un select al contenedor divResiduosModificar
+    botonCategorias.addEventListener("click", manejadorClickCategoriasMas);
+    divCategoriasAdd.appendChild(labelCategorias);
+    divCategoriasAdd.appendChild(botonCategorias);
+
+    let divCategorias = crearElemento("div",undefined, {"id" : "divCategoriasModificar"});
+    // Muestro los residuos que tiene el producto
+    if(datosProducto.categorias.length !== 0) {
+        for(let i=0; i<datosProducto.residuos.length;i++) {
+            let misCategoriasP = crearElemento("p",undefined);
+            let misCategoriasSelect= crearElemento("select", undefined);
+            let misCategoriasOption= crearElemento("option",datosProducto.categorias[i]);
+            let misCategoriasMenos = crearElemento("input",undefined, {
+                "type": "button",
+                "class" : "btnCategorias",
+                "value" : "➖"
+            });
+
+            misCategoriasMenos.addEventListener("click",manejadorClickCategoriasMenos);
+            misCategoriasSelect.appendChild(misCategoriasOption);
+            misCategoriasP.appendChild(misCategoriasSelect);
+            misCategoriasP.appendChild(misCategoriasMenos);
+            divCategorias.appendChild(misCategoriasP);
+        }
+    }
+    modalBody.appendChild(divCategoriasAdd);
+    modalBody.appendChild(divCategorias);
+    // modalBody.appendChild(labelCategorias);
+    // modalBody.appendChild(inputCategorias);
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
 
 
-    // Entrada Categorias
-    let labelCategorias = crearElemento("label","Categorias",{"for":"inCategorias"});
-    let inputCategorias = crearElemento("input",undefined,{
+    // Entrada Observacion
+    let labelObservacion = crearElemento("label","Observaciones",{"for":"inObsevaciones"});
+    let inputObservacion = crearElemento("input",undefined,{
         "type" : "text",
-        "id": "inCategorias" + idModal,
-        "placeholder" : datosProducto.categorias
+        "id": "inObservaciones" + idModal,
+        "placeholder" : datosProducto.observaciones
     });
-    modalBody.appendChild(labelCategorias);
-    modalBody.appendChild(inputCategorias);
+    modalBody.appendChild(labelObservacion);
+    modalBody.appendChild(inputObservacion);
+
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     // Contenido footer
     let modalFooter = crearElemento("div",undefined, {"class": "modal-footer"});
@@ -266,9 +303,6 @@ function dibujarModal(idModal, datosProducto) {
     modalContent.appendChild(modalFooter);
     modalDialog.appendChild(modalContent);
     miDiv.appendChild(modalDialog);
-
-    //añado modal estas seguro 
-    // miDiv.appendChild(dibujarModalSeguro(idModal));
 
     return miDiv;
 }
@@ -295,12 +329,14 @@ function dibujarModalSeguro(idModalSeguro) {
     let misUnidades = crearElemento("p",undefined,{"id" : "inUnidades" + idModalSeguro + "-seguro"});
     let misResiduos = crearElemento("p",undefined,{"id" : "inResiduos" + idModalSeguro + "-seguro"});
     let misCategorias = crearElemento("p",undefined,{"id" : "inCategorias" + idModalSeguro + "-seguro"});
+    let misObservaciones = crearElemento("p",undefined,{"id" : "inObservaciones" + idModalSeguro + "-seguro"});
     modalBody.appendChild(miPregunta);
     modalBody.appendChild(miFoto);
     modalBody.appendChild(miNombre);
     modalBody.appendChild(misUnidades);
     modalBody.appendChild(misResiduos);
     modalBody.appendChild(misCategorias);
+    modalBody.appendChild(misObservaciones);
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
     // Contenido footer
     let modalFooter = crearElemento("div",undefined, {"class": "modal-footer"});
@@ -349,11 +385,13 @@ function recuperarProductos(longitud) {
         let miUnidadCabecera = crearElemento("li","Unidad de medida"); 
         let miResiduoCabecera = crearElemento("li","Residuos generados"); 
         let miCategoriaCabecera = crearElemento("li","Categorias");
+        let miObservacionCabecera = crearElemento("li","Observaciones");
         miCabecera.appendChild(miFotoCabecera); 
         miCabecera.appendChild(miProductoCabecera); 
         miCabecera.appendChild(miUnidadCabecera); 
         miCabecera.appendChild(miResiduoCabecera); 
         miCabecera.appendChild(miCategoriaCabecera); 
+        miCabecera.appendChild(miObservacionCabecera); 
         miDiv.appendChild(miCabecera);
         for(let i = 0; i< respuesta.length; i++) {
             miDiv.appendChild(dibujarProducto(respuesta[i]));
@@ -398,7 +436,24 @@ function obtenerResiduos(miContenedorResiduos, callback) {
   let datos = "obtenerResiduos=";
   miPeticion.send(datos);
 }
+function obtenerCategorias(miContenedorCategorias, callback) {
+    let miPeticion = new XMLHttpRequest();
 
+    miPeticion.open("POST", "../../PHP/gestionar_productos.php", true);
+
+  miPeticion.onreadystatechange = function() {
+    if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+        // console.log(miPeticion.responseText);
+        // console.log(miContenedorResiduos);
+        callback(miPeticion.responseText);
+    }
+  };
+
+  miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  let datos = "obtenerCategorias=";
+  miPeticion.send(datos);
+}
 function modificarProducto(idDatos) {
     idDatos = idDatos.split("btnSi")[1];
     let fotoProducto = document.getElementById("inFoto" + idDatos + "-seguro").innerHTML;
@@ -408,32 +463,69 @@ function modificarProducto(idDatos) {
     let nombreProducto = document.getElementById("inNombre" + idDatos + "-seguro").innerHTML;
     // divido el contenido desde ": "
     nombreProducto = nombreProducto.split(": ")[1].trim();
+    let observacionesProducto = document.getElementById("inObservaciones" + idDatos + "-seguro").innerHTML;
+    // divido el contenido desde ": "
+    observacionesProducto = observacionesProducto.split(": ")[1].trim();
 
     let unidadesProducto = document.getElementById("inUnidades" + idDatos + "-seguro").innerHTML;
     unidadesProducto = unidadesProducto.split(": ")[1].trim();
 
     let residuosProducto = document.getElementById("inResiduos" + idDatos + "-seguro").innerHTML;
     residuosProducto = residuosProducto.split(": ")[1].trim();
+    // obtengo los residuos
+    residuosProducto = residuosProducto.split(",");
+    console.log(residuosProducto);
+    // recorro los residuos y los guardo en un array
+    let residuos = [];
+    for(let i = 0; i < residuosProducto.length; i++) {
+        residuos.push(residuosProducto[i].trim());
+    }
+    console.log("residuos array: ", residuos);
+
+    // let categoriasProducto = document.getElementById("inCategorias" + idDatos + "-seguro").innerHTML;
+    // categoriasProducto = categoriasProducto.split(": ")[1].trim();
 
     let categoriasProducto = document.getElementById("inCategorias" + idDatos + "-seguro").innerHTML;
     categoriasProducto = categoriasProducto.split(": ")[1].trim();
+    // obtengo los residuos
+    categoriasProducto = categoriasProducto.split(",");
+    console.log(categoriasProducto);
+    // recorro los residuos y los guardo en un array
+    let categorias = [];
+    for(let i = 0; i < categoriasProducto.length; i++) {
+        categorias.push(categoriasProducto[i].trim());
+    }
+    console.log("categorias array: ", categorias);
 
+
+    // creo un JSON para mandar la informacion a la BD
+    let misDatos = {
+        "idProducto" : idDatos,
+        "fotoProducto" : fotoProducto,
+        "nombreProducto" : nombreProducto,
+        "unidadesProducto"  : unidadesProducto,
+        "residuosProducto" : residuos,
+        "categoriasProducto" : categorias,
+        "observacionesProducto" : observacionesProducto
+    };
+    console.log("json enviado: " ,misDatos);
+    misDatos = JSON.stringify(misDatos);
 
     // COMIENZO A MODIFICAR LA BD
     let miPeticion = new XMLHttpRequest();
 
-    miPeticion.open("POST", "../../PHP/gestionar_usuarios.php", true);
+    miPeticion.open("POST", "../../PHP/gestionar_productos.php", true);
 
     miPeticion.onreadystatechange = function() {
         if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-            // console.log(miPeticion.responseText);
+            console.log(miPeticion.responseText);
             // callback(miPeticion.responseText);
             recuperarProductos();
         }
     };
 
     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    let datos = "modificarDatos=" + idDatos + "&nombre=" + nombreProducto + "&foto=" +fotoProducto + "&unidades=" + unidadesProducto + "&residuos=" + residuosProducto + "&categorias=" + categoriasProducto;
+    let datos = "modificarProducto=" + misDatos;
     miPeticion.send(datos);
 }
 
@@ -641,6 +733,41 @@ function manejadorClickResiduosMas(e) {
 
     
 }
+function manejadorClickCategoriasMenos(e) {
+    // console.log(this.parentElement);
+    // console.log("menos");
+    this.parentElement.remove();
+}
+function manejadorClickCategoriasMas(e) {
+    console.log(this.parentElement.nextSibling);
+    console.log("mas");
+    let miContenedorCategorias = this.parentElement.nextSibling;
+
+    obtenerCategorias(miContenedorCategorias,function(respuesta) {
+        respuesta = JSON.parse(respuesta);
+        // recorro el json
+        let misCategoriasP = crearElemento("p",undefined);
+        let misCategoriasSelect= crearElemento("select", undefined);
+        let misCategoriasMenos = crearElemento("input",undefined, {
+            "type": "button",
+            "class" : "btnCategorias",
+            "value" : "➖"
+        });
+        // añado los option de Categorias
+        for(let i = 0; i< respuesta.length; i++) {
+            // console.log("puta",respuesta[i]);
+            let misCategoriasOption= crearElemento("option",respuesta[i].descripcion, {"value" : respuesta[i].id});
+
+            misCategoriasSelect.appendChild(misCategoriasOption);
+        }
+            misCategoriasMenos.addEventListener("click",manejadorClickCategoriasMenos);
+            misCategoriasP.appendChild(misCategoriasSelect);
+            misCategoriasP.appendChild(misCategoriasMenos);
+            miContenedorCategorias.appendChild(misCategoriasP);
+    });
+
+    
+}
 function manejadorClickAdd(e) {
     console.log("añado usuario");
     
@@ -735,21 +862,74 @@ function manejadorClickModificar(e) {
     }
     document.getElementById("inUnidades" + this.id + "-seguro").innerHTML = txt;
 
-    let residuos = document.getElementById("inResiduos" + this.id);
-    if(residuos.value) {
-        txt = "Residuos: " + residuos.value;
-    } else {
-        txt = "Residuos: " + residuos.placeholder;
-    }
-    document.getElementById("inResiduos" + this.id + "-seguro").innerHTML = txt;
 
-    let categorias = document.getElementById("inCategorias" + this.id);
-    if(residuos.value) {
-        txt = "Categorias: " + residuos.value;
-    } else {
-        txt = "Categorias: " + residuos.placeholder;
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    let residuos = document.getElementById("inResiduos" + this.id);
+
+    let padre = this.parentElement.previousElementSibling;
+    console.log(padre);
+    let contenedorResiduos = padre.querySelector('#divResiduosModificar'); 
+    console.log(contenedorResiduos);
+    let residuosSeleccionados = contenedorResiduos.querySelectorAll('p select');
+    console.log("Todos los p: ", residuosSeleccionados[1]);
+    // console.log("residuo id: ", residuosSeleccionados[1].value);
+    // console.log("residuo nombre: ", residuosSeleccionados[1].options[residuosSeleccionados[1].selectedIndex].text);
+
+    // Recorro los residuos seleccionados
+    for(let i = 0; i < residuosSeleccionados.length; i++) {
+        if(i === 0) {txt = ""}
+        // let residuoID = residuosSeleccionados[i].value;
+        let residuoNombre = residuosSeleccionados[i].options[residuosSeleccionados[i].selectedIndex].text;
+        // console.log("residuo id: ",residuoID);
+        console.log("residuo nombre: ",residuoNombre);
+        if(i === residuosSeleccionados.length - 1) {
+            txt += residuoNombre;
+        } else {
+            txt += residuoNombre + ",";
+        }
     }
-    document.getElementById("inCategorias" + this.id + "-seguro").innerHTML = txt;
+
+    document.getElementById("inResiduos" + this.id + "-seguro").innerHTML = "Residuos: " + txt;
+
+    // CATEGORIAS
+    let categorias = document.getElementById("inCategorias" + this.id);
+    padre = this.parentElement.previousElementSibling;
+    console.log(padre);
+    let contenedorCategorias = padre.querySelector('#divCategoriasModificar'); 
+    console.log(contenedorCategorias);
+    let categoriasSeleccionados = contenedorCategorias.querySelectorAll('p select');
+    console.log("Todos los p: ", categoriasSeleccionados[1]);
+    // console.log("residuo id: ", residuosSeleccionados[1].value);
+    // console.log("residuo nombre: ", residuosSeleccionados[1].options[residuosSeleccionados[1].selectedIndex].text);
+
+    // Recorro los residuos seleccionados
+    for(let i = 0; i < categoriasSeleccionados.length; i++) {
+        if(i === 0) {txt = ""}
+        // let residuoID = residuosSeleccionados[i].value;
+        let categoriaNombre = categoriasSeleccionados[i].options[categoriasSeleccionados[i].selectedIndex].text;
+        // console.log("residuo id: ",residuoID);
+        console.log("residuo nombre: ",categoriaNombre);
+        if(i === categoriasSeleccionados.length - 1) {
+            txt += categoriaNombre;
+        } else {
+            txt += categoriaNombre + ",";
+        }
+    }
+
+    document.getElementById("inCategorias" + this.id + "-seguro").innerHTML = "Categorias: " + txt;
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+    // OBSERVACIONES
+    let observaciones = document.getElementById("inObservaciones" + this.id);
+    if(observaciones.value) {
+        txt = "Observaciones: " + observaciones.value;
+    } else {
+        txt = "Observaciones: " + observaciones.placeholder;
+    }
+    document.getElementById("inObservaciones" + this.id + "-seguro").innerHTML = txt;
+
     // ↑↑↑↑↑↑↑↑↑↑↑↑
 }
 function manejadorClickHabilitar(e) {
