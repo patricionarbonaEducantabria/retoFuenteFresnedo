@@ -379,7 +379,9 @@ function recuperarProductos(longitud) {
         // recorro el json
         let miDiv = document.getElementById("contenedor-productos");
         //Este es la cabecera de las listas generadas
-        let miCabecera = crearElemento("ul",undefined);
+        let miCabecera = crearElemento("ul",undefined,{
+            "id":"cabecera"
+        });
         let miFotoCabecera = crearElemento("li","Foto"); 
         let miProductoCabecera = crearElemento("li","Producto"); 
         let miUnidadCabecera = crearElemento("li","Unidad de medida"); 

@@ -1,7 +1,8 @@
 window.onload = principal;
 
-function principal() {
-
+function principal() 
+{
+    recuperarPedido();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -73,3 +74,86 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = "../usuario/usuario_HistorialPedidos.html";
     };
 });
+
+
+function crearElemento(etiqueta, texto, atributos) {
+    let elementoNuevo = document.createElement(etiqueta);
+    if(texto !== undefined) {
+        let contenido = document.createTextNode(texto);
+        elementoNuevo.appendChild(contenido);
+    }
+    if(atributos !== undefined) {
+        for(let clave in atributos) {
+            elementoNuevo.setAttribute(clave, atributos[clave]);
+        }
+    }
+    return elementoNuevo;
+}
+
+function dibujarProductos(datosProducto) {
+    let miFila = crearElemento("ul",undefined);
+    let filita = crearElemento("li",undefined);
+    let papelera = crearElemento("input",undefined,{"type":"button","value":"AQUI VA LA PAPELERA","id":"btnPapelera"});
+    filita.appendChild(papelera);
+    miFila.appendChild(filita);
+    let foto = crearElemento("li",undefined);    
+    foto.appendChild(crearElemento("img",undefined,{"src" : datosProducto.foto, "id":"foto_producto"}));   
+    miFila.appendChild(foto);
+    let descripcion = crearElemento("li",datosProducto.nombre, {"id":"nombre_producto"});
+    miFila.appendChild(descripcion);
+    let filita_1 = crearElemento("li",undefined);
+    let boton_2 = crearElemento("input",undefined,{"type":"button","value":"-", "id":"btnRestar"});
+    let cantidad =  crearElemento("p",datosProducto.cantidad,{"id":"cantidad_producto"});
+    let boton_3 = crearElemento("input",undefined,{"type":"button","value":"+", "id":"btnSumar"});
+    filita_1.appendChild(boton_2);
+    filita_1.appendChild(cantidad);
+    filita_1.appendChild(boton_3);
+    miFila.appendChild(filita_1);
+    let unidades = crearElemento("li",datosProducto.unidad, {"id":"unidad_producto"});  
+    miFila.appendChild(unidades);
+    if(datosProducto.observaciones == null) {
+        let observaciones = crearElemento("li","sin observaciones", {"id":"observaciones_producto"});    
+        miFila.appendChild(observaciones);
+    }
+    else {
+        let observaciones = crearElemento("li",datosProducto.observaciones, {"id":"observaciones_producto"});    
+        miFila.appendChild(observaciones);
+    }
+    return miFila;
+}
+
+function enviarProductos(callback)
+{
+    // enviar a PHP
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.onreadystatechange = function () {
+        if(miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            callback(miPeticion.responseText);
+        }   
+    }
+
+    miPeticion.open("POST","../../PHP/usuario_cesta.php",true);
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    let productos = localStorage.getItem('productos');
+    miPeticion.send("productos=" + productos);
+}
+
+function recuperarPedido(longitud)
+{
+    let miDiv = document.getElementById("contenedor-productos");
+    // vaciamos el div
+    // miDiv.innerHTML = "";
+
+    enviarProductos(function(respuesta) {
+        respuesta = JSON.parse(respuesta);
+        // recorro el JSON
+        // let miDiv = document.getElementById("contenedor-productos");
+        for(let i = 0; i<respuesta.length; i++)
+        {
+            miDiv.appendChild(dibujarProductos(respuesta[i]));
+        }
+        document.body.appendChild(miDiv);
+    });
+}

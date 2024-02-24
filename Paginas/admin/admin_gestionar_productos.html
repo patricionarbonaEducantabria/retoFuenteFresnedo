@@ -13,9 +13,9 @@
 </head>
 <body>
     <header>
-        <div id="contenedor-buscador">
-            <input type="button" value="Buscar" id="btnBuscar">
+        <div id="contenedor-buscar">
             <input type="text" id="inBuscador" placeholder="ej: pimiento">
+            <button id="btnBuscar">Buscar</button>
         </div>
         <input type="button" id="btnAddProducto" value="Añadir Producto">
     </header>
@@ -25,6 +25,21 @@
         <!-- Modal de añadir usuario -->
         
         <div id="contenedor-productos">
+            <ul id="cabecera">
+                <li>Foto</li>
+                <li>Producto</li>
+                <li>Unidad de medida</li>
+                <li>Residuos generados</li>
+                <li>Categorías</li>
+                <li></li> <!-- Espacio adicional si es necesario -->
+            </ul>
+            <ul id="1">
+                <li>Foto</li>
+                <li>Producto</li>
+                <li>Unidad de medida</li>
+                <li>Residuos generados</li>
+                <li>Categorías</li>
+            </ul>
     </div>
 
     <button onclick="scrollToTop()" id="btnScrollToTop" title="Ir arriba">Δ</button>
