@@ -6,6 +6,10 @@ if(isset($_POST['obtenerUsuario'])) {
     // echo "conectado";
     obtenerUsuario();
 }
+if(isset($_POST['actualizarSolicitud'])) {
+    // echo "conectado";
+    actualizarSolicitud();
+}
 
 function obtenerPedidos() {
     $fechas = $_POST['obtenerPedidos'];
@@ -41,6 +45,7 @@ function obtenerPedidos() {
     $jsonString = json_encode($pedidos);
     echo $jsonString;
 }
+
 function obtenerUsuario() {
     $idUsuario = $_POST['obtenerUsuario'];
 
@@ -68,5 +73,33 @@ function obtenerUsuario() {
 
     $jsonString = json_encode($usuario);
     echo $jsonString;
+}
+
+function actualizarSolicitud() {
+    $datosPedido = $_POST['actualizarSolicitud'];
+$datosPedido = json_decode($datosPedido);
+$fecha = $datosPedido->fecha;
+$producto = $datosPedido->producto;
+$email = $datosPedido->emailUsuario;
+$cantidad = $datosPedido->cantidad;
+
+try {
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $resultado = $conexion->prepare("
+        UPDATE solicitudes
+        SET cantidad = ?
+        WHERE fecha = ? AND descripcion = ? AND fk_usuario = (SELECT id FROM usuarios WHERE email = ?);
+    ");
+
+    $resultado->execute(array($cantidad, $fecha, $producto, $email));
+
+    // Manejo del resultado o respuesta al cliente si es necesario
+    echo "1";
+} catch (PDOException $e) {
+    // Manejo de errores
+    echo "0";
+}
 }
 ?>

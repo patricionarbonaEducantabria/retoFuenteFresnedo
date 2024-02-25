@@ -8,6 +8,9 @@ function principal()
     let desde = document.getElementById("inFecha_desde").value;
     let hasta = document.getElementById("inFecha_hasta").value;
     recuperarPedidos(desde,hasta);
+
+    botonBuscar = document.getElementById("btnBuscar");
+    botonBuscar.addEventListener("click",manejadorClickBuscar);
 }
 
 function fechasDefecto() {
@@ -63,7 +66,7 @@ function obtenerPedidos(desde,hasta) {
 
     miPeticion.onreadystatechange = function() {
         if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-            console.log(JSON.parse(miPeticion.responseText));
+            console.log("Respuesta Server: ",JSON.parse(miPeticion.responseText));
             dibujarPedidos(JSON.parse(miPeticion.responseText));
             // callback(miPeticion.responseText);
         }
@@ -94,14 +97,13 @@ function dibujarPedidoEnLista(jsonPedidos) {
     divPedidosLista.innerHTML = "";
     // Crear un json de cada pedido por su producto
     let jsonProductos = {};
-    
+    console.log("Pedidos: ",jsonPedidos);
     for(let i = 0; i< jsonPedidos.length; i++) {
-        console.log(jsonPedidos[i].producto);
+        // console.log(jsonPedidos[i].producto);
         if(jsonProductos.hasOwnProperty(jsonPedidos[i].producto)) {
             
             jsonProductos[jsonPedidos[i].producto].cantidadProducto += jsonPedidos[i].cantidad;
             jsonProductos[jsonPedidos[i].producto].solicitudes.push(jsonPedidos[i]) ;
-            console.log("c d:", jsonProductos[jsonPedidos[i].producto].cantidad);
 
 
             // Ajustar el rango de fecha
@@ -131,11 +133,11 @@ function dibujarPedidoEnLista(jsonPedidos) {
             jsonProductos[jsonPedidos[i].producto] = producto;
         }
     }
-    console.log(jsonProductos);
+    console.log("Pedidos unidos: ",jsonProductos);
+
 
     // Iterar en el JSON
     Object.values(jsonProductos).forEach(function (jsonPedido) {
-        console.log("que", jsonPedido);
         let pedidoUl = crearElemento("ul", undefined, { "id": "pedido" + jsonPedido.nombreProducto });
         // Estado Pedido
         let estado;
@@ -169,10 +171,8 @@ function dibujarPedidoEnLista(jsonPedidos) {
         for(let i = 0; i < jsonPedido.solicitudes.length; i++) {
             let ulUsuario = crearElemento("ul",undefined);
             let solicitud = jsonPedido.solicitudes[i];
-            console.log("solicitudes:",solicitud);
             obtenerUsuario(solicitud.idUsuario, function(respuesta) {
                 let usuario = JSON.parse(respuesta);
-                console.log(usuario);
                 let usuarioPedido = crearElemento("li","Usuario: " + usuario.email);
                 let fechaPedido = crearElemento("li","Fecha pedido: " +  solicitud.fecha);
                 let productoPedido = crearElemento("li","Producto pedido: " +  solicitud.producto);
@@ -197,10 +197,41 @@ function dibujarPedidoEnLista(jsonPedidos) {
 
                 // Modal de modificar
                 let elementosCuerpoModificar = crearElemento("div",undefined,{"id": "contenedorModificarModal" + idModificar});
-                aqui estoy
+                let usuarioModificar = crearElemento("p", "Usuario: " + usuario.email);
+                let fechaModificar = crearElemento("p", "Fecha: " + solicitud.fecha);
+                let productoModificar = crearElemento("p", "Producto: " + solicitud.producto);
+                let labelCantidadModificar = crearElemento("label","Cantidad: ",{"for":"inCantidadModificar"});
+                let cantidadModificar = crearElemento("input", undefined, {
+                    "type" : "text",
+                    "id":"inCantidadModificar" ,
+                    "placeholder" : solicitud.cantidad,
+                    "value" : solicitud.cantidad
+                });
+                cantidadModificar.addEventListener("input",manejadorInputCantidad);
+                let labelUnidadesModificar = crearElemento("label", solicitud.unidades,{"for":"inCantidadModificar"});
+                let observacionesModificar = crearElemento("p", "Observaciones: " + solicitud.observaciones);
+                let estado = solicitud.tramitado;
+                estado === "1" ? estado = "Tramitado" : estado = "En tramite";
+                let estadoModificar = crearElemento("p", "Estado: " + estado);
+
+                elementosCuerpoModificar.appendChild(usuarioModificar);
+                elementosCuerpoModificar.appendChild(fechaModificar);
+                elementosCuerpoModificar.appendChild(productoModificar);
+                elementosCuerpoModificar.appendChild(labelCantidadModificar);
+                elementosCuerpoModificar.appendChild(cantidadModificar);
+                elementosCuerpoModificar.appendChild(labelUnidadesModificar);
+                elementosCuerpoModificar.appendChild(observacionesModificar);
+                elementosCuerpoModificar.appendChild(estadoModificar);
+
+                let confirmarModificar = crearElemento("button","Confirmar", {
+                    "class" : "btnConfirmar btn btn-primary",
+                    "id" : "btnConfirmar"
+                });
+                confirmarModificar.addEventListener("click", manejadorClickConfirmar);
+
                 let miModalModificarPedido = dibujarModal(
                     idModificar,
-                    "Modificar Pedido de " + usuario.email + " de " + solicitud.producto, elementosCuerpoModificar
+                    "Modificar Pedido de " + usuario.email + " de " + solicitud.producto, elementosCuerpoModificar, confirmarModificar
                 );
                 // Añado el modal modificar a pedidoUsuarios, para evitar problemas de vision
                 pedidoUsuarios.appendChild(miModalModificarPedido);
@@ -333,14 +364,92 @@ function obtenerUsuario(idUsuario ,callback) {
     let datos = "obtenerUsuario=" + idUsuario;
     miPeticion.send(datos);
 }
+function actualizarSolicitud(datosSolicitud ,callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            // console.log(JSON.parse(miPeticion.responseText));
+            callback(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    datosSolicitud = JSON.stringify(datosSolicitud);
+    let datos = "actualizarSolicitud=" + datosSolicitud;
+    miPeticion.send(datos);
+}
+
+function validarInputNumeros(elemento) {
+    let regex = /^(\d+|\d*\.\d+)$/;
+    let valor = elemento.value;
+    if(regex.test(valor) || valor.substr(-1) === ".") {
+        // comprobar que no haya mas de 2 puntos
+        if((valor.match(/\./g) || []).length === 2) {
+            elemento.value = valor.slice(0,-1);
+        }
+        // comprobar que no tengamos valor similar a 02
+        if(valor.length >= 2 && valor[0] === "0") {
+            elemento.value = valor.slice(1);
+        }
+        // Maximos decimales 3
+        if(valor.split(".")[1] && valor.split(".")[1].length > 3) {
+            elemento.value = valor.slice(0,-1);
+        }
+    } else {
+        elemento.value = 0;
+    }
+}
 
 function manejadorClickModificar() {
     // modal-4Bacon2024-01-25-00-00-00
     let superModal = this.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-    // console.log(superModal);
     $(this.id).modal('show');
     $("#" + superModal.id).modal('hide');
 }
 function manejadorClickEliminar() {
 
+}
+function manejadorClickConfirmar() {
+    let contenedorBody = this.parentElement.previousSibling;
+    let contenedorDatos = contenedorBody.querySelector("div");
+    let datosP = contenedorDatos.querySelectorAll("p");
+    let datosCantidad = contenedorDatos.querySelector("input");
+    let datosPedido = {
+        "emailUsuario" : datosP[0].innerHTML.split(": ")[1] ,
+        "fecha" : datosP[1].innerHTML.split(": ")[1],
+        "producto" : datosP[2].innerHTML.split(": ")[1],
+        "cantidad" : datosCantidad.value,
+        "observaciones" : datosP[3].innerHTML.split(": ")[1],
+        "estado" : datosP[4].innerHTML.split(": ")[1]
+    };
+
+    actualizarSolicitud(datosPedido, function(respuesta) {
+        if(respuesta === "1") {
+            let idModal = contenedorBody.parentElement.parentElement.parentElement.id;
+            $("#" + idModal).modal('hide');
+            let desde = document.getElementById("inFecha_desde").value;
+            let hasta = document.getElementById("inFecha_hasta").value;
+            recuperarPedidos(desde,hasta);
+
+        } else {
+            console.log("No se actualizo");
+        }
+    });
+
+}
+
+function manejadorClickBuscar() {
+    let desde = document.getElementById("inFecha_desde").value;
+    let hasta = document.getElementById("inFecha_hasta").value;
+    if(desde < hasta ) {
+        recuperarPedidos(desde,hasta);
+    } 
+}
+function manejadorInputCantidad() {
+    validarInputNumeros(this);
 }
