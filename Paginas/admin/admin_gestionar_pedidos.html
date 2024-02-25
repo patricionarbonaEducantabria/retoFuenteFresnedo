@@ -4,8 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion de pedidos</title>
+    <script src="../../JS/gestionar_pedidos.js"></script>
+    <!-- Libreria flatpickr para controlar fechas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
-    
+    <header>
+        <div id="contenedor-buscar">
+            <label for="inFecha_desde">Desde: </label>
+            <input type="date" id="inFecha_desde">
+            <label for="inFecha_hasta">Hasta: </label>
+            <input type="date" id="inFecha_hasta">
+
+            <input type="button" id="btnBuscar" value="Buscar"></input>
+        </div>
+        <input type="button" id="btnImprimir" value="Imprimir Lista">
+    </header>
+    <div id="contenedor-pedidos">
+        <div id="contenedor-pedidos-enLista"></div>
+        <div id="contenedor-pedidos-fueraLista"></div>
+    </div>
 </body>
 </html>
