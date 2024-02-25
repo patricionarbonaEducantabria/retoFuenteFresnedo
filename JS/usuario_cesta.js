@@ -204,10 +204,15 @@ function crearPedido() {
     miPeticion.open("POST","../../PHP/usuario_cesta.php",true);
     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let productos = localStorage.getItem('productos');
+    let observaciones = document.getElementById("inObservaciones");
+    if(observaciones.value === '') {
+        observaciones.value = observaciones.placeholder;
+    }
     
     let misDatos = {
         "email" : localStorage.getItem("email"),
         "productos" : JSON.parse(productos),
+        "observaciones" : observaciones.value
     };
     misDatos = JSON.stringify(misDatos);
     miPeticion.send("crearPedido=" + misDatos);

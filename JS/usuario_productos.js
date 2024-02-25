@@ -139,12 +139,12 @@ function validarInputNumeros(elemento) {
         if(valor.length >= 2 && valor[0] === "0") {
             elemento.value = valor.slice(1);
         }
+        // Maximos decimales 3
+        if(valor.split(".")[1] && valor.split(".")[1].length > 3) {
+            elemento.value = valor.slice(0,-1);
+        }
     } else {
         elemento.value = 0;
-    }
-    // Maximos decimales 3
-    if(valor.split(".")[1].length > 3) {
-        elemento.value = valor.slice(0,-1);
     }
 }
 

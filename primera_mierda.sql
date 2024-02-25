@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS linea_pedido (
 -- TABLA SOLICITUDES
 CREATE TABLE IF NOT EXISTS solicitudes (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    fecha DATE NOT NULL,
+    fecha DATETIME NOT NULL,
     descripcion CHAR(50) NOT NULL,
     unidades CHAR(20) NOT NULL,
     cantidad FLOAT NOT NULL,
