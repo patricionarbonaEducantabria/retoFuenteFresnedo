@@ -265,6 +265,8 @@ function manejadorClickRealizarPedido() {
         productosJSON[idProducto].cantidad = cantidadNueva;
         productosString = JSON.stringify(productosJSON);
         localStorage.setItem("productos", productosString);
+        localStorage.removeItem("productos");
     }
     crearPedido();
+    recuperarPedido();
 }

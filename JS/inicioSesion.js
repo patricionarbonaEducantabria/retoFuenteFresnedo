@@ -2,6 +2,7 @@ window.onload = principal;
 
 function principal()
 {
+    localStorage.clear();
     let botonInicioSesion = document.getElementById("btnInicio_Sesion");
     botonInicioSesion.addEventListener("click", manejadorClickInicioSesion);
     // Agregar event listener para el evento keypress en todo el documento
@@ -112,7 +113,6 @@ function iniciarSesion(email, contrasenia) {
             document.getElementById("rellenadoCampos").innerHTML= "Usuario deshabilitado";
         } else{
             localStorage.setItem('email', email);
-            localStorage.setItem('contrasenia', contrasenia);
             window.location.href = miPeticion.responseText;
         }
     }
