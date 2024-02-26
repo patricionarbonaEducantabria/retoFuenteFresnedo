@@ -11,6 +11,9 @@ function principal()
 
     botonBuscar = document.getElementById("btnBuscar");
     botonBuscar.addEventListener("click",manejadorClickBuscar);
+
+    botonBuscar = document.getElementById("btnHacerPedido");
+    botonBuscar.addEventListener("click",manejadorClickHacerPedido);
 }
 
 function fechasDefecto() {
@@ -59,6 +62,8 @@ function recuperarPedidos(desde, hasta) {
     obtenerPedidos(desde,hasta);
 }
 
+
+
 function obtenerPedidos(desde,hasta) {
     let miPeticion = new XMLHttpRequest();
 
@@ -66,7 +71,7 @@ function obtenerPedidos(desde,hasta) {
 
     miPeticion.onreadystatechange = function() {
         if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-            console.log("Respuesta Server: ",JSON.parse(miPeticion.responseText));
+            // console.log("Respuesta Server: ",JSON.parse(miPeticion.responseText));
             dibujarPedidos(JSON.parse(miPeticion.responseText));
             // callback(miPeticion.responseText);
         }
@@ -97,7 +102,7 @@ function dibujarPedidoEnLista(jsonPedidos) {
     divPedidosLista.innerHTML = "";
     // Crear un json de cada pedido por su producto
     let jsonProductos = {};
-    console.log("Pedidos: ",jsonPedidos);
+    // console.log("Pedidos: ",jsonPedidos);
     for(let i = 0; i< jsonPedidos.length; i++) {
         // console.log(jsonPedidos[i].producto);
         if(jsonProductos.hasOwnProperty(jsonPedidos[i].producto)) {
@@ -133,20 +138,20 @@ function dibujarPedidoEnLista(jsonPedidos) {
             jsonProductos[jsonPedidos[i].producto] = producto;
         }
     }
-    console.log("Pedidos unidos: ",jsonProductos);
+    // console.log("Pedidos unidos: ",jsonProductos);
 
 
     // Iterar en el JSON
     Object.values(jsonProductos).forEach(function (jsonPedido) {
         let pedidoUl = crearElemento("ul", undefined, { "id": "pedido" + jsonPedido.nombreProducto });
         // Estado Pedido
-        let estado;
-        if (jsonPedido.tramitado === "1") {
-            estado = "Tramitado";
-        } else {
-            estado = "En tramite";
-        }
-        let pedidoEstado = crearElemento("li", estado);
+        // let estado;
+        // if (jsonPedido.tramitado === "1") {
+        //     estado = "Tramitado";
+        // } else {
+        //     estado = "En tramite";
+        // }
+        // let pedidoEstado = crearElemento("li", estado);
         let pedidoFecha = crearElemento("li", jsonPedido.fecha);
         let pedidoProducto = crearElemento("li", jsonPedido.nombreProducto);
         let pedidoCantidad = crearElemento("li", jsonPedido.cantidadProducto + " " + jsonPedido.unidades);
@@ -240,13 +245,13 @@ function dibujarPedidoEnLista(jsonPedidos) {
 
                 // Eliminar
                 let eliminarPedido = crearElemento("li",undefined);
-                let botonEliminar = crearElemento("input",undefined, {
-                    "class" : "btnEliminar",
+                let botonTramitar = crearElemento("input",undefined, {
+                    "class" : "btnTramitar",
                     "type" : "button",
-                    "value" : "Eliminar Pedido"
+                    "value" : "Tramitar/No Tramitar Pedido"
                 });
-                botonEliminar.addEventListener("click", manejadorClickEliminar);
-                eliminarPedido.appendChild(botonEliminar);
+                botonTramitar.addEventListener("click", manejadorClickTramitar);
+                eliminarPedido.appendChild(botonTramitar);
 
                 ulUsuario.appendChild(usuarioPedido);
                 ulUsuario.appendChild(fechaPedido);
@@ -266,7 +271,7 @@ function dibujarPedidoEnLista(jsonPedidos) {
         let miModal = dibujarModal(idModalUsuarios, "Usuarios que han pedido " + jsonPedido.nombreProducto,elementosCuerpo);
 
         // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-        pedidoUl.appendChild(pedidoEstado);
+        // pedidoUl.appendChild(pedidoEstado);
         pedidoUl.appendChild(pedidoFecha);
         pedidoUl.appendChild(pedidoProducto);
         pedidoUl.appendChild(pedidoCantidad);
@@ -364,6 +369,25 @@ function obtenerUsuario(idUsuario ,callback) {
     let datos = "obtenerUsuario=" + idUsuario;
     miPeticion.send(datos);
 }
+function obtenerProveedores(callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            // console.log(JSON.parse(miPeticion.responseText));
+            callback(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+
+    let datos = "obtenerProveedores=";
+    miPeticion.send(datos);
+}
 function actualizarSolicitud(datosSolicitud ,callback) {
     let miPeticion = new XMLHttpRequest();
 
@@ -381,6 +405,25 @@ function actualizarSolicitud(datosSolicitud ,callback) {
 
     datosSolicitud = JSON.stringify(datosSolicitud);
     let datos = "actualizarSolicitud=" + datosSolicitud;
+    miPeticion.send(datos);
+}
+function tramitarSolicitud(datosSolicitud ,callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            console.log(miPeticion.responseText);
+            // console.log(JSON.parse(miPeticion.responseText));
+            callback(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    datosSolicitud = JSON.stringify(datosSolicitud);
+    let datos = "tramitarSolicitud=" + datosSolicitud;
     miPeticion.send(datos);
 }
 
@@ -411,7 +454,43 @@ function manejadorClickModificar() {
     $(this.id).modal('show');
     $("#" + superModal.id).modal('hide');
 }
-function manejadorClickEliminar() {
+function manejadorClickTramitar() {
+    let padre = this.parentElement.parentElement;
+    hijos = padre.childNodes;
+    console.log(hijos);
+    
+    // Conversion del estado
+    let estado = hijos[6].innerHTML.split(": ")[1];
+    if(estado === "En tramite") {
+        estado = '0';
+    } else {
+        estado = '1';
+    }
+
+    let datosPedido = {
+        "emailUsuario" : hijos[0].innerHTML.split(": ")[1] ,
+        "fecha" : hijos[1].innerHTML.split(": ")[1],
+        "producto" : hijos[2].innerHTML.split(": ")[1],
+        "cantidad" : hijos[3].innerHTML.split(": ")[1],
+        "observaciones" : hijos[4].innerHTML.split(": ")[1],
+        "telefono" : hijos[5].innerHTML.split(": ")[1],
+        "estado" : estado
+    };
+
+    console.log(datosPedido);
+    tramitarSolicitud(datosPedido, function(respuesta) {
+        if(respuesta === "1") {
+            // let idModal = contenedorBody.parentElement.parentElement.parentElement.id;
+            // $("#" + idModal).modal('hide');
+            hijos[6].innerHTML = "Estado Pedido: Sin tramitar";
+            
+            console.log("se actualizo");
+            
+        } else {
+            console.log("No se actualizo");
+            hijos[6].innerHTML = "Estado Pedido: En tramite";
+        }
+    });
 
 }
 function manejadorClickConfirmar() {
@@ -443,6 +522,56 @@ function manejadorClickConfirmar() {
 
 }
 
+function manejadorClickHacerPedido() {
+    console.log("pidiendo");
+    let contenedorPedidos = document.getElementById("contenedor-pedidos");
+    let pedidosLista = contenedorPedidos.querySelectorAll("div")[0];
+    let elementosCuerpo = crearElemento("div",undefined);
+    pedidosLista = pedidosLista.childNodes;
+    // crear la fecha
+    let desde = document.getElementById("inFecha_desde").value;
+    let hasta = document.getElementById("inFecha_hasta").value;
+    let titulo = desde + " a " + hasta;
+    for(let i = 0; i < pedidosLista.length; i++) {
+        let elementosPedido = pedidosLista[i].childNodes;
+        let ulPedido = crearElemento("ul",undefined,{"id" : "pedido" + i});
+        let liProducto = crearElemento("li",elementosPedido[2].innerHTML);
+        let liCantidad = crearElemento("li",elementosPedido[3].innerHTML);
+
+        // proveedores
+        let liProveedores = crearElemento("li",undefined);
+        let selectProveedores = crearElemento("select",undefined);
+        obtenerProveedores( function(respuesta) {
+            let proveedores = JSON.parse(respuesta);
+            for(let i = 0; i < proveedores.length; i++) {
+                console.log(proveedores[i]);
+                let optionProveedores = crearElemento("option", 
+                    proveedores[i].nombre + " tlf: " + proveedores[i].telefono
+                , {"value" : proveedores[i].idProveedor});
+                selectProveedores.appendChild(optionProveedores);
+            }
+        });
+        liProveedores.appendChild(selectProveedores);
+
+        ulPedido.appendChild(liProducto);
+        ulPedido.appendChild(liCantidad);
+        ulPedido.appendChild(liProveedores);
+        elementosCuerpo.appendChild(ulPedido);
+    }
+
+    // aqui sigue boton
+    let elementosFooter = crearElemento
+
+    let miModal = dibujarModal("hacer-pedido","Creación de pedido", elementosCuerpo);
+    document.getElementById("contenedor-hacer-pedido").appendChild(miModal);
+    $("#modal-hacer-pedido").modal('show');
+    // $("#modal-hacer-pedido").on("hidden.bs.modal", function () {
+    //     let desde = document.getElementById("inFecha_desde").value;
+    //     let hasta = document.getElementById("inFecha_hasta").value;
+    //     console.log("me cerraron wey");
+    //     recuperarPedidos(desde,hasta);
+    // });
+}
 function manejadorClickBuscar() {
     let desde = document.getElementById("inFecha_desde").value;
     let hasta = document.getElementById("inFecha_hasta").value;
