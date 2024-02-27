@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina compra</title>
     <script src="../../JS/usuario_cesta.js"></script>
-    <link rel="stylesheet" href="../../Estilos/usuario_productos.css">
+    <link rel="stylesheet" href="../../Estilos/cesta.css">
 </head>
 <body>
     <!-- BARRA DE NAVEGACION -->
@@ -13,10 +13,13 @@
         <div>
             <ul id="barraNav">
                 <li>
-                    <input type="button" id="btnFruteria" value="Fruteria">
+                    <input type="button" id="btnCarniceria" value="Carnicería">
                 </li>
                 <li>
-                    <input type="button" id="btnPescaderia" value="Pescaderia">
+                    <input type="button" id="btnFruteria" value="Frutería">
+                </li>
+                <li>
+                    <input type="button" id="btnPescaderia" value="Pescadería">
                 </li>
                 <li>
                     <input type="button" id="btnCongelados" value="Congelados">
@@ -25,18 +28,20 @@
                     <input type="button" id="btnEconomatoVarios" value="Economato y Varios">
                 </li>
                 <li>
-                    <input type="button" id="btnPasteleria" value="Pasteleria">
+                    <input type="button" id="btnPasteleria" value="Pastelería">
                 </li>
                 <li>
-                    <input type="button" id="btnCafeteriaRestaurante" value="Cafeteria y Restaurante">
+                    <input type="button" id="btnCafeteriaRestaurante" value="Cafetería y Restaurante">
                 </li>
                 <li>
-                    <input type="button" id="btnUtilesMateriales" value="Utiles y Materiales">
+                    <input type="button" id="btnUtilesMateriales" value="Útiles y Materiales">
                 </li>
                 <li>
                     <input type="button" id="btnPan" value="Pan">
                 </li>
             </ul>
+        </div>
+        <div>
             <ul id="iconos">
                 <li>
                     <a href="./usuario_pagina_compra.html">
@@ -67,11 +72,10 @@
     <!-- LISTAS PRODUCTO -->
     <div id="contenedor-productos">
         <h1 id="categoria">Tu cesta</h1>
-        
     </div>
     <div id="contenedor-pago">
         <textarea name="textarea" rows="10" cols="50" id="inObservaciones" placeholder="Sin observaciones"></textarea>
-        <input type="button" value="Realizar Pedido" id="btnPedido">
+        <input type="button" value="Realizar Pedido" id="btnPedido"> 
     </div>
 
 </body>

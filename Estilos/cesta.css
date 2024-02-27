@@ -1,0 +1,127 @@
+/* Estilos generales */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos de la barra de navegación */
+
+header {
+    background-color: #ff9900;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alineación vertical */
+}
+
+#barraNav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#barraNav li {
+    display: inline;
+    margin-right: 10px;
+}
+
+#barraNav li input[type="button"] {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#barraNav li input[type="button"]:hover {
+    text-decoration: underline;
+}
+
+#iconos {
+    list-style-type: none;
+    margin-right: 40px; /* Espaciado entre los iconos y la derecha de la pantalla */
+}
+
+#iconos ul {
+    list-style-type: none;
+    padding: 0;
+  margin: 0;
+}
+
+#iconos li {
+    display: inline;
+    margin-left: 10px; /* Espaciado entre los iconos */
+}
+
+#iconos li a {
+    text-decoration: none;
+}
+
+#iconos img {
+    width: 50px; /* Tamaño ajustable según tu preferencia */
+    height: 50px; /* Tamaño ajustable según tu preferencia */
+}
+
+#icono_persona {
+    position: relative;
+}
+
+#icono_persona:hover #submenu {
+    display: block;
+}
+
+#submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffcc66;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#submenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#submenu ul li {
+    padding: 5px 0;
+}
+
+#submenu ul li input[type="button"] {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#submenu ul li input[type="button"]:hover {
+    text-decoration: underline;
+}
+
+#contenedor-productos {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+#contenedor-productos ul {
+    list-style: none;
+    display: inline-block;
+    justify-content: center;
+}
+
+#contenedor-productos ul li {
+    margin: 50px;
+}
+
+#foto_producto{
+    width: 200px;
+    height: auto;
+}

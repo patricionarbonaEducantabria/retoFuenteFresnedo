@@ -14,6 +14,16 @@ function principal()
 
     botonBuscar = document.getElementById("btnHacerPedido");
     botonBuscar.addEventListener("click",manejadorClickHacerPedido);
+
+
+    // Modal del pedido
+    let botonPedido = crearElemento("input",undefined, {
+        "type" : "button",
+        "value" : "Hacer pedido",
+        "class" : "btn btn-primary"
+    });
+    let miModal = dibujarModal("hacer-pedido","Creación de pedido",undefined, botonPedido);
+    document.getElementById("contenedor-hacer-pedido").appendChild(miModal);
 }
 
 function fechasDefecto() {
@@ -526,44 +536,89 @@ function manejadorClickHacerPedido() {
     console.log("pidiendo");
     let contenedorPedidos = document.getElementById("contenedor-pedidos");
     let pedidosLista = contenedorPedidos.querySelectorAll("div")[0];
+    
     let elementosCuerpo = crearElemento("div",undefined);
     pedidosLista = pedidosLista.childNodes;
+    // Me quiero morir
+    
+    for(let i = 0; i < pedidosLista.length; i++) {
+
+        let elementosPedido = pedidosLista[i].childNodes;
+        let ulPedido = crearElemento("ul",undefined,{"id" : "pedido" + i});
+        
+        // console.log("puta: ", pedidosLista[i]);
+        let liUsuarios = pedidosLista[i].childNodes[4];
+        // console.log("li Usuarios: ", liUsuarios);
+        let modalUsuarios = liUsuarios.querySelector(".modal");
+        // console.log("modal Usuario: ", modalUsuarios);
+        let solicitudesUsuarios = modalUsuarios.querySelectorAll("ul");
+        console.log("solicitudes de usuarios: ", solicitudesUsuarios);
+        let cantidad = 0;
+        let unidad;
+        // Recorro las solicitudes por producto
+        for(let j = 0; j < solicitudesUsuarios.length; j++) {
+            let ulUsuario = solicitudesUsuarios[j];
+
+            unidad = ulUsuario.querySelectorAll("li")[3].innerHTML.split(" ").slice(2).join().replace(","," ");
+
+            // console.log("solicitud del usuario: ", ulUsuario);
+            let estadoSolicitudUsuario = ulUsuario.querySelectorAll("li")[6];
+            // console.log("estado solicitud del usuario: ", estadoSolicitudUsuario);
+            estadoSolicitudUsuario = estadoSolicitudUsuario.innerHTML.split(": ")[1];
+            // console.log("estado solicitud del usuario: ", estadoSolicitudUsuario);
+            
+            if(estadoSolicitudUsuario === "En tramite") {
+                console.log("mamahuevo");
+                let liProducto = crearElemento("li",elementosPedido[1].innerHTML);
+                cantidad += parseFloat(ulUsuario.querySelectorAll("li")[3].innerHTML.split(" ")[1]);
+            } else {
+                console.log("digo glu glu");
+            }
+        }
+        // console.log("cantidad: ", cantidad, " unidad: ", unidad);
+        if(cantidad > 0) {
+            let liProducto = crearElemento("li",elementosPedido[1].innerHTML);
+            let liCantidad = crearElemento("li",cantidad + unidad);
+            // console.log("cuanto: " ,cantidad + " " + unidad);
+            let liProveedores = crearElemento("li",undefined);
+            let selectProveedores = crearElemento("select",undefined);
+            obtenerProveedores( function(respuesta) {
+                let proveedores = JSON.parse(respuesta);
+                for(let i = 0; i < proveedores.length; i++) {
+                    // console.log(proveedores[i]);
+                    let optionProveedores = crearElemento("option", 
+                        proveedores[i].nombre + " tlf: " + proveedores[i].telefono
+                    , {"value" : proveedores[i].idProveedor});
+                    selectProveedores.appendChild(optionProveedores);
+                }
+            });
+            liProveedores.appendChild(selectProveedores);
+            ulPedido.appendChild(liProducto);
+            ulPedido.appendChild(liCantidad);
+            ulPedido.appendChild(liProveedores);
+            liProveedores.appendChild(selectProveedores);
+
+            ulPedido.appendChild(liProducto);
+            ulPedido.appendChild(liCantidad);
+            ulPedido.appendChild(liProveedores);
+            elementosCuerpo.appendChild(ulPedido);
+        }
+    }
+
+    // aqui sigue boton
     // crear la fecha
     let desde = document.getElementById("inFecha_desde").value;
     let hasta = document.getElementById("inFecha_hasta").value;
     let titulo = desde + " a " + hasta;
-    for(let i = 0; i < pedidosLista.length; i++) {
-        let elementosPedido = pedidosLista[i].childNodes;
-        let ulPedido = crearElemento("ul",undefined,{"id" : "pedido" + i});
-        let liProducto = crearElemento("li",elementosPedido[2].innerHTML);
-        let liCantidad = crearElemento("li",elementosPedido[3].innerHTML);
+    let miModal = document.getElementById("modal-hacer-pedido");
 
-        // proveedores
-        let liProveedores = crearElemento("li",undefined);
-        let selectProveedores = crearElemento("select",undefined);
-        obtenerProveedores( function(respuesta) {
-            let proveedores = JSON.parse(respuesta);
-            for(let i = 0; i < proveedores.length; i++) {
-                console.log(proveedores[i]);
-                let optionProveedores = crearElemento("option", 
-                    proveedores[i].nombre + " tlf: " + proveedores[i].telefono
-                , {"value" : proveedores[i].idProveedor});
-                selectProveedores.appendChild(optionProveedores);
-            }
-        });
-        liProveedores.appendChild(selectProveedores);
+    miModal.querySelector(".modal-body").innerHTML = "";
+    miModal.querySelector(".modal-body").appendChild(elementosCuerpo);
+    miModal.querySelector(".modal-header h1").innerHTML = "";
+    miModal.querySelector(".modal-header h1").innerHTML = "Creación de pedido de " + titulo;
+    // document.getElementById("modal-hacer-pedido").appendChild(elementosCuerpo);
 
-        ulPedido.appendChild(liProducto);
-        ulPedido.appendChild(liCantidad);
-        ulPedido.appendChild(liProveedores);
-        elementosCuerpo.appendChild(ulPedido);
-    }
-
-    // aqui sigue boton
-    let elementosFooter = crearElemento
-
-    let miModal = dibujarModal("hacer-pedido","Creación de pedido", elementosCuerpo);
-    document.getElementById("contenedor-hacer-pedido").appendChild(miModal);
+    
     $("#modal-hacer-pedido").modal('show');
     // $("#modal-hacer-pedido").on("hidden.bs.modal", function () {
     //     let desde = document.getElementById("inFecha_desde").value;
