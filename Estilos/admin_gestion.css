@@ -28,11 +28,11 @@ body {
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    padding-left: 60px; /* Aumentamos el padding para dejar espacio para el logo */
+    padding-left: 0px; /* Aumentamos el padding para dejar espacio para el logo */
     margin-top: 15px; /* Ajustamos el margen superior */
     margin-bottom: 15px;
     background-size: 40px; /* Tamaño del logo */
-    background-position: 10px center; /* Posición del logo */
+    background-position: 30px center; /* Posición del logo */
     background-repeat: no-repeat; /* Evitar repetir el logo */
 }
 
