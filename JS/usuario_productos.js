@@ -4,6 +4,8 @@ function principal()
 {
     // document.getElementById("errores").innerHTML = "";
     recuperarProductos();
+    popUpAñadido();
+    popUpError();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -76,6 +78,66 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 });
 
+function dibujarModalError(idModal, titulo,elementosCuerpo,elementosFooter) {
+    let miDiv = crearElemento("div",undefined,{"id":"modal-" +idModal, "class": "modal"});
+    let modalDialog = crearElemento("div",undefined,{"class": "modal-dialog"});
+    let modalContent = crearElemento("div",undefined, {"class": "modal-content"});
+    // Contenido Header
+    let modalHeader = crearElemento("div",undefined, {"class": "modal-header"});
+    let modalTitulo = crearElemento("h1", titulo, {"class" : "modal-title"});
+    // let modalCierre = crearElemento("button",undefined,{
+    //     "type" : "button",
+    //     "class" : "btn-close",
+    //     "data-bs-dismiss" : "modal",
+    //     "aria-label" : "Close"
+    // });
+    modalHeader.appendChild(modalTitulo);
+    // modalHeader.appendChild(modalCierre);
+    // Contenido Body
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // let modalBody = crearElemento("div",undefined, {"class": "modal-body"});
+
+    if(elementosCuerpo !== undefined) {
+        modalBody.appendChild(elementosCuerpo);
+    }
+
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    // Contenido footer
+    // let modalFooter = crearElemento("div",undefined, {"class": "modal-footer"});
+    // Pongo al boton modificar el id del modal ¿estas seguro?
+    // let modalModificar = crearElemento("button", textoBoton, {
+    //     "type" : "button",
+    //     "class" : "btn btn-primary",
+    //     "id" : "btn-" + textoBoton + "-" + idModal + "-modal",
+    //     "data-bs-toggle": "modal",
+    //     "data-bs-target": "#modal-" + idModal + "-seguro"
+    // });
+    // modalFooter.appendChild(modalModificar);
+    if(elementosFooter !== undefined) {
+        modalFooter.appendChild(elementosFooter);
+    }
+
+    modalContent.appendChild(modalHeader);
+    // modalContent.appendChild(modalBody);
+    // modalContent.appendChild(modalFooter);
+    modalDialog.appendChild(modalContent);
+    miDiv.appendChild(modalDialog);
+
+    return miDiv;
+}
+
+function popUpAñadido() {
+    idModal = "Popup-add";
+    tituloModal = "Producto añadido";
+    miModal = dibujarModalError(idModal,tituloModal);
+    document.body.appendChild(miModal);
+}
+function popUpError(){
+    idModal = "Popup-error";
+    tituloModal = "Introduce una cantidad";
+    miModal = dibujarModalError(idModal,tituloModal);
+    document.body.appendChild(miModal);
+}
 function crearElemento(etiqueta, texto, atributos) {
     let elementoNuevo = document.createElement(etiqueta);
     if(texto !== undefined) {
@@ -154,22 +216,22 @@ function manejadorClickAñadirProducto(idProducto)
     let miCantidad = document.getElementById("cantidad_"+idProducto).value;
     if (miCantidad === "" || miCantidad === null) 
     {
-        document.getElementById("errores_"+idProducto).innerHTML = "Introduce una cantidad";
-    } 
-    else if (parseFloat(miCantidad) <= 0) 
-    {
-        document.getElementById("errores_"+idProducto).innerHTML = "Número incorrecto";
+        $("#modal-Popup-error").modal('show');
+        setTimeout(function() {
+            $("#modal-Popup-error").modal('hide');
+            }, 700);
     } 
     else 
     {
+        $("#modal-Popup-add").modal('show');
+        
         // ESTILO MENSAJE DE ERRORES
         almacenarProductos(idProducto, miCantidad);
-        document.getElementById("errores_"+idProducto).innerHTML = "Producto añadido correctamente";
         
         // Desaparecer el mensaje después de 2 segundos (2000 milisegundos)
         setTimeout(function() {
-            document.getElementById("errores_"+idProducto).innerHTML = "";
-        }, 2000);
+        $("#modal-Popup-add").modal('hide');
+        }, 700);
     }
 }
 function manejadorInputCantidad() {
@@ -209,7 +271,7 @@ function almacenarProductos(idProducto, miCantidad)
     // Almacenamos el objeto
     localStorage.setItem('productos', JSON.stringify(productos));
     // para que el cajon de texto vuelve a esta vacio
-    document.getElementById("cantidad_"+idProducto).value = undefined;
+    document.getElementById("cantidad_"+idProducto).value = "";
 }
 
 function obtenerProductos(callback)

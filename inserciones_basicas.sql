@@ -16,18 +16,18 @@ INSERT INTO unidades (descripcion) VALUES ('Botella');
 INSERT INTO unidades (descripcion) VALUES ('Blister');
 
 /*TABLA CATEGORIAS*/
-INSERT INTO categorias (descripcion) VALUES ('Fruteria');
-INSERT INTO categorias (descripcion) VALUES ('Carniceria');
-INSERT INTO categorias (descripcion) VALUES ('Pescaderia');
-INSERT INTO categorias (descripcion) VALUES ('Pasteleria');
+INSERT INTO categorias (descripcion) VALUES ('Frutería');
+INSERT INTO categorias (descripcion) VALUES ('Carnicería');
+INSERT INTO categorias (descripcion) VALUES ('Pescadería');
+INSERT INTO categorias (descripcion) VALUES ('Pastelería');
 INSERT INTO categorias (descripcion) VALUES ('Congelados');
 INSERT INTO categorias (descripcion) VALUES ('Economato y Varios');
-INSERT INTO categorias (descripcion) VALUES ('Cafeteria y Restaurante');
+INSERT INTO categorias (descripcion) VALUES ('Cafetería y Restaurante');
 INSERT INTO categorias (descripcion) VALUES ('Pan');
 INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
 
 /*TABLA PRODUCTOS*/ 
-    /*Carniceria */
+    /*Carnicería */
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Pollo', (SELECT id FROM unidades WHERE descripcion = 'Unidad'));
     INSERT INTO productos (descripcion, fk_unidades ) 
@@ -54,7 +54,7 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
     VALUES ('Carne picada Mezcla', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Pechuga de pollo fileteada', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    /* Fruteria*/
+    /* Frutería*/
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Ajo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
     INSERT INTO productos (descripcion, fk_unidades ) 
@@ -143,10 +143,10 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
     VALUES ('Platano', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Arandanos', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
-    /*Pescaderia*/
+    /*Pescadería*/
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Dorada de racion', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    /*Pasteleria*/
+    /*Pastelería*/
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Harina Floja', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
     INSERT INTO productos (descripcion, fk_unidades ) 
@@ -223,7 +223,7 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
     VALUES ('Picos de pan integrales', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'));
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Regañás', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'));
-    /* Cafeteria y Restaurante*/
+    /* Cafetería y Restaurante*/
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Café Selección', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
     INSERT INTO productos (descripcion, fk_unidades ) 
@@ -265,365 +265,365 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
 
 
 /* Vista Productos-Categoria*/
-    /* Carniceria*/
+    /* Carnicería*/
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pollo'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Chorizo de guisar'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Tocino fresco'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Gallina'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Salchichon'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Bacon'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Solomillo de Cerdo'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Conejo'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Cinta de Lomo'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Babilla terneta'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Panceta de cerdo'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Carne picada Mezcla'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pechuga de pollo fileteada'),
-    (SELECT id FROM categorias WHERE descripcion = 'Carniceria')
+    (SELECT id FROM categorias WHERE descripcion = 'Carnicería')
     );
 
-    /*Fruteria*/
+    /*Frutería*/
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Ajo'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Cebolla'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Naranja'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Patata'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pimiento rojo'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pimiento verde italiano'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Puerros'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Zanahoria'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Limones'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Ajo negro'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Naranja de mesa grande'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Piña semimadura monte'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Freson temporada'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Granada palos extra'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Kiwi New Zealand'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pomelo rosa grande'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Menta fresca o Hierbabuena'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Limon verde'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Espinaca'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Lechuga'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Tomate'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Calabaza'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Calabacin'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Manzana reineta'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Vaina verde'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Salvia'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Jengibre'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Mango'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Manzana golden'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Jengibre fresco'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Fresa'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Aguacate'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Lima'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Brotes de alfalfa'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Champiñones'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Zanahoria baby'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Mazorca baby'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Chalotas'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Cebolla dulce'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Cilantro'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Chile fresco'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Cebollino'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Platano'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Arandanos'),
-    (SELECT id FROM categorias WHERE descripcion = 'Fruteria')
+    (SELECT id FROM categorias WHERE descripcion = 'Frutería')
     );
-    /*Pescaderia*/
+    /*Pescadería*/
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Dorada de racion'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pescaderia')
+    (SELECT id FROM categorias WHERE descripcion = 'Pescadería')
     );
-    /*Pasteleria*/
+    /*Pastelería*/
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Harina Floja'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Mantequilla'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Nata para montar'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Harina de almendra'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pulpa de mango'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pulpa de frambuesa'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pulpa de cereza'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Harina de tapioca'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Frambuesa fresca'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Grosellas'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Queso de burgos fresco'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Pan de sandwich'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Tramezzino'),
-    (SELECT id FROM categorias WHERE descripcion = 'Pasteleria')
+    (SELECT id FROM categorias WHERE descripcion = 'Pastelería')
     );
     /* Congelados*/
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
@@ -747,46 +747,46 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
     (SELECT id FROM productos WHERE descripcion = 'Regañás'),
     (SELECT id FROM categorias WHERE descripcion = 'Economato y Varios')
     );
-    /* Cafeteria y Restaurante*/
+    /* Cafetería y Restaurante*/
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Café Selección'),
-    (SELECT id FROM categorias WHERE descripcion = 'Cafeteria y Restaurante')
+    (SELECT id FROM categorias WHERE descripcion = 'Cafetería y Restaurante')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Azúcar sobre'),
-    (SELECT id FROM categorias WHERE descripcion = 'Cafeteria y Restaurante')
+    (SELECT id FROM categorias WHERE descripcion = 'Cafetería y Restaurante')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Chocolate puro polvo taza'),
-    (SELECT id FROM categorias WHERE descripcion = 'Cafeteria y Restaurante')
+    (SELECT id FROM categorias WHERE descripcion = 'Cafetería y Restaurante')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Sacarina sobres'),
-    (SELECT id FROM categorias WHERE descripcion = 'Cafeteria y Restaurante')
+    (SELECT id FROM categorias WHERE descripcion = 'Cafetería y Restaurante')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Agua Solares cristal'),
-    (SELECT id FROM categorias WHERE descripcion = 'Cafeteria y Restaurante')
+    (SELECT id FROM categorias WHERE descripcion = 'Cafetería y Restaurante')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Agua Solares Pet 1,5litro'),
-    (SELECT id FROM categorias WHERE descripcion = 'Cafeteria y Restaurante')
+    (SELECT id FROM categorias WHERE descripcion = 'Cafetería y Restaurante')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Botellin agua pet'),
-    (SELECT id FROM categorias WHERE descripcion = 'Cafeteria y Restaurante')
+    (SELECT id FROM categorias WHERE descripcion = 'Cafetería y Restaurante')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Granadina'),
-    (SELECT id FROM categorias WHERE descripcion = 'Cafeteria y Restaurante')
+    (SELECT id FROM categorias WHERE descripcion = 'Cafetería y Restaurante')
     );
     /* Pan*/
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
