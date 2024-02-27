@@ -15,7 +15,6 @@ function principal()
     // botonNoAdd.addEventListener("click",manejadorClickNoAdd);
     // botonAdd.addEventListener("click",manejadorClickAdd);
     dibujarModalesAdd();
-
     recuperarUsuarios();
     let botonMostrarAdd = document.getElementById("btnMostrarAddUsuarios");
     let modalAddUsuario = new bootstrap.Modal("#modal-Add-Usuario");
@@ -248,6 +247,29 @@ function recuperarUsuarios(longitud) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
         let miDiv = document.getElementById("contenedor-usuarios");
+        let miCabecera = crearElemento("ul",undefined,{
+            "id":"cabecera"
+        });
+        let miNombreCabecera = crearElemento("li","Nombre"); 
+        let miEmailCabecera = crearElemento("li","Email"); 
+        let miTelefonoCabecera = crearElemento("li","Teléfono"); 
+        let miCambioCabecera = crearElemento("li","Cargo"); 
+        let miHabilitadoCabecera = crearElemento("li","Habilitado/Deshabilitado");
+        let miCabeceraVacia = crearElemento("li","");
+        let miCabeceraVacia1 = crearElemento("li","");
+        let miCabeceraVacia2 = crearElemento("li","");
+        let miCabeceraVacia3 = crearElemento("li","");
+        miCabecera.appendChild(miNombreCabecera); 
+        miCabecera.appendChild(miEmailCabecera); 
+        miCabecera.appendChild(miTelefonoCabecera); 
+        miCabecera.appendChild(miCambioCabecera); 
+        miCabecera.appendChild(miHabilitadoCabecera); 
+        miCabecera.appendChild(miCabeceraVacia); 
+        miCabecera.appendChild(miCabeceraVacia1); 
+        miCabecera.appendChild(miCabeceraVacia2); 
+        miCabecera.appendChild(miCabeceraVacia3); 
+        miDiv.appendChild(miCabecera);
+        document.body.appendChild(miDiv);
         for(let i = 0; i< respuesta.length; i++) {
             miDiv.appendChild(dibujarUsuario(respuesta[i]));
         }
