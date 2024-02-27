@@ -542,6 +542,9 @@ function manejadorClickHacerPedido() {
     // Me quiero morir
     
     for(let i = 0; i < pedidosLista.length; i++) {
+
+        let elementosPedido = pedidosLista[i].childNodes;
+        let ulPedido = crearElemento("ul",undefined,{"id" : "pedido" + i});
         
         // console.log("puta: ", pedidosLista[i]);
         let liUsuarios = pedidosLista[i].childNodes[4];
@@ -550,10 +553,14 @@ function manejadorClickHacerPedido() {
         // console.log("modal Usuario: ", modalUsuarios);
         let solicitudesUsuarios = modalUsuarios.querySelectorAll("ul");
         console.log("solicitudes de usuarios: ", solicitudesUsuarios);
-        
+        let cantidad = 0;
+        let unidad;
         // Recorro las solicitudes por producto
         for(let j = 0; j < solicitudesUsuarios.length; j++) {
             let ulUsuario = solicitudesUsuarios[j];
+
+            unidad = ulUsuario.querySelectorAll("li")[3].innerHTML.split(" ").slice(2).join().replace(","," ");
+
             // console.log("solicitud del usuario: ", ulUsuario);
             let estadoSolicitudUsuario = ulUsuario.querySelectorAll("li")[6];
             // console.log("estado solicitud del usuario: ", estadoSolicitudUsuario);
@@ -563,11 +570,39 @@ function manejadorClickHacerPedido() {
             if(estadoSolicitudUsuario === "En tramite") {
                 console.log("mamahuevo");
             // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
-                
-                
+                let liProducto = crearElemento("li",elementosPedido[1].innerHTML);
+                cantidad += parseFloat(ulUsuario.querySelectorAll("li")[3].innerHTML.split(" ")[1]);
             } else {
                 console.log("digo glu glu");
             }
+        }
+        // console.log("cantidad: ", cantidad, " unidad: ", unidad);
+        if(cantidad > 0) {
+            let liProducto = crearElemento("li",elementosPedido[1].innerHTML);
+            let liCantidad = crearElemento("li",cantidad + unidad);
+            // console.log("cuanto: " ,cantidad + " " + unidad);
+            let liProveedores = crearElemento("li",undefined);
+            let selectProveedores = crearElemento("select",undefined);
+            obtenerProveedores( function(respuesta) {
+                let proveedores = JSON.parse(respuesta);
+                for(let i = 0; i < proveedores.length; i++) {
+                    // console.log(proveedores[i]);
+                    let optionProveedores = crearElemento("option", 
+                        proveedores[i].nombre + " tlf: " + proveedores[i].telefono
+                    , {"value" : proveedores[i].idProveedor});
+                    selectProveedores.appendChild(optionProveedores);
+                }
+            });
+            liProveedores.appendChild(selectProveedores);
+            ulPedido.appendChild(liProducto);
+            ulPedido.appendChild(liCantidad);
+            ulPedido.appendChild(liProveedores);
+            liProveedores.appendChild(selectProveedores);
+
+            ulPedido.appendChild(liProducto);
+            ulPedido.appendChild(liCantidad);
+            ulPedido.appendChild(liProveedores);
+            elementosCuerpo.appendChild(ulPedido);
         }
 
 
