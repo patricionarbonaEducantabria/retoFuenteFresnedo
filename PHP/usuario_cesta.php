@@ -87,31 +87,38 @@
         // }
 
         // Insertar las solicitudes de producto en SOLICITUDES
-        $resultado = $conexion->prepare("
-            INSERT INTO solicitudes 
-            (fecha, descripcion, unidades, cantidad, observaciones, fk_usuario, tramitado)
-            VALUES (
-                ?,
-                (SELECT descripcion FROM productos WHERE id = ?),
-                (SELECT unidades.descripcion 
-                    FROM productos 
-                    JOIN unidades ON productos.fk_unidades = unidades.id 
-                    WHERE productos.id = ?),
-                ?,
-                ?,
-                (SELECT id FROM usuarios WHERE email = ?), 0
-            );
-        ");
-
-        foreach ($productos as $productoID => $producto) {
-            $cantidad = $producto['cantidad'];
-
-            $resultado->execute(array($fecha, $productoID, $productoID, $cantidad, $observaciones, $usuario));
+        
+        try {
+            $resultado = $conexion->prepare("
+                INSERT INTO solicitudes 
+                (fecha, descripcion, unidades, cantidad, observaciones, fk_usuario, tramitado)
+                VALUES (
+                    ?,
+                    (SELECT descripcion FROM productos WHERE id = ?),
+                    (SELECT unidades.descripcion 
+                        FROM productos 
+                        JOIN unidades ON productos.fk_unidades = unidades.id 
+                        WHERE productos.id = ?),
+                    ?,
+                    ?,
+                    (SELECT id FROM usuarios WHERE email = ?), 0
+                );
+            ");
+        
+            foreach ($productos as $productoID => $producto) {
+                $cantidad = $producto['cantidad'];
+        
+                $resultado->execute(array($fecha, $productoID, $productoID, $cantidad, $observaciones, $usuario));
+            }
+        
+            echo 1; // Éxito
+        } catch (Exception $e) {
+            echo 0; // Error
         }
-
+        
+        
 
         
-        // echo json_encode($productos['productos'][1]['id']);
 
     }
 ?>

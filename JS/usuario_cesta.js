@@ -2,6 +2,7 @@ window.onload = principal;
 
 function principal() 
 {
+    
     recuperarPedido();
 }
 
@@ -140,7 +141,7 @@ function enviarProductos(callback)
 
     miPeticion.onreadystatechange = function () {
         if(miPeticion.readyState == 4 && miPeticion.status == 200) {
-            // console.log(miPeticion.responseText);
+            console.log(miPeticion.responseText);
             callback(miPeticion.responseText);
         }   
     }
@@ -154,19 +155,23 @@ function enviarProductos(callback)
 function recuperarPedido(longitud)
 {
     let miDiv = document.getElementById("contenedor-productos");
-    // vaciamos el div
-    // miDiv.innerHTML = "";
-
-    enviarProductos(function(respuesta) {
-        respuesta = JSON.parse(respuesta);
-        // recorro el JSON
-        // let miDiv = document.getElementById("contenedor-productos");
-        for(let i = 0; i<respuesta.length; i++)
-        {
-            miDiv.appendChild(dibujarProductos(respuesta[i]));
-        }
-        document.body.appendChild(miDiv);
-    });
+    if(localStorage.getItem("productos") !== null) {
+        // vaciamos el div
+        // miDiv.innerHTML = "";
+    
+        enviarProductos(function(respuesta) {
+            respuesta = JSON.parse(respuesta);
+            // recorro el JSON
+            // let miDiv = document.getElementById("contenedor-productos");
+            for(let i = 0; i<respuesta.length; i++)
+            {
+                miDiv.appendChild(dibujarProductos(respuesta[i]));
+            }
+            document.body.appendChild(miDiv);
+        });
+    } else {
+        miDiv.innerHTML = "";
+    }
 }
 
 function validarInputNumeros(elemento) {
@@ -191,13 +196,14 @@ function validarInputNumeros(elemento) {
     }
 }
 
-function crearPedido() {
+function crearPedido(callback) {
     // enviar a PHP
     let miPeticion = new XMLHttpRequest();
 
     miPeticion.onreadystatechange = function () {
         if(miPeticion.readyState == 4 && miPeticion.status == 200) {
-            console.log(miPeticion.responseText);
+            // console.log(miPeticion.responseText);
+            callback(miPeticion.responseText);
         }   
     }
 
@@ -265,8 +271,15 @@ function manejadorClickRealizarPedido() {
         productosJSON[idProducto].cantidad = cantidadNueva;
         productosString = JSON.stringify(productosJSON);
         localStorage.setItem("productos", productosString);
-        localStorage.removeItem("productos");
+        console.log("hola: ",i);
     }
-    crearPedido();
-    recuperarPedido();
+    crearPedido(function(respuesta) {
+        if(respuesta === "1") {
+            console.log("se hizo el pedido");
+            localStorage.removeItem("productos");
+            recuperarPedido();
+        } else {
+            console.log("no se pudo hacer el pedido");
+        }
+    });
 }
