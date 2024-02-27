@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario Inicio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../Estilos/inicio_usuario.css">
+    <link rel="stylesheet" href="../../Estilos/modoOscuro.sass">
+    <script type="module" src="../../JS/modoOscuro.js"></script>
     <script src="../../JS/usuario_inicio.js"></script>
 
 </head>
@@ -24,7 +25,7 @@
                 <div id="submenu">
                     <ul>
                         <li>
-                            <input type="button" id="btnModoOscuro" value="Modo Oscuro/Claro">
+                            <button class="change-theme-button" id="theme-button"></button>
                         </li>
                         <li>
                             <input type="button" id="btnHistorialPedidos" value="Historial pedidos">
@@ -38,12 +39,15 @@
         </ul>
     </header>
 
+
+<button class="change-theme-button" id="theme-button"></button>
+
         <!-- Topic Cards -->
         <div id="cards_landscape_wrap-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                        <a href="../usuario/usuario_carniceria.html">
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        <a>
                             <div class="card-flyer">
                                 <div class="text-box">
                                     <div class="image-box">
@@ -56,8 +60,8 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                        <a href="../usuario_pescaderia.html">
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        <a>
                             <div class="card-flyer">
                                 <div class="text-box">
                                     <div class="image-box">
@@ -70,8 +74,8 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                        <a href="../usuario/usuario_pasteleria.html">
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        <a>
                             <div class="card-flyer">
                                 <div class="text-box">
                                     <div class="image-box">
@@ -85,8 +89,8 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                        <a href="../usuario/usuario_pan.html">
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        <a>
                             <div class="card-flyer">
                                 <div class="text-box">
                                     <div class="image-box">
@@ -99,8 +103,8 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                        <a href="../usuario/usuario_cafeteria_restaurante.html">
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                        <a>
                             <div class="card-flyer">
                                 <div class="text-box">
                                     <div class="image-box">
@@ -113,8 +117,8 @@
                             </div>
                         </a>
                     </div>
-                <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                    <a href="../usuario/usuario_utiles_materiales.html">
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <a>
                         <div class="card-flyer">
                             <div class="text-box">
                                 <div class="image-box">
@@ -127,8 +131,8 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                    <a href="../usuario/usuario_economato_varios.html">
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <a>
                         <div class="card-flyer">
                             <div class="text-box">
                                 <div class="image-box">
@@ -141,8 +145,8 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                    <a href="../usuario/usuario_congelados.html">
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <a>
                         <div class="card-flyer">
                             <div class="text-box">
                                 <div class="image-box">
@@ -155,8 +159,8 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-xs-9 col-sm-4 col-md-3 col-lg-3">
-                    <a href="../usuario/usuario_fruteria.html">
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <a>
                         <div class="card-flyer">
                             <div class="text-box">
                                 <div class="image-box">
