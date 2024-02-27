@@ -569,7 +569,6 @@ function manejadorClickHacerPedido() {
             
             if(estadoSolicitudUsuario === "En tramite") {
                 console.log("mamahuevo");
-            // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
                 let liProducto = crearElemento("li",elementosPedido[1].innerHTML);
                 cantidad += parseFloat(ulUsuario.querySelectorAll("li")[3].innerHTML.split(" ")[1]);
             } else {
@@ -604,38 +603,6 @@ function manejadorClickHacerPedido() {
             ulPedido.appendChild(liProveedores);
             elementosCuerpo.appendChild(ulPedido);
         }
-
-
-
-
-
-        // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
-
-        // let elementosPedido = pedidosLista[i].childNodes;
-        // let ulPedido = crearElemento("ul",undefined,{"id" : "pedido" + i});
-        // let liProducto = crearElemento("li",elementosPedido[1].innerHTML);
-        // let liCantidad = crearElemento("li",elementosPedido[2].innerHTML);
-        // // console.log("producto: ",liProducto);
-        // // aqui me voy a morir haciendo el pedido
-        // // proveedores
-        // let liProveedores = crearElemento("li",undefined);
-        // let selectProveedores = crearElemento("select",undefined);
-        // obtenerProveedores( function(respuesta) {
-        //     let proveedores = JSON.parse(respuesta);
-        //     for(let i = 0; i < proveedores.length; i++) {
-        //         // console.log(proveedores[i]);
-        //         let optionProveedores = crearElemento("option", 
-        //             proveedores[i].nombre + " tlf: " + proveedores[i].telefono
-        //         , {"value" : proveedores[i].idProveedor});
-        //         selectProveedores.appendChild(optionProveedores);
-        //     }
-        // });
-        // liProveedores.appendChild(selectProveedores);
-
-        // ulPedido.appendChild(liProducto);
-        // ulPedido.appendChild(liCantidad);
-        // ulPedido.appendChild(liProveedores);
-        // elementosCuerpo.appendChild(ulPedido);
     }
 
     // aqui sigue boton
