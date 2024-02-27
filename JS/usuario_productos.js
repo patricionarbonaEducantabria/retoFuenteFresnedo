@@ -6,6 +6,23 @@ function principal()
     recuperarProductos();
     popUpAñadido();
     popUpError();
+    
+    window.onscroll = function() {
+        scrollFunction();
+    }; 
+}
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("btnScrollToTop").style.display = "block";
+    } else {
+        document.getElementById("btnScrollToTop").style.display = "none";
+    }
+}
+
+function scrollToTop() {
+    document.body.scrollTop = 0; // Para Safari
+    document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
 }
 
 document.addEventListener("DOMContentLoaded", function() {

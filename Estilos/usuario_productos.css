@@ -181,6 +181,27 @@ header {
     padding: 16px;
 }
 
+/* Estilos para el botón de ir arriba */
+#btnScrollToTop {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 999;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: 50%;
+}
+
+#btnScrollToTop:hover {
+    background-color: #0056b3;
+}
+
 /* Estilos específicos para dispositivos móviles */
 
 @media only screen and (max-width: 768px) {
