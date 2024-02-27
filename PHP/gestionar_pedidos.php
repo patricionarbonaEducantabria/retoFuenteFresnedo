@@ -28,24 +28,72 @@ function obtenerPedidos() {
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
 
     $resultado = $conexion -> prepare("
-        SELECT * FROM solicitudes WHERE fecha >= ? AND fecha <= ? ORDER BY fecha ASC;
+    SELECT 
+        solicitudes.id AS idSolicitud,
+        solicitudes.fecha AS fechaSolicitud,
+        solicitudes.descripcion AS productoSolicitud,
+        solicitudes.cantidad AS cantidadSolicitud,
+        solicitudes.unidades AS unidadSolicitud,
+        solicitudes.observaciones AS observacionesSolicitud,
+        solicitudes.tramitado AS estadoPedido,
+        usuarios.id AS idUsuarioSolicitud,
+        usuarios.email AS emailUsuarioSolicitud,
+        usuarios.telefono AS telefonoUsuarioSolicitud
+    FROM solicitudes 
+    JOIN usuarios ON solicitudes.fk_usuario = usuarios.id
+    WHERE fecha >= ? AND fecha <= ? ORDER BY fk_usuario ASC, fecha DESC;
     ");
     $resultado -> execute(array($desde, $hasta));
 
     $pedidos = array();
-    while($fila = $resultado -> fetch()) {
+    $usuarioActual = null;
+    $nombreActual = null;
+    $telefonoActual = null;
+    $pedidoUsuario = array();
+
+    while ($fila = $resultado->fetch()) {
+        if ($usuarioActual === null) {
+            $usuarioActual = $fila['idUsuarioSolicitud'];
+            $nombreActual = $fila['emailUsuarioSolicitud'];
+            $telefonoActual = $fila['telefonoUsuarioSolicitud'];
+            $pedidoUsuario = array(
+                'idUsuario' => $usuarioActual,
+                'nombreUsuario' => $nombreActual,
+                'telefonoUsuario' => $telefonoActual,
+                'solicitudes' => array()
+                );
+        }
+
+        if ($usuarioActual !== $fila['idUsuarioSolicitud']) {
+            $pedidos[] = $pedidoUsuario;
+            $usuarioActual = $fila['idUsuarioSolicitud'];
+            $nombreActual = $fila['emailUsuarioSolicitud'];
+            $telefonoActual = $fila['telefonoUsuarioSolicitud'];
+            $pedidoUsuario = array(
+                'idUsuario' => $usuarioActual,
+                'nombreUsuario' => $nombreActual,
+                'telefonoUsuario' => $telefonoActual,
+                'solicitudes' => array())
+                ;
+        }
+
         $pedido = array(
-            'idSolicitud' => $fila['id'],
-            'tramitado' => $fila['tramitado'],
-            'fecha' => $fila['fecha'],
-            'producto' => $fila['descripcion'],
-            'cantidad' => $fila['cantidad'],
-            'observaciones' => $fila['observaciones'],
-            'idUsuario' => $fila['fk_usuario'],
-            'unidades' => $fila['unidades']
-            );
-    $pedidos[] = $pedido;
-}
+            'idSolicitud' => $fila['idSolicitud'],
+            'fecha' => $fila['fechaSolicitud'],
+            'producto' => $fila['productoSolicitud'],
+            'cantidad' => $fila['cantidadSolicitud'],
+            'unidad' => $fila['unidadSolicitud'],
+            'observaciones' => $fila['observacionesSolicitud'],
+            'estadoPedido' => $fila['estadoPedido'],
+        );
+
+        $pedidoUsuario['solicitudes'][] = $pedido;
+    }
+
+    // Agregar el último conjunto de solicitudes al array de pedidos
+    if ($usuarioActual !== null) {
+        $pedidos[] = $pedidoUsuario;
+    }
     
 
         
