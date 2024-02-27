@@ -1,0 +1,284 @@
+/* // Estilos base que SÍ son necesarios en el tema dark */
+
+:root {
+  --main-color       : #1083D6;
+  --title-color      : #2A3B47;
+  --text-color       : #697477;
+  --light-text-color : #A0A7AC;
+  --border-color     : #EFF3F5;
+  --container-color  : #FFFFFF;
+  --body-color       : #FBFBFE;
+  --container-shadow : 0 1px 4px rgba(146,161,176,.15);
+}
+
+body.dark-theme {
+  --main-color       : #52A5E0;
+  --title-color      : #EFF3F5;
+  --text-color       : #C8CDD0;
+  --light-text-color : #A0A7AC;
+  --border-color     : #2A3B47;
+  --container-color  : #212E36;
+  --body-color       : #192229;
+  --container-shadow : none;
+}
+
+body {
+  background : var(--body-color);
+  color      : var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color : var(--title-color);
+}
+
+a {
+  color : var(--main-color);
+}
+
+hr {
+  border        : none;
+  border-bottom : 1px solid var(--border-color);
+}
+
+.subtitle {
+  color : var(--light-text-color);
+}
+
+.button {
+  background : var(--main-color);
+}
+
+.container {
+  background : var(--container-color);
+  box-shadow : var(--container-shadow);
+}
+/* // Fin de estilos base que SÍ son necesarios en el tema dark
+
+
+// Botón para activar el tema oscuro */
+.change-theme-button {
+  font-size   : 20px;
+  font-weight : 600;
+  outline     : none;
+  color       : var(--title-color);
+  background  : none;
+  border      : none;
+  cursor      : pointer;
+
+  &::before {
+    content : '🌞 Tema claro';
+
+    .dark-theme & {
+      content :  '🌝 Tema oscuro';
+    }
+  }
+}
+
+
+/* //  Fin del Botón para activar el tema oscuro */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--body-color);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#encabezado {
+  margin-right: 0;
+  padding-right: 15px;
+}
+
+#encabezado ul {
+  /* Alineación a la derecha */
+  text-align: right; 
+  margin-top: 0;
+  padding-top: 16px;
+}
+
+#encabezado ul li {
+  position: relative;
+  display: inline-block;
+}
+
+#submenu {
+  position: absolute;
+  /* Ajustar posición a la izquierda */
+  left: -45px; 
+  /* Ajustar posición */
+  top: 68px; 
+  display: none;
+  background-color: var(--light-text-color); 
+  border-radius: 5px; 
+  /* Sombra */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+  /* Asegurar que esté por encima de otros elementos */
+  z-index: 1; 
+  width: auto;
+}
+
+#icono_persona:hover #submenu {
+  display: block;
+}
+
+#submenu ul {
+  display: flex;
+  padding: 0;
+  text-align: left;
+  margin: 0;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+#submenu ul li input[type="button"] {
+  /* Ancho completo */
+  width: 100%; 
+  /* Altura */
+  height: 40px; 
+  /* Color de fondo */
+  background-color: transparent; 
+  border: none;
+  /* Borde redondeado */
+  border-radius: 5px; 
+  cursor: pointer;
+  /* Transición suave */
+  transition: background-color 0.3s ease; 
+}
+
+#submenu ul li input[type="button"]:hover {
+  /* Cambio de color al pasar el ratón */
+  background-color:var(--main-color); 
+}
+
+#encabezado img {
+  width: 55px;
+  height: 55px;
+  /* Mover imágenes a la esquina derecha */
+  float: right; 
+  /* Espacio entre imágenes */
+  margin-right: 0;
+  padding-right: 20px; 
+}
+
+.login-box {
+  width: 800px;
+  background-color: var(--body-color);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  /* display: flex; */
+  text-align: center;
+  align-content: center;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.login-box input[type="button"] {
+  width: 80%; 
+  height: 55px;
+  background-color: var(--main-color);
+  color: var(--body-color);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* disposición botones */
+.parent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+/*----  Main Style  ----*/
+#cards_landscape_wrap-2{
+  text-align: center;
+  /* background: #F7F7F7; */
+}
+#cards_landscape_wrap-2 .container{
+  padding-top: 30px; 
+  padding-bottom: 50px;
+}
+#cards_landscape_wrap-2 a{
+  text-decoration: none;
+  outline: none;
+}
+#cards_landscape_wrap-2 .card-flyer {
+  border-radius: 5px;
+}
+#cards_landscape_wrap-2 .card-flyer .image-box{
+  background: var(--body-color);
+  overflow: hidden;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.50);
+  border-radius: 5px;
+}
+#cards_landscape_wrap-2 .card-flyer .image-box img{
+  -webkit-transition:all .9s ease; 
+  -moz-transition:all .9s ease; 
+  -o-transition:all .9s ease;
+  -ms-transition:all .9s ease; 
+  width: 100%;
+  height: 200px;
+}
+#cards_landscape_wrap-2 .card-flyer:hover .image-box img{
+  opacity: 0.7;
+  -webkit-transform:scale(1.15);
+  -moz-transform:scale(1.15);
+  -ms-transform:scale(1.15);
+  -o-transform:scale(1.15);
+  transform:scale(1.15);
+}
+#cards_landscape_wrap-2 .card-flyer .text-box{
+  text-align: center;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box .text-container{
+  padding: 30px 18px;
+}
+#cards_landscape_wrap-2 .card-flyer{
+  background: var(--main-color);
+  margin-top: 50px;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.40);
+}
+#cards_landscape_wrap-2 .card-flyer:hover{
+  background: #00c8e0;
+  box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  margin-top: 50px;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box p{
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px; 
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: black;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box h6{
+  margin-top: 0px;
+  margin-bottom: 4px; 
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Roboto Black', sans-serif;
+  letter-spacing: 1px;
+  color: black;
+}
