@@ -24,7 +24,7 @@ INSERT INTO categorias (descripcion) VALUES ('Congelados');
 INSERT INTO categorias (descripcion) VALUES ('Economato y Varios');
 INSERT INTO categorias (descripcion) VALUES ('Cafetería y Restaurante');
 INSERT INTO categorias (descripcion) VALUES ('Pan');
-INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
+INSERT INTO categorias (descripcion) VALUES ('Útiles y Materiales');
 
 /*TABLA PRODUCTOS*/ 
     /*Carnicería */
@@ -255,7 +255,7 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
     VALUES ('Pan sandwich', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Pan tostadas', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'));
-    /* Utiles y Materiales*/
+    /* Útiles y Materiales*/
     INSERT INTO productos (descripcion, fk_unidades ) 
     VALUES ('Bolsa plastico', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
     INSERT INTO productos (descripcion, fk_unidades ) 
@@ -824,21 +824,21 @@ INSERT INTO categorias (descripcion) VALUES ('Utiles y Materiales');
     (SELECT id FROM productos WHERE descripcion = 'Pan tostadas'),
     (SELECT id FROM categorias WHERE descripcion = 'Pan')
     );
-    /* Utiles y Materiales*/
+    /* Útiles y Materiales*/
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Bolsa plastico'),
-    (SELECT id FROM categorias WHERE descripcion = 'Utiles y Materiales')
+    (SELECT id FROM categorias WHERE descripcion = 'Útiles y Materiales')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Film transparente'),
-    (SELECT id FROM categorias WHERE descripcion = 'Utiles y Materiales')
+    (SELECT id FROM categorias WHERE descripcion = 'Útiles y Materiales')
     );
     INSERT INTO productos_categoria (fk_producto, fk_categoria) 
     VALUES (
     (SELECT id FROM productos WHERE descripcion = 'Papel Aluminio'),
-    (SELECT id FROM categorias WHERE descripcion = 'Utiles y Materiales')
+    (SELECT id FROM categorias WHERE descripcion = 'Útiles y Materiales')
     );
 
     -- INSERCION DE RESIDUOS
