@@ -104,6 +104,38 @@ header {
     text-decoration: underline;
 }
 
+#contenedor-productos {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+#contenedor-productos ul {
+    list-style: none;
+    display: inline-block;
+    justify-content: center;
+}
+
+#contenedor-productos ul li {
+    margin: 50px;
+}
+
+/* Estilos para el título */
+#titulo-productos {
+    font-size: 24px; /* Tamaño de fuente más grande */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Estilos para los elementos <li> dentro de cada <ul> */
+#contenedor-productos ul li {
+    margin-bottom: 10px; /* Espacio entre elementos de la lista */
+}
+
+#foto_producto{
+    width: 200px;
+    height: auto;
+}
 /* Estilos para el menú desplegable en dispositivos móviles */
 
 #menuMovil {
