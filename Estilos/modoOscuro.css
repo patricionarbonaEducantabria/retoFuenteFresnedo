@@ -146,54 +146,38 @@ nav .enlaces a:hover {
   color: #707070;
 }
 
-#submenu {
-  position: absolute;
-  /* Ajustar posición a la izquierda */
-  left: -45px;
-  /* Ajustar posición */
-  top: 68px;
-  display: none;
-  background-color: var(--light-text-color);
-  border-radius: 5px;
-  /* Sombra */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  /* Asegurar que esté por encima de otros elementos */
-  z-index: 1;
-  width: auto;
+ul, ol {
+  list-style: none;
 }
 
-#icono_persona:hover #submenu {
+.nav > li {
+  float: left;
+}
+
+.nav li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 12px;
   display: block;
 }
 
-#submenu ul {
-  display: flex;
-  padding: 0;
-  text-align: left;
-  margin: 0;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
+.nav li ul {
+  display: none;
+  position: absolute;
+  min-width: 140px;
 }
 
-#submenu ul li input[type=button] {
-  /* Ancho completo */
-  width: 100%;
-  /* Altura */
-  height: 40px;
-  /* Color de fondo */
-  background-color: transparent;
-  border: none;
-  /* Borde redondeado */
-  border-radius: 5px;
-  cursor: pointer;
-  /* Transición suave */
-  transition: background-color 0.3s ease;
+.nav li:hover > ul {
+  display: block;
 }
 
-#submenu ul li input[type=button]:hover {
-  /* Cambio de color al pasar el ratón */
-  background-color: var(--main-color);
+.nav li ul li {
+  position: relative;
+}
+
+.nav li ul li ul {
+  right: -140px;
+  top: 0px;
 }
 
 nav img {
