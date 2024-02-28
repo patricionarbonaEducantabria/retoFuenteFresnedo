@@ -669,7 +669,7 @@ function principal()
     fechasDefecto();
 
     // rellenarPedidos();
-
+    sessionStorage.setItem("dondeEstoy",null);
     botonBuscar = document.getElementById("btnBuscar");
     botonBuscar.addEventListener("click",manejadorClickBuscar);
     botonVerSolicitudes = document.getElementById("btnVerSolicitudes");
@@ -784,15 +784,24 @@ function manejadorClickBuscar() {
     let desde = document.getElementById("inFecha_desde").value;
     let hasta = document.getElementById("inFecha_hasta").value;
     if(desde < hasta ) {
-        rellenarPedidos(desde,hasta);
+        if(sessionStorage.getItem("dondeEstoy") === "null") {
+            console.log("Selecciona que quieres ver");
+        } 
+        if(sessionStorage.getItem("dondeEstoy") === "solicitudes") {
+            rellenarPedidos(desde,hasta);
+        } else if(sessionStorage.getItem("dondeEstoy") === "pedidos") {
+            console.log("muestro Pedidos");
+        }
     } 
 }
 function manejadorClickMostrarSolicitudes() {
     console.log("Muestro Solicitudes(llamo manejador)");
+    sessionStorage.setItem("dondeEstoy", "solicitudes");
     rellenarPedidos();
 }
 function manejadorClickMostrarPedidos() {
     console.log("Muestro Solicitudes(llamo manejador)");
+    sessionStorage.setItem("dondeEstoy", "pedidos");
 }
 function manejadorClickHacerPedido () {
     console.log("Hago Pedido(llamo manejador)");
