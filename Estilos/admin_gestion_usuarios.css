@@ -7,6 +7,38 @@ header {
     background-color: #f0f0f0;
 }
 
+/* Estilos para la cabecera */
+#cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0; /* Eliminamos el padding para que se ajuste al tamaño de los elementos */
+    background-color: #007bff9c;
+    color: #fff;
+    border: 1px solid #ccc;
+    list-style-type: none;
+    margin: 0;
+    flex: 1;
+    font-weight: bolder;
+    font-size: 16px; /* Ajustamos el tamaño de la fuente para que sea igual al de las listas */
+    z-index: 1000;
+    margin-bottom: 10px;
+}
+
+/* Estilo para cada elemento dentro de la cabecera */
+#cabecera li {
+    flex: 1; /* Distribuir el espacio disponible de manera equitativa */
+    padding: 10px; /* Añadimos un poco de espacio interno */
+    text-align: center; /* Centramos el texto */
+    border-right: 1px solid #ccc; /* Añadimos una línea divisoria entre elementos */
+    margin: 0; /* Añadimos margen cero para evitar espacios adicionales */
+}
+
+/* Estilo para el último elemento dentro de la cabecera */
+#cabecera li:last-child {
+    border-right: none; /* Quitamos la línea divisoria en el último elemento */
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -147,6 +179,27 @@ ul li:last-child {
 #btnScrollToTop:hover {
     background-color: #0056b3;
 }
+/* Estilos para el botón de ir arriba */
+#btnScrollToTop {
+display: none;
+position: fixed;
+bottom: 80px;
+right: 20px;
+z-index: 999;
+font-size: 18px;
+border: none;
+outline: none;
+background-color: #007bff;
+color: white;
+cursor: pointer;
+padding: 10px 12px;
+border-radius: 50%;
+}
+
+#btnScrollToTop:hover {
+background-color: #0056b3;
+}
+
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 1128px) {
@@ -154,51 +207,30 @@ ul li:last-child {
         flex-direction: column;
         align-items: stretch;
     }
-
+    
     ul li {
         border-right: none; /* Quitamos la línea divisoria en todos los elementos */
     }
-
+    
     header {
         flex-direction: column;
         align-items: stretch;
     }
-
+    
     #contenedor-buscar {
         flex-direction: column;
         align-items: stretch;
     }
-
+    
     #txtBuscar {
         margin-right: 0;
         margin-bottom: 10px;
     }
-
+    
     #btnMostrarAddUsuarios,
     #btnModificarDatos {
         width: 100%;
         margin-top: 10px;
     }
-
-    /* Estilos para el botón de ir arriba */
-#btnScrollToTop {
-    display: none;
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    z-index: 999;
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    padding: 10px 12px;
-    border-radius: 50%;
 }
 
-#btnScrollToTop:hover {
-    background-color: #0056b3;
-}
-
-}

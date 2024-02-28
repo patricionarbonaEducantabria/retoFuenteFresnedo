@@ -415,12 +415,14 @@ function recuperarProductos(longitud) {
         let miResiduoCabecera = crearElemento("li","Residuos generados"); 
         let miCategoriaCabecera = crearElemento("li","Categorias");
         let miObservacionCabecera = crearElemento("li","Observaciones");
+        let miCabeceraVacia = crearElemento("li","");
         miCabecera.appendChild(miFotoCabecera); 
         miCabecera.appendChild(miProductoCabecera); 
         miCabecera.appendChild(miUnidadCabecera); 
         miCabecera.appendChild(miResiduoCabecera); 
         miCabecera.appendChild(miCategoriaCabecera); 
         miCabecera.appendChild(miObservacionCabecera); 
+        miCabecera.appendChild(miCabeceraVacia); 
         miDiv.appendChild(miCabecera);
         for(let i = 0; i< respuesta.length; i++) {
             miDiv.appendChild(dibujarProducto(respuesta[i]));
