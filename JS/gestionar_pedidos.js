@@ -688,6 +688,8 @@ function fechasDefecto() {
     ultimoMes.setMonth(hoy.getMonth() - 1);
     ultimoMes = ultimoMes.toISOString().split('T')[0];
     flatpickr("#inFecha_hasta", {
+        altInput: true,
+        altFormat: "F j, Y",
         dateFormat: "Y-m-d", // Formato de fecha
         defaultDate: "today", // Establece la fecha actual como predeterminada
         maxDate: "today",
@@ -699,11 +701,13 @@ function fechasDefecto() {
             }, 
             months: {
               shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
-              longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+              longhand: ['Enero', 'Febrero', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             },
           }
       });
     flatpickr("#inFecha_desde", {
+        altInput: true,
+        altFormat: "F j, Y",
         dateFormat: "Y-m-d", // Formato de fecha
         defaultDate: ultimoMes, // Establece la fecha actual como predeterminada
         maxDate: "today",
@@ -715,7 +719,7 @@ function fechasDefecto() {
             }, 
             months: {
               shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
-              longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+              longhand: ['Enero', 'Febrero', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             },
           }
       });
@@ -1217,7 +1221,7 @@ function dibujarSolicitudes(jsonPedidos) {
         
         let divPedidosUsuario = crearElemento("div",undefined,{"id": "usuario" + jsonPedidos[i].idUsuario});
         // datos del usuario
-        let h2emailUsuario = crearElemento("h2","Pedidos de: " + jsonPedidos[i].nombreUsuario );
+        let h2emailUsuario = crearElemento("h2","Solicitudes de: " + jsonPedidos[i].nombreUsuario );
         let h3telefonoUsuario = crearElemento("h3","Teléfono: " + jsonPedidos[i].telefonoUsuario);
 
         // añado datos del usuario antes que las solicitudes
