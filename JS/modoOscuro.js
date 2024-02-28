@@ -28,3 +28,9 @@ themeButton.addEventListener('click', () => {
   // Guardamos el tema actual que eligió el usuario
   localStorage.setItem('selected-theme', getCurrentTheme())
 })
+
+const btnSwitch = document.querySelector('#theme-button');
+
+btnSwitch.addEventListener('click', () => {
+	btnSwitch.classList.toggle('active');
+});
