@@ -21,8 +21,16 @@ if(isset($_POST['addUsuario'])) {
 // Listar los usuarios
 function obtenerUsuarios() {
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
-    $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email != ?;");
-    $resultado -> execute(array($_POST['email']));
+    if($_POST['obtenerUsuarios'] != "") {
+        $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email != ? AND email LIKE CONCAT(?,'%');");
+        $resultado -> execute(array($_POST['email'],$_POST['obtenerUsuarios']));
+        
+        // echo "si";
+    } else {
+        // echo "no";
+        $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email != ?;");
+        $resultado -> execute(array($_POST['email']));
+    }
     $datos = array();
     while($fila = $resultado -> fetch()) {
         $usuario = array(

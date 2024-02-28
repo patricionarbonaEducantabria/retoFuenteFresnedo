@@ -69,9 +69,22 @@ function dibujarUsuario(datosUsuario) {
     miFila.appendChild(miCorreo);
     let miTelefono = crearElemento("li",datosUsuario.telefono);    
     miFila.appendChild(miTelefono);
-    let miCargo = crearElemento("li",datosUsuario.cargo);    
+    let cargo;
+    if(datosUsuario.cargo === "1") {
+        cargo = "Administrador";
+    } else {
+        cargo = "Usuario";
+    }
+    let miCargo = crearElemento("li",cargo);    
     miFila.appendChild(miCargo);
-    let miEstado = crearElemento("li",datosUsuario.estado);
+    
+    let estado;
+    if(datosUsuario.estado === "0") {
+        estado = "Deshabilitado";
+    } else {
+        estado = "Habilitado";
+    }
+    let miEstado = crearElemento("li",estado);
     miFila.appendChild(miEstado);
     // Boton Modificar Datos
     let filita = crearElemento("li",undefined);
@@ -239,14 +252,15 @@ function dibujarModalSeguro(idModalSeguro) {
     return miDiv;
 }
 
-function recuperarUsuarios(longitud) {
+function recuperarUsuarios(emailUsuario) {
     let miDiv = document.getElementById("contenedor-usuarios");
     miDiv.innerHTML = "";
-
-    obtenerUsuarios(function(respuesta) {
+    console.log("recupweo");
+    obtenerUsuarios(emailUsuario,function(respuesta) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
         let miDiv = document.getElementById("contenedor-usuarios");
+        miDiv.innerHTML ="";
         let miCabecera = crearElemento("ul",undefined,{
             "id":"cabecera"
         });
@@ -277,7 +291,7 @@ function recuperarUsuarios(longitud) {
     });
 }
 
-function obtenerUsuarios(callback) {
+function obtenerUsuarios(emailUsuario,callback) {
     let miEmail = localStorage.getItem("email");
     let miPeticion = new XMLHttpRequest();
 
@@ -291,8 +305,11 @@ function obtenerUsuarios(callback) {
   };
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
   let datos = "obtenerUsuarios=&email=" + miEmail;
+  if(emailUsuario){
+    emailUsuario.toLowerCase();
+    datos = "obtenerUsuarios=" + emailUsuario + "&email=" + miEmail;
+  }
   miPeticion.send(datos);
 }
 
@@ -500,7 +517,10 @@ function dibujarModalAddUsuarioSeguro() {
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
-
+    console.log("busco el camino a la vida");
+    correo = this.previousElementSibling.value;
+    // console.log(this.previousElementSibling.value);
+    recuperarUsuarios(correo);
 }
 function manejadorClickAdd(e) {
     console.log("añado usuario");
