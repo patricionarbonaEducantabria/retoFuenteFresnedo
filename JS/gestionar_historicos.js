@@ -30,15 +30,11 @@ function dibujarHistorico(datosSolicitud) {
     // console.log("dibujando fila: ",datosSolicitud);
     let miFila = crearElemento("ul",undefined,{"id":"solicitud" + datosSolicitud.id,"class":"padre"});
     if(datosSolicitud.tramitado == 1){
-        let miEstado = crearElemento("li",undefined,{"class":"estadoCirculo circle"});
-        miFila.appendChild(miEstado);
-        miEstado = crearElemento("li","Esta pedido",{"class":"estadoMensaje"});
-        miFila.appendChild(miEstado);
+      miEstado = crearElemento("li","Esta pedido",{"class":"circle"});
+      miFila.appendChild(miEstado);
     }else if(datosSolicitud.tramitado == 0){
-        let miEstado = crearElemento("li",undefined,{"class":"estadoCirculo circle2"});
-        miFila.appendChild(miEstado);
-        miEstado = crearElemento("li","Todavia no se ha pedido",{"class":"estadoMensaje"});
-        miFila.appendChild(miEstado);
+      miEstado = crearElemento("li","Todavia no se ha pedido",{"class":"estadoMensaje circle2"});
+      miFila.appendChild(miEstado);
     }
     let miFecha = crearElemento("li",datosSolicitud.fecha,{"class":"fecha"});  
     miFila.appendChild(miFecha);
@@ -72,7 +68,7 @@ function recuperarHistorico() {
         // recorro el json
         let miDiv = document.getElementById("contenedor-historico");
         for(let i = 0; i< respuesta.length; i++) {
-            console.log(respuesta[i]);
+            // console.log(respuesta[i]);
             miDiv.appendChild(dibujarHistorico(respuesta[i]));
         }
         document.body.appendChild(miDiv);

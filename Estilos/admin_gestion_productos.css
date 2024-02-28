@@ -188,6 +188,10 @@ ul li img {
     ul li {
         border-right: none; /* Quitamos la línea divisoria en todos los elementos */
     }
+    #cabecera li {
+        border-right: none; /* Quitamos la línea divisoria en todos los elementos */
+        border-bottom: 1px solid #ccc;
+    }
 
     header {
         flex-direction: column;
