@@ -69,12 +69,12 @@
 // }
 
 // function recuperarPedidos(desde, hasta) {
-//     obtenerPedidos(desde,hasta);
+//     obtenerSolicitudes(desde,hasta);
 // }
 
 
 
-// function obtenerPedidos(desde,hasta) {
+// function obtenerSolicitudes(desde,hasta) {
 //     let miPeticion = new XMLHttpRequest();
 
 //     miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
@@ -82,7 +82,7 @@
 //     miPeticion.onreadystatechange = function() {
 //         if (miPeticion.readyState == 4 && miPeticion.status == 200) {
 //             // console.log("Respuesta Server: ",JSON.parse(miPeticion.responseText));
-//             dibujarPedidos(JSON.parse(miPeticion.responseText));
+//             dibujarSolicitudes(JSON.parse(miPeticion.responseText));
 //             // callback(miPeticion.responseText);
 //         }
 //     }
@@ -95,13 +95,13 @@
 //     }
 //     misDatos = JSON.stringify(misDatos);
 
-//     let datos = "obtenerPedidos=" + misDatos;
+//     let datos = "obtenerSolicitudes=" + misDatos;
 //     miPeticion.send(datos);
 // }
 
 // // 
 // // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓DIBUJAR PEDIDOS↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-// function dibujarPedidos(jsonPedidos) {
+// function dibujarSolicitudes(jsonPedidos) {
 //     dibujarPedidoEnLista(jsonPedidos);
     
 // }
@@ -668,7 +668,7 @@ function principal()
 {
     fechasDefecto();
 
-    // rellenarPedidos();
+    // rellenarSolicitudes();
     sessionStorage.setItem("dondeEstoy",null);
     botonBuscar = document.getElementById("btnBuscar");
     botonBuscar.addEventListener("click",manejadorClickBuscar);
@@ -761,6 +761,18 @@ function crearElemento(etiqueta, texto, atributos) {
     }
     return elementoNuevo;
 }
+function rellenarSolicitudes(desde,hasta) {
+    if(typeof(desde) === "undefined" && typeof(hasta) === "undefined") {
+        // valores por defecto de fechas
+        desde = document.getElementById("inFecha_desde").value;
+        hasta = document.getElementById("inFecha_hasta").value;
+    }
+    // cargo los pedidos
+    obtenerSolicitudes(desde,hasta, function(respuesta) {
+        dibujarSolicitudes(respuesta);
+
+    });
+}
 function rellenarPedidos(desde,hasta) {
     if(typeof(desde) === "undefined" && typeof(hasta) === "undefined") {
         // valores por defecto de fechas
@@ -770,7 +782,7 @@ function rellenarPedidos(desde,hasta) {
     // cargo los pedidos
     obtenerPedidos(desde,hasta, function(respuesta) {
         dibujarPedidos(respuesta);
-
+        console.log(respuesta);
     });
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
@@ -788,20 +800,21 @@ function manejadorClickBuscar() {
             console.log("Selecciona que quieres ver");
         } 
         if(sessionStorage.getItem("dondeEstoy") === "solicitudes") {
-            rellenarPedidos(desde,hasta);
+            rellenarSolicitudes(desde,hasta);
         } else if(sessionStorage.getItem("dondeEstoy") === "pedidos") {
-            console.log("muestro Pedidos");
+            rellenarPedidos(desde,hasta);
         }
     } 
 }
 function manejadorClickMostrarSolicitudes() {
     console.log("Muestro Solicitudes(llamo manejador)");
     sessionStorage.setItem("dondeEstoy", "solicitudes");
-    rellenarPedidos();
+    rellenarSolicitudes();
 }
 function manejadorClickMostrarPedidos() {
-    console.log("Muestro Solicitudes(llamo manejador)");
+    console.log("Muestro Pedidos(llamo manejador)");
     sessionStorage.setItem("dondeEstoy", "pedidos");
+    rellenarPedidos();
 }
 function manejadorClickHacerPedido () {
     console.log("Hago Pedido(llamo manejador)");
@@ -896,7 +909,6 @@ function manejadorClickTramitarPedido () {
             console.log("No se pudo hacer el pedido");
         }
     });
-    // ando por aqui
 
 }
 
@@ -930,13 +942,38 @@ function manejadorClickActualizarSolicitud() {
     };
     actualizarSolicitud(datosPedido, function(respuesta) {
         if(respuesta === "1") {
-            rellenarPedidos();
+            rellenarSolicitudes();
             $("#modal-ModificarCantidad").modal("hide");
         } else  {
             console.log("Hubo un error");
         }
     });
     console.log("idSolicitud: ",idSolicitud, " cantidad: ", cantidad);
+}
+function manejadorClickActualizarPedido() {
+    console.log("actualizo estado(llamado manejador)");
+    let contenedorPedido = this.parentElement.parentElement.parentElement.parentElement;
+    let idPedido = contenedorPedido.id.split("-")[1];
+    let idEstado = this.className;
+    let liEstadoPedido = contenedorPedido.childNodes[4];
+    console.log(idEstado);
+    console.log(idPedido);
+    console.log(liEstadoPedido);
+    let datosPedido = {
+        idPedido: idPedido,
+        idEstado: idEstado
+    };
+    actualizarPedido(datosPedido, function(respuesta) {
+        console.log("respuesta actualizar: ",respuesta);
+        if(respuesta === "1") {
+            obtenerEstado(idPedido, function(respuesta) {
+                    console.log("respuesta obtener estado: ",respuesta);
+                    liEstadoPedido.innerHTML = "";
+                    liEstadoPedido.innerHTML = "Estado: " + respuesta;
+            });
+        }
+    });
+    
 }
 function manejadorClickTramitarSolicitud() {
     console.log("tramito solicitud(llamado manejador)");
@@ -964,7 +1001,7 @@ function manejadorInputCantidad() {
 
 // ===========PETICIONES BD=========================================
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-function obtenerPedidos(desde,hasta, callback) {
+function obtenerSolicitudes(desde,hasta, callback) {
     let miPeticion = new XMLHttpRequest();
     miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
 
@@ -973,6 +1010,30 @@ function obtenerPedidos(desde,hasta, callback) {
             // console.log("Respuesta Server: ",JSON.parse(miPeticion.responseText));
             callback(JSON.parse(miPeticion.responseText));
             // console.log(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    let misDatos = {
+        "desde" : desde,
+        "hasta" : hasta + " 23:59:59"
+    }
+    misDatos = JSON.stringify(misDatos);
+
+    let datos = "obtenerSolicitudes=" + misDatos;
+    miPeticion.send(datos);
+}
+function obtenerPedidos(desde,hasta, callback) {
+    let miPeticion = new XMLHttpRequest();
+    miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            console.log("Respuesta Server Pedidos: ",JSON.parse(miPeticion.responseText));
+            callback(JSON.parse(miPeticion.responseText));
+            console.log(miPeticion.responseText);
+            // aqui estoy
         }
     }
 
@@ -1044,6 +1105,43 @@ function hacerPedidoObtenerSolicitudes(datosSolicitud ,callback) {
     let datos = "hacerPedidoObtenerSolicitudes=" + datosSolicitud;
     miPeticion.send(datos);
 }
+function actualizarPedido(datosSolicitud ,callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            // console.log(JSON.parse(miPeticion.responseText));
+            callback(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    datosSolicitud = JSON.stringify(datosSolicitud);
+    let datos = "actualizarPedido=" + datosSolicitud;
+    miPeticion.send(datos);
+}
+function obtenerEstado(datosSolicitud ,callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            // console.log(JSON.parse(miPeticion.responseText));
+            callback(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    let datos = "obtenerEstado=" + datosSolicitud;
+    miPeticion.send(datos);
+}
 function obtenerProveedores(callback) {
     let miPeticion = new XMLHttpRequest();
 
@@ -1082,12 +1180,30 @@ function hacerPedido(datosSolicitud ,callback) {
     let datos = "hacerPedido=" + datosSolicitud;
     miPeticion.send(datos);
 }
+function obtenerEstados(callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            // console.log(JSON.parse(miPeticion.responseText));
+            callback(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    let datos = "obtenerEstados=";
+    miPeticion.send(datos);
+}
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 // ===========PETICIONES BD=========================================
 
 // ===========FUNCIONES DIBUJAR=========================================
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-function dibujarPedidos(jsonPedidos) {
+function dibujarSolicitudes(jsonPedidos) {
     // contenedor de pedidos
     let divUsuarios = document.getElementById('contenedor-pedidos');
     divUsuarios.innerHTML = "";
@@ -1176,10 +1292,83 @@ function dibujarPedidos(jsonPedidos) {
     let modalTramitarPedido = dibujarModalTramitarPedido();
     // solucion pocha, problema raro del modal
     modalTramitarPedido.addEventListener('hidden.bs.modal', function () {
-        rellenarPedidos();
+        rellenarSolicitudes();
         console.log("me cerraro wey");
       });
     document.getElementById("contenedor-modales").appendChild(modalTramitarPedido);
+
+}
+function dibujarPedidos(jsonPedidos) {
+    // contenedor de pedidos
+    let divPedidos = document.getElementById('contenedor-pedidos');
+    divPedidos.innerHTML = "";
+    console.log("dibujos algo:",jsonPedidos);
+    for (let fecha in jsonPedidos) {
+        console.log('Fecha:', fecha);
+        let divFecha = crearElemento("div",undefined);
+        let h2Fecha = crearElemento("h2", "Pedidos del " + fecha);
+        divFecha.appendChild(h2Fecha);
+        
+        // Recorrer los usuarios y sus pedidos para cada fecha
+        for (let idUsuario in jsonPedidos[fecha]) {
+            let ulUsuario = crearElemento("ul",undefined);
+            let usuario = jsonPedidos[fecha][idUsuario];
+            let liNombre = crearElemento("li","Pedidos de: " + usuario.usuario);
+            let liPedidos = crearElemento("li",undefined);
+
+
+            // console.log('Id Usuario:', usuario.idUsuario);
+            // console.log('Usuario:', usuario.usuario);
+    
+            // Recorrer los pedidos para cada usuario
+            usuario.pedidos.forEach(pedido => {
+                let ulPedido = crearElemento("ul",undefined, {"id":"pedido-" + pedido.idPedido});
+                let liProducto = crearElemento("li", 'Producto: ' + pedido.producto);
+                let liCantidad = crearElemento("li", 'Cantidad: ' + pedido.cantidad);
+                let liUnidades = crearElemento("li", 'Unidades: ' + pedido.unidades);
+                let liObservaciones = crearElemento("li", 'Observaciones: ' + pedido.observaciones);
+                let liSuEstado = crearElemento("li", "Estado: " + pedido.estado);
+                // lista de botones de estado pedido
+                let liEstados = crearElemento("li",undefined);
+                let ulBotonesEstados = crearElemento("ul",undefined,{"class" : "ulEstados"});
+                
+                obtenerEstados(function(respuesta) {
+                    respuesta = JSON.parse(respuesta);
+                    for(let i = 0; i < respuesta.length; i++) {
+                        let liEstado = crearElemento("li",undefined);
+                        let botonEstado = crearElemento("input", respuesta[i].estado,{
+                            "type" : "button",
+                            "class" : respuesta[i].idEstado,
+                            "value" : respuesta[i].estado
+                        });
+                        botonEstado.addEventListener("click",manejadorClickActualizarPedido);
+                        liEstado.appendChild(botonEstado);
+                        ulBotonesEstados.appendChild(liEstado);
+                    }
+                });
+                liEstados.appendChild(ulBotonesEstados);
+
+                ulPedido.appendChild(liProducto);
+                ulPedido.appendChild(liCantidad);
+                ulPedido.appendChild(liUnidades);
+                ulPedido.appendChild(liObservaciones);
+                ulPedido.appendChild(liSuEstado);
+                ulPedido.appendChild(liEstados);
+                liPedidos.appendChild(ulPedido);
+            });
+            ulUsuario.appendChild(liNombre);
+            ulUsuario.appendChild(liPedidos);
+            divFecha.appendChild(ulUsuario);
+        }
+
+        divPedidos.appendChild(divFecha);
+    }
+
+    
+    
+
+
+    
 
 }
 
