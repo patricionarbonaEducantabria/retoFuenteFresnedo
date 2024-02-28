@@ -24,7 +24,7 @@ body.dark-theme {
 
 body {
   background: var(--body-color);
-  transition: background-color 0.6s ease-in;
+  transition: 3s ease all;
   color: var(--text-color);
 }
 
@@ -51,14 +51,10 @@ hr {
 
 .container {
   background: var(--container-color);
-  transition: background-color 0.6s ease-in;
+  transition: 3s ease all;
   box-shadow: var(--container-shadow);
 }
 
-/* // Fin de estilos base que SÍ son necesarios en el tema dark
-
-
-// Botón para activar el tema oscuro */
 .change-theme-button {
   background: #343D5B;
   border-radius: 1000px;
@@ -79,7 +75,7 @@ hr {
   left: 0;
   right: unset;
   border-radius: 100px;
-  transition: 0.3s ease all;
+  transition: 3s ease all;
   box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 .change-theme-button.active {
@@ -99,7 +95,6 @@ hr {
   color: #fff;
 }
 
-/* //  Fin del Botón para activar el tema oscuro */
 body {
   margin: 0;
   padding: 0;
@@ -112,21 +107,43 @@ body {
   align-items: center;
 }
 
-#encabezado {
-  margin-right: 0;
-  padding-right: 15px;
+nav {
+  background: var(--body-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 5px;
+  transition: 3s ease all;
+  box-shadow: var(--title-color);
 }
-
-#encabezado ul {
-  /* Alineación a la derecha */
-  text-align: right;
-  margin-top: 0;
-  padding-top: 16px;
+body.dark nav {
+  background: var(--text-color);
+  box-shadow: var(--light-text-color);
 }
-
-#encabezado ul li {
-  position: relative;
-  display: inline-block;
+body.dark nav a {
+  color: var(--light-text-color);
+}
+body.dark nav a:hover {
+  color: var(--body-color);
+}
+nav .logotipo {
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+}
+nav .logotipo img {
+  width: 140px;
+  height: 80px;
+}
+nav .enlaces {
+  display: flex;
+  align-items: center;
+}
+nav .enlaces a {
+  margin-right: 40px;
+}
+nav .enlaces a:hover {
+  color: #707070;
 }
 
 #submenu {
@@ -179,9 +196,9 @@ body {
   background-color: var(--main-color);
 }
 
-#encabezado img {
-  width: 55px;
-  height: 55px;
+nav img {
+  width: 70px;
+  height: 60px;
   /* Mover imágenes a la esquina derecha */
   float: right;
   /* Espacio entre imágenes */
@@ -223,7 +240,7 @@ body {
   grid-template-rows: repeat(3, 1fr);
 }
 
-/*----  Main Style  ----*/
+/*----  stylo de las tarjetas  ----*/
 #cards_landscape_wrap-2 {
   text-align: center;
   /* background: #F7F7F7; */
@@ -245,18 +262,24 @@ body {
   border-radius: 5px;
 }
 
+#cards_landscape_wrap-2 img {
+  height: 75px !important;
+  width: 110px !important;
+}
+
 #cards_landscape_wrap-2 .card-flyer .image-box {
   background: var(--body-color);
   overflow: hidden;
+  transition: 3s ease all;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
 }
 
 #cards_landscape_wrap-2 .card-flyer .image-box img {
-  -webkit-transition: all 0.9s ease;
-  -moz-transition: all 0.9s ease;
-  -o-transition: all 0.9s ease;
-  -ms-transition: all 0.9s ease;
+  -webkit-transition: all 3s ease;
+  -moz-transition: all 3s ease;
+  -o-transition: all 3s ease;
+  -ms-transition: all 3s ease;
   width: 100%;
   height: 200px;
 }
