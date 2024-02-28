@@ -3,10 +3,12 @@ window.onload = principal;
 function principal()
 {
     // document.getElementById("errores").innerHTML = "";
-    recuperarProductos();
     popUpAñadido();
     popUpError();
     
+    categoriaSeleccionada = sessionStorage.getItem("categoria");
+    recuperarProductos(categoriaSeleccionada);
+
     window.onscroll = function() {
         scrollFunction();
     }; 
@@ -29,63 +31,86 @@ document.addEventListener("DOMContentLoaded", function() {
     if(document.getElementById("btnCarniceria") != undefined)
     {
         document.getElementById("btnCarniceria").onclick = function() {
-            window.location.href = "../usuario/usuario_carniceria.html";
+            // window.location.href = "../usuario/usuario_carniceria.html";
+            console.log("pulso", this.id);
+            categoria = this.id.split("btn")[1];
+            recuperarProductos(categoria);
         };
     }
     
     if(document.getElementById("btnPescaderia") != undefined)
     {
         document.getElementById("btnPescaderia").onclick = function() {
-            window.location.href = "../usuario/usuario_pescaderia.html";
+            // window.location.href = "../usuario/usuario_pescaderia.html";
+            categoria = this.id.split("btn")[1];
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnFruteria") != undefined)
     {
         document.getElementById("btnFruteria").onclick = function() {
-            window.location.href = "../usuario/usuario_fruteria.html";
+            // window.location.href = "../usuario/usuario_fruteria.html";
+            categoria = this.id.split("btn")[1];
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnCongelados") != undefined)
     {
         document.getElementById("btnCongelados").onclick = function() {
-            window.location.href = "../usuario/usuario_congelados.html";
+            // window.location.href = "../usuario/usuario_congelados.html";
+            categoria = this.id.split("btn")[1];
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnEconomatoVarios") != undefined)
     {
         document.getElementById("btnEconomatoVarios").onclick = function() {
-            window.location.href = "../usuario/usuario_economato_varios.html";
+            // window.location.href = "../usuario/usuario_economato_varios.html";
+            categoria = this.id.split("btn")[1];
+            categoria = categoria.split("V").join(' y v');
+            // console.log(categoria);
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnPasteleria") != undefined)
     {
         document.getElementById("btnPasteleria").onclick = function() {
-            window.location.href = "../usuario/usuario_pasteleria.html";
+            // window.location.href = "../usuario/usuario_pasteleria.html";
+            categoria = this.id.split("btn")[1];
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnCafeteriaRestaurante") != undefined)
     {
         document.getElementById("btnCafeteriaRestaurante").onclick = function() {
-            window.location.href = "../usuario/usuario_cafeteria_restaurante.html";
+            // window.location.href = "../usuario/usuario_cafeteria_restaurante.html";
+            categoria = this.id.split("btn")[1];
+            categoria = categoria.split("R").join(' y R');
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnUtilesMateriales"))
     {
         document.getElementById("btnUtilesMateriales").onclick = function() {
-            window.location.href = "../usuario/usuario_utiles_materiales.html";
+            // window.location.href = "../usuario/usuario_utiles_materiales.html";
+            categoria = this.id.split("btn")[1];
+            categoria = categoria.split("M").join(' y M');
+            recuperarProductos(categoria);
         };
     }
 
-    if(document.getElementById("btnPan") != undefined)
+    if(document.getElementById("btnPanadería") != undefined)
     {
-        document.getElementById("btnPan").onclick = function() {
-            window.location.href = "../usuario/usuario_pan.html";
+        document.getElementById("btnPananadería").onclick = function() {
+            // window.location.href = "../usuario/usuario_pan.html";
+            categoria = this.id.split("btn")[1];
+            recuperarProductos(categoria);
         };
     }
 
@@ -291,9 +316,8 @@ function almacenarProductos(idProducto, miCantidad)
     document.getElementById("cantidad_"+idProducto).value = "";
 }
 
-function obtenerProductos(callback)
+function obtenerProductos(categoria,callback)
 {
-    let miCategoria = document.getElementById("categoria").textContent;
     let miPeticion = new XMLHttpRequest();
 
     miPeticion.open("POST","../../PHP/usuario_productos.php", true);
@@ -301,27 +325,32 @@ function obtenerProductos(callback)
     miPeticion.onreadystatechange = function() {
         if(miPeticion.readyState == 4 && miPeticion.status == 200)
         {
-            console.log(miPeticion.responseText);
+            // console.log(miPeticion.responseText);
             callback(miPeticion.responseText);
         }
     };
 
     miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    let datos = "obtenerProductos=&categoria=" + miCategoria;
+    let datos = "obtenerProductos=&categoria=" + categoria;
     
     miPeticion.send(datos);
 }
 
-function recuperarProductos(longitud) {
+function recuperarProductos(categoria) {
     let miDiv = document.getElementById("contenedor-productos");
     // vaciamos el div
-    // miDiv.innerHTML = "";
+    miDiv.innerHTML = "";
+    
 
-    obtenerProductos(function(respuesta) {
+    obtenerProductos(categoria,function(respuesta) {
         respuesta = JSON.parse(respuesta);
         // recorro el JSON
         // let miDiv = document.getElementById("contenedor-productos");
+        let h1Categoria = crearElemento("h1",categoria);
+        miDiv.appendChild(h1Categoria);
+        console.log(typeof(categoria));
+        // document.getElementById("categoria").innerHTML = categoria;
         for(let i = 0; i<respuesta.length; i++)
         {
             miDiv.appendChild(dibujarProductos(respuesta[i]));
