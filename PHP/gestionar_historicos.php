@@ -14,15 +14,16 @@ function obtenerHistorico() {
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
     $resultado = $conexion -> prepare("SELECT * FROM solicitudes 
     where 
-        fecha <= ? AND fecha <= ?
+        fecha >= ? AND fecha <= ?
         AND
-        fk_usuario = (SELECT id FROM usuarios WHERE email = ?);");
+        fk_usuario = (SELECT id FROM usuarios WHERE email = ?) 
+        ORDER BY fecha DESC;");
     $resultado -> execute(array($desde, $hasta,$usuario));
-    $datos = array();
+    $solicitudes = array();
     while($fila = $resultado -> fetch()) {
         $solicitud = array(
             'id' => $fila['id'],
-            'idUsuario' => $fila['idUsuario'],
+            'idUsuario' => $fila['fk_usuario'],
             'fecha' => $fila['fecha'],
             'descripcion' => $fila['descripcion'],
             'unidades' => $fila['unidades'],
@@ -31,10 +32,10 @@ function obtenerHistorico() {
             'tramitado' => $fila['tramitado']
         );
 
-        $datos[] = $usuario;
+        $solicitudes[] = $solicitud;
     }
 
-    $jsonString = json_encode($datos);
+    $jsonString = json_encode($solicitudes);
     echo $jsonString;
 }
 

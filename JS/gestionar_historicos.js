@@ -26,24 +26,27 @@ function crearElemento(etiqueta, texto, atributos) {
     return elementoNuevo;
 }
 
-function dibujarHistorico(datosUsuario) {
-    let miFila = crearElemento("div",undefined,{"id":datosUsuario.id,"class":"parent"});
-    if(datosUsuario.tramitado == 1){
-        miEstado = crearElemento("p",undefined,{"id":"circle","class":"div1"})
+function dibujarHistorico(datosSolicitud) {
+    // console.log("dibujando fila: ",datosSolicitud);
+    let miFila = crearElemento("ul",undefined,{"id":"solicitud" + datosSolicitud.id,"class":"padre"});
+    if(datosSolicitud.tramitado == 1){
+        let miEstado = crearElemento("li",undefined,{"class":"estadoCirculo circle"});
         miFila.appendChild(miEstado);
-        miEstado = crearElemento("p","Tramitado",{"class":"div2"})
+        miEstado = crearElemento("li","Esta pedido",{"class":"estadoMensaje"});
         miFila.appendChild(miEstado);
-    }else if(datosUsuario.tramitado == 0){
-        let miEstado = crearElemento("p",undefined,{"id":"circle2","class":"div1"})
+    }else if(datosSolicitud.tramitado == 0){
+        let miEstado = crearElemento("li",undefined,{"class":"estadoCirculo circle2"});
         miFila.appendChild(miEstado);
-        miEstado = crearElemento("p","En tramite",{"class":"div2"})
+        miEstado = crearElemento("li","Todavia no se ha pedido",{"class":"estadoMensaje"});
         miFila.appendChild(miEstado);
     }
-    let miDescripcion = crearElemento("p",datosUsuario.descripcion,{"class":"div3"});  
+    let miFecha = crearElemento("li",datosSolicitud.fecha,{"class":"fecha"});  
+    miFila.appendChild(miFecha);
+    let miDescripcion = crearElemento("li",datosSolicitud.descripcion,{"class":"producto"});  
     miFila.appendChild(miDescripcion);
-    let miCantidad = crearElemento("p",datosUsuario.cantidad,{"class":"div4"});    
+    let miCantidad = crearElemento("li",datosSolicitud.cantidad,{"class":"cantidad"});    
     miFila.appendChild(miCantidad);
-    let miUnidad = crearElemento("p",datosUsuario.unidades,{"class":"div5"});    
+    let miUnidad = crearElemento("li",datosSolicitud.unidades,{"class":"unidad"});    
     miFila.appendChild(miUnidad);
 
     return miFila;
@@ -51,7 +54,7 @@ function dibujarHistorico(datosUsuario) {
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
-    buscadorFecha();
+    recuperarHistorico();
 }
 
 
@@ -60,16 +63,16 @@ function manejadorClickBuscar(e) {
 function recuperarHistorico() {
     let miDiv = document.getElementById("contenedor-historico");
     miDiv.innerHTML = "";
-    if(typeof(desde) === "undefined" && typeof(hasta) === "undefined") {
-        // valores por defecto de fechas
-        desde = document.getElementById("inFecha_desde").value;
-        hasta = document.getElementById("inFecha_hasta").value;
-    }
- obtenerSolicitudes(desde, hasta, function(respuesta) {
+    desde = document.getElementById("inFecha_desde").value;
+    hasta = document.getElementById("inFecha_hasta").value;
+    hasta += " 23:59:59";
+
+    obtenerSolicitudes(desde, hasta, function(respuesta) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
         let miDiv = document.getElementById("contenedor-historico");
         for(let i = 0; i< respuesta.length; i++) {
+            console.log(respuesta[i]);
             miDiv.appendChild(dibujarHistorico(respuesta[i]));
         }
         document.body.appendChild(miDiv);
@@ -83,7 +86,7 @@ function obtenerSolicitudes(desde,hasta,callback) {
 
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-        // console.log(miPeticion.responseText);
+        // console.log(JSON.parse(miPeticion.responseText));
         callback(miPeticion.responseText);
     }
   };
@@ -97,49 +100,10 @@ function obtenerSolicitudes(desde,hasta,callback) {
   };
   datosSolicitud = JSON.stringify(datosSolicitud);
 
-  console.log("datosSolicitud: ",datosSolicitud);
+//   console.log("datosSolicitud: ",datosSolicitud);
   let datos = "obtenerHistorico="+ datosSolicitud;
   miPeticion.send(datos);
 }
-
-function buscadorFecha(){
-
-    let miDiv = document.getElementById("contenedor-historico");
-    miDiv.innerHTML = "";
-
- obtenerSolicitudes(function(respuesta) {
-        respuesta = JSON.parse(respuesta);
-
-let miDiv = document.getElementById("contenedor-historico");
-
-//recupero los valores de los input date (yyyy-mm-dd)
-
-let fechaHace = document.getElementById("fecha_desde").value;
-let fechaHasta = document.getElementById("fecha_hasta").value
-
-            if(fechaHace !== "" && fechaHasta !== ""){
-                //filtro el array por fecha 
-                muestra = respuesta.filter( n=> n.fecha > fechaHace && n.fecha <= fechaHasta)
-                //recorro el array para crear los elementos
-
-                for(let i = 0; i< muestra.length; i++){
-                    miDiv.appendChild(dibujarHistorico(muestra[i]));
-                    console.error("salta la primera");     
-                }
-               
-            }else if(fechaHasta === ""){
-                muestra = respuesta.filter(n => n.fecha > fechaHace);
-                console.warn(muestra);
-                for(let i = 0; i< muestra.length; i++){
-                    miDiv.appendChild(dibujarHistorico(muestra[i]));
-                    console.error("salta la segunda");
-                }
-            }
-        
-    document.body.appendChild(miDiv);
-    });
-}
-
 
 function fechasDefecto() {
     //Establecer fecha desde y hasta: Por defecto de hoy a hace un mes

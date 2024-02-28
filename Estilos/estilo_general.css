@@ -21,26 +21,14 @@
 }
 
 
-#circle {
+.circle {
     background: green;
     border-radius: 50%;
     width: 10px;
     height: 10px;
 }
-#circle2 {
+.circle2 {
     background: orange;
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-}
-#circle3 {
-    background: rgb(255, 47, 0);
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
-}
-#circle4 {
-    background: rgb(0, 0, 0);
     border-radius: 50%;
     width: 10px;
     height: 10px;
@@ -54,11 +42,31 @@
     grid-row-gap: 8px;
     align-items: baseline;
     justify-items: start
-    }
+}
   
-        .div1 { grid-area: 1 / 5 / 2 / 6; }
-        .div2 { grid-area: 1 / 6 / 2 / 7; }
-        .div3 { grid-area: 1 / 7 / 2 / 8; }
-        .div4 { grid-area: 1 / 8 / 2 / 9; }
-        .div5 { grid-area: 1 / 9 / 2 / 10; }
+.div1 { grid-area: 1 / 5 / 2 / 6; }
+.div2 { grid-area: 1 / 6 / 2 / 7; }
+.div3 { grid-area: 1 / 7 / 2 / 8; }
+.div4 { grid-area: 1 / 8 / 2 / 9; }
+.div5 { grid-area: 1 / 9 / 2 / 10; }
  
+/* Patricio pruebas */
+#contenedor-historico {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin: auto auto; */
+}
+
+.filas {
+    display: flex;
+    align-items: center;
+}
+
+.padre {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 0px;
+    }

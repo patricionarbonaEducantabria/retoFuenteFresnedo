@@ -10,57 +10,36 @@
     <script src="../../JS/usuario_inicio.js"></script>
 </head>
 <body>
-    
-    <header>
-        <div class="back">
-            <div class="menu container2">
-                <a href="#" class="logo">
-                    <img src="../../Imagenes/logo.png" id="logito" alt="logo">
-                </a>
-                <input type="checkbox" id="menu"/>
-                <label for="menu">
-                    <img src="../../Imagenes/menu2.png" class="menu-icono" alt="menu-icono">
-                </label>
-                <nav class="navbar">
+    <nav>
+        <a class="logotipo" href="./usuario_inicio.html">
+            <img src="../../Imagenes/logo.png" alt="logo instituto">
+        </a>
+        <div class="enlaces">
+            <ul id="icono_persona" class="nav">
+                <li>
+                    <a href="#">
+                        <img src="../../Imagenes/icono_persona.png" alt="icono_persona">
+                    </a>
                     <ul>
                         <li>
-                            <a href="#">
-                                <label for="Historial de pedido">Historial de pedido</label>
-                                <img src="../../Imagenes/icono_persona.png" alt="icoPersona">
-                            </a>
+                            <input type="button" id="btnHistorialPedidos" value="Historial pedidos">
                         </li>
                         <li>
-                            <a href="../usuario/usuario_pagina_compra.html">
-                                <label for="cesta">Cesta</label>
-                                <img src="../../Imagenes/carro-de-la-compra.png" alt="icoCesta">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <label for="Historial de pedido">Cerrar sesion</label>
-                            </a>
+                            <input type="button" id="btnCerrarSesion" value="Cerrar sesión">
                         </li>
                     </ul>
-                    <ul>
-                        <button class="change-theme-button" id="theme-button">
-                            <span><i class="fas fa-sun"></i></span>
-                            <span><i class="fas fa-moon"></i></span>
-                        </button>
-                    </ul>
-                </nav>
-            </div>
+                </li>
+            </ul>
+            <a href="./usuario_pagina_compra.html">
+                <img src="../../Imagenes/carro-de-la-compra.png" alt="carrito_compra">
+            </a>
+            
+            <button class="change-theme-button" id="theme-button">
+                <span><i class="fas fa-sun"></i></span>
+                <span><i class="fas fa-moon"></i></span>
+            </button>
         </div>
-    </header>
-
-
-
-
-
-
-
-
-
-
+    </nav>
 
     <!-- Topic Cards -->
     <div id="cards_landscape_wrap-2">
