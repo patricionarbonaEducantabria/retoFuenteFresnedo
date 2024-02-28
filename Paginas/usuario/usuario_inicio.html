@@ -8,32 +8,19 @@
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../Estilos/modoOscuro.css">
     <script src="../../JS/usuario_inicio.js"></script>
-    <style>
-        #cards_landscape_wrap-2 img {
-            height: 75px !important;
-            width: 110px !important;
-        }
-        
-    </style>
-    
 </head>
 <body>
-    <header id="encabezado">
-        <ul>
-            <li>
-                <a href="./usuario_pagina_compra.html">
-                    <img src="../../Imagenes/carro-de-la-compra.png" alt="carrito_compra">
-                </a>
-            </li>
-            <li id="icono_persona">
-                <a href="#">
-                    <img src="../../Imagenes/icono_persona.png" alt="icono_persona">
-                </a>
-                <div id="submenu">
+    <nav>
+        <a class="logotipo" href="./usuario_inicio.html">
+            <img src="../../Imagenes/logo.png" alt="logo instituto">
+        </a>
+        <div class="enlaces">
+            <ul id="icono_persona" class="nav">
+                <li>
+                    <a href="#">
+                        <img src="../../Imagenes/icono_persona.png" alt="icono_persona">
+                    </a>
                     <ul>
-                        <li>
-                            <!-- <button class="change-theme-button" id="theme-button"></button> -->
-                        </li>
                         <li>
                             <input type="button" id="btnHistorialPedidos" value="Historial pedidos">
                         </li>
@@ -41,17 +28,19 @@
                             <input type="button" id="btnCerrarSesion" value="Cerrar sesión">
                         </li>
                     </ul>
-                </div>
-            </li>
-        </ul>
-    </header>
-    
-    <button class="change-theme-button" id="theme-button">
-        <span><i class="fas fa-sun"></i></span>
-        <span><i class="fas fa-moon"></i></span>
-    </button>
-    
-    
+                </li>
+            </ul>
+            <a href="./usuario_pagina_compra.html">
+                <img src="../../Imagenes/carro-de-la-compra.png" alt="carrito_compra">
+            </a>
+            
+            <button class="change-theme-button" id="theme-button">
+                <span><i class="fas fa-sun"></i></span>
+                <span><i class="fas fa-moon"></i></span>
+            </button>
+        </div>
+    </nav>
+
     <!-- Topic Cards -->
     <div id="cards_landscape_wrap-2">
         <div class="container">
