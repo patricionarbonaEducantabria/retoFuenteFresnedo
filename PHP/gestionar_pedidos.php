@@ -18,6 +18,42 @@ if(isset($_POST['tramitarSolicitud'])) {
     // echo "conectado";
     tramitarSolicitud();
 }
+if(isset($_POST['hacerPedidoObtenerSolicitudes'])) {
+    // echo "conectado";
+    hacerPedidoObtenerSolicitudes();
+}
+
+
+function hacerPedidoObtenerSolicitudes() {
+    $idSolicitudes = $_POST['hacerPedidoObtenerSolicitudes'];
+    $idSolicitudes = json_decode($idSolicitudes);
+
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+
+    $resultado = $conexion ->prepare("SELECT * FROM solicitudes WHERE id = ? and tramitado = 1;");
+
+    $solicitudes = [];
+    
+    foreach($idSolicitudes as $solicitud) {
+        $resultado->execute(array($solicitud));
+
+        if($fila = $resultado -> fetch()) {
+            $solicitud = array(
+                "idSolicitud" => $fila['id'],
+                "fechaSolicitud" => $fila['fecha'],
+                "productoSolicitud" => $fila['descripcion'],
+                "unidadesSolicitud" => $fila['unidades'],
+                "cantidadSolicitud" => $fila['cantidad'],
+                "observacionesSolicitud" => $fila['observaciones'],
+            );
+            $solicitudes[] = $solicitud;
+        }
+    }
+
+    $jsonString = json_encode($solicitudes);
+    echo $jsonString;
+}
+
 
 function obtenerPedidos() {
     $fechas = $_POST['obtenerPedidos'];
@@ -161,10 +197,8 @@ function obtenerUsuario() {
 function actualizarSolicitud() {
     $datosPedido = $_POST['actualizarSolicitud'];
     $datosPedido = json_decode($datosPedido);
-    $fecha = $datosPedido->fecha;
-    $producto = $datosPedido->producto;
-    $email = $datosPedido->emailUsuario;
-    $cantidad = $datosPedido->cantidad;
+    $idSolicitud = $datosPedido->id;
+    $cantidadSolicitud = $datosPedido->cantidad;
 
     try {
         $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
@@ -173,10 +207,10 @@ function actualizarSolicitud() {
         $resultado = $conexion->prepare("
             UPDATE solicitudes
             SET cantidad = ?
-            WHERE fecha = ? AND descripcion = ? AND fk_usuario = (SELECT id FROM usuarios WHERE email = ?);
+            WHERE id = ?;
         ");
 
-        $resultado->execute(array($cantidad, $fecha, $producto, $email));
+        $resultado->execute(array($cantidadSolicitud, $idSolicitud));
 
         // Manejo del resultado o respuesta al cliente si es necesario
         echo "1";
@@ -196,28 +230,46 @@ function tramitarSolicitud() {
     //     "telefono" : hijos[5].innerHTML.split(": ")[1],
     //     "estado" : hijos[6].innerHTML.split(": ")[1]
     // };
-    $datosPedido = $_POST['tramitarSolicitud'];
-    $datosPedido = json_decode($datosPedido);
-    $email = $datosPedido->emailUsuario;
-    $fecha = $datosPedido->fecha;
-    $producto = $datosPedido->producto;
-    $tramite = $datosPedido->estado;
+    $idSolicitud = $_POST['tramitarSolicitud'];
 
 
-        $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
-        // $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $resultado = $conexion->prepare("
-        UPDATE solicitudes
-        SET tramitado = ?
-        WHERE fecha = ? AND descripcion = ? AND fk_usuario = (SELECT id FROM usuarios WHERE email = ?);
-        ");
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
 
-        $resultado->execute(array($tramite, $fecha, $producto, $email));
-        if($tramite == 0) {
-            echo "1";
-        } else {
-            echo "0";
-        }
+    try {
+
+        // Comenzar una transacción
+        $conexion->beginTransaction();
+
+        // Consulta para actualizar el campo tramitado
+        $update_sql = "UPDATE solicitudes
+                    SET tramitado = CASE WHEN tramitado = 1 THEN 0 ELSE 1 END
+                    WHERE id = ?";
+
+        // Preparar y ejecutar la consulta de actualización
+        $resultado = $conexion->prepare($update_sql);
+        $resultado->execute(array($idSolicitud));
+
+        // Consulta para obtener el nuevo valor de tramitado
+        $select_sql = "SELECT tramitado FROM solicitudes WHERE id = ?";
+        
+        // Preparar y ejecutar la consulta de selección
+        $resultado = $conexion->prepare($select_sql);
+        $resultado->execute(array($idSolicitud));
+
+        // Obtener el resultado
+        $nuevo_valor_tramitado = $resultado->fetchColumn();
+
+        // Confirmar la transacción
+        $conexion->commit();
+
+        echo $nuevo_valor_tramitado;
+    } catch (PDOException $e) {
+        // Si hay un error, deshacer la transacción
+        $conexion->rollBack();
+        echo "error";
+    }
+
+
 }
 ?>
