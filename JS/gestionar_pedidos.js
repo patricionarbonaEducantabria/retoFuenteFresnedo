@@ -580,20 +580,20 @@
 //             let liProducto = crearElemento("li",elementosPedido[1].innerHTML);
 //             let liCantidad = crearElemento("li",cantidad + unidad);
 //             // console.log("cuanto: " ,cantidad + " " + unidad);
-//             let liProveedores = crearElemento("li",undefined);
-//             let selectProveedores = crearElemento("select",undefined);
-//             obtenerProveedores( function(respuesta) {
-//                 let proveedores = JSON.parse(respuesta);
-//                 for(let i = 0; i < proveedores.length; i++) {
-//                     // console.log(proveedores[i]);
-//                     let optionProveedores = crearElemento("option", 
-//                         proveedores[i].nombre + " tlf: " + proveedores[i].telefono
-//                     , {"value" : proveedores[i].idProveedor});
-//                     selectProveedores.appendChild(optionProveedores);
-//                 }
-//             });
-//             liProveedores.appendChild(selectProveedores);
-//             ulPedido.appendChild(liProducto);
+            // let liProveedores = crearElemento("li",undefined);
+            // let selectProveedores = crearElemento("select",undefined);
+            // obtenerProveedores( function(respuesta) {
+            //     let proveedores = JSON.parse(respuesta);
+            //     for(let i = 0; i < proveedores.length; i++) {
+            //         // console.log(proveedores[i]);
+            //         let optionProveedores = crearElemento("option", 
+            //             proveedores[i].nombre + " tlf: " + proveedores[i].telefono
+            //         , {"value" : proveedores[i].idProveedor});
+            //         selectProveedores.appendChild(optionProveedores);
+            //     }
+            // });
+            // liProveedores.appendChild(selectProveedores);
+            // ulPedido.appendChild(liProducto);
 //             ulPedido.appendChild(liCantidad);
 //             ulPedido.appendChild(liProveedores);
 //             liProveedores.appendChild(selectProveedores);
@@ -668,7 +668,7 @@ function principal()
 {
     fechasDefecto();
 
-    rellenarPedidos();
+    // rellenarPedidos();
 
     botonBuscar = document.getElementById("btnBuscar");
     botonBuscar.addEventListener("click",manejadorClickBuscar);
@@ -789,6 +789,7 @@ function manejadorClickBuscar() {
 }
 function manejadorClickMostrarSolicitudes() {
     console.log("Muestro Solicitudes(llamo manejador)");
+    rellenarPedidos();
 }
 function manejadorClickMostrarPedidos() {
     console.log("Muestro Solicitudes(llamo manejador)");
@@ -804,22 +805,90 @@ function manejadorClickHacerPedido () {
 
         // recorro las id y obtengo los ul con esas id
         let solicitudes = JSON.parse(respuesta);
-        let divSolicitudes = crearElemento("div",undefined);
-        for(let i = 0; i < solicitudes.length; i++) {
-            let ulSolicitud = document.getElementById("solicitud"+solicitudes[i].idSolicitud,undefined);
-            divSolicitudes.appendChild(ulSolicitud);
-        }
+        if(solicitudes[0] !== undefined) {
+            
+            let divSolicitudes = crearElemento("div",undefined,{"id": solicitudes[0].idUsuario});
+            for(let i = 0; i < solicitudes.length; i++) {
+                let ulSolicitud = document.getElementById("solicitud"+solicitudes[i].idSolicitud,undefined);
+                let liProveedores = crearElemento("li",undefined);
+                let selectProveedores = crearElemento("select",undefined);
+                obtenerProveedores( function(respuesta) {
+                    let proveedores = JSON.parse(respuesta);
+                    for(let i = 0; i < proveedores.length; i++) {
+                        // console.log(proveedores[i]);
+                        let optionProveedores = crearElemento("option", 
+                            proveedores[i].nombre + " tlf: " + proveedores[i].telefono
+                        , {"value" : proveedores[i].idProveedor});
+                        selectProveedores.appendChild(optionProveedores);
+                    }
+                });
 
-        document.querySelector("#modal-TramitarPedido .modal-body").innerHTML = "";
-        document.querySelector("#modal-TramitarPedido .modal-body").appendChild(divSolicitudes);
-        $("#modal-TramitarPedido").modal("show");
+
+                // Elimino lis del ul que no necesito
+                let hijosEliminar = ulSolicitud.childNodes;
+                // fuera fecha
+                // console.log(hijosEliminar);
+                ulSolicitud.removeChild(hijosEliminar[0]);
+                // fuera botones
+                // console.log(hijosEliminar);
+                ulSolicitud.removeChild(hijosEliminar[4]);
+                ulSolicitud.removeChild(hijosEliminar[4]);
+                // fuera estado
+                ulSolicitud.removeChild(hijosEliminar[3]);
+
+                liProveedores.appendChild(selectProveedores);
+                ulSolicitud.appendChild(liProveedores);
+                divSolicitudes.appendChild(ulSolicitud);
+
+            }
+
+            document.querySelector("#modal-TramitarPedido .modal-body").innerHTML = "";
+            document.querySelector("#modal-TramitarPedido .modal-body").appendChild(divSolicitudes);
+            $("#modal-TramitarPedido").modal("show");
+        }
 
     });
 }
 function manejadorClickTramitarPedido () {
     console.log("Tramito Pedido(llamo manejador)");
-    console.log(this.parentElement.parentElement.previousSibling);
-    // aqui estoy
+    console.log(this);
+    let ulSolicitudes = this.parentElement.parentElement.previousSibling.querySelectorAll("div ul");
+    console.log(ulSolicitudes);
+    let datosPedido = [];
+    for(let i = 0; i < ulSolicitudes.length; i++) {
+        let idUsuario = ulSolicitudes[i].parentElement.id;
+        let idSolicitud = ulSolicitudes[i].id.split("solicitud")[1];
+        let productoSolicitud = ulSolicitudes[i].childNodes[0].innerHTML.split(": ")[1];
+        
+        let cantidadSolicitud = ulSolicitudes[i].childNodes[1].innerHTML.split(": ")[1].split(" ");
+        let unidadesSolicitud = cantidadSolicitud.slice(1).join(" ");
+        cantidadSolicitud = cantidadSolicitud[0];
+        
+        let observacionesSolicitud = ulSolicitudes[i].childNodes[2].innerHTML.split(": ")[1];
+        let idProveedorSolicitud = ulSolicitudes[i].childNodes[3].childNodes[0].value;
+
+        datosPedido.push({
+            "idUsuario" : idUsuario,
+            "idSolicitud" : idSolicitud,
+            "producto" : productoSolicitud,
+            "cantidad" : cantidadSolicitud,
+            "unidades" : unidadesSolicitud,
+            "observaciones" : observacionesSolicitud,
+            "idProveedor" : idProveedorSolicitud
+        });
+    }
+    console.log(datosPedido);
+    hacerPedido(datosPedido, function(respuesta) {
+        if(respuesta === "1") {
+            // console.log("Se hizo el pedido");
+            $("#modal-TramitarPedido").modal("hide");
+
+        } else {
+            console.log("No se pudo hacer el pedido");
+        }
+    });
+    // ando por aqui
+
 }
 
 function manejadorClickModificarSolicitud() {
@@ -983,6 +1052,25 @@ function obtenerProveedores(callback) {
 
 
     let datos = "obtenerProveedores=";
+    miPeticion.send(datos);
+}
+function hacerPedido(datosSolicitud ,callback) {
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/gestionar_pedidos.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            // console.log(miPeticion.responseText);
+            // console.log(JSON.parse(miPeticion.responseText));
+            callback(miPeticion.responseText);
+        }
+    }
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    datosSolicitud = JSON.stringify(datosSolicitud);
+    let datos = "hacerPedido=" + datosSolicitud;
     miPeticion.send(datos);
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑

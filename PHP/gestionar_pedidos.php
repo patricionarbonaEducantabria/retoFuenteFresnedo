@@ -22,6 +22,10 @@ if(isset($_POST['hacerPedidoObtenerSolicitudes'])) {
     // echo "conectado";
     hacerPedidoObtenerSolicitudes();
 }
+if(isset($_POST['hacerPedido'])) {
+    // echo "conectado";
+    hacerPedido();
+}
 
 
 function hacerPedidoObtenerSolicitudes() {
@@ -45,6 +49,7 @@ function hacerPedidoObtenerSolicitudes() {
                 "unidadesSolicitud" => $fila['unidades'],
                 "cantidadSolicitud" => $fila['cantidad'],
                 "observacionesSolicitud" => $fila['observaciones'],
+                "idUsuario" => $fila['fk_usuario']
             );
             $solicitudes[] = $solicitud;
         }
@@ -268,6 +273,70 @@ function tramitarSolicitud() {
         // Si hay un error, deshacer la transacción
         $conexion->rollBack();
         echo "error";
+    }
+
+
+}
+function hacerPedido() {
+    // datosPedido.push({
+    //     "idUsuario" : idUsuario,
+    //     "idSolicitud" : idSolicitud,
+    //     "producto" : productoSolicitud,
+    //     "cantidad" : cantidadSolicitud,
+    //     "unidades" : unidadesSolicitud,
+    //     "observaciones" : observacionesSolicitud,
+    //     "idProveedor" : idProveedorSolicitud
+    // });
+    // Obtengo el array de pedidos
+    $pedidos = $_POST['hacerPedido'];
+    $pedidos = json_decode($pedidos);
+
+    date_default_timezone_set('Europe/Madrid');
+    $fechaHoy = date('Y-m-d');
+
+
+    $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
+
+    try {
+
+        // Comenzar una transacción
+        $conexion->beginTransaction();
+
+
+        $resultado = $conexion->prepare("INSERT INTO pedidos (fecha, fk_proveedor, fk_estado, fk_usuario, observaciones) 
+        VALUES (? , ? ,?, ?, ?);
+        ");
+
+        $pedidoSQL = $conexion->prepare("INSERT INTO linea_pedido 
+        (fk_pedido, descripcion, cantidad, unidades, observaciones) 
+        VALUES (?, ?, ?, ?, ?);
+        ");
+
+        foreach($pedidos as $solicitud) {
+            $idProveedor = $solicitud->idProveedor;
+            $idUsuario = $solicitud->idUsuario;
+            $observaciones = $solicitud->observaciones;
+
+            $resultado->execute(array($fechaHoy, $idProveedor, 1, $idUsuario, $observaciones));
+
+            $idUltimoPedido = $conexion->lastInsertId();
+
+            $producto = $solicitud->producto;
+            $cantidad = $solicitud->cantidad;
+            $unidades = $solicitud->unidades;
+            $observaciones = $solicitud->observaciones;
+
+            $pedidoSQL->execute(array($idUltimoPedido, $producto, $cantidad, $unidades, $observaciones));
+        }
+
+        // Confirmar la transacción
+        $conexion->commit();
+
+        echo "1";
+    } catch (PDOException $e) {
+        // Si hay un error, deshacer la transacción
+        $conexion->rollBack();
+        echo "0";
     }
 
 
