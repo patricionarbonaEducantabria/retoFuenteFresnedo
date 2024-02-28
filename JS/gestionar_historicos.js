@@ -4,6 +4,7 @@ function principal()
 {
     // miDiv.appendChild(dibujarUsuario());
     // document.body.appendChild(miDiv);
+    fechasDefecto();
 
     let miBoton = document.getElementById("btnBuscar");
     miBoton.addEventListener("click", manejadorClickBuscar);
@@ -56,11 +57,15 @@ function manejadorClickBuscar(e) {
 
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑ MANEJADORES ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-function recuperarHistorico(longitud) {
+function recuperarHistorico() {
     let miDiv = document.getElementById("contenedor-historico");
     miDiv.innerHTML = "";
-
- obtenerSolicitudes(function(respuesta) {
+    if(typeof(desde) === "undefined" && typeof(hasta) === "undefined") {
+        // valores por defecto de fechas
+        desde = document.getElementById("inFecha_desde").value;
+        hasta = document.getElementById("inFecha_hasta").value;
+    }
+ obtenerSolicitudes(desde, hasta, function(respuesta) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
         let miDiv = document.getElementById("contenedor-historico");
@@ -71,7 +76,7 @@ function recuperarHistorico(longitud) {
     });
 }
 
-function obtenerSolicitudes(callback) {
+function obtenerSolicitudes(desde,hasta,callback) {
     let miPeticion = new XMLHttpRequest();
 
     miPeticion.open("POST", "../../PHP/gestionar_historicos.php", true);
@@ -85,7 +90,15 @@ function obtenerSolicitudes(callback) {
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  let datos = "obtenerHistorico="+localStorage.getItem("email");
+  let datosSolicitud = {
+    "desde" : desde,
+    "hasta" : hasta,
+    "emailUsuario" : localStorage.getItem("email")
+  };
+  datosSolicitud = JSON.stringify(datosSolicitud);
+
+  console.log("datosSolicitud: ",datosSolicitud);
+  let datos = "obtenerHistorico="+ datosSolicitud;
   miPeticion.send(datos);
 }
 
@@ -125,4 +138,51 @@ let fechaHasta = document.getElementById("fecha_hasta").value
         
     document.body.appendChild(miDiv);
     });
+}
+
+
+function fechasDefecto() {
+    //Establecer fecha desde y hasta: Por defecto de hoy a hace un mes
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    let hoy = new Date();
+    let ultimoMes = new Date(hoy);
+    ultimoMes.setMonth(hoy.getMonth() - 1);
+    ultimoMes = ultimoMes.toISOString().split('T')[0];
+    flatpickr("#inFecha_hasta", {
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Y-m-d", // Formato de fecha
+        defaultDate: "today", // Establece la fecha actual como predeterminada
+        maxDate: "today",
+        locale: {
+            firstDayOfWeek: 1,
+            weekdays: {
+              shorthand: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+              longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],         
+            }, 
+            months: {
+              shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+              longhand: ['Enero', 'Febrero', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            },
+          }
+      });
+    flatpickr("#inFecha_desde", {
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Y-m-d", // Formato de fecha
+        defaultDate: ultimoMes, // Establece la fecha actual como predeterminada
+        maxDate: "today",
+        locale: {
+            firstDayOfWeek: 1,
+            weekdays: {
+              shorthand: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+              longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],         
+            }, 
+            months: {
+              shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+              longhand: ['Enero', 'Febrero', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            },
+          }
+      });
+    //   ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 }

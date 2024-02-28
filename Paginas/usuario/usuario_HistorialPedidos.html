@@ -5,16 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial de pedidos</title>
     <link rel="icon" type="image/x-icon" href="../../Imagenes/logo.ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../Estilos/estilo_general.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="../../JS/gestionar_historicos.js"></script>
+    <!-- Libreria Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/confetti.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="../../Estilos/estilo_general.css">
 </head>
 <body>
     <div id="Buscador_Fechas">
-        <label for="fecha_desde">Desde: </label>
+        <!-- <label for="fecha_desde">Desde: </label>
         <input type="date" name="fecha_desde" id="fecha_desde" value="2024-01-01">
         <label for="fecha_hasta">Hasta: </label>
-        <input type="date" name="fecha_hasta" id="fecha_hasta">
+        <input type="date" name="fecha_hasta" id="fecha_hasta"> -->
+
+        <label for="inFecha_desde">Desde: </label>
+        <input type="date" id="inFecha_desde">
+        <label for="inFecha_hasta">Hasta: </label>
+        <input type="date" id="inFecha_hasta">
+
 
         <button type="button" class="btn btn-warning" id="btnBuscar">Buscar</button>
     </div>
