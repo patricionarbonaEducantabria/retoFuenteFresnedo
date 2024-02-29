@@ -405,8 +405,8 @@ a{
     left: -0.4vw;
     background: orange;
     border-radius: 50%;
-    width: calc(fit-content + 3vw);
-    height: calc(fit-content + 5vh ) ;
+    width: 1.5em;
+    height: 1.5em;
     text-align: center;
 }
 
