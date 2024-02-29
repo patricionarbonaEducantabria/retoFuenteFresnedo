@@ -27,6 +27,12 @@
     transition:  3s ease all;
     color      : var(--text-color);
   }
+
+  header{
+    background-color: var(--body-color);
+    transition: 3s ease all;
+    color: var(--text-color);
+  }
   
   h1, h2, h3, h4, h5, h6 {
     color : var(--title-color);
