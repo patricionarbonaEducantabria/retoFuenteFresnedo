@@ -21,69 +21,83 @@ document.addEventListener("DOMContentLoaded", function() {
     if(document.getElementById("btnCarniceria") != undefined)
     {
         document.getElementById("btnCarniceria").onclick = function() {
-            window.location.href = "../usuario/usuario_carniceria.html";
+            // window.location.href = "../usuario/usuario_carniceria.html";
+            categoria = this.value;
+            recuperarProductos(categoria);
         };
     }
     
     if(document.getElementById("btnPescaderia") != undefined)
     {
         document.getElementById("btnPescaderia").onclick = function() {
-            window.location.href = "../usuario/usuario_pescaderia.html";
+            // window.location.href = "../usuario/usuario_pescaderia.html";
+            categoria = this.value;
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnFruteria") != undefined)
     {
         document.getElementById("btnFruteria").onclick = function() {
-            window.location.href = "../usuario/usuario_fruteria.html";
+            // window.location.href = "../usuario/usuario_fruteria.html";
+            categoria = this.value;
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnCongelados") != undefined)
     {
         document.getElementById("btnCongelados").onclick = function() {
-            window.location.href = "../usuario/usuario_congelados.html";
+            // window.location.href = "../usuario/usuario_congelados.html";
+            categoria = this.value;
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnEconomatoVarios") != undefined)
     {
         document.getElementById("btnEconomatoVarios").onclick = function() {
-            window.location.href = "../usuario/usuario_economato_varios.html";
+            // window.location.href = "../usuario/usuario_economato_varios.html";
+            categoria = this.value;
+            // console.log(categoria);
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnPasteleria") != undefined)
     {
         document.getElementById("btnPasteleria").onclick = function() {
-            window.location.href = "../usuario/usuario_pasteleria.html";
+            // window.location.href = "../usuario/usuario_pasteleria.html";
+            categoria = this.value;
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnCafeteriaRestaurante") != undefined)
     {
         document.getElementById("btnCafeteriaRestaurante").onclick = function() {
-            window.location.href = "../usuario/usuario_cafeteria_restaurante.html";
+            // window.location.href = "../usuario/usuario_cafeteria_restaurante.html";
+            categoria = this.value;
+            recuperarProductos(categoria);
         };
     }
 
     if(document.getElementById("btnUtilesMateriales"))
     {
         document.getElementById("btnUtilesMateriales").onclick = function() {
-            window.location.href = "../usuario/usuario_utiles_materiales.html";
+            // window.location.href = "../usuario/usuario_utiles_materiales.html";
+            categoria = this.value;
+            recuperarProductos(categoria);
         };
     }
 
-    if(document.getElementById("btnPan") != undefined)
+    if(document.getElementById("btnPanaderia") != undefined)
     {
-        document.getElementById("btnPan").onclick = function() {
-            window.location.href = "../usuario/usuario_pan.html";
+        document.getElementById("btnPananaderia").onclick = function() {
+            // window.location.href = "../usuario/usuario_pan.html";
+            categoria = this.value;
+            recuperarProductos(categoria);
         };
-    }
-    // Boton Realizar Pedido de la cesta
-    if(document.getElementById("btnPedido") != undefined)
-    {
-        document.getElementById("btnPedido").onclick = manejadorClickRealizarPedido;
     }
 
     // boton historial pedidos

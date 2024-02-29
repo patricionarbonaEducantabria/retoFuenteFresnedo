@@ -32,8 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         document.getElementById("btnCarniceria").onclick = function() {
             // window.location.href = "../usuario/usuario_carniceria.html";
-            console.log("pulso", this.id);
-            categoria = this.id.split("btn")[1];
+            categoria = this.value;
             recuperarProductos(categoria);
         };
     }
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         document.getElementById("btnPescaderia").onclick = function() {
             // window.location.href = "../usuario/usuario_pescaderia.html";
-            categoria = this.id.split("btn")[1];
+            categoria = this.value;
             recuperarProductos(categoria);
         };
     }
@@ -51,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         document.getElementById("btnFruteria").onclick = function() {
             // window.location.href = "../usuario/usuario_fruteria.html";
-            categoria = this.id.split("btn")[1];
+            categoria = this.value;
             recuperarProductos(categoria);
         };
     }
@@ -60,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         document.getElementById("btnCongelados").onclick = function() {
             // window.location.href = "../usuario/usuario_congelados.html";
-            categoria = this.id.split("btn")[1];
+            categoria = this.value;
             recuperarProductos(categoria);
         };
     }
@@ -69,8 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         document.getElementById("btnEconomatoVarios").onclick = function() {
             // window.location.href = "../usuario/usuario_economato_varios.html";
-            categoria = this.id.split("btn")[1];
-            categoria = categoria.split("V").join(' y v');
+            categoria = this.value;
             // console.log(categoria);
             recuperarProductos(categoria);
         };
@@ -80,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         document.getElementById("btnPasteleria").onclick = function() {
             // window.location.href = "../usuario/usuario_pasteleria.html";
-            categoria = this.id.split("btn")[1];
+            categoria = this.value;
             recuperarProductos(categoria);
         };
     }
@@ -89,8 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         document.getElementById("btnCafeteriaRestaurante").onclick = function() {
             // window.location.href = "../usuario/usuario_cafeteria_restaurante.html";
-            categoria = this.id.split("btn")[1];
-            categoria = categoria.split("R").join(' y R');
+            categoria = this.value;
             recuperarProductos(categoria);
         };
     }
@@ -99,17 +96,16 @@ document.addEventListener("DOMContentLoaded", function() {
     {
         document.getElementById("btnUtilesMateriales").onclick = function() {
             // window.location.href = "../usuario/usuario_utiles_materiales.html";
-            categoria = this.id.split("btn")[1];
-            categoria = categoria.split("M").join(' y M');
+            categoria = this.value;
             recuperarProductos(categoria);
         };
     }
 
-    if(document.getElementById("btnPanadería") != undefined)
+    if(document.getElementById("btnPanaderia") != undefined)
     {
-        document.getElementById("btnPananadería").onclick = function() {
+        document.getElementById("btnPanaderia").onclick = function() {
             // window.location.href = "../usuario/usuario_pan.html";
-            categoria = this.id.split("btn")[1];
+            categoria = this.value;
             recuperarProductos(categoria);
         };
     }
