@@ -7,6 +7,9 @@ header {
     background-color: #f0f0f0;
 }
 
+.container2 { 
+    background-color: rgba(255, 255, 255, 0.8);
+}
 ul {
     list-style-type: none;
     margin: 0;
@@ -231,6 +234,40 @@ ul li img {
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 1100px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px; /* Reducimos el padding para dispositivos móviles */
+    }
+    
+    /* Ajustar el tamaño del logo */
+    .logo-container {
+        margin-bottom: 10px; /* Añadimos un margen inferior */
+    }
+    .logo-container img {
+        max-width: 100px; /* Ajustamos el tamaño máximo del logo */
+    }
+
+    /* Alinear contenedor de buscar verticalmente */
+    #contenedor-buscar {
+        margin-bottom: 10px;
+    }
+
+    /* Alinear dropdown de usuario */
+    .persona-logo-container {
+        margin-top: 10px;
+    }
+
+    /* Estilos para los botones */
+    input[type="button"] {
+        width: 100%;
+        margin-bottom: 5px; /* Añadimos un pequeño margen inferior entre los botones */
+    }
+    /* Ocultar contenedor de hacer pedido */
+    #contenedor-hacer-pedido {
+        display: none;
+    }
+    
     ul {
         flex-direction: column;
         align-items: stretch;
@@ -238,11 +275,6 @@ ul li img {
 
     ul li {
         border-right: none; /* Quitamos la línea divisoria en todos los elementos */
-    }
-
-    header {
-        flex-direction: column;
-        align-items: stretch;
     }
 
     #contenedor-buscar {
@@ -253,6 +285,20 @@ ul li img {
     #txtBuscar {
         margin-right: 0;
         margin-bottom: 10px;
+    }
+
+    #contenedor-hacer-pedido {
+        display: flex; /* Asegurarse de que el contenedor sea visible */
+        justify-content: space-between; /* Distribuir elementos horizontalmente */
+        align-items: center; /* Alinear elementos verticalmente */
+        width: 100%; /* Ajustar al ancho completo del contenedor padre */
+        margin-bottom: 10px; /* Agregar margen inferior para separar de otros elementos */
+    }
+
+    /* Estilos para los botones dentro del contenedor de hacer pedido */
+    #btnVerPedidos,
+    #btnVerSolicitudes {
+        width: 45%; /* Ajustar el ancho de los botones */
     }
 
     #btnMostrarAddProducto,

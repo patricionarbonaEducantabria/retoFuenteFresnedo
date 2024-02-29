@@ -20,6 +20,18 @@ body {
     text-align: center;
 }
 
+.menu, .container2 {
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+img {
+    width: 70px;
+    height: auto;
+}
 .login-box input[type="button"] {
     width: 100%; /* Ancho del botón al 80% para que aparezcan uno encima del otro */
     height: 100px; /* Aumentamos la altura del botón */
