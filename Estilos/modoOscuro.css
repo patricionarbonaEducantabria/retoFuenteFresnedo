@@ -216,7 +216,7 @@ header img {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #192229;
+    background-color: var(--container-color);
     display: none;
   }
   .navbar img {
