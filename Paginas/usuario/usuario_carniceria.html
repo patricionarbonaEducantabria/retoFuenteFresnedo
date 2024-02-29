@@ -55,26 +55,26 @@
                             <input type="button" id="btnPanaderia" value="Panadería">
                         </li>
                     </ul>
-                </nav>
-                <nav class="navbar">
                     <ul>
                         <li>
-                            <a href="./usuario_HistorialPedidos.html" id="icoPersona">
-                                <label for="Historial de pedido">Historial de pedido</label>
-                                <img src="../../Imagenes/icono_persona.png" alt="icoPersona">
-                            </a>
+                            <div class="dropdown" >
+                                <button class="btn btn-secondary dropdown-toggle" id="botonPersona" type="button" data-bs-toggle="dropdown" >
+                                  <img src="../../Imagenes/icono_persona.png" alt="icoPersona">
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><h6 class="dropdown-header">Usuario/Configuración</h6></li>
+                                  <li><a class="dropdown-item" href="../usuario/usuario_HistorialPedidos.html">Historial de pedidos</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" style="
+                                    padding-right: 70px" href="../../index.html">Cerrar sesión</a></li>
+                                </ul>
+                              </div>
                         </li>
 
                         <li>
                             <a href="../usuario/usuario_pagina_compra.html">
                                 <label for="cesta">Cesta</label>
                                 <img src="../../Imagenes/carro-de-la-compra.png" alt="icoCesta">
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="./usuario_HistorialPedidos.html">
-                                <label for="Historial de pedido">Cerrar sesion</label>
                             </a>
                         </li>
                     </ul>
@@ -85,7 +85,6 @@
                                 <span><i class="fas fa-moon"></i></span>
                             </button>
                         </li>
-
                     </ul>
                 </nav>
             </div>
