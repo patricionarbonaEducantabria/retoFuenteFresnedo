@@ -287,6 +287,20 @@ ul li img {
         margin-bottom: 10px;
     }
 
+    #contenedor-hacer-pedido {
+        display: flex; /* Asegurarse de que el contenedor sea visible */
+        justify-content: space-between; /* Distribuir elementos horizontalmente */
+        align-items: center; /* Alinear elementos verticalmente */
+        width: 100%; /* Ajustar al ancho completo del contenedor padre */
+        margin-bottom: 10px; /* Agregar margen inferior para separar de otros elementos */
+    }
+
+    /* Estilos para los botones dentro del contenedor de hacer pedido */
+    #btnVerPedidos,
+    #btnVerSolicitudes {
+        width: 45%; /* Ajustar el ancho de los botones */
+    }
+
     #btnMostrarAddProducto,
     #btnModificarDatos {
         width: 100%;
