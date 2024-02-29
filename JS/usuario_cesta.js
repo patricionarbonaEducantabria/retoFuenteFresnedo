@@ -335,6 +335,7 @@ function manejadorClickRealizarPedido() {
             console.log("se hizo el pedido");
             localStorage.removeItem("productos");
             recuperarPedido();
+            window.location.href = "./usuario_carniceria.html";
         } else {
             console.log("no se pudo hacer el pedido");
         }
