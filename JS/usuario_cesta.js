@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if(document.getElementById("btnPanaderia") != undefined)
     {
-        document.getElementById("btnPananaderia").onclick = function() {
+        document.getElementById("btnPanaderia").onclick = function() {
             // window.location.href = "../usuario/usuario_pan.html";
             categoria = this.value;
             recuperarProductos(categoria);
@@ -192,6 +192,26 @@ function recuperarPedido(longitud)
             {
                 miDiv.appendChild(dibujarProductos(respuesta[i]));
             }
+            if(Object.keys(respuesta).length > 0) {
+                console.log(miDiv);
+                let divPagar = crearElemento("div",undefined,{"id" : "divPagar"});
+                let inObservaciones = crearElemento("textarea",undefined,{
+                   "rows" : "10",
+                   "cols": "50",
+                    "id": "inObservaciones",
+                    "placeholder" : "Sin observaciones"
+                });
+                let botonPedido = crearElemento("input",undefined,{
+                    "type" : "button",
+                    "value" : "Realizar Pedido",
+                    "id" : "btnPedido"
+                });
+                botonPedido.addEventListener("click",manejadorClickRealizarPedido);
+                divPagar.appendChild(inObservaciones);
+                divPagar.appendChild(botonPedido);
+                miDiv.appendChild(divPagar);
+                console.log(miDiv);
+            }
             document.body.appendChild(miDiv);
         });
     } else {
@@ -270,10 +290,13 @@ function manejadorClickPapelera() {
     let productosString = localStorage.getItem("productos");
     let productosJSON = JSON.parse(productosString); 
     
-
+    console.log(productosJSON);
+    console.log(Object.keys(productosJSON).length);
     // Eliminar el producto
     delete productosJSON[idProducto];
-
+    if(Object.keys(productosJSON).length === 0) {
+        document.getElementById("contenedor-productos").innerHTML = "";
+    }
     // Actualizar los productos
     productosString = JSON.stringify(productosJSON);
     localStorage.setItem("productos", productosString);
@@ -296,7 +319,6 @@ function manejadorClickRealizarPedido() {
         productosJSON[idProducto].cantidad = cantidadNueva;
         productosString = JSON.stringify(productosJSON);
         localStorage.setItem("productos", productosString);
-        console.log("hola: ",i);
     }
     crearPedido(function(respuesta) {
         if(respuesta === "1") {
