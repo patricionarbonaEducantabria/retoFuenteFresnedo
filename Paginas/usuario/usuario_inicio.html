@@ -6,6 +6,9 @@
     <title>Usuario Inicio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../../Imagenes/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../Estilos/modoOscuro.css">
     <script src="../../JS/usuario_inicio.js"></script>
@@ -25,10 +28,18 @@
                 <nav class="navbar">
                     <ul>
                         <li>
-                            <a href="#" id="icoPersona">
-                                <label for="Historial de pedido">Historial de pedido</label>
-                                <img src="../../Imagenes/icono_persona.png" alt="icoPersona">
-                            </a>
+                            <div class="dropdown" >
+                                <button class="btn btn-secondary dropdown-toggle" id="botonPersona" type="button" data-bs-toggle="dropdown" >
+                                  <img src="../../Imagenes/icono_persona.png" alt="icoPersona">
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><h6 class="dropdown-header">Usuario/Configuración</h6></li>
+                                  <li><a class="dropdown-item" href="../usuario/usuario_HistorialPedidos.html">Historial de pedidos</a></li>
+                                  <li><hr class="dropdown-divider"></li>
+                                  <li><a class="dropdown-item" style="
+                                    padding-right: 70px" href="../index.html">Cerrar sesión</a></li>
+                                </ul>
+                              </div>
                         </li>
                         <li>
                             <a href="../usuario/usuario_pagina_compra.html">
@@ -56,7 +67,6 @@
             </div>
         </div>
     </header>
-
 
 
 

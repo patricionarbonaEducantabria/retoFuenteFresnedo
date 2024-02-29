@@ -175,8 +175,9 @@ header img {
   height: 70px;
 }
 
-.navbar ul li #icoPersona:hover label {
-  display: flex;
+#botonPersona{
+  background-color: transparent;
+  border: none;
 }
 
 @media (max-width: 991px) {
