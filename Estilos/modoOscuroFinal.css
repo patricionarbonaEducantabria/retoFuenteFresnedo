@@ -393,6 +393,19 @@ header img {
   background-color: #0056b3;
 }
 
+#circulo::after {
+  content: attr(title);
+    display: inline-block;
+    position: relative;
+    top: -2vh;
+    left: -0.4vw;
+    background: orange;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+}
+
 /* Estilos específicos para dispositivos móviles */
 @media only screen and (max-width: 768px) {
   .menu {
