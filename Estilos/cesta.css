@@ -1,4 +1,25 @@
 /* Estilos generales */
+:root {
+    --main-color       : #1083D6;
+    --title-color      : #2A3B47;
+    --text-color       : #697477;
+    --light-text-color : #A0A7AC;
+    --border-color     : #EFF3F5;
+    --container-color  : #A0A7AC;
+    --body-color       : #FBFBFE;
+    --container-shadow : 0 1px 4px rgba(146,161,176,.15);
+  }
+  
+  body.dark-theme {
+    --main-color       : #52A5E0;
+    --title-color      : #EFF3F5;
+    --text-color       : #C8CDD0;
+    --light-text-color : #A0A7AC;
+    --border-color     : #2A3B47;
+    --container-color  : #212E36;
+    --body-color       : #192229;
+    --container-shadow : none;
+  }
 
 body {
     font-family: Arial, sans-serif;
@@ -6,20 +27,164 @@ body {
     padding: 0;
 }
 
+a {
+  padding: 0;
+}
 /* Estilos de la barra de navegación */
 
+#divPagar {
+    width: 300px; /* Ancho del contenedor */
+    height: auto; /* Altura automática para adaptarse al contenido */
+    text-align: center;
+  }
+  
+#inObservaciones {
+    display: block; /* Hace que el textarea ocupe toda la anchura disponible */
+    width: 100%; /* Ocupa el 100% del ancho del contenedor */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    margin-bottom: 10px; /* Espacio entre el textarea y el input */
+  }
+  
+#btnPedido{
+    display: block; /* Hace que el input ocupe toda la anchura disponible */
+    width: 100%; /* Ocupa el 100% del ancho del contenedor */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+  }
+
 header {
-    background-color: #ff9900;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Alineación vertical */
+  background-color: var(--container-color);
+  padding: 10px;
+  padding-bottom: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alineación vertical */
 }
+
+.imgPapelera {
+    width: 60px;
+    height: 50px;
+}
+
+.change-theme-button {
+    background: #343D5B;
+    border-radius: 1000px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+  }
+  .change-theme-button::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background: #F1F1F1;
+    top: 0;
+    left: 0;
+    right: unset;
+    border-radius: 100px;
+    transition: 3s ease all;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+  .change-theme-button.active {
+    background: orange;
+    color: #000;
+  }
+  .change-theme-button.active::after {
+    right: 0;
+    left: unset;
+  }
+  .change-theme-button span {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    background: none;
+    color: #fff;
+  }
+
+.back {
+  padding: 50px 0;
+  margin-bottom: 40px;
+  background-color: var(--container-color);
+  transition: 3s ease all;
+}
+
+.menu {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.menu .navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Otros estilos existentes... */
+  
+  .menu .navbar ul li {
+    position: relative;
+    float: left;
+    list-style: none;
+  }
+  
+  .menu .navbar ul li a {
+    font-size: 18px;
+    padding: 20px;
+    display: block;
+  }
+  
+  .menu .navbar ul li a:hover {
+    color: var(--light-text-color);
+  }
+  
+  #menu {
+    display: none;
+  }
+  
+  .menu-icono {
+    width: 90px;
+    height: 80px;
+  }
+  
+  .menu label {
+    cursor: pointer;
+    display: none;
+  }
+  
+  header img {
+    width: 60px;
+    height: 50px;
+  }
+  
+  .logo {
+    height: 90px;
+    padding-right: 50px;
+  }
+  
+  #logito {
+    width: 100px;
+    height: 70px;
+  }
+  
+  .navbar ul li #icoPersona:hover label {
+    display: flex;
+  }
 
 #barraNav {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    margin-right: 100px;
 }
 
 #barraNav li {
@@ -30,7 +195,7 @@ header {
 #barraNav li input[type="button"] {
     background-color: transparent;
     border: none;
-    color: white;
+    color: var(--title-color);
     font-size: 20px;
     cursor: pointer;
 }
@@ -64,12 +229,11 @@ header {
     height: 50px; /* Tamaño ajustable según tu preferencia */
 }
 
-#icono_persona {
-    position: relative;
-}
-
-#icono_persona:hover #submenu {
-    display: block;
+#botonPersona {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin-top: 20px;
 }
 
 #submenu {
@@ -77,7 +241,7 @@ header {
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #ffcc66;
+    background-color: var(--body-color);
     border-radius: 5px;
     padding: 10px;
 }
@@ -95,7 +259,7 @@ header {
 #submenu ul li input[type="button"] {
     background-color: transparent;
     border: none;
-    color: #333;
+    color: var(--main-color);
     font-size: 14px;
     cursor: pointer;
 }
@@ -104,11 +268,16 @@ header {
     text-decoration: underline;
 }
 
+h1 {
+    color: var(--title-color);
+}
+
 #contenedor-productos {
     text-align: center;
     justify-content: center;
     width: 100%;
     position: relative;
+    background-color: var(--body-color);
 }
 
 #contenedor-productos ul {
@@ -119,37 +288,136 @@ header {
 
 #contenedor-productos ul li {
     margin: 50px;
+    color: var(--title-color);
+}
+
+/* Estilos para el título */
+#titulo-productos {
+    font-size: 24px; /* Tamaño de fuente más grande */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Estilos para los elementos <li> dentro de cada <ul> */
+#contenedor-productos ul li {
+    margin-bottom: 10px; /* Espacio entre elementos de la lista */
 }
 
 #foto_producto{
     width: 200px;
     height: auto;
 }
+/* Estilos para el menú desplegable en dispositivos móviles */
 
-#divPagar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-textarea {
-    margin-bottom: 3.25vh;
-    width: min-content;
-    text-align: center;
-    /* height: min-content; */
+#menuMovil {
+    display: none;
 }
 
-.imgPapelera {
-    height: 5vh;
-    width: 3vw;
+/* Estilos para el contenido principal */
+
+#contenedor-productos {
+    margin-top: 0px;
+    padding: 20px;
 }
 
+/* Estilos para la modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0); /* Fondo transparente */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.modal-header {
+    padding: 10px 16px;
+    background-color: #fefefe;
+    color: black;
+}
+
+.modal-body {
+    padding: 16px;
+}
+
+/* Estilos para el botón de ir arriba */
+#btnScrollToTop {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 999;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: 50%;
+}
+
+#btnScrollToTop:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos específicos para dispositivos móviles */
 @media only screen and (max-width: 768px) {
-    textarea {
-        margin-top: 2vh;
-    }
+  .menu {
+    padding: 20px;
+  }
+  .menu label {
+    display: initial;
+  }
+  .back {
+    padding: 60px 0;
+  }
+  .menu .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--container-color);
+    display: none;
+  }
+  .navbar img {
+    display: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  .menu .navbar ul li {
+    width: 100%;
+  }
+  #menu:checked ~ .navbar {
+    display: initial;
+  }
 
-    .imgPapelera {
-        height: 5vh;
-        width: 10vw;
-    }
+  /* Ajustes de tamaño de fuente para dispositivos móviles */
+  .menu .navbar ul li a {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  /* Ajustes de tamaño de logo para dispositivos móviles */
+  .logo {
+    padding-right: 20px;
+  }
+
+  /* Ajustes de tamaño de icono de menú para dispositivos móviles */
+  .menu-icono {
+    width: 60px;
+    height: 50px;
+  }
 }
