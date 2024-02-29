@@ -49,7 +49,7 @@ function comprobarEsAdmin() {
 
 function principal() 
 {
-    
+    botonAdmin();
     recuperarPedido();
 
     let imagenesEnlacesw = document.getElementById("barraNav").querySelectorAll("li");
@@ -62,6 +62,31 @@ function principal()
             window.location.href = "../usuario/usuario_carniceria.html";
         }
     }
+}
+
+function botonAdmin() {
+    miEmail = localStorage.getItem("email");
+
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/redireccion.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            console.log("es admin: ",miPeticion.responseText);
+            // callback(miPeticion.responseText);
+            if(miPeticion.responseText !== "0") {
+                // console.log(miPeticion.responseText);
+                // console.log(document.getElementsByClassName('dropdown-menu'));
+                document.getElementsByClassName('dropdown-menu')[0].innerHTML += miPeticion.responseText;
+            } 
+        }
+    };
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    let datos = "botonAdmin=" + miEmail;
+    console.log(datos);
+    miPeticion.send(datos);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
