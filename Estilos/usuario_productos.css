@@ -5,7 +5,7 @@
     --text-color       : #697477;
     --light-text-color : #A0A7AC;
     --border-color     : #EFF3F5;
-    --container-color  : #FFFFFF;
+    --container-color  : #A0A7AC;
     --body-color       : #FBFBFE;
     --container-shadow : 0 1px 4px rgba(146,161,176,.15);
   }
@@ -29,30 +29,39 @@ body {
 /* Estilos de la barra de navegación */
 
 header {
-    background-color: var(--body-color);
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Alineación vertical */
+  background-color: var(--container-color);
+  padding: 10px;
+  padding-bottom: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alineación vertical */
 }
 
 .back {
-    padding: 50px 0;
-    margin-bottom: 40px;
-    background-color: var(--container-color);
-    transition: 3s ease all;
-  }
-  
-  .menu {
-    position: absolute;
-    top: 0;
-    left: 50px;
-    right: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-  }
+  padding: 50px 0;
+  margin-bottom: 40px;
+  background-color: var(--container-color);
+  transition: 3s ease all;
+}
+
+.menu {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.menu .navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Otros estilos existentes... */
   
   .menu .navbar ul li {
     position: relative;
@@ -117,7 +126,7 @@ header {
 #barraNav li input[type="button"] {
     background-color: transparent;
     border: none;
-    color: var(--text-color);
+    color: var(--title-color);
     font-size: 20px;
     cursor: pointer;
 }
