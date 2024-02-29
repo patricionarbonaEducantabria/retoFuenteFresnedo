@@ -64,7 +64,7 @@ function emailExiste(email, callback) {
     // Creo el objeto para tratar la peticion Ajax
     let miPeticion = new XMLHttpRequest();
 
-    miPeticion.open("POST", "../PHP/inicioSesion.php", true);
+    miPeticion.open("POST", "./PHP/inicioSesion.php", true);
 
   // Configurar la función de retorno de llamada
   miPeticion.onreadystatechange = function() {
@@ -83,7 +83,7 @@ function emailExiste(email, callback) {
 function contraseniaExiste(contrasenia, callback) {
     let miPeticion = new XMLHttpRequest();
 
-    miPeticion.open("POST", "../PHP/inicioSesion.php", true);
+    miPeticion.open("POST", "./PHP/inicioSesion.php", true);
 
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
@@ -102,7 +102,7 @@ function contraseniaExiste(contrasenia, callback) {
 function iniciarSesion(email, contrasenia) {
     let miPeticion = new XMLHttpRequest();
 
-    miPeticion.open("POST", "../PHP/inicioSesion.php", true);
+    miPeticion.open("POST", "./PHP/inicioSesion.php", true);
 
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {

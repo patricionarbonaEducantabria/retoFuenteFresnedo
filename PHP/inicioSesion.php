@@ -58,17 +58,17 @@ function iniciarSesion() {
         $existe = $resultado -> fetch();
         if($existe) {
             session_destroy();
-            echo "../Paginas/nueva_contrasenia.html";
+            echo "./Paginas/nueva_contrasenia.html";
         } else {
             $resultado = $conexion -> prepare("SELECT admin FROM usuarios WHERE email = ? AND password=?;");
             $resultado -> execute(array($email, $contrasenia));
             $respuesta = $resultado -> fetch();
             if($respuesta['admin'] == "1") {
                 session_destroy();
-                echo "../Paginas/admin/admin_inicio.html";
+                echo "./Paginas/admin/admin_inicio.html";
             } else {
                 session_destroy();
-                echo "../Paginas/usuario/usuario_inicio.html";
+                echo "./Paginas/usuario/usuario_inicio.html";
             }
         }
     }else {

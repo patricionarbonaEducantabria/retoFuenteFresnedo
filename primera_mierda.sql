@@ -38,13 +38,13 @@ CREATE TABLE IF NOT EXISTS productos (
     descripcion CHAR(50) NOT NULL,
     fk_unidades INT NOT NULL,
     observaciones CHAR(100) NULL,
-    foto CHAR(80) DEFAULT '../../Imagenes/carne.png',
+    foto CHAR(80) DEFAULT '../../Imagenes/Carnicería.png',
     FOREIGN KEY (fk_unidades) REFERENCES unidades (id)
     ON UPDATE CASCADE
 ) ENGINE = INNODB;
 
 -- TABLA PRODUCTOS_CATEGORIA
-CREATE TABLE IF NOT EXISTS productos_categoria (
+CREATE TABLE IF NOT EXISTS productos_categoria (    
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fk_producto INT NOT NULL,
     fk_categoria INT NOT NULL,

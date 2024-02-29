@@ -68,7 +68,7 @@ function enviarDatos() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     // Redirigir a la página de inicio
-                    window.location.href = "../Paginas/index.html"; // Cambia la ruta según la ubicación de tu página de inicio
+                    window.location.href = "../index.html"; // Cambia la ruta según la ubicación de tu página de inicio
                 } else {
                     // Manejo de errores en la respuesta del servidor
                     console.error("Error al actualizar la contraseña:", xhr.statusText);
