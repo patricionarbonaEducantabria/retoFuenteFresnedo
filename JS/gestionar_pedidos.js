@@ -296,7 +296,7 @@ function manejadorClickActualizarPedido() {
     let contenedorPedido = this.parentElement.parentElement.parentElement.parentElement;
     let idPedido = contenedorPedido.id.split("-")[1];
     let idEstado = this.className;
-    let liEstadoPedido = contenedorPedido.childNodes[4];
+    let liEstadoPedido = contenedorPedido.childNodes[5];
     console.log(idEstado);
     console.log(idPedido);
     console.log(liEstadoPedido);
@@ -311,6 +311,16 @@ function manejadorClickActualizarPedido() {
                     console.log("respuesta obtener estado: ",respuesta);
                     liEstadoPedido.innerHTML = "";
                     liEstadoPedido.innerHTML = "Estado: " + respuesta;
+                    if(respuesta === "En espera") {
+                        liEstadoPedido.className = "enEspera";
+                    } else if(respuesta === "Pendiente") {
+                        liEstadoPedido.className = "pendiente";
+                    } else if(respuesta === "Completado") {
+                        liEstadoPedido.className = "completado";
+                    } else {
+                        liEstadoPedido.className = "cancelado";
+                    }
+
             });
         }
     });
@@ -652,7 +662,7 @@ function dibujarPedidos(jsonPedidos) {
         
         // Recorrer los usuarios y sus pedidos para cada fecha
         for (let idUsuario in jsonPedidos[fecha]) {
-            let ulUsuario = crearElemento("ul",undefined);
+            let ulUsuario = crearElemento("ul",undefined, {"class" : "ulUsuario"});
             let usuario = jsonPedidos[fecha][idUsuario];
             let liNombre = crearElemento("li","Pedidos de: " + usuario.usuario);
             let liPedidos = crearElemento("li",undefined);
@@ -671,6 +681,15 @@ function dibujarPedidos(jsonPedidos) {
                 let liProveedor = crearElemento("li","Proveedor: " + pedido.proveedor.nombre + "  tlf: " + pedido.proveedor.telefono);
                 
                 let liSuEstado = crearElemento("li", "Estado: " + pedido.estado);
+                if(pedido.estado === "En espera") {
+                    liSuEstado.className = "enEspera";
+                } else if(pedido.estado === "Pendiente") {
+                    liSuEstado.className = "pendiente";
+                } else if(pedido.estado === "Completado") {
+                    liSuEstado.className = "completado";
+                } else {
+                    liSuEstado.className = "cancelado";
+                }
                 // lista de botones de estado pedido
                 let liEstados = crearElemento("li",undefined);
                 let ulBotonesEstados = crearElemento("ul",undefined,{"class" : "ulEstados"});
