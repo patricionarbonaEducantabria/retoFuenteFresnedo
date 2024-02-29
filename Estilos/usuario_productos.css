@@ -5,7 +5,7 @@
     --text-color       : #697477;
     --light-text-color : #A0A7AC;
     --border-color     : #EFF3F5;
-    --container-color  : #A0A7AC;
+    --container-color  : #dbdcdd;
     --body-color       : #FBFBFE;
     --container-shadow : 0 1px 4px rgba(146,161,176,.15);
   }
@@ -64,7 +64,10 @@ header {
 }
 
 /* Otros estilos existentes... */
-  
+  input {
+    background-color: var(--container-color);
+    color: var(--title-color);
+  }
   .menu .navbar ul li {
     position: relative;
     float: left;
@@ -75,6 +78,7 @@ header {
     font-size: 18px;
     padding: 20px;
     display: block;
+    color: var(--title-color);
   }
   
   .menu .navbar ul li a:hover {
@@ -112,6 +116,7 @@ header {
 
   .dropdown-menu{
     background-color: var(--body-color);
+    color: var(--title-color);
   }
   
   .navbar ul li #icoPersona:hover label {
@@ -340,6 +345,7 @@ header {
   .menu .navbar ul li a {
     font-size: 16px;
     padding: 10px;
+    color: var(--title-color);
   }
 
   /* Ajustes de tamaño de logo para dispositivos móviles */
