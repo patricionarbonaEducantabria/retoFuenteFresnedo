@@ -124,9 +124,15 @@ function crearElemento(etiqueta, texto, atributos) {
 function dibujarProductos(datosProducto) {
     let miFila = crearElemento("ul",undefined, {"id" : datosProducto.id});
     let filita = crearElemento("li",undefined);
-    let papelera = crearElemento("input",undefined,{"type":"button","value":"AQUI VA LA PAPELERA","id":"btnPapelera"});
-    filita.appendChild(papelera);
-    miFila.appendChild(filita);
+
+    let papelera = crearElemento("a",undefined,{"href":"#"});
+    let imgPapelera = crearElemento("img",undefined, {
+        "class" : "imgPapelera",
+        "src" : "../../Imagenes/papelera-de-reciclaje-blanca.png",
+        "alt" : '<a href="https://www.flaticon.es/iconos-gratis/papelera-de-reciclaje" title="papelera de reciclaje iconos">Papelera de reciclaje iconos creados por lakonicon - Flaticon</a>'
+    });
+    
+    
     let foto = crearElemento("li",undefined);    
     foto.appendChild(crearElemento("img",undefined,{"src" : datosProducto.foto, "id":"foto_producto"}));   
     miFila.appendChild(foto);
@@ -156,6 +162,9 @@ function dibujarProductos(datosProducto) {
     // todos los productos van a tener observaciones
     let observaciones = crearElemento("li",datosProducto.observaciones, {"id":"observaciones_producto"});    
     miFila.appendChild(observaciones);
+    papelera.appendChild(imgPapelera);
+    filita.appendChild(papelera);
+    miFila.appendChild(filita);
     return miFila;
 }
 
@@ -196,7 +205,7 @@ function recuperarPedido(longitud)
                 console.log(miDiv);
                 let divPagar = crearElemento("div",undefined,{"id" : "divPagar"});
                 let inObservaciones = crearElemento("textarea",undefined,{
-                   "rows" : "10",
+                   "rows" : "4",
                    "cols": "50",
                     "id": "inObservaciones",
                     "placeholder" : "Sin observaciones"
@@ -204,7 +213,8 @@ function recuperarPedido(longitud)
                 let botonPedido = crearElemento("input",undefined,{
                     "type" : "button",
                     "value" : "Realizar Pedido",
-                    "id" : "btnPedido"
+                    "id" : "btnPedido",
+                    "class" :"btn btn-primary"
                 });
                 botonPedido.addEventListener("click",manejadorClickRealizarPedido);
                 divPagar.appendChild(inObservaciones);
