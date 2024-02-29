@@ -23,13 +23,13 @@ body.dark-theme {
 
 body {
   background: var(--body-color);
-  transition: 3s ease all;
+  transition: .3s ease all;
   color: var(--text-color);
 }
 
 header {
   background-color: var(--body-color);
-  transition: 3s ease all;
+  transition: .3s ease all;
   color: var(--text-color);
 }
 
@@ -56,7 +56,7 @@ hr {
 
 .container {
   background: var(--container-color);
-  transition: 3s ease all;
+  transition: .3s ease all;
   box-shadow: var(--container-shadow);
 }
 
@@ -80,7 +80,7 @@ hr {
   left: 0;
   right: unset;
   border-radius: 100px;
-  transition: 3s ease all;
+  transition: .3s ease all;
   box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 .change-theme-button.active {
@@ -125,7 +125,7 @@ align-items: center; /* Alineación vertical */
 padding: 50px 0;
 margin-bottom: 40px;
 background-color: var(--container-color);
-transition: 3s ease all;
+transition: .3s ease all;
 }
 
 .menu {
@@ -410,7 +410,7 @@ margin-top: 20px;
   left: 0;
   right: 0;
   background-color: var(--container-color);
-  transition: 3s ease all;
+  transition: .3s ease all;
   display: none;
 }
 .navbar img {
