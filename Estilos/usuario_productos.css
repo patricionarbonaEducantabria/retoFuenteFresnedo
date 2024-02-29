@@ -1,3 +1,4 @@
+User
 /* Estilos generales */
 :root {
     --main-color       : #1083D6;
@@ -299,7 +300,6 @@ header {
 }
 
 /* Estilos específicos para dispositivos móviles */
-
 @media only screen and (max-width: 768px) {
   .menu {
     padding: 20px;
@@ -329,5 +329,22 @@ header {
   }
   #menu:checked ~ .navbar {
     display: initial;
+  }
+
+  /* Ajustes de tamaño de fuente para dispositivos móviles */
+  .menu .navbar ul li a {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  /* Ajustes de tamaño de logo para dispositivos móviles */
+  .logo {
+    padding-right: 20px;
+  }
+
+  /* Ajustes de tamaño de icono de menú para dispositivos móviles */
+  .menu-icono {
+    width: 60px;
+    height: 50px;
   }
 }
