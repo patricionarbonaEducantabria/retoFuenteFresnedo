@@ -55,11 +55,27 @@ ul li {
     padding: 10px; /* Añadimos un poco de espacio interno */
     text-align: center; /* Centramos el texto */
     border-right: 1px solid #ccc; /* Añadimos una línea divisoria entre elementos */
+    position: relative; /* Posición relativa para los elementos */
+    overflow: hidden; /* Ocultamos el contenido que se desborde */
 }
 
-/* Estilo para el último elemento dentro de un usuario */
-ul li:last-child {
-    border-right: none; /* Quitamos la línea divisoria en el último elemento */
+/* Estilo para el contenido que se desborde */
+ul li:hover {
+    overflow: visible; /* Muestra el contenido que desborda al pasar el cursor */
+}
+
+/* Estilo para el contenido desbordado */
+ul li:hover::after {
+    content: attr(title); /* Mostrar el contenido completo como un tooltip */
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    top: 100%; /* Colocar el tooltip debajo del elemento */
+    left: 0;
+    white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+    max-width: 200px; /* Ancho máximo del tooltip */
 }
 
 ul li img {
