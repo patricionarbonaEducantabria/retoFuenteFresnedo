@@ -151,13 +151,14 @@ body {
 }
 
 .menu .navbar ul li a {
-  font-size: 18px;
+  font-size: 17px;
   display: block;
-  color: var(--title-color);
+  color: var(--main-color);
+  text-decoration: none;
 }
 
 .menu .navbar ul li a:hover {
-  color: var(--light-text-color);
+  color: var(--text-color);
 }
 
 #menu {
@@ -202,6 +203,10 @@ header img {
   background-color: var(--body-color);
 }
 
+.btn:hover {
+  color: var(--text-color);
+}
+
 @media (max-width: 991px) {
   .menu {
     padding: 20px;
@@ -217,7 +222,8 @@ header img {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: var(--container-color);
+    background-color: var(--body-color);
+    transition: 3s ease all;
     display: none;
   }
   .navbar img {
@@ -231,6 +237,11 @@ header img {
   }
   #menu:checked ~ .navbar {
     display: initial;
+  }
+  .btn {
+    padding-left: 0;
+    font-size: 17px;
+    color: var(--main-color);
   }
 }
 /*----  stylo de las tarjetas  ----*/

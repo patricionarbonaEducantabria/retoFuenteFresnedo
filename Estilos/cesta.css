@@ -33,6 +33,7 @@ a {
 /* Estilos de la barra de navegación */
 
 #divPagar {
+    margin: auto;
     width: 300px; /* Ancho del contenedor */
     height: auto; /* Altura automática para adaptarse al contenido */
     text-align: center;

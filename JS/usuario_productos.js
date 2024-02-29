@@ -12,6 +12,17 @@ function principal()
     window.onscroll = function() {
         scrollFunction();
     }; 
+    setInterval(circuloCesta, 1000);
+}
+
+function circuloCesta() {
+    productos = localStorage.getItem("productos");
+    productos = JSON.parse(productos);
+    cantidad = Object.keys(productos).length;
+    console.log(cantidad);
+    // circuloPuto = document.getElementById('circulo').style;
+    // circuloPuto.content = cantidad;
+    $('#circulo').attr("title", cantidad);
 }
 
 function scrollFunction() {
@@ -110,10 +121,6 @@ document.addEventListener("DOMContentLoaded", function() {
         };
     }
 
-    // boton historial pedidos
-    document.getElementById("btnHistorialPedidos").onclick = function() {
-        window.location.href = "../usuario/usuario_HistorialPedidos.html";
-    };
 });
 
 function dibujarModalError(idModal, titulo,elementosCuerpo,elementosFooter) {
