@@ -161,6 +161,18 @@
 
   // }
 
+.navbar > *{
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+
+}
+
+.navbar{
+  align-items: center;
+  top: 2vh;
+}
 .container2 {
     max-width: 1100px;
     margin: 0 auto;
@@ -175,6 +187,7 @@
 
 .menu {
   position: absolute;
+  align-items: center;
   top: 0;
   left: 0;
   right: 0;
@@ -193,7 +206,7 @@
 
 .menu .navbar ul li a {
   font-size: 18px;
-  padding: 20px;
+  // padding: 20px;
   display: block;
   
 }
@@ -225,40 +238,22 @@ header img{
   height: 90px;
 }
 #logito{
+  position: relative;
+  top:1.5vh;
+  padding: 0;
   width: 100px;
   height: 70px;
 }
 
-/* menu desplegable */
-
-.navbar ul ul {
-  display:none;
-  position:absolute;
-  top:100%;
-  left:0;
-  background:#eee;
-  padding:0;
- }
- 
- /* items del menu desplegable */
- 
- .navbar ul ul li {
-  float:none;
-  width:150px
- }
- 
- /* enlaces de los items del menu desplegable */
- 
- .navbar ul ul a {
-  line-height:120%;
-  padding:10px 15px;
- }
- 
- /* items del menu desplegable al pasar el ratón */
- 
- .navbar ul li:hover > ul {
-  display:block;
- }
+#botonPersona {
+  background-color: transparent;
+  border: none;
+  padding-top: 0.5px;
+  padding-bottom: 0;
+}
+.dropdown-menu{
+  background-color: var(--body-color);
+}
 
 
 @media(max-width:991px){

@@ -125,3 +125,31 @@ header {
     width: 200px;
     height: auto;
 }
+
+#divPagar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+textarea {
+    margin-bottom: 3.25vh;
+    width: min-content;
+    text-align: center;
+    /* height: min-content; */
+}
+
+.imgPapelera {
+    height: 5vh;
+    width: 3vw;
+}
+
+@media only screen and (max-width: 768px) {
+    textarea {
+        margin-top: 2vh;
+    }
+
+    .imgPapelera {
+        height: 5vh;
+        width: 10vw;
+    }
+}

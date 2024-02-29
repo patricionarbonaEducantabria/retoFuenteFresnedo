@@ -172,22 +172,25 @@ function obtenerPedidos() {
 
         // Preparar y ejecutar la consulta para obtener fechas y pedidos
         $consulta = $conexion->prepare("
-            SELECT
-                pedidos.fecha AS fecha,
-                pedidos.fk_usuario AS idUsuario,
-                usuarios.email AS usuario,
-                linea_pedido.descripcion AS producto,
-                linea_pedido.cantidad AS cantidad,
-                linea_pedido.unidades AS unidades,
-                linea_pedido.observaciones AS observaciones,
-                estados.descripcion AS estado,
-                pedidos.id AS idPedido
-            FROM pedidos
-            JOIN usuarios ON pedidos.fk_usuario = usuarios.id
-            JOIN linea_pedido ON pedidos.id = linea_pedido.fk_pedido
-            JOIN estados ON pedidos.fk_estado = estados.id
-            WHERE pedidos.fecha >= ? AND pedidos.fecha <= ?
-            ORDER BY pedidos.fecha DESC, pedidos.fk_usuario;
+        SELECT
+        pedidos.fecha AS fecha,
+        pedidos.fk_usuario AS idUsuario,
+        usuarios.email AS usuario,
+        linea_pedido.descripcion AS producto,
+        linea_pedido.cantidad AS cantidad,
+        linea_pedido.unidades AS unidades,
+        linea_pedido.observaciones AS observaciones,
+        estados.descripcion AS estado,
+        pedidos.id AS idPedido,
+        proveedores.descripcion AS nombreProveedor,
+        proveedores.telefono AS telefonoProveedor
+        FROM pedidos
+        JOIN usuarios ON pedidos.fk_usuario = usuarios.id
+        JOIN linea_pedido ON pedidos.id = linea_pedido.fk_pedido
+        JOIN estados ON pedidos.fk_estado = estados.id
+        JOIN proveedores ON pedidos.fk_proveedor = proveedores.id
+        WHERE pedidos.fecha >= ? AND pedidos.fecha <= ?
+        ORDER BY pedidos.fecha DESC, pedidos.fk_usuario;
         ");
         $consulta->execute([$desde, $hasta]);
 
@@ -218,7 +221,11 @@ function obtenerPedidos() {
                 'cantidad' => $fila['cantidad'],
                 'unidades' => $fila['unidades'],
                 'observaciones' => $fila['observaciones'],
-                'estado' => $fila['estado']
+                'estado' => $fila['estado'],
+                'proveedor' => [
+                    "nombre" => $fila['nombreProveedor'],
+                    "telefono" => $fila['telefonoProveedor'],
+                ]
             ];
         }
 
