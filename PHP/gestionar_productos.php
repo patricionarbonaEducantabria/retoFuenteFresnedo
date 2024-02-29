@@ -22,6 +22,8 @@ if(isset($_POST['obtenerUnidades'])) {
 function obtenerProductos() {
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
 
+    if(empty($_POST['obtenerProductos'])) {
+
     // Recupero la informacion del producto
     $resultado = $conexion -> prepare("
     SELECT
@@ -36,6 +38,24 @@ function obtenerProductos() {
 
     ");
     $resultado -> execute();
+    // echo "tu prima";
+    } else {
+        $resultado = $conexion -> prepare("
+    SELECT
+    productos.id AS producto_id,
+    productos.descripcion AS producto_descripcion,
+    unidades.descripcion AS unidad_descripcion,
+    productos.observaciones AS producto_observaciones,
+    productos.foto AS producto_foto
+    FROM productos
+    INNER JOIN unidades ON productos.fk_unidades = unidades.id
+    WHERE productos.descripcion LIKE CONCAT(?,'%')
+    ORDER BY productos.id;
+
+    ");
+    $resultado -> execute(array($_POST['obtenerProductos']));
+    // echo "puta tu vieja";
+    }
 
     $datos = array();
     while($fila = $resultado -> fetch()) {
