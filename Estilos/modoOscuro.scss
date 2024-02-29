@@ -170,6 +170,7 @@
   padding: 50px 0;
   margin-bottom: 40px;
   background-color: var(--container-color);
+  transition: 3s ease all;
 }
 
 .menu {
@@ -227,6 +228,21 @@ header img{
   width: 100px;
   height: 70px;
 }
+
+.navbar{
+  ul{
+    li{
+        #icoPersona:hover{
+          label{
+           display: flex;
+          }
+        }
+      
+    }
+  }
+ 
+}
+
 
 @media(max-width:991px){
 
