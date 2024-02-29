@@ -22,7 +22,7 @@ if(isset($_POST['addUsuario'])) {
 function obtenerUsuarios() {
     $conexion = new PDO('mysql:host=localhost;dbname=almacen', 'dwes', 'abc123.');
     if($_POST['obtenerUsuarios'] != "") {
-        $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email != ? AND email LIKE CONCAT(?,'%');");
+        $resultado = $conexion -> prepare("SELECT * FROM usuarios WHERE email != ? AND nombre LIKE CONCAT(?,'%');");
         $resultado -> execute(array($_POST['email'],$_POST['obtenerUsuarios']));
         
         // echo "si";
