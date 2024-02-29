@@ -229,19 +229,36 @@ header img{
   height: 70px;
 }
 
-.navbar{
-  ul{
-    li{
-        #icoPersona:hover{
-          label{
-           display: flex;
-          }
-        }
-      
-    }
-  }
+/* menu desplegable */
+
+.navbar ul ul {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#eee;
+  padding:0;
+ }
  
-}
+ /* items del menu desplegable */
+ 
+ .navbar ul ul li {
+  float:none;
+  width:150px
+ }
+ 
+ /* enlaces de los items del menu desplegable */
+ 
+ .navbar ul ul a {
+  line-height:120%;
+  padding:10px 15px;
+ }
+ 
+ /* items del menu desplegable al pasar el ratón */
+ 
+ .navbar ul li:hover > ul {
+  display:block;
+ }
 
 
 @media(max-width:991px){
