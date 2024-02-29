@@ -178,6 +178,57 @@ ul li img {
 #btnScrollToTop:hover {
     background-color: #0056b3;
 }
+
+
+.completado::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    top: 0vh;
+    right: 7vw;
+    background: #5cb85c;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+.cancelado::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    top: 0vh;
+    right: 2vw;
+    background: #d9534f;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+.enEspera::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    top: 0vh;
+    right: 2vw;
+    background: #0275d8;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+.pendiente::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    top: 0vh;
+    right: 2vw;
+    background: #f0ad4e;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+.ulUsuario:first-child {
+    width: min-content;
+}
+
 /* Estilos para dispositivos móviles */
 @media (max-width: 1100px) {
     ul {
