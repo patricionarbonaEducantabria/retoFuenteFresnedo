@@ -4,6 +4,17 @@ function principal()
 {
     
     recuperarPedido();
+
+    let imagenesEnlacesw = document.getElementById("barraNav").querySelectorAll("li");
+    for(let i = 0 ; i< imagenesEnlacesw.length;i++){
+        imagenesEnlacesw[i].onclick = function(){
+            seccion = this.querySelector("input").value;
+            console.log(seccion);
+            sessionStorage.setItem("categoria",seccion);
+
+            window.location.href = "../usuario/usuario_carniceria.html";
+        }
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
