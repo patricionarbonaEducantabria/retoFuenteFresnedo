@@ -192,6 +192,9 @@ header {
     margin-right: 10px;
 }
 
+input {
+    color: black;
+}
 #barraNav li input[type="button"] {
     background-color: transparent;
     border: none;
