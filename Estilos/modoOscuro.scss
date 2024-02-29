@@ -118,49 +118,7 @@
   }
 
   // navegador o header como querais verlo
-  // nav {
-  //   background: var(--body-color);
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   padding: 15px 20px;
-  //   border-radius: 5px;
-  //   transition: 3s ease all;
-  //   box-shadow: var(--title-color);
-  
-  //   body.dark & {
-  //     background: var(--text-color);
-  //     box-shadow: var(--light-text-color);
-  //     a {
-  //       color: var(--light-text-color);
-  //       &:hover {
-  //         color: var(--body-color);
-  //       }
-  //     }
-  //   }
-  
-  //   .logotipo {
-  //     font-weight: 700;
-  //     font-family: 'Roboto', sans-serif;
-  //     img{
-  //       width: 140px;
-  //       height: 80px;
-  //     }
-  //   }
-  
-  //   .enlaces {
-  //     display: flex;
-  //     align-items: center;
-  //     a {
-  //       margin-right: 40px;
-  //       &:hover {
-  //         color: #707070;
-  //       }
-  //     }
-  //   }
-
-  // }
-
+ 
 .navbar > *{
   margin-top: 0;
   margin-bottom: 0;
@@ -205,14 +163,14 @@
 }
 
 .menu .navbar ul li a {
-  font-size: 18px;
-  // padding: 20px;
+  font-size: 17px;
   display: block;
-  
+  color: var(--main-color);
+  text-decoration: none;
 }
 
 .menu .navbar ul li a:hover {
-  color: var(--light-text-color);
+  color: var(--text-color);
 }
 
 #menu{
@@ -255,6 +213,9 @@ header img{
   background-color: var(--body-color);
 }
 
+.btn:hover{
+  color: var(--text-color);
+}
 
 @media(max-width:991px){
 
@@ -273,7 +234,8 @@ header img{
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #192229;
+    background-color: var(--body-color);
+    transition: 3s ease all;
     display: none;
   }
   .navbar img{
@@ -288,6 +250,12 @@ a{
 
   #menu:checked ~ .navbar {
     display: initial;
+  }
+
+  .btn{
+    padding-left: 0;
+    font-size: 17px;
+    color: var(--main-color);
   }
 }
 
