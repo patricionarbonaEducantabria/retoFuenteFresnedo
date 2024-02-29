@@ -14,7 +14,7 @@ function comprobarExisteEmail() {
         if(miPeticion.responseText === "0") {
             window.location.href = "../../index.html";
         } else {
-            comprobarEsAdmin();
+            // comprobarEsAdmin();
         }
     }
   };
@@ -45,9 +45,35 @@ function comprobarEsAdmin() {
   miPeticion.send(datos);
 }
 
+
+function botonAdmin() {
+    miEmail = localStorage.getItem("email");
+
+    let miPeticion = new XMLHttpRequest();
+
+    miPeticion.open("POST", "../../PHP/redireccion.php", true);
+
+    miPeticion.onreadystatechange = function() {
+        if (miPeticion.readyState == 4 && miPeticion.status == 200) {
+            console.log("es admin: ",miPeticion.responseText);
+            // callback(miPeticion.responseText);
+            if(miPeticion.responseText !== "0") {
+                // console.log(miPeticion.responseText);
+                // console.log(document.getElementsByClassName('dropdown-menu'));
+                document.getElementsByClassName('dropdown-menu')[0].innerHTML += miPeticion.responseText;
+            } 
+        }
+    };
+
+    miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    let datos = "botonAdmin=" + miEmail;
+    console.log(datos);
+    miPeticion.send(datos);
+}
+
 document.addEventListener("DOMContentLoaded", function() {
 
-    
+    botonAdmin();
     let imagenesEnlacesw = document.getElementById("cards_landscape_wrap-2").querySelectorAll("a");
     for(let i = 0 ; i< imagenesEnlacesw.length;i++){
         imagenesEnlacesw[i].onclick = function(){
