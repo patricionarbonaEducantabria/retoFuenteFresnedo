@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS productos (
 ) ENGINE = INNODB;
 
 -- TABLA PRODUCTOS_CATEGORIA
-CREATE TABLE IF NOT EXISTS productos_categoria (
+CREATE TABLE IF NOT EXISTS productos_categoria (    
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fk_producto INT NOT NULL,
     fk_categoria INT NOT NULL,
