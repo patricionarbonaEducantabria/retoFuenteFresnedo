@@ -397,11 +397,11 @@ function dibujarModalSeguro(idModalSeguro) {
     return miDiv;
 }
 
-function recuperarProductos(longitud) {
+function recuperarProductos(producto) {
     let miDiv = document.getElementById("contenedor-productos");
     miDiv.innerHTML = "";
 
-    obtenerProductos(function(respuesta) {
+    obtenerProductos(producto,function(respuesta) {
         respuesta = JSON.parse(respuesta);
         // recorro el json
         let miDiv = document.getElementById("contenedor-productos");
@@ -432,21 +432,24 @@ function recuperarProductos(longitud) {
     });
 }
 
-function obtenerProductos(callback) {
+function obtenerProductos(producto,callback) {
     let miPeticion = new XMLHttpRequest();
 
     miPeticion.open("POST", "../../PHP/gestionar_productos.php", true);
 
   miPeticion.onreadystatechange = function() {
     if (miPeticion.readyState == 4 && miPeticion.status == 200) {
-        // console.log(miPeticion.responseText);
+        console.log(miPeticion.responseText);
         callback(miPeticion.responseText);
     }
   };
 
   miPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
   let datos = "obtenerProductos=";
+  if(producto != undefined) {
+    datos += producto;
+  }
+  console.log(datos);
   miPeticion.send(datos);
 }
 function obtenerResiduos(miContenedorResiduos, callback) {
@@ -834,7 +837,11 @@ function dibujarModalAddProductoSeguro() {
 
 // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓MANEJADORES ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 function manejadorClickBuscar(e) {
-
+    console.log("busco");
+    let producto = document.getElementById("inBuscador").value;
+    if(producto !== "") {
+        recuperarProductos(producto);
+    }
 }
 
 function manejadorClickResiduosMenos(e) {

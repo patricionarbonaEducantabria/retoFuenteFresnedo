@@ -1,10 +1,56 @@
-/* Estilos para el header */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
     background-color: #f0f0f0;
+}
+
+.logo-container,
+.search-button-container,
+.persona-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container {
+    order: 1;
+}
+
+.search-button-container {
+    order: 2;
+}
+
+.persona-logo-container {
+    order: 3;
+}
+
+#contenedor-buscar {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}
+
+#txtBuscar {
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#btnMostrarAddUsuarios {
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    background-color: #fff;
+    /* Ajusta los estilos del menú desplegable según sea necesario */
 }
 
 /* Estilos para la cabecera */
@@ -224,7 +270,19 @@ background-color: #0056b3;
     }
     
     ul li {
-        border-right: none; /* Quitamos la línea divisoria en todos los elementos */
+        border-right: 1px solid #ccc; /* Quitamos la línea divisoria en todos los elementos */
+    }
+
+    #cabecera li {
+        flex: 1; /* Distribuir el espacio disponible de manera equitativa */
+        padding: 10px; /* Añadimos un poco de espacio interno */
+        text-align: center; /* Centramos el texto */
+        border-right: none;
+        border-bottom: 1px solid #ccc; /* Añadimos una línea divisoria entre elementos */
+        margin: 0; /* Añadimos margen cero para evitar espacios adicionales */
+    }
+    #cabecera li:nth-last-child(-n+4) {
+        display: none;
     }
     
     header {
