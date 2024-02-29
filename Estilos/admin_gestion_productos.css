@@ -210,10 +210,23 @@ ul li img {
     }
 
     header {
+        display: flex;
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
     }
 
+    .logo-container {
+        margin-bottom: 10px;
+    }
+
+    #contenedor-buscar {
+        margin-bottom: 10px;
+    }
+
+    .persona-logo-container {
+        margin-top: 10px;
+    }
+    
     #contenedor-buscar {
         flex-direction: column;
         align-items: stretch;
