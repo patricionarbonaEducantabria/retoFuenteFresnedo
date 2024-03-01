@@ -206,7 +206,7 @@ function dibujarProductos(datosProducto) {
     
     
     let foto = crearElemento("li",undefined);    
-    foto.appendChild(crearElemento("img",undefined,{"src" : datosProducto.foto, "id":"foto_producto"}));   
+    foto.appendChild(crearElemento("img",undefined,{"src" :"../../Imagenes/" + datosProducto.foto, "id":"foto_producto"}));   
     miFila.appendChild(foto);
     let descripcion = crearElemento("li",datosProducto.nombre, {"id":"nombre_producto"});
     miFila.appendChild(descripcion);
