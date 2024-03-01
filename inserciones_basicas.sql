@@ -28,240 +28,240 @@ INSERT INTO categorias (descripcion) VALUES ('Útiles y Materiales');
 
 /*TABLA PRODUCTOS*/ 
     /*Carnicería */
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pollo', (SELECT id FROM unidades WHERE descripcion = 'Unidad'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Chorizo de guisar', (SELECT id FROM unidades WHERE descripcion = 'Unidad'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Tocino Fresco', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Gallina', (SELECT id FROM unidades WHERE descripcion LIKE 'Unidad'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Salchichon', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Bacon', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades, observaciones ) 
-    VALUES ('Solomillo de Cerdo', (SELECT id FROM unidades WHERE descripcion LIKE 'Unidad'), 'Miercoles');
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Conejo', (SELECT id FROM unidades WHERE descripcion LIKE 'Unidad'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Cinta de Lomo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Babilla terneta', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Panaderíaceta de cerdo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Carne picada Mezcla', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pechuga de pollo fileteada', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Pollo', (SELECT id FROM unidades WHERE descripcion = 'Unidad'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Chorizo de guisar', (SELECT id FROM unidades WHERE descripcion = 'Unidad'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Tocino Fresco', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Gallina', (SELECT id FROM unidades WHERE descripcion LIKE 'Unidad'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Salchichon', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Bacon', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Solomillo de Cerdo', (SELECT id FROM unidades WHERE descripcion LIKE 'Unidad'), 'Miercoles', "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Conejo', (SELECT id FROM unidades WHERE descripcion LIKE 'Unidad'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Cinta de Lomo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Babilla terneta', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Panaderíaceta de cerdo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Carne picada Mezcla', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Carnicería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Pechuga de pollo fileteada', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Carnicería.png");
     /* Frutería*/
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Ajo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Cebolla', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Naranja', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Patata', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pimiento rojo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pimiento verde italiano', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Puerros', (SELECT id FROM unidades WHERE descripcion LIKE '%Manojo%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Zanahoria', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Limones', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Ajo negro', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Naranja de mesa grande', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Piña semimadura monte', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Freson temporada', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Granada palos extra', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Kiwi New Zealand', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pomelo rosa grande', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Menta fresca o Hierbabuena', (SELECT id FROM unidades WHERE descripcion LIKE '%Paquete%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Limon verde', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Espinaca', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Lechuga', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Tomate', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Calabaza', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Calabacin', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Manzana reineta', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Vaina verde', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Salvia', (SELECT id FROM unidades WHERE descripcion LIKE '%Blister%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Jengibre', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Mango', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Manzana golden', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Jengibre fresco', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Fresa', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Aguacate', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Lima', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Brotes de alfalfa', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Champiñones', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Zanahoria baby', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Mazorca baby', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Chalotas', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Cebolla dulce', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Cilantro', (SELECT id FROM unidades WHERE descripcion LIKE '%Bandeja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Chile fresco', (SELECT id FROM unidades WHERE descripcion LIKE '%Bandeja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Cebollino', (SELECT id FROM unidades WHERE descripcion LIKE '%Bandeja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Platano', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Arandanos', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Ajo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Cebolla', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Naranja', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Patata', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Pimiento rojo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Pimiento verde italiano', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Puerros', (SELECT id FROM unidades WHERE descripcion LIKE '%Manojo%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Zanahoria', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Limones', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Ajo negro', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Naranja de mesa grande', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Piña semimadura monte', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Freson temporada', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Granada palos extra', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Kiwi New Zealand', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Pomelo rosa grande', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Menta fresca o Hierbabuena', (SELECT id FROM unidades WHERE descripcion LIKE '%Paquete%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Limon verde', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Espinaca', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Lechuga', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Tomate', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Calabaza', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Calabacin', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Manzana reineta', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Vaina verde', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Salvia', (SELECT id FROM unidades WHERE descripcion LIKE '%Blister%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Jengibre', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Mango', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Manzana golden', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Jengibre fresco', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Fresa', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Aguacate', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Lima', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Brotes de alfalfa', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Champiñones', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Zanahoria baby', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Mazorca baby', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Chalotas', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Cebolla dulce', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Cilantro', (SELECT id FROM unidades WHERE descripcion LIKE '%Bandeja%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Chile fresco', (SELECT id FROM unidades WHERE descripcion LIKE '%Bandeja%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Cebollino', (SELECT id FROM unidades WHERE descripcion LIKE '%Bandeja%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Platano', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'), "Sin observaciones", "Frutería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Arandanos', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'), "Sin observaciones", "Frutería.png");
     /*Pescadería*/
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Dorada de racion', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Dorada de racion', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), "Sin observaciones", "Pescadería.png");
     /*Pastelería*/
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Harina Floja', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Mantequilla', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Nata para montar', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Harina de almendra', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pulpa de mango', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pulpa de frambuesa', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pulpa de cereza', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Harina de tapioca', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Frambuesa fresca', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Grosellas', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Queso de burgos fresco', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Panadería de sandwich', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Tramezzino', (SELECT id FROM unidades WHERE descripcion LIKE '%Paquete%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Harina Floja', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Mantequilla', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Nata para montar', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Harina de almendra', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Pulpa de mango', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Pulpa de frambuesa', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Pulpa de cereza', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Harina de tapioca', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Frambuesa fresca', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Grosellas', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Queso de burgos fresco', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Panadería de sandwich', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'),"Sin observaciones", "Pastelería.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Tramezzino', (SELECT id FROM unidades WHERE descripcion LIKE '%Paquete%'),"Sin observaciones", "Pastelería.png");
     /* Congelados*/
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pure de frutos rojos', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Bocas de mar', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Pure de frutos rojos', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Congelados.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Bocas de mar', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'),"Sin observaciones", "Congelados.png");
     /* Economato y varios*/
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Aceite Oliva suave', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Aceite Girasol', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Arroz redondo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Huevos', (SELECT id FROM unidades WHERE descripcion LIKE '%Carton%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Jamon York', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Leche Entera', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Queso barra nata', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Cuajada', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Garbanzos secos', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Tinto Garnacha', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Atun', (SELECT id FROM unidades WHERE descripcion LIKE '%Sobre%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Mermelada de albaricoque', (SELECT id FROM unidades WHERE descripcion LIKE '%Bote'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Zumo de melocoton', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Queso Curado', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Vino oloroso', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Garbanzos cocidos', (SELECT id FROM unidades WHERE descripcion LIKE '%Tarro%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Sidra', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Pedro Ximénez', (SELECT id FROM unidades WHERE descripcion LIKE '%Botella%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Latón de tomate entero', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Mazorcas baby', (SELECT id FROM unidades WHERE descripcion LIKE '%Bote'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Picos de panadería integrales', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Regañás', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Aceite Oliva suave', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Aceite Girasol', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Arroz redondo', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Huevos', (SELECT id FROM unidades WHERE descripcion LIKE '%Carton%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Jamon York', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Leche Entera', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Queso barra nata', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Cuajada', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Garbanzos secos', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Tinto Garnacha', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Atun', (SELECT id FROM unidades WHERE descripcion LIKE '%Sobre%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Mermelada de albaricoque', (SELECT id FROM unidades WHERE descripcion LIKE '%Bote'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Zumo de melocoton', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Queso Curado', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Vino oloroso', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Garbanzos cocidos', (SELECT id FROM unidades WHERE descripcion LIKE '%Tarro%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Sidra', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Pedro Ximénez', (SELECT id FROM unidades WHERE descripcion LIKE '%Botella%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Latón de tomate entero', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Mazorcas baby', (SELECT id FROM unidades WHERE descripcion LIKE '%Bote'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Picos de panadería integrales', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'),"Sin observaciones", "Economato y Varios.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Regañás', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'),"Sin observaciones", "Economato y Varios.png");
     /* Cafetería y Restaurante*/
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Café Selección', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Azúcar sobre', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Chocolate puro polvo taza', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Sacarina sobres', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Agua Solares cristal', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Agua Solares Pet 1,5litro', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Botellin agua pet', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Granadina', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Café Selección', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Cafetería y Restaurante.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Azúcar sobre', (SELECT id FROM unidades WHERE descripcion LIKE '%(g)%'),"Sin observaciones", "Cafetería y Restaurante.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Chocolate puro polvo taza', (SELECT id FROM unidades WHERE descripcion LIKE '%(Kg)%'),"Sin observaciones", "Cafetería y Restaurante.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Sacarina sobres', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'),"Sin observaciones", "Cafetería y Restaurante.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Agua Solares cristal', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Cafetería y Restaurante.png");
+    INSERT INTO productos (descripcion, fk_unidades , observaciones, foto) 
+    VALUES ('Agua Solares Pet 1,5litro', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Cafetería y Restaurante.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Botellin agua pet', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Cafetería y Restaurante.png");
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Granadina', (SELECT id FROM unidades WHERE descripcion LIKE '%(L)%'),"Sin observaciones", "Cafetería y Restaurante.png");
     /* Panadería*/
-    INSERT INTO productos (descripcion, fk_unidades, observaciones ) 
-    VALUES ('Barra Panadería', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Lunes, Martes, Miércoles, Jueves, Viernes');
-    INSERT INTO productos (descripcion, fk_unidades, observaciones ) 
-    VALUES ('Levadura Fresca', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Lunes');
-    INSERT INTO productos (descripcion, fk_unidades, observaciones ) 
-    VALUES ('Panadería de maíz', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Miércoles');
-    INSERT INTO productos (descripcion, fk_unidades, observaciones ) 
-    VALUES ('Panadería integral', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Miércoles');
-    INSERT INTO productos (descripcion, fk_unidades, observaciones ) 
-    VALUES ('Panadería de cereales', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Viernes');
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Panadería sandwich', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Panadería tostadas', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Barra Panadería', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Lunes, Martes, Miércoles, Jueves, Viernes', 'Panadería.png');
+    INSERT INTO productos (descripcion, fk_unidades, observaciones , foto) 
+    VALUES ('Levadura Fresca', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Lunes', 'Panadería.png');
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Panadería de maíz', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Miércoles', 'Panadería.png');
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Panadería integral', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Miércoles', 'Panadería.png');
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto ) 
+    VALUES ('Panadería de cereales', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'), 'Viernes', 'Panadería.png');
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Panadería sandwich', (SELECT id FROM unidades WHERE descripcion LIKE '%Caja%'),"Sin observaciones", 'Panadería.png');
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Panadería tostadas', (SELECT id FROM unidades WHERE descripcion LIKE '%Bolsa%'),"Sin observaciones", 'Panadería.png');
     /* Útiles y Materiales*/
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Bolsa plastico', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Film transparente', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
-    INSERT INTO productos (descripcion, fk_unidades ) 
-    VALUES ('Papel Aluminio', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'));
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Bolsa plastico', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'),"Sin observaciones", 'Útiles y Materiales.png');
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Film transparente', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'),"Sin observaciones", 'Útiles y Materiales.png');
+    INSERT INTO productos (descripcion, fk_unidades, observaciones, foto  ) 
+    VALUES ('Papel Aluminio', (SELECT id FROM unidades WHERE descripcion LIKE '%Unidad%'),"Sin observaciones", 'Útiles y Materiales.png');
 
 
 /* Vista Productos-Categoria*/
@@ -848,13 +848,17 @@ INSERT INTO categorias (descripcion) VALUES ('Útiles y Materiales');
         ('Residuo 3', 'Observaciones 3'),
         ('Residuo 4', 'Observaciones 4'),
         ('Residuo 5', 'Observaciones 5'),
-        ('Residuo 6', 'Observaciones 6'),
-        ('Residuo 7', 'Observaciones 7'),
-        ('Residuo 8', 'Observaciones 8'),
-        ('Residuo 9', 'Observaciones 9'),
-        ('Residuo 10', 'Observaciones 10'),
-        ('Residuo 11', 'Observaciones 11'),
-        ('Residuo 12', 'Observaciones 12'),
-        ('Residuo 13', 'Observaciones 13'),
-        ('Residuo 14', 'Observaciones 14'),
+        ('Sin redsiduos', 'Sin residuos'),
         ('Residuo 15', 'Observaciones 15');
+
+-- INSERCION ESTADOS
+INSERT INTO `estados` (`descripcion`, `observaciones`) VALUES
+        ('En espera', 'Se esta esperando a que llegue el producto'),
+        ('Pendiente', "Se ha creado el pedido, pero todavia no se ha solicitado al proveedor"),
+        ('Cancelado', "No se acepto el pedido o se anulo por parte del proveedor"),
+        ('Completado', 'El pedido ha sido recibido');
+        
+-- INSERCION PROVEEDORES
+INSERT INTO `proveedores` (`descripcion`, `telefono`, `email`, `direccion`, `observaciones`) VALUES
+('Proveedor1', '123456789', 'proveedor1@example.com', 'Calle 123, Ciudad', 'Observaciones proveedor 1'),
+('Proveedor2', '987654321', 'proveedor2@example.com', 'Avenida XYZ, Ciudad', 'Observaciones proveedor 2');
