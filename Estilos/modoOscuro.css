@@ -207,6 +207,20 @@ header img {
   color: var(--text-color);
 }
 
+#circulo::after {
+  content: attr(title);
+    display: inline-block;
+    position: relative;
+    top: -2vh;
+    left: -0.4vw;
+    background: orange;
+    color: black;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+}
+
 @media (max-width: 991px) {
   .menu {
     padding: 20px;
@@ -242,6 +256,18 @@ header img {
     padding-left: 0;
     font-size: 17px;
     color: var(--main-color);
+  }
+  #circulo::after {
+    content: attr(title);
+      display: inline-block;
+      position: relative;
+      top: -0vh;
+      left: -0.4vw;
+      background: orange;
+      border-radius: 50%;
+      width: 1.5em;
+      height: 1.5em;
+      text-align: center;
   }
 }
 /*----  stylo de las tarjetas  ----*/

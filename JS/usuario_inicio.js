@@ -1,5 +1,15 @@
+setInterval(circuloCesta, 1000);
 comprobarExisteEmail();
 
+function circuloCesta() {
+    productos = localStorage.getItem("productos");
+    productos = JSON.parse(productos);
+    cantidad = Object.keys(productos).length;
+    console.log(cantidad);
+    // circuloPuto = document.getElementById('circulo').style;
+    // circuloPuto.content = cantidad;
+    $('#circulo').attr("title", cantidad);
+}
 
 function comprobarExisteEmail() {
     let miEmail = localStorage.getItem("email");
